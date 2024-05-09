@@ -1,0 +1,45 @@
+import { Meta } from "@storybook/blocks";
+
+import GlobalLevel from "./assets/infrastructure/global-level.png";
+import VMLevel from "./assets/infrastructure/vm-level.png";
+import ContainerLevel from "./assets/infrastructure/container-level.png";
+import RealmLevel from "./assets/infrastructure/realm-level.png";
+
+
+
+<Meta title="Infrastructure" />
+
+<div className="sb-container">
+
+   <div className='sb-section-title'>
+       # Global Level
+
+     </div>
+   <img src={GlobalLevel} alt="Global Level" />
+
+   <div className='sb-section-title'>
+          # Virtual Machines Level
+
+        </div>
+    <img src={VMLevel} alt="VM Level" />
+
+   <div className='sb-section-title'>
+          # Container Level
+
+        </div>
+    <img src={ContainerLevel} alt="Container Level" />
+
+   <div className='sb-section-title'>
+       # Realm Level
+
+     </div>
+   <img src={RealmLevel} alt="Realm Level" />
+
+</div>
+
+<style>
+  {`
+   body {
+   }
+  `}
+</style>
