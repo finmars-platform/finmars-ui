@@ -1,0 +1,408 @@
+# JavaScript Coding Standards for Finmars
+
+## Rule 1: Naming Conventions for REST API Interactions
+
+### Introduction
+Maintaining consistent naming conventions across different layers of an application is crucial for readability and maintainability. This rule defines the standard approach for naming variables when interacting with REST APIs and within JavaScript applications.
+
+### 1.1 Use of snake_case with REST APIs
+When JavaScript applications interact with REST APIs, especially those developed with languages that conventionally use `snake_case` (like Python), it is important to adhere to this naming style for API requests and responses. This ensures alignment with backend conventions and facilitates easier data integration.
+
+### Example: API Interaction
+```javascript
+fetch('/api/data', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+        user_id: 123,
+        item_details: {
+            item_id: 456,
+            item_type: 'book',
+        }
+    })
+});
+```
+
+### 1.2 Use of camelCase within JavaScript Applications
+Within JavaScript codebases, use `camelCase` for naming variables and functions. This practice aligns with the JavaScript community standards and enhances the readability and consistency of the frontend code.
+
+### Example: JavaScript Local Variables
+```javascript
+let userName = 'JohnDoe';
+let userProfile = {
+    userId: 123,
+    userPreferences: {
+        themeColor: 'dark',
+        notificationsEnabled: true
+    }
+};
+```
+
+### Conclusion
+This dual approach—using `snake_case` for API interactions and `camelCase` for local JavaScript variables—addresses the common scenario where backend and frontend conventions differ. By adhering to these standards, developers can ensure a clean separation of concerns and maintain consistency across the different parts of their applications.
+
+## Rule 2: Use of Kebab-case for CSS Classes
+
+### Introduction
+In CSS, the naming convention plays a crucial role in keeping stylesheets readable and maintainable. For CSS class names, kebab-case is the standard practice, which helps to maintain consistency across stylesheets.
+
+### Example of Kebab-case in CSS
+```css
+.my-class {
+    color: blue;
+    background-color: white;
+}
+```
+This example demonstrates how to use kebab-case for class names in CSS, ensuring clarity and adherence to widespread web development conventions.
+
+## Rule 3: Use of Kebab-case for Components in HTML Templates
+
+### Introduction
+When naming components in HTML templates, especially in frameworks like Angular or Vue, kebab-case is used to name custom elements and components. This convention aligns with the HTML specification for custom elements, which requires lower-case names with at least one dash.
+
+### Example of Kebab-case in HTML Components
+```html
+<my-custom-component></my-custom-component>
+<login-form></login-form>
+```
+Using kebab-case for component tags enhances readability and conforms to the naming standards expected by most web frameworks and the HTML5 specification.
+
+## Rule 4: Use of Kebab-case for Data Attributes
+
+### Introduction
+For custom data attributes in HTML, such as those used for identifying elements in JavaScript frameworks like AngularJS (ng-click) or Vue.js (v-on), kebab-case is the preferred naming convention. This ensures that the HTML remains valid and consistent with native HTML attributes.
+
+### Example of Kebab-case for Data Attributes
+```html
+<button data-button-id="submit-form" ng-click="submitForm()">Submit</button>
+<div v-bind:id="dynamicId"></div>
+```
+In this example, kebab-case is used for both custom directives and standard data attributes, maintaining a clear and systematic approach to HTML attribute naming.
+
+### Conclusion
+By adopting kebab-case for CSS classes, HTML components, and data attributes, developers can ensure that their code adheres to community standards and best practices, promoting greater consistency and interoperability across frontend technologies.
+
+## Rule 5: Avoid Inline Styling
+
+### Introduction
+Inline styling, while convenient for quick tweaks, can lead to maintenance challenges and scalability issues in web development. This rule addresses the reasons for avoiding inline styles in HTML and recommends alternative approaches.
+
+### Avoiding Inline Styles
+Using the `style` attribute in HTML elements to directly apply CSS properties is strongly discouraged. Inline styling can:
+- **Override CSS stylesheets**, making debugging and style consistency difficult to maintain.
+- **Complicate maintenance**, as styles become spread across HTML and CSS files, reducing the ability to reuse styles or change styling themes systematically.
+- **Hinder performance**, especially if conditional styles are better handled via CSS classes and more complex stylesheets.
+
+### Example of Inline Styling
+```html
+<!-- Not recommended -->
+<div style="color: red; background-color: yellow;">This is a styled div.</div>
+```
+
+### Recommended Alternatives
+Instead of inline styles, use CSS classes and external stylesheets. This approach enhances reusability, maintainability, and separation of concerns.
+
+#### Example Using CSS Classes
+```html
+<!-- Recommended -->
+<div class="highlighted-text">This is a styled div.</div>
+```
+```css
+/* In an external stylesheet */
+.highlighted-text {
+    color: red;
+    background-color: yellow;
+}
+```
+
+### Conclusion
+Avoiding inline styles in HTML not only improves the maintainability and scalability of your applications but also ensures that styling remains consistent and easy to update across large projects. Adopting this practice supports a cleaner, more modular approach to frontend development.
+
+## Rule 6: Avoid Using Ternary Operators
+
+### Introduction
+Ternary operators offer a shorthand for conditional statements in JavaScript, but their use can sometimes lead to less readable code, especially in complex conditions or when overused. This rule advises against using ternary operators in situations where clarity and maintainability are priorities.
+
+### Why Avoid Ternary Operators?
+While ternary operators can make code shorter, they often sacrifice readability and can make debugging more difficult. Overuse or misuse of ternary operators can result in:
+- **Decreased Code Readability**: Ternary operators can make simple code unnecessarily cryptic, especially for those unfamiliar with the syntax.
+- **Complicated Logic Handling**: Complex conditions using nested ternary operators can be hard to follow and understand.
+- **Difficult Maintenance**: Changes and debugging become more challenging as the logic grows more intricate.
+
+### Example of Problematic Ternary Usage
+```javascript
+const status = age > 18 ? canVote ? 'Can vote and drive' : 'Can drive' : 'Cannot drive or vote';
+```
+This nested ternary example demonstrates how quickly readability can deteriorate, making the code hard to follow and maintain.
+
+### Recommended Alternative
+Instead of ternary operators, use traditional `if-else` statements, which are much clearer, especially when dealing with complex conditions:
+
+```javascript
+let status;
+if (age > 18) {
+    if (canVote) {
+        status = 'Can vote and drive';
+    } else {
+        status = 'Can drive';
+    }
+} else {
+    status = 'Cannot drive or vote';
+}
+```
+
+### Conclusion
+While ternary operators are a useful tool in JavaScript for simple conditions, avoiding them in more complex scenarios ensures that the code remains accessible and easy to manage. This practice aligns with our commitment to clear, maintainable code across our projects.
+
+## Rule 7: Avoid Using Switch Statements
+
+### Introduction
+`Switch` statements in JavaScript can sometimes streamline decision-making processes with multiple outcomes based on a single variable. However, they can also lead to code that is harder to manage and debug, particularly as the complexity of the decision tree grows. This rule advocates for alternatives that enhance code readability and maintainability.
+
+### Why Avoid Switch Statements?
+While `switch` statements can appear to simplify complex conditional logic by grouping cases, they have several drawbacks:
+- **Maintenance Challenges**: Adding new conditions or modifying existing ones can be error-prone and may lead to bugs if `break` statements are omitted or misplaced.
+- **Limited Flexibility**: `Switch` statements are less flexible than other control structures like `if-else`, particularly when conditions are not based purely on equality or when multiple variables need to be considered.
+- **Encouragement of Large Blocks**: They can encourage large code blocks that are difficult to follow, especially when each case includes substantial logic.
+
+### Example of Problematic Switch Usage
+```javascript
+switch (userRole) {
+    case 'admin':
+        grantAdminAccess();
+        break;
+    case 'editor':
+        grantEditorAccess();
+        break;
+    case 'subscriber':
+        grantSubscriberAccess();
+        break;
+    default:
+        throw new Error('Invalid user role');
+}
+```
+This `switch` example, while manageable, can grow cumbersome and hard to maintain as more roles and conditions are added.
+
+### Recommended Alternative
+Use `if-else` statements or object literals (also known as "lookup tables") for more straightforward and maintainable logic:
+
+#### If-Else Example
+```javascript
+if (userRole === 'admin') {
+    grantAdminAccess();
+} else if (userRole === 'editor') {
+    grantEditorAccess();
+} else if (userRole === 'subscriber') {
+    grantSubscriberAccess();
+} else {
+    throw new Error('Invalid user role');
+}
+```
+
+#### Object Literal Example
+```javascript
+const accessActions = {
+    admin: grantAdminAccess,
+    editor: grantEditorAccess,
+    subscriber: grantSubscriberAccess
+};
+
+const action = accessActions[userRole];
+if (action) {
+    action();
+} else {
+    throw new Error('Invalid user role');
+}
+```
+
+### Conclusion
+By avoiding `switch` statements and opting for alternatives like `if-else` structures or object literals, JavaScript developers can create cleaner, more flexible, and easier-to-maintain code. This practice aligns with our dedication to producing high-quality, robust software.
+
+## Rule 8: Standardize JavaScript File Names
+
+### Introduction
+Choosing the right file naming convention is essential for readability, consistency, and accessibility within a JavaScript project. Avoiding extra dividers in file names and adhering to recognized naming conventions like `camelCase.js` or `PascalCase.js` can help prevent confusion and ensure compatibility with various development tools.
+
+### Why Standardize File Names?
+Using additional dots in file names, such as `page.controller.js` or `number.helper.js`, can create several issues:
+- **Inconsistency Across the Codebase**: Divergent naming patterns can lead to disorganization and confusion.
+- **Compatibility Issues with Tools**: Some development tools or systems may misinterpret parts of the file name as multiple extensions, leading to potential mishandling.
+- **Navigational Challenges**: Extra dividers can complicate the process of searching and indexing files, particularly in larger projects.
+
+### Examples of Problematic File Naming
+```plaintext
+// Not recommended
+user.controller.js
+auth.service.js
+config.helper.js
+```
+
+### Recommended Naming Conventions
+Instead of using additional dividers, adopt either `camelCase` or `PascalCase` for naming files. These conventions are widely recognized and integrate well across various programming environments and tools. Use `camelCase` primarily for instances and `PascalCase` for classes or constructor functions.
+
+#### Example of Improved File Naming
+```plaintext
+// Recommended for general files and instances
+userProfile.js
+authenticationService.js
+configurationHelper.js
+
+// Recommended for classes, constructors, or React components
+UserProfile.js
+AuthenticationService.js
+ConfigurationHelper.js
+```
+
+### Conclusion
+Adopting a standardized approach to file naming such as `camelCase.js` or `PascalCase.js` ensures greater uniformity and compatibility within the JavaScript project. This practice not only aids in maintaining an organized file system but also enhances the navigability and manageability of the codebase, supporting robust software development practices.
+
+## Rule 9: Proper Initialization of Components and Functions
+
+### Introduction
+Proper initialization of components and functions in JavaScript frameworks such as Angular, React, or Vue is crucial for maintaining clean and manageable code. This rule addresses the importance of explicitly declaring and calling initialization functions rather than setting values or calling functions directly within component lifecycle hooks or directive callbacks.
+
+### Why Use Initialization Functions?
+Directly assigning values or calling functions in component lifecycle methods or directive callbacks can lead to code that is:
+- **Hard to Trace**: It becomes more difficult to understand when and how certain values are set or functions are called.
+- **Less Maintainable**: Such practices can lead to code duplication and scattering of initialization logic across different parts of the component or application.
+- **Error-Prone**: Mixing logic and lifecycle hooks without clear separation can lead to unexpected behaviors as the complexity of the application grows.
+
+### Recommended Practice
+Explicitly declare an initialization function, typically named `init` or similar, and call this function within the appropriate lifecycle hook or at the start of the component's setup. This method consolidates initialization logic into a single, easily manageable location.
+
+#### Example in a Vue Component
+```javascript
+export default {
+    data() {
+        return {
+            userData: null,
+            isLoading: false,
+        };
+    },
+    created() {
+        this.init();
+    },
+    methods: {
+        init() {
+            this.isLoading = true;
+            fetchUserData().then(data => {
+                this.userData = data;
+                this.isLoading = false;
+            });
+        }
+    }
+};
+```
+
+#### Example in an AngularJS Controller
+```javascript
+angular.module('app').controller('UserProfileController', ['$scope', 'UserService', function($scope, UserService) {
+    $scope.userData = null;
+    $scope.isLoading = false;
+
+    $scope.init = function() {
+        $scope.isLoading = true;
+        UserService.fetchUserData().then(function(data) {
+            $scope.userData = data;
+            $scope.isLoading = false;
+        });
+    };
+
+    $scope.init();  // Call init function when the controller is instantiated
+}]);
+```
+
+#### Example in an AngularJS Directive
+```javascript
+angular.module('app').directive('userProfile', function() {
+    return {
+        restrict: 'E',
+        templateUrl: 'user-profile.html',
+        controller: ['$scope', 'UserService', function($scope, UserService) {
+            $scope.userData = null;
+            $scope.isLoading = false;
+
+            $scope.init = function() {
+                $scope.isLoading = true;
+                UserService.fetchUserData().then(function(data) {
+                    $scope.userData = data;
+                    $scope.isLoading = false;
+                });
+            };
+
+            $scope.init();  // Initialize when directive's controller is instantiated
+        }]
+    };
+});
+```
+
+### Conclusion
+By consistently using an initialization function in your components or directives, you enhance the clarity, maintainability, and reliability of your JavaScript code. This approach ensures that all initialization processes are centrally managed and easily traceable, promoting best practices in software development.
+
+## Rule 10: Proper Error Handling in Vue Applications
+
+### Introduction
+Handling errors effectively is crucial in maintaining a robust front-end application. This rule focuses on managing network and server errors gracefully within Vue components. By transitioning the component to an error state, displaying an error message, and providing a retry option, you can enhance user experience and ensure application reliability.
+
+### Why Proper Error Handling?
+Proper error handling ensures that:
+- **User Experience is Maintained**: Users are informed of issues and can attempt to recover from them.
+- **Application Stability**: Prevents the application from crashing and allows users to continue using other parts of the application unaffected by the error.
+- **Developer Friendliness**: Makes it easier for developers to diagnose and handle errors.
+
+### Recommended Error Handling Approach
+In Vue components, manage errors by setting an error state when an exception occurs during data fetching or processing. Display an error message to the user and provide a retry button to re-initiate the failed operation.
+
+#### Example in a Vue Component
+```vue
+<template>
+  <div v-if="error">
+    <p>Error fetching data: {{ errorMessage }}</p>
+    <button @click="fetchData">Retry</button>
+  </div>
+  <div v-else>
+    <p>Data loaded successfully!</p>
+    <!-- Display data here -->
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      error: false,
+      errorMessage: '',
+      data: null,
+    };
+  },
+  methods: {
+    fetchData() {
+      this.error = false;
+      this.errorMessage = '';
+      fetch('/api/data')
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok.');
+          }
+          return response.json();
+        })
+        .then(data => {
+          this.data = data;
+        })
+        .catch(error => {
+          this.error = true;
+          this.errorMessage = error.message || 'Failed to fetch data.';
+        });
+    }
+  },
+  created() {
+    this.fetchData();
+  }
+};
+</script>
+```
+
+### Conclusion
+Implementing a structured approach to error handling in Vue components ensures that errors are managed in a user-friendly manner. This approach not only keeps the users informed but also allows them to attempt to resolve issues independently. By incorporating these practices, developers can create more reliable and resilient Vue applications.

@@ -708,3 +708,43 @@ def bulk_delete(self, task_id, *args, **kwargs):
 
 ### Conclusion
 Implementing systematic progress updates in Celery tasks helps in maintaining an efficient and user-friendly backend process. This practice not only assists in monitoring task execution but also improves the responsiveness and reliability of the system.
+
+# Rule 18: Enhancing Serializer Outputs for Related Objects
+
+## Introduction
+In Django REST Framework, handling relations in serializers often requires a balance between performance and providing sufficient data. To improve API responses without heavily impacting performance, a common practice involves serializing related objects in a detailed yet controlled manner.
+
+### 18.1 Handling Relations in Serializers
+When a model includes relationships to other models, it's common to reference these related objects by their IDs in serializers. However, to enhance frontend development and reduce the need for additional API calls, it's beneficial to also provide a serialized representation of the entire related object.
+
+### 18.2 Implementation Strategy
+For each related object in a serializer, in addition to the default foreign key field, include a nested serializer that outputs the complete object. This nested serializer should be named with an `_object` suffix to clearly differentiate it from the foreign key field.
+
+#### Example Implementation
+Consider a Django model `SomeModel` that has a foreign key relation to `LinkModel`. Here's how to implement this in the serializer:
+
+```python
+from rest_framework import serializers
+from .models import SomeModel, LinkModel
+
+class LinkModelSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = LinkModel
+        fields = '__all__'
+
+class SomeModelSerializer(serializers.ModelSerializer):
+    linked_model = serializers.PrimaryKeyRelatedField(read_only=True)
+    linked_model_object = LinkModelSerializer(read_only=True, source='linked_model')
+
+    class Meta:
+        model = SomeModel
+        fields = ['linked_model', 'linked_model_object']
+```
+
+### 18.3 Benefits of This Approach
+- **Reduced API Calls**: Frontend applications can retrieve detailed related object data in a single request, reducing the need for additional API calls.
+- **Clarity and Convenience**: Provides immediate access to related object details, which can be particularly useful for dropdowns, displays, or forms that require more than just the related object's ID.
+- **Flexibility**: Allows API consumers to use either the ID or the full object as needed, depending on the context of their application.
+
+### Conclusion
+By including full serialized objects for model relations in serializers, we significantly enhance the usability and efficiency of our APIs. This practice allows developers to access detailed data conveniently while maintaining clarity in the API's structure and responses.
