@@ -1,0 +1,710 @@
+# Python Coding Guidelines
+
+## Introduction
+This document outlines the Python coding standards and best practices for our development team. These guidelines are based on collective experiences and industry standards aimed at improving code readability, maintainability, and scalability.
+
+# Essential Development Principles for Finmars
+
+## Contextual Awareness in Development
+
+When developing viewsets or tasks for Finmars, maintaining a contextual awareness is crucial. This involves consistently managing and utilizing several key pieces of information across all operations:
+
+- **realm_code**: Represents the actual instance of the Django app. It's essential for users to understand where they are and for developers to find bug locations.
+- **space_code**: Identifies the current Space and corresponding schema in the database. This is vital for data isolation and integrity.
+- **user**: Includes the username and is used to track who is performing the operation.
+- **member**: Linked to the user, containing IAM policies which are critical for access control and permissions.
+- **space**: (In Legacy - MasterUser) Typically fetched via the `space_code` or `member`. In rare cases, it could default to `MasterUser.objects.all().first()`, under the assumption that only one Space exists per schema in the MasterUser table.
+- **user_code**: An alpha-numeric, human-readable unique identifier used instead of traditional numeric IDs. For example, instead of "Some Instrument id: 1", using "Some Instrument `user_code: 'tsla'`".
+- **configuration_code**: An alpha-numeric string formatted as `[tld].[company].[module]`, such as `com.finmars.standard-instrument-type`. This is used for entities inheriting from `ConfigurationModel`, indicating shareable configurations that can be easily installed via a marketplace into a Space. Examples include `com.finmars.standard-instrument-type:bond` for `[configuration_code]:[user_code]`.
+
+These elements provide the necessary context to ensure that all actions performed within Finmars are relevant, secure, and compliant with established data handling policies.
+
+## Rigorous Error Handling
+
+In Finmars, operations must fail explicitly and informatively rather than misleading users or developers. Misleading messages such as "500 OK", "Task Failed Successfully", or "Task status: OK" (when there are underlying issues) are unacceptable. Instead, Finmars adopts a clear and transparent approach to error reporting:
+
+- **Explicit Failures**: If an operation encounters issues that prevent it from completing successfully, it should fail with a clear and actionable exception. This helps in quickly identifying and resolving issues.
+- **Partial Success Policy**: For tasks that involve processing multiple items (e.g., bulk operations), Finmars operates on a principle of 'Partial Success'. This means that if a task successfully processes 99 out of 100 items, the task's overall status may still be marked as 'SUCCESS'. However, it's crucial that any errors or failures are:
+  - Clearly documented in the task's report.
+  - Accompanied by notifications alerting to the specific failures.
+
+This approach ensures that while the majority of a task can complete successfully, any discrepancies are clearly flagged for further action, ensuring transparency and reliability in operations.
+
+## Conclusion
+
+Keeping these principles in mind during development not only ensures adherence to Finmars's operational standards but also enhances the robustness and user trust in the platform. By emphasizing context and rigorous error handling, developers can create more resilient and user-centric applications within the Finmars ecosystem.
+
+
+
+### 1. Use of Conditional Statements
+We prioritize clarity and extendibility in our codebase. Therefore, we avoid using ternary operators, which can often lead to condensed and less readable code. Instead, we encourage the use of full `if/else` statements.
+
+#### Example:
+Instead of using a ternary operation like this:
+```python
+result = x if condition else y
+```
+use a more expandable and readable `if/else` structure:
+```python
+if condition:
+    result = x
+else:
+    result = y
+```
+This approach facilitates adding more complex logic in the future, such as incorporating additional conditions or executing further operations like sending notifications within the conditional blocks.
+
+### 2. Avoid the Walrus Operator in Conditional Statements
+The walrus operator (`:=`) allows for assignment and returns of a value in a single expression, which can be less readable, especially in conditional statements. Our standard practice is to separate the assignment from the condition to enhance clarity.
+
+#### Example:
+Instead of embedding function calls or assignments within an `if` statement:
+```python
+if (count := get_count()):
+    process_items(count)
+```
+We recommend separating the assignment for better readability:
+```python
+count = get_count()
+if count:
+    process_items(count)
+```
+This practice ensures that conditionals are used strictly for evaluating conditions and not for assigning values.
+
+### 3. Function Calls in Conditional Statements
+To maintain code clarity, avoid direct function calls within conditional statements. This separation helps in understanding the code at a glance as it clearly differentiates between condition checking and function execution.
+
+#### Example:
+Instead of:
+```python
+if foo():
+    do_something()
+```
+Prefer:
+```python
+has_result = foo()
+if has_result:
+    do_something()
+```
+This method makes the code easier to understand and review, especially in complex codebases.
+
+### 4. Restrict Usage of Constants
+Define constants sparingly. As a rule, constants should only be declared in `settings.py`. All other values should be dynamically fetched either from a master user configuration or a database storage system. This approach allows for greater flexibility and easier configuration management.
+
+
+### 5. Importing Task Decorator
+All Celery tasks must use the `finmars_task` decorator from our custom module. Import this decorator as follows:
+
+```python
+from poms.celery_tasks import finmars_task
+```
+
+### Task Definition
+Define every Celery task with the `finmars_task` decorator, specifying the task's name and binding it to allow access to the task's context:
+
+```python
+@finmars_task(name="%app_label%.%task_name%", bind=True)
+def some_task(self, task_id, context):
+    # Task implementation here
+```
+
+### Task Parameters
+Each task should accept the following parameters:
+- `task_id`: The ID of the task as stored in the Finmars Database, uniquely identifying this task instance.
+- `context`: A dictionary containing essential metadata, including `realm_code` and `space_code`.
+
+### Task Invocation
+Before invoking a task, set up the task instance in the database. Create an instance of `CeleryTask` with necessary details:
+
+```python
+task = CeleryTask.objects.create(
+    master_user=request.user.master_user,
+    member=request.user.member,
+    verbose_name="Some Verbose Name",
+    type="some_task_name",
+    status=CeleryTask.STATUS_INIT,
+)
+task.options_object = serializer.validated_data
+task.save()
+```
+
+### Asynchronous Task Execution
+Once the task instance is prepared and saved, pass its ID along with the context to the task function using `apply_async`:
+
+```python
+some_task.apply_async(kwargs={
+    "task_id": task.id,
+    "context": {
+        "space_code": task.master_user.space_code,
+        "realm_code": task.master_user.realm_code,
+    }
+})
+```
+
+Following these steps ensures that our tasks are not only consistent but also provide the necessary hooks for logging, debugging, and monitoring their execution across different environments.
+
+
+# Rule 6: Django and Django REST Framework Structuring Guidelines
+
+## Introduction
+When working with Django and Django REST Framework, it is essential to maintain a consistent structure for all models to ensure robustness and scalability. This rule outlines the standard requirements for setting up new models in our projects.
+
+### 6.1 Administrative Interface
+Every new model should be accompanied by an administrative page to facilitate data management. This setup allows for quick interactions with the model's data within Django's admin interface.
+
+### 6.2 Serialization
+Define a serializer for each model to ensure it can be efficiently converted to and from JSON format, which is necessary for clean, effective communication with our RESTful APIs.
+
+### 6.3 ViewSet
+Implement a ViewSet for each model to handle API requests. This component acts as the controller in our MVC architecture, managing the logic for incoming network requests.
+
+### 6.4 Model Inheritance
+To streamline development and ensure consistency, new models should inherit from pre-defined base models as follows:
+
+#### 6.4.1 NamedModel
+All models require a unique user identifier (`user_code`). Inherit from `NamedModel` to include this functionality by default:
+
+```python
+class SomeModel(NamedModel):
+    # Additional fields and methods here
+```
+
+#### 6.4.2 ConfigurationModel
+If a model is used for configurations that might be shared or distributed (such as through a marketplace), include a `configuration_code` by inheriting from `ConfigurationModel`:
+
+```python
+class SomeModel(ConfigurationModel):
+    # Additional fields and methods here
+```
+
+#### 6.4.3 FakeDeletableModel
+For models that should not be fully deletable to preserve historical data, inherit from `FakeDeletableModel`. This approach ensures that data is marked as deleted without actually removing it from the database:
+
+```python
+class SomeModel(FakeDeletableModel):
+    # Additional fields and methods here
+```
+
+#### 6.4.4 DataTimeStampedModel
+Ensure that each model automatically captures and stores timestamps for when data is created or modified. Achieve this by inheriting from `DataTimeStampedModel`:
+
+```python
+class SomeModel(DataTimeStampedModel):
+    # Additional fields and methods here
+```
+
+### Conclusion
+Following these guidelines for Django model structuring will help maintain a high standard of data integrity and ease of maintenance across our various projects. Implementing these rules ensures that our models are not only well-organized but also robust and scalable.
+
+
+# Rule 7: Restrictions on Extending Django's ORM
+
+## Introduction
+Extending Django's Object-Relational Mapping (ORM) system can introduce complexity and potential performance issues in our codebase. Therefore, it is generally discouraged to directly extend the ORM with custom managers or methods unless absolutely necessary.
+
+### 7.1 General Policy on ORM Extension
+Direct modifications or extensions to Django's ORM should be avoided. This practice ensures that the application remains maintainable, and scalable, and aligns with Django's intended use of its ORM.
+
+### 7.2 Alternative Approaches
+Before considering an extension to the ORM, explore alternative solutions. Often, functionality can be achieved through other means that do not require altering how the ORM operates. This could include using:
+
+- Helper functions or classes
+- Service layers
+- QuerySet methods provided by Django
+
+### 7.3 Mandatory Team Review
+If, after thorough consideration, extending the ORM seems to be the only viable solution, the decision must not be made unilaterally. The following steps should be taken to ensure team consensus:
+
+1. **Documentation:** Prepare a detailed explanation of why the extension is necessary, including potential impacts on the system.
+2. **Team Meeting:** Schedule a call or meeting with the development team to discuss the proposal. It's crucial that all aspects are thoroughly debated and vetted.
+3. **Consensus:** Proceed only if there is unanimous agreement among all team members.
+
+### 7.4 Example of Forbidden Practice
+Using custom model managers by directly assigning them to models is explicitly forbidden. This includes any form of redefining the `objects` manager like so:
+
+```python
+class SomeModelManager(models.Manager):
+    pass
+
+class SomeModel(models.Model):
+    objects = SomeModelManager()
+```
+
+This example illustrates a practice that must be avoided to maintain the standardization and simplicity of our ORM interactions.
+
+### Conclusion
+By adhering to these guidelines, we ensure that our database interactions are efficient, straightforward, and aligned with the Django framework's best practices. Extensions to the ORM should be the exception, not the rule, and should only be implemented when absolutely necessary and with full team support.
+
+# Rule 8: Organization of Helper Functions
+
+## Introduction
+To ensure our codebase remains clean, maintainable, and adheres to object-oriented principles, it's essential to properly organize helper functions. Instead of using static methods, which can limit the extensibility and testing of our code, we encourage the use of instance methods within well-structured classes.
+
+### 8.1 Use of Helper Classes
+Instead of defining loose functions throughout the code, group related functions into classes organized by functionality. These classes should reside in a `utils.py` file within the respective app or module, promoting better modularity and reusability.
+
+### 8.2 Creating Helper Classes
+Group related functionalities into classes without static methods. This approach encourages better practices in coding by enabling inheritance, polymorphism, and easier mocking during tests.
+
+#### Example Implementation
+Organize functions into classes that can be instantiated when needed. This method fosters a more flexible and testable design:
+
+```python
+# In utils.py
+
+class DateHelper:
+    def format_date(self, date):
+        # Implementation for formatting a date
+
+class NumberHelper:
+    def increment_number(self, num):
+        # Implementation to increment a number
+
+class StorageHelper:
+    def save_to_storage(self, data, location):
+        # Implementation to save data to a storage location
+```
+
+### 8.3 Importing and Using Helper Classes
+Import these classes and create instances where necessary. This pattern ensures encapsulation and maintains a cleaner, more professional code structure:
+
+```python
+from .utils import DateHelper, NumberHelper, StorageHelper
+
+# Creating instances
+date_helper = DateHelper()
+number_helper = NumberHelper()
+storage_helper = StorageHelper()
+
+# Usage
+formatted_date = date_helper.format_date(some_date)
+new_number = number_helper.increment_number(current_number)
+storage_helper.save_to_storage(data_to_store, 'path/to/location')
+```
+
+### Conclusion
+By structuring helper functions within classes as instance methods, we promote a more organized, extensible, and maintainable approach to managing utility functions. This method also enhances the ability to conduct unit testing and maintain clear separation of concerns within our projects.
+
+# Rule 9: Adding Help Text to Model Fields
+
+## Introduction
+Adding `help_text` to each Django model field is crucial for clarity and usability within the Django admin and any generated documentation.
+
+### 9.1 Implementation of Help Text
+Ensure every field in a new or updated model includes `help_text` to describe its purpose and expected content.
+
+#### Example Implementation
+Here’s how to add `help_text` in a "Notification" model:
+
+```python
+from django.db import models
+
+class Notification(models.Model):
+    title = models.CharField(max_length=100, help_text="Title of the notification.")
+    message = models.TextField(help_text="Content of the notification message.")
+    recipient = models.ForeignKey(User, on_delete=models.CASCADE, help_text="User who will receive the notification.")
+    sent_at = models.DateTimeField(null=True, help_text="Date and time the notification was sent, if applicable.")
+    is_active = models.BooleanField(default=True, help_text="Status to indicate if the notification is active.")
+```
+
+### 9.2 Benefits of Using Help Text
+`Help_text` enhances the clarity and usability of model fields, especially in:
+- **Admin Interface:** Provides useful field descriptions.
+- **Code Maintenance:** Assists in understanding the model's purpose without needing to reference external documentation.
+
+### Conclusion
+Mandatory `help_text` on model fields ensures every team member understands the model structure at a glance, promoting better data management and system comprehension.
+
+
+# Rule 10: Extending Redoc Documentation for New API Endpoints
+
+## Introduction
+Maintaining comprehensive and up-to-date API documentation is crucial for the usability and maintainability of our services. Redoc provides a clean, interactive documentation format that makes understanding and testing our APIs easier. Ensuring that Redoc documentation is updated with every new endpoint is mandatory.
+
+### 10.1 Requirement for Redoc Documentation
+All Django services must include Redoc documentation. This documentation should be thorough, covering all available API endpoints, their functions, parameters, and expected responses.
+
+### 10.2 Process for Extending Redoc Documentation
+Whenever a new API endpoint is developed, follow these steps to update the Redoc documentation:
+
+#### Example Implementation
+1. **Document the Endpoint:** Include detailed descriptions of the endpoint’s purpose, the expected input, and the format of the response. Use docstrings in your view functions to automatically generate relevant sections in Redoc.
+
+```python
+from rest_framework.views import APIView
+from rest_framework.response import Response
+
+class UserAPIView(APIView):
+    """
+    Retrieves and updates user information.
+
+    # Parameters:
+    - `user_id` (int): The ID of the user to retrieve or update.
+
+    # Returns:
+    - `200 OK`: successful retrieval or update of user data.
+    """
+    def get(self, request, user_id):
+        pass
+
+    def post(self, request, user_id):
+        pass
+```
+
+2. **Generate Redoc Documentation:** Ensure your Django settings or the command-line script is set up to regenerate the Redoc documentation automatically after updates to the code.
+
+### 10.3 Benefits of Updated Redoc Documentation
+- **Enhanced Developer Experience:** Provides developers and new team members with an immediate understanding of API functionalities.
+- **Improved Testing and Integration:** Facilitates easier testing and integration with other services.
+- **Better End-User Documentation:** Offers end-users clear instructions and information, enhancing usability and support.
+
+### Conclusion
+By consistently updating Redoc documentation with each new API endpoint, we ensure that all team members and users benefit from clear, accurate, and useful documentation. This practice is essential for the ongoing success and scalability of our services.
+
+# Rule 11: Standardizing Exception Handling with FinmarsBaseException
+
+## Introduction
+Proper exception handling is critical for debugging and maintaining high-quality code. In our projects, we use a custom exception base class, `FinmarsBaseException`, to standardize error reporting and handling across all services.
+
+### 11.1 Using FinmarsBaseException
+All custom exceptions in our projects should inherit from `FinmarsBaseException`, defined in `poms/common/exceptions.py`. This ensures that each exception carries an `error_key`—a unique, human-readable identifier for the error.
+
+### 11.2 Structure of FinmarsBaseException
+Here’s how the `FinmarsBaseException` is defined:
+
+```python
+class FinmarsBaseException(Exception):
+    def __init__(self, error_key: str, message: str = ""):
+        """
+        A custom exception for Finmars, essential for providing an error_key to identify the error.
+
+        :param error_key: A unique string key identifying the error.
+        :param message: An optional detailed message associated with the error.
+        """
+        super().__init__(message)
+        self.error_key = error_key
+
+    def __str__(self):
+        return super().__str__()
+
+    def __repr__(self):
+        return super().__str__()
+```
+
+### 11.3 Implementing Custom Exceptions
+When creating a custom exception, extend `FinmarsBaseException` and provide an `error_key` that succinctly but clearly describes the error. This key should be alphanumeric and underscore-separated.
+
+#### Example Implementations
+Here are some examples of custom exceptions with descriptive `error_key` values:
+
+```python
+class TransactionDateNotFoundException(FinmarsBaseException):
+    def __init__(self):
+        super().__init__("first_transaction_date_is_not_found", "The first transaction date could not be found.")
+
+class DateRangeException(FinmarsBaseException):
+    def __init__(self):
+        super().__init__("date_from_is_greater_than_date_to", "The start date is greater than the end date.")
+
+class ItemsMissingException(FinmarsBaseException):
+    def __init__(self):
+        super().__init__("items_are_missing", "Some required items are missing from the request.")
+
+class DataFetchException(FinmarsBaseException):
+    def __init__(self):
+        super().__init__("could_not_fetch_data_from_third_party", "Data retrieval from the third party failed.")
+```
+
+### 11.4 Benefits of Using FinmarsBaseException
+- **Consistency:** Using a base exception class ensures consistent handling and reporting of errors across different parts of the application.
+- **Clarity:** The `error_key` provides an easily identifiable and human-readable error code, enhancing both logging and debugging processes.
+- **Extensibility:** Custom exceptions can easily extend this base class to provide more specific error handling as needed.
+
+### Conclusion
+Adopting `FinmarsBaseException` as the base for all custom exceptions ensures that our error handling is uniform and effective, facilitating easier maintenance and higher code quality.
+
+# Rule 12: Inheriting from AbstractModelViewSet for Viewsets
+
+## Introduction
+Consistency and reusability in API viewsets are crucial for maintaining clean and maintainable code. To achieve this, we utilize a common abstract base class, `AbstractModelViewSet`, for all our viewsets.
+
+### 12.1 AbstractModelViewSet Structure
+`AbstractModelViewSet` extends multiple mixins and base classes to provide a robust starting point for all viewsets. It incorporates essential functionalities and permission handling that are common across our applications.
+
+#### Composition of AbstractModelViewSet
+The `AbstractModelViewSet` includes the following components:
+- `AbstractApiView`: Provides the foundational API behaviors.
+- `ListLightModelMixin` and `ListEvModelMixin`: Offer optimized listing functionalities.
+- `UpdateModelMixinExt` and `DestroyModelFakeMixin`: Extend standard update and delete operations.
+- `BulkModelMixin`: Enables operations on multiple objects at once.
+- `AbstractFinmarsAccessPolicyViewSet`: Ensures consistent access policies are applied.
+
+Additionally, it configures permission and filtering backends that are essential for secure and flexible data handling:
+```python
+class AbstractModelViewSet(
+    AbstractApiView,
+    ListLightModelMixin,
+    ListEvModelMixin,
+    UpdateModelMixinExt,
+    DestroyModelFakeMixin,
+    BulkModelMixin,
+    AbstractFinmarsAccessPolicyViewSet,
+):
+    permission_classes = AbstractFinmarsAccessPolicyViewSet.permission_classes + [
+        IsAuthenticated
+    ]
+    filter_backends = AbstractFinmarsAccessPolicyViewSet.filter_backends + [
+        ByIdFilterBackend,
+        ByIsDeletedFilterBackend,
+        ByIsEnabledFilterBackend,
+        OrderingFilter,
+        OrderingPostFilter,
+    ]
+```
+
+### 12.2 Mandatory Inheritance
+All new viewsets must inherit from `AbstractModelViewSet` to ensure that they adhere to the established standards and behaviors. This inheritance guarantees that:
+- Standard permissions are applied uniformly, including `IsAuthenticated` for all viewsets.
+- Essential filter backends are included by default, enhancing functionality and security.
+
+### 12.3 Exception Handling
+If, for a specific reason, inheriting from `AbstractModelViewSet` is not feasible, the viewset must at least include the `IsAuthenticated` permission to maintain the minimum security standard.
+
+### Conclusion
+Using `AbstractModelViewSet` as a base for all viewsets standardizes how we handle permissions, filtering, and common behaviors across our APIs. This approach not only simplifies development but also enhances security and compliance with our architectural guidelines.
+
+# Rule 13: Implementing Lightweight Serializers for Heavy Models
+
+## Introduction
+For models with numerous fields and relationships, performance can often be optimized by introducing a lighter version of the serializer. This approach is particularly useful for enhancing both backend and frontend performance by reducing the load during data retrieval, especially in listings such as dropdowns where only basic information is required.
+
+### 13.1 Purpose of ModelLightSerializer
+Create a `ModelLightSerializer` that includes only essential fields, typically `id`, `name`, and `user_code`. This serializer will be used to fetch minimal data, which is sufficient for many UI components that do not require detailed information.
+
+#### Example of a Lightweight Serializer
+Here is an example of a lightweight serializer for an `Account` model:
+```python
+from rest_framework import serializers
+
+class AccountLightSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Account
+        fields = ['id', 'name', 'user_code']
+```
+
+### 13.2 Creating Lightweight Viewset Actions
+In viewsets, add a custom action that uses this lightweight serializer. This action serves data in a simplified format, ideal for scenarios where full detail is unnecessary, such as initial list views or dropdown menus.
+
+#### Implementation of a Lightweight Action
+Here’s how to implement the `list_light` action in a viewset for the `Account` model:
+```python
+from rest_framework.decorators import action
+from rest_framework.response import Response
+
+class AccountViewSet(viewsets.ModelViewSet):
+    queryset = Account.objects.all()
+    serializer_class = AccountSerializer  # Default to the full serializer
+
+    @action(detail=False, methods=["get"], url_path="light", serializer_class=AccountLightSerializer)
+    def list_light(self, request, *args, **kwargs):
+        queryset = self.filter_queryset(self.get_queryset())
+        page = self.paginator.post_paginate_queryset(queryset, request)
+        serializer = self.get_serializer(page, many=True)
+        return self.get_paginated_response(serializer.data)
+```
+
+### 13.3 Benefits of Using Lightweight Serializers
+- **Reduced Load Time:** Fetches and transmits significantly less data, decreasing response times.
+- **Improved Efficiency:** Enhances the user experience by loading only the necessary data, making the application more responsive.
+- **Resource Conservation:** Saves bandwidth and processing power both on the server and client side.
+
+### Conclusion
+By employing lightweight serializers and corresponding viewset actions for models with extensive data requirements, we effectively streamline data handling processes. This strategy not only boosts performance but also conserves resources, making our applications more efficient and user-friendly.
+
+# Rule 14: Simplifying tasks.py by Delegating Complex Logic
+
+## Introduction
+To maintain a clean and organized codebase, especially within asynchronous task files such as `tasks.py`, it's crucial to delegate complex logic to separate handler modules. This approach helps keep the `tasks.py` file focused primarily on task management and error handling, rather than on the intricacies of the processes being executed.
+
+### 14.1 Guidelines for tasks.py
+The `tasks.py` file should primarily handle:
+- Task instantiation and lifecycle management.
+- Basic error handling and status updates.
+- Invoking handlers that contain the business logic.
+
+#### Example of a Clean tasks.py
+Here’s how a well-structured `tasks.py` should look using `finmars_task` and delegating complex processes:
+
+```python
+from poms.csv_import.handlers import SimpleImportProcess
+from poms.common.models import CeleryTask
+import json
+import traceback
+import logging
+
+_l = logging.getLogger(__name__)
+
+@finmars_task(name="csv_import.simple_import", bind=True)
+def simple_import(self, task_id, procedure_instance_id=None, *args, **kwargs):
+    try:
+        celery_task = CeleryTask.objects.get(pk=task_id)
+        celery_task.celery_task_id = self.request.id  # Link task ID to request ID
+        celery_task.status = CeleryTask.STATUS_PENDING
+        celery_task.save()
+    except Exception as e:
+        err_msg = f"simple_import celery_task {task_id} error {repr(e)} traceback {traceback.format_exc()}"
+        _l.error(err_msg)
+        raise RuntimeError(err_msg) from e
+
+    import_process = SimpleImportProcess(
+        task_id=task_id,
+        procedure_instance_id=procedure_instance_id,
+    )
+
+    # Manage process steps and error handling within the SimpleImportProcess
+    try:
+        import_process.execute()
+        return json.dumps(import_process.task.result_object, default=str)
+    except Exception as e:
+        err_msg = f"simple_import error {repr(e)} trace {traceback.format_exc()}"
+        _l.error(err_msg)
+        celery_task.error_message = err_msg
+        celery_task.status = CeleryTask.STATUS_ERROR
+        celery_task.save()
+```
+
+### 14.2 Role of Handlers
+Handlers in `handlers.py` manage the detailed logic and steps of the processes initiated by tasks. This separation:
+- Enhances the readability and maintainability of `tasks.py`.
+- Allows for better unit testing and separation of concerns.
+- Keeps `tasks.py` under manageable size, ideally below 2000 lines.
+
+### Conclusion
+By ensuring `tasks.py` focuses on task management and defers complex logic to specialized handler classes, we maintain cleaner, more efficient, and more maintainable code. This method significantly improves the scalability and debuggability of our asynchronous task implementations.
+
+# Rule 15: Efficient Use of Typing in Python
+
+## Introduction
+Type hints in Python enhance code readability and help in static type checking. However, excessive or redundant type annotations can clutter the code and reduce clarity. This rule addresses when to use type hints effectively and when they might be unnecessary.
+
+### 15.1 Understanding When to Use Type Hints
+Type hints are beneficial for:
+- Clarifying expected data types for function arguments and return values, especially in complex functions or those with non-obvious parameters.
+- Enhancing IDE functionalities and static analysis tools to catch type-related errors early in development.
+
+### 15.2 Avoiding Redundant Typings
+While type hints can be very helpful, they should be used judiciously. Avoid redundant type hints where the type of a variable is obvious from its name or the context in which it is used.
+
+#### Example of Redundant Typing
+Consider the function `get_monad`:
+```python
+def get_monad(service_name: str, request_options: dict):
+    pass
+```
+In this example, adding `: str` to `service_name` and `: dict` to `request_options` is unnecessary if the variable names clearly indicate their types.
+
+#### Improved Version Without Redundant Typing
+```python
+def get_monad(service_name, request_options):
+    pass
+```
+
+### 15.3 Guidelines for Applying Type Hints
+- **Use type hints for clarity:** Apply them when the function's operation or the expected types of its inputs are not immediately clear from the context.
+- **Avoid type hints for basic primitives:** If the parameter names clearly suggest their types (like `user_id` or `service_name`), type hints might be redundant.
+- **Complex types deserve hints:** For complex data structures or when using classes and interfaces that may not be immediately recognizable, type hints provide significant value.
+
+### Conclusion
+Effectively using type hints in Python involves balancing between clarity and redundancy. By following these guidelines, developers can ensure that type hints serve to enhance, rather than complicate, the understanding and maintenance of code.
+
+# Rule 16: Use of String-Based Enums in Python
+
+## Introduction
+Using enums in Python can greatly enhance code readability and error reduction by providing a set of predefined constants. However, the choice between using numeric versus string values for enums can have significant implications. We advocate for the use of string-based enums for their clear advantages in readability and maintainability.
+
+### 16.1 Problems with Numeric Enums
+Numeric enums, while common, can lead to several issues in a codebase:
+- **Lack of Clarity:** Numeric values do not convey meaning without additional context, making the code harder to understand at a glance.
+- **Error-Prone:** Similar numeric values can be easily confused, leading to subtle bugs that are hard to detect.
+
+#### Example of Numeric Enums
+```python
+class TransactionClass(AbstractClassModel):
+    BUY = 1
+    SELL = 2
+    # More entries...
+```
+
+### 16.2 Advantages of String-Based Enums
+String-based enums replace numeric identifiers with descriptive strings, enhancing the code’s self-documenting nature and making it easier to understand and maintain.
+
+#### Example of Improved Enum Using Strings
+```python
+class TransactionClass(AbstractClassModel):
+    BUY = "buy"
+    SELL = "sell"
+    FX_TRADE = "fx_trade"
+    # More entries...
+
+    CLASSES = (
+        (BUY, gettext_lazy("Buy")),
+        (SELL, gettext_lazy("Sell")),
+        (FX_TRADE, gettext_lazy("FX Trade")),
+        # More entries...
+    )
+```
+
+### 16.3 Implementing String-Based Enums
+- **Use snake_case identifiers:** String values should be lowercase with underscores separating words, following Python’s naming conventions.
+- **Descriptive names:** Each enum should clearly describe the value it represents, avoiding abbreviations unless they are well understood.
+
+### Conclusion
+Switching to string-based enums in our projects will ensure that the intent and function of each enum are immediately clear to anyone reading the code. This approach reduces the likelihood of errors and improves the maintainability of our applications. By adopting this rule, we standardize the implementation of enums across our codebase, ensuring consistency and clarity.
+
+
+# Rule 17: Reporting Progress in Celery Tasks
+
+## Introduction
+Effective management of long-running asynchronous tasks in Celery often requires providing real-time updates on task progress. This enhances system transparency and improves user interaction by indicating how much of the task has been completed.
+
+### 17.1 Purpose of Progress Updates
+Progress updates are essential for:
+- **User Feedback**: Keeping users informed about the status of background operations.
+- **System Monitoring**: Enabling system administrators and developers to track the progress of operations, which is crucial for debugging and optimization.
+
+### 17.2 Implementing Progress Updates in finmars_task
+When defining a Celery task with `finmars_task`, include a mechanism to regularly update the progress to track how much of the task has been completed. Use the task instance itself to log progress details.
+
+#### Example of Progress Reporting in a finmars_task
+Here’s how to implement and use progress updates within a `finmars_task` function:
+
+```python
+from poms.common.models import CeleryTask
+
+@finmars_task(name="celery_tasks.bulk_delete", bind=True)
+def bulk_delete(self, task_id, *args, **kwargs):
+    celery_task = CeleryTask.objects.get(pk=task_id)
+
+    # Assuming `ids` are passed in `kwargs` to specify what to delete
+    total_items = len(kwargs['ids'])
+    for count, item_id in enumerate(kwargs['ids'], start=1):
+        instance = MyModel.objects.get(pk=item_id)
+        instance.fake_delete()  # or any other operation
+
+        # Update progress after each operation
+        celery_task.update_progress({
+            "current": count,
+            "total": total_items,
+            "percent": round(count / total_items * 100, 2),
+            "description": f"Deleted instance {item_id}"
+        })
+
+    celery_task.status = CeleryTask.STATUS_COMPLETED
+    celery_task.save()
+```
+
+### 17.3 Best Practices for Progress Updates
+- **Determine Update Frequency**: Balance the frequency of updates to avoid excessive overhead. Typically, update after processing each item or batch of items.
+- **Robust Error Handling**: Include error handling within the task to ensure that failures in progress updating do not halt the main task execution.
+
+### Conclusion
+Implementing systematic progress updates in Celery tasks helps in maintaining an efficient and user-friendly backend process. This practice not only assists in monitoring task execution but also improves the responsiveness and reliability of the system.
