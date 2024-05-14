@@ -1,41 +1,71 @@
 /* Default to light mode */
 
-:root {
-    /* Light mode variables */
-    --primary-color: #8F4C36;
-    --on-primary-color: #FFF;
-    --secondary-color: #53433F;
-    --outline-color: rgba(133, 115, 110, 1);
-    --outline-background-color: rgba(103, 80, 164, 0.12);
-    --page-background-color: #FFF;
-    --card-background-color: #FFF1ED;
-    --state-active-background-color: #FFDBD0;
-    --card-border-color: #85736E;
-    --table-header-background-color: rgba(241, 223, 218, .5);
-    --table-border-color: #F1DFDA;
-    --dialog-background-color: #F7E4DF;
-    --dropdown-background-color: #FCEAE5;
+/*
+s.zhitenev@finmars.com
+2024-05-14
+*/
 
-    --color-success: #F4E2A7;
-    --color-error: #BA1A1A;
+/* Light mode variables */
+:root {
+
+    --primary-color: #8F4C36;
+    --on-primary-color: #FFFFFF;
+
+    --secondary-color: #53433F;
+    --on-secondary-color: #FFDBD0; /* NEW */
+
+    --base-text-color: #231917; /* NEW */ /* default color for every text in finmars figma_keyword=surface */
+    --base-heading-color: #53433F; /* NEW */ /* h1-h6 */
+    --base-background-color: #FFFFFF; /* NEW */ /* body, page */
+
+    --container-background-color: #F7E4DF; /* NEW */ /* dropdowns, menu */
+    --table-header-background-color: #FFF1ED; /* NEW */ /* table-header */
+
+    --active-state-background-color: #FFDBD0; /* NEW */
+    --active-state-color: #2C160E; /* NEW */
+
+    --border-color: #85736E; /* NEW */ /* button borders, segments, inputs, dividers figma_keyword=outline  */
+    --border-color-light: #D8C2BC; /* NEW */ /* cards, tables, */
+
+    --hover-opacity: 0.92; /* NEW */
+    --focus-opacity: 0.88; /* NEW */
+    --disabled-opacity: 0.88; /* NEW */
+
+    --success-color: #F4E2A7; /* NEW */
+    --error-color: #BA1A1A; /* NEW */
+
 }
 
 /* Switch to dark mode when .dark-mode class is present on body */
 body.dark-mode {
+
     --primary-color: #FFB59D;
     --on-primary-color: #55200D;
-    --secondary-color: #FFDBD0;
-    --outline-color: rgba(160, 141, 135, 1);
-    --outline-background-color: rgba(208, 188, 255, 0.12);
-    --page-background-color: #1A110F;
-    --card-background-color: #1A110F;
-    --state-active-background-color: #5D4036;
-    --card-border-color: #FFDBD0;
-    --table-header-background-color: rgba(230, 224, 233, 0.12);
-    --table-border-color: #53433F;
-    --dialog-background-color: #1A110F;
-    --dropdown-background-color: #271D1B;
 
-    --color-success: #52461A;
-    --color-error: #BA1A1A;
+    --secondary-color: #FFDBD0;
+    --on-secondary-color: #53433F;
+
+    --base-text-color: #F1DFDA; /* NEW */ /* default color for every text in finmars */
+    --base-heading-color: #D8C2BC; /* NEW */ /* h1-h6 */
+    --base-background-color: #1A110F; /* NEW */ /* body, page figma_keyword=surface */
+
+    --container-background-color: #271D1B; /* NEW */ /* dropdowns, menu */
+    --table-header-background-color: #1A110F; /* NEW */ /* table-header */
+
+    --active-state-background-color: #5D4036; /* NEW */
+    --active-state-color: #FFDBD0; /* NEW */
+
+    --border-color: #A08D87; /* NEW */ /* button borders, segments, inputs, dividers  figma_keyword=outline */
+    --border-color-light: #D8C2BC; /* NEW */ /* cards, tables, figma_keyword=outline */
+
+    --hover-opacity: 0.92; /* NEW */
+    --focus-opacity: 0.88; /* NEW */
+    --disabled-opacity: 0.88; /* NEW */
+
+    --success-color: #52461A;
+    --error-color: #BA1A1A;
 }
+
+
+
+

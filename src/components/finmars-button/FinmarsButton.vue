@@ -58,6 +58,12 @@ export default {
   transition: box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), background-color 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
+.finmars-button:hover {
+  opacity: var(--hover-opacity);
+  background: var(--primary-color);
+  color: var(--secondary-color);
+}
+
 .finmars-button.fm-raised {
   box-shadow: 0px 1px 3px 1px #00000026;
   box-shadow: 0px 1px 2px 0px #0000004D;
@@ -84,12 +90,14 @@ export default {
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .26);
 
   &:not([disabled]):hover {
-    opacity: 0.5;
+    //opacity: 0.5;
+    opacity: var(--hover-opacity);
     background-color: var(--primary-color);
   }
 
   &:not([disabled]).md-focused {
-    opacity: 0.5;
+    //opacity: 0.5;
+    opacity: var(--focus-opacity);
     background-color: var(--primary-color);
   }
 }
@@ -191,4 +199,6 @@ button.fm-raised.md-warn.finmars-button {
   background-color: var(--state-active-background-color);
   opacity: .8;
 }
+
+
 </style>
