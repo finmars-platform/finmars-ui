@@ -39,50 +39,31 @@ s.zhitenev@finmars.com
 /* Switch to dark mode when .dark-mode class is present on body */
 body.dark-mode {
 
-    /* General usage variables*/
-    /* --[?special]-[?state]-[styleProperty] */
-    /* always kebab-case */
-    /* variable [segment] mast be camelCase */
-    /* [?segment] is optional */
-    /* [?special] - e.g. light, activeState, onPrimary */
-
     --primary-color: #FFB59D;
-    --onPrimary-color: #55200D;
+    --on-primary-color: #55200D;
 
     --secondary-color: #FFDBD0;
-    --onSecondary-color: #53433F;
+    --on-secondary-color: #53433F;
 
-    --baseText-color: #F1DFDA; /* NEW */ /* default color for every text in finmars */
-    --baseHeading-color: #D8C2BC; /* NEW */ /* h1-h6 */
-    --baseBackground-color: #1A110F; /* NEW */ /* body, page figma_keyword=surface */
+    --base-text-color: #F1DFDA; /* NEW */ /* default color for every text in finmars */
+    --base-heading-color: #D8C2BC; /* NEW */ /* h1-h6 */
+    --base-background-color: #1A110F; /* NEW */ /* body, page figma_keyword=surface */
 
-    --container-backgroundColor: #271D1B; /* NEW */ /* dropdowns, menu */
-    --activeState-backgroundColor: #5D4036; /* NEW */
-    --activeState-color: #FFDBD0; /* NEW */
+    --container-background-color: #271D1B; /* NEW */ /* dropdowns, menu */
+    --table-header-background-color: #1A110F; /* NEW */ /* table-header */
+
+    --active-state-background-color: #5D4036; /* NEW */
+    --active-state-color: #FFDBD0; /* NEW */
 
     --border-color: #A08D87; /* NEW */ /* button borders, segments, inputs, dividers  figma_keyword=outline */
-    --light-border-color: #D8C2BC; /* NEW */ /* cards, tables, figma_keyword=outline */
+    --border-color-light: #D8C2BC; /* NEW */ /* cards, tables, figma_keyword=outline */
 
     --hover-opacity: 0.92; /* NEW */
-    --hover-primary-color: rgba(255, 181, 157, var(--hover-opacity));
-    --hover-primary-backgroundColor: rgba(255, 181, 157, var(--hover-opacity));
-
     --focus-opacity: 0.88; /* NEW */
     --disabled-opacity: 0.88; /* NEW */
 
     --success-color: #52461A;
     --error-color: #BA1A1A;
-
-    /* Component specific variables */
-    /* --[component]-[?type]-[?state]-[styleProperty] */
-    /* always kebab-case for pieces of variable */
-    /* variable [segment] mast be camelCase */
-    /* [?segment] is optional */
-
-    --tableHeader-backgroundColor: #1A110F; /* NEW */ /* table-header */
-    /*--table-body-background-color: transparent; !* NEW *! !* table-body *!*/
-    --tableBody-backgroundColor: var(--base-background-color); /* NEW */ /* table-body */
-
 }
 
 
