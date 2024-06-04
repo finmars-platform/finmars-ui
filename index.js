@@ -1,7 +1,25 @@
-import FinmarsButton from './src/components/finmars-button/FinmarsButton.vue';
-import FinmarsCard from './src/components/finmars-card/FinmarsCard.vue';
-import FinmarsCardHeader from './src/components/finmars-card/FinmarsCardHeader.vue';
-import FinmarsCardContent from './src/components/finmars-card/FinmarsCardContent.vue';
-import FinmarsCardFooter from './src/components/finmars-card/FinmarsCardFooter.vue';
+import './src/assets/css/base-theme.css'
 
-export { FinmarsButton, FinmarsCard, FinmarsCardHeader, FinmarsCardContent, FinmarsCardFooter}
+import FmBtn from './src/components/fm/Btn.vue'
+
+export { default as tailwindBaseCssVariables } from "./tailwind/baseCssVariablesPlugin";
+
+export { FmBtn }
+
+/**
+ * VUE plugin that registers all components
+ *
+ * @type {{install(*, {}=): void}}
+ */
+export const uiComponentsPlugin = {
+    install(
+        Vue,
+        args={}
+    ) {
+
+        const prefix = args.componentNamePrefix || "Fm"
+
+        Vue.component(`${prefix}Btn`, FmBtn);
+
+    }
+}

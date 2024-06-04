@@ -5,10 +5,28 @@ s.zhitenev@finmars.com
 2024-05-14
 */
 
+/* General usage variables
+
+ --[?special]-[?state]-[styleProperty]
+ always kebab-case
+ variable [segment] mast be camelCase
+ [?segment] is optional
+ [?special] - e.g. light, activeState, onPrimary
+*/
+
+/* Component specific variables
+
+ --[component]-[?type]-[?state]-[styleProperty]
+ always kebab-case for pieces of variable
+ variable [segment] mast be camelCase
+ [?segment] is optional
+
+*/
+
 /* Light mode variables */
 :root {
 
-    --primary-color: #8F4C36;
+    --primary-color: rgb(143, 76, 54);
     --on-primary-color: #FFFFFF;
 
     --secondary-color: #53433F;
@@ -34,17 +52,15 @@ s.zhitenev@finmars.com
     --success-color: #F4E2A7; /* NEW */
     --error-color: #BA1A1A; /* NEW */
 
+    --button-text-color: var(--primary-color);
+    --button-text-backgroundColor: initial;
+    --button-filled-color: rgb(255, 255, 255);
+    --button-filled-backgroundColor: var(--primary-color);
+
 }
 
 /* Switch to dark mode when .dark-mode class is present on body */
-body.dark-mode {
-
-    /* General usage variables*/
-    /* --[?special]-[?state]-[styleProperty] */
-    /* always kebab-case */
-    /* variable [segment] mast be camelCase */
-    /* [?segment] is optional */
-    /* [?special] - e.g. light, activeState, onPrimary */
+body.dark {
 
     --primary-color: #FFB59D;
     --onPrimary-color: #55200D;
@@ -72,12 +88,6 @@ body.dark-mode {
 
     --success-color: #52461A;
     --error-color: #BA1A1A;
-
-    /* Component specific variables */
-    /* --[component]-[?type]-[?state]-[styleProperty] */
-    /* always kebab-case for pieces of variable */
-    /* variable [segment] mast be camelCase */
-    /* [?segment] is optional */
 
     --tableHeader-backgroundColor: #1A110F; /* NEW */ /* table-header */
     /*--table-body-background-color: transparent; !* NEW *! !* table-body *!*/

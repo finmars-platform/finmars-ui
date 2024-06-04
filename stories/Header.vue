@@ -25,15 +25,6 @@
           >Welcome, <b>{{ user.name }}</b
           >!</span
         >
-        <finmars-button size="small" @click="$emit('logout')" label="Log out" v-if="user" />
-        <finmars-button size="small" @click="$emit('login')" label="Log in" v-if="!user" />
-        <finmars-button
-          primary
-          size="small"
-          @click="$emit('createAccount')"
-          label="Sign up"
-          v-if="!user"
-        />
       </div>
     </div>
   </header>
@@ -41,12 +32,11 @@
 
 <script>
 import './header.css';
-import FinmarsButton from '../src/components/finmars-button/FinmarsButton.vue';
 
 export default {
   name: 'my-header',
 
-  components: { FinmarsButton },
+  components: {  },
 
   props: {
     user: {
