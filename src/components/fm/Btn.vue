@@ -1,36 +1,35 @@
 <template>
     <button
-        class="h-10 px-6"
+        class="h-10 px-6 flex items-center rounded-3xl text-sm"
         :class="['btn', type]"
     >
-        <div v-if="icon" :class="`icon material-icons`">{{ icon }}</div>
-        <slot />
+        <div v-if="icon"
+             class="icon material-icons "
+        >
+            {{ icon }}
+        </div>
+        {{ label }}
+        <slot/>
     </button>
 </template>
 
-<script>
+<script setup>
+import {onMounted} from 'vue'
 
-export default  {
-    name: "FmBtn",
-    props: {
-        label: String,
-        icon: String,
-        /**
-         * Type of button
-         * @values filled, text
-         */
-        type: {
-            type: String,
-            default: 'text',
-        },
+const props = defineProps({
+    label: String,
+    icon: String,
+    type: {
+        type: String,
+        default: 'text',
     },
-    setup(props) {
-        if ( !["text", "filled"].includes(props.type) ) {
-            throw `Invalid type for component FmBtn: ${props.type}`;
-        }
-    }
-}
+})
 
+onMounted(() => {
+    if (!["text", "filled"].includes(props.type)) {
+        throw `Invalid type for component FmBtn: ${props.type}`;
+    }
+})
 </script>
 
 <style scoped>
@@ -150,10 +149,45 @@ export default  {
     &.text {
         color: theme('colors.--button-text-color');
         background-color: theme('colors.--button-text-backgroundColor');
+
+        &:hover {
+            background-color: theme('colors.--button-text-hover-backgroundColor');
+        }
+
+        &:focus {
+            background-color: theme('colors.--button-text-focus-backgroundColor');
+        }
+
+        &:active {
+            background-color: theme('colors.--button-text-pressed-backgroundColor');
+        }
+
+        &:disabled {
+            color: theme('colors.--button-text-disabled-color');
+            background-color: theme('colors.--button-text-disabled-backgroundColor');
+        }
     }
+
     &.filled {
         color: theme('colors.--button-filled-color');
         background-color: theme('colors.--button-filled-backgroundColor');
+
+        &:hover {
+            background-color: theme('colors.--button-filled-hover-backgroundColor');
+        }
+
+        &:focus {
+            background-color: theme('colors.--button-filled-focus-backgroundColor');
+        }
+
+        &:active {
+            background-color: theme('colors.--button-filled-pressed-backgroundColor');
+        }
+
+        &:disabled {
+            color: theme('colors.--button-filled-disabled-color');
+            background-color: theme('colors.--button-filled-disabled-backgroundColor');
+        }
     }
 }
 </style>
