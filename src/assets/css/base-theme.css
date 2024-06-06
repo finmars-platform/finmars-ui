@@ -25,6 +25,7 @@ s.zhitenev@finmars.com
 
 /* Light mode variables */
 :root {
+
     --primary-color-nums: 143, 76, 54;
     --primary-color: rgb(var(--primary-color-nums));
     --on-primary-color: #FFFFFF;
@@ -52,33 +53,32 @@ s.zhitenev@finmars.com
 
     --hover-opacity: 0.92; /* NEW */
     --focus-opacity: 0.88; /* NEW */
-    --pressed-opacity: 0.88; /* NEW */
-    --disabled-opacity: 0.12; /* NEW */
-    --error-color: #BA1A1A; /* NEW */
+    --disabled-opacity: 0.88; /* NEW */
 
-    --text-hover-opacity: 0.08; /* NEW */
-    --text-focus-opacity: 0.12; /* NEW */
+    --success-color: #F4E2A7; /* NEW */
+    --error-color: #BA1A1A; /* NEW */
 
     --button-text-color: var(--on-secondary-color);
     --button-text-disabled-color: var(--disabled-text-color);
     --button-text-backgroundColor: initial;
-    --button-text-hover-backgroundColor: rgba(var(--secondary-color-nums), var(--text-hover-opacity));
-    --button-text-focus-backgroundColor: rgba(var(--secondary-color-nums), var(--text-focus-opacity));
-    --button-text-pressed-backgroundColor: rgba(var(--secondary-color-nums), var(--text-focus-opacity));
+    --button-text-hover-backgroundColor: rgba(var(--secondary-color-nums), 0.08);
+    --button-text-focus-backgroundColor: rgba(var(--secondary-color-nums), 0.12);
+    --button-text-pressed-backgroundColor: rgba(var(--secondary-color-nums), 0.12);
     --button-text-disabled-backgroundColor: initial;
 
     --button-filled-color: var(--on-primary-color);
     --button-filled-disabled-color: var(--disabled-text-color);
     --button-filled-backgroundColor: var(--primary-color);
-    --button-filled-hover-backgroundColor: rgba(var(--primary-color-nums), var(--hover-opacity));
-    --button-filled-focus-backgroundColor: rgba(var(--primary-color-nums), var(--focus-opacity));
-    --button-filled-pressed-backgroundColor: rgba(var(--primary-color-nums), var(--pressed-opacity));
-    --button-filled-disabled-backgroundColor: rgba(var(--disabled-backgroundColor-nums), var(--disabled-opacity));
+    --button-filled-hover-backgroundColor: rgba(var(--primary-color-nums), 0.92);
+    --button-filled-focus-backgroundColor: rgba(var(--primary-color-nums), 0.88);
+    --button-filled-pressed-backgroundColor: rgba(var(--primary-color-nums), 0.88);
+    --button-filled-disabled-backgroundColor: rgba(var(--disabled-backgroundColor-nums), 0.12);
 
 }
 
 /* Switch to dark mode when .dark-mode class is present on body */
 body.dark {
+
     background-color: rgba(26, 17, 15, 1);
 
     --primary-color-nums: 255, 181, 157;
@@ -104,18 +104,12 @@ body.dark {
     --border-color: #A08D87; /* NEW */ /* button borders, segments, inputs, dividers  figma_keyword=outline */
     --light-border-color: #D8C2BC; /* NEW */ /* cards, tables, figma_keyword=outline */
 
+    --hover-opacity: 0.92; /* NEW */
     --hover-primary-color: rgba(255, 181, 157, var(--hover-opacity));
     --hover-primary-backgroundColor: rgba(255, 181, 157, var(--hover-opacity));
 
-
-    --filled-pressed-opacity: 0.88; /* NEW */
-    --filled-hover-opacity: 0.92; /* NEW */
-    --filled-focus-opacity: 0.88; /* NEW */
-
-    --text-hover-opacity: 0.08; /* NEW */
-    --text-focus-opacity: 0.12; /* NEW */
-    --text-pressed-opacity: 0.12; /* NEW */
-    --text-disabled-opacity: 0.12; /* NEW */
+    --focus-opacity: 0.88; /* NEW */
+    --disabled-opacity: 0.88; /* NEW */
 
     --success-color: #52461A;
     --error-color: #BA1A1A;
@@ -128,18 +122,18 @@ body.dark {
     --button-text-color: var(--onSecondary-color);
     --button-text-disabled-color: var(--disabled-text-color);
     --button-text-backgroundColor: initial;
-    --button-text-hover-backgroundColor: rgba(var(--secondary-color-nums), var(--text-hover-opacity));
-    --button-text-focus-backgroundColor: rgba(var(--secondary-color-nums), var(--text-focus-opacity));
-    --button-text-pressed-backgroundColor: rgba(var(--secondary-color-nums), var(--text-pressed-opacity));
+    --button-text-hover-backgroundColor: rgba(var(--secondary-color-nums), 0.08);
+    --button-text-focus-backgroundColor: rgba(var(--secondary-color-nums), 0.12);
+    --button-text-pressed-backgroundColor: rgba(var(--secondary-color-nums), 0.12);
     --button-text-disabled-backgroundColor: initial;
 
     --button-filled-color: var(--onPrimary-color);
     --button-filled-disabled-color: var(--disabled-text-color);
     --button-filled-backgroundColor: var(--primary-color);
-    --button-filled-hover-backgroundColor: rgba(var(--primary-color-nums), var(--filled-hover-opacity));
-    --button-filled-focus-backgroundColor: rgba(var(--primary-color-nums), var(--filled-focus-opacity));
-    --button-filled-pressed-backgroundColor: rgba(var(--primary-color-nums), var(--filled-pressed-opacity));
-    --button-filled-disabled-backgroundColor: rgba(var(--disabled-backgroundColor-nums), var(--text-disabled-opacity));
+    --button-filled-hover-backgroundColor: rgba(var(--primary-color-nums), 0.92);
+    --button-filled-focus-backgroundColor: rgba(var(--primary-color-nums), 0.88);
+    --button-filled-pressed-backgroundColor: rgba(var(--primary-color-nums), 0.88);
+    --button-filled-disabled-backgroundColor: rgba(var(--disabled-backgroundColor-nums), 0.12);
 }
 
 
