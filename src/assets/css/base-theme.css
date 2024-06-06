@@ -78,9 +78,6 @@ s.zhitenev@finmars.com
 
 /* Switch to dark mode when .dark-mode class is present on body */
 body.dark {
-
-    background-color: rgba(26, 17, 15, 1);
-
     --primary-color-nums: 255, 181, 157;
     --primary-color: rgb(var(--primary-color-nums));
     --onPrimary-color: #55200D;
