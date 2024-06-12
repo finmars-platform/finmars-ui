@@ -26,16 +26,13 @@ s.zhitenev@finmars.com
 /* Light mode variables */
 :root {
 
-    --primary-color-nums: 143, 76, 54;
-    --primary-color: rgb(var(--primary-color-nums));
+    --primary-color: rgb(143, 76, 54);
     --on-primary-color: #FFFFFF;
 
-    --secondary-color-nums: 103, 80, 164;
-    --secondary-color: rgb(var(--secondary-color-nums));
+    --secondary-color: rgb(103, 80, 164);
     --on-secondary-color: #8F4C36; /* NEW */
 
-    --disabled-backgroundColor-nums: 29, 27, 32;
-    --disabled-backgroundColor: rgb(var(--disabled-backgroundColor-nums));
+    --disabled-backgroundColor: rgb(29, 27, 32);
     --disabled-text-color: rgb(171, 163, 161);
 
     --base-text-color: #231917; /* NEW */ /* default color for every text in finmars figma_keyword=surface */
@@ -61,33 +58,30 @@ s.zhitenev@finmars.com
     --button-text-color: var(--on-secondary-color);
     --button-text-disabled-color: var(--disabled-text-color);
     --button-text-backgroundColor: initial;
-    --button-text-hover-backgroundColor: rgba(var(--secondary-color-nums), 0.08);
-    --button-text-focus-backgroundColor: rgba(var(--secondary-color-nums), 0.12);
-    --button-text-pressed-backgroundColor: rgba(var(--secondary-color-nums), 0.12);
+    --button-text-hover-backgroundColor: rgba(103, 80, 164, 0.08);
+    --button-text-focus-backgroundColor: rgba(103, 80, 164, 0.12);
+    --button-text-pressed-backgroundColor: rgba(103, 80, 164, 0.12);
     --button-text-disabled-backgroundColor: initial;
 
     --button-filled-color: var(--on-primary-color);
     --button-filled-disabled-color: var(--disabled-text-color);
     --button-filled-backgroundColor: var(--primary-color);
-    --button-filled-hover-backgroundColor: rgba(var(--primary-color-nums), 0.92);
-    --button-filled-focus-backgroundColor: rgba(var(--primary-color-nums), 0.88);
-    --button-filled-pressed-backgroundColor: rgba(var(--primary-color-nums), 0.88);
-    --button-filled-disabled-backgroundColor: rgba(var(--disabled-backgroundColor-nums), 0.12);
-
+    --button-filled-hover-backgroundColor: rgba(143, 76, 54, 0.92);
+    --button-filled-focus-backgroundColor: rgba(143, 76, 54, 0.88);
+    --button-filled-pressed-backgroundColor: rgba(143, 76, 54, 0.88);
+    --button-filled-disabled-backgroundColor: rgba(29, 27, 32, 0.12);
 }
 
 /* Switch to dark mode when .dark-mode class is present on body */
 body.dark {
-    --primary-color-nums: 255, 181, 157;
-    --primary-color: rgb(var(--primary-color-nums));
+
+    --primary-color: rgb(255, 181, 157);
     --onPrimary-color: #55200D;
 
-    --secondary-color-nums: 208, 188, 255;
-    --secondary-color: rgb(var(--secondary-color-nums));
+    --secondary-color: rgb(208, 188, 255);
     --onSecondary-color: #FFB59D;
 
-    --disabled-backgroundColor-nums: 230, 224, 233;
-    --disabled-backgroundColor: rgb(var(--disabled-backgroundColor-nums));
+    --disabled-backgroundColor: rgb(230, 224, 233);
     --disabled-text-color: rgb(123, 110, 108);
 
     --baseText-color: #F1DFDA; /* NEW */ /* default color for every text in finmars */
@@ -119,18 +113,18 @@ body.dark {
     --button-text-color: var(--onSecondary-color);
     --button-text-disabled-color: var(--disabled-text-color);
     --button-text-backgroundColor: initial;
-    --button-text-hover-backgroundColor: rgba(var(--secondary-color-nums), 0.08);
-    --button-text-focus-backgroundColor: rgba(var(--secondary-color-nums), 0.12);
-    --button-text-pressed-backgroundColor: rgba(var(--secondary-color-nums), 0.12);
+    --button-text-hover-backgroundColor: rgba(208, 188, 255, 0.08);
+    --button-text-focus-backgroundColor: rgba(208, 188, 255, 0.12);
+    --button-text-pressed-backgroundColor: rgba(208, 188, 255, 0.12);
     --button-text-disabled-backgroundColor: initial;
 
     --button-filled-color: var(--onPrimary-color);
     --button-filled-disabled-color: var(--disabled-text-color);
     --button-filled-backgroundColor: var(--primary-color);
-    --button-filled-hover-backgroundColor: rgba(var(--primary-color-nums), 0.92);
-    --button-filled-focus-backgroundColor: rgba(var(--primary-color-nums), 0.88);
-    --button-filled-pressed-backgroundColor: rgba(var(--primary-color-nums), 0.88);
-    --button-filled-disabled-backgroundColor: rgba(var(--disabled-backgroundColor-nums), 0.12);
+    --button-filled-hover-backgroundColor: rgba(255, 181, 157, 0.92);
+    --button-filled-focus-backgroundColor: rgba(255, 181, 157, 0.88);
+    --button-filled-pressed-backgroundColor: rgba(255, 181, 157, 0.88);
+    --button-filled-disabled-backgroundColor: rgba(230, 224, 233, 0.12);
 }
 
 

@@ -8,28 +8,20 @@
         >
             {{ icon }}
         </div>
-        {{ label }}
         <slot/>
     </button>
 </template>
 
 <script setup>
-import {onMounted} from 'vue'
 
-const props = defineProps({
-    label: String,
+defineProps({
     icon: String,
     type: {
         type: String,
         default: 'text',
+        validator: (value) => ["text", "filled"].includes(value)
     },
-})
-
-onMounted(() => {
-    if (!["text", "filled"].includes(props.type)) {
-        throw `Invalid type for component FmBtn: ${props.type}`;
-    }
-})
+});
 </script>
 
 <style scoped>
