@@ -151,10 +151,11 @@ defineProps({
         }
 
         &:active {
-            background-color: theme('colors.--button-text-pressed-backgroundColor');
+            background-color: theme('colors.--button-text-active-backgroundColor');
         }
 
         &:disabled {
+            opacity: theme('opacity.--button-disabled');
             color: theme('colors.--button-text-disabled-color');
             background-color: theme('colors.--button-text-disabled-backgroundColor');
         }
@@ -173,10 +174,11 @@ defineProps({
         }
 
         &:active {
-            background-color: theme('colors.--button-filled-pressed-backgroundColor');
+            background-color: theme('colors.--button-filled-active-backgroundColor');
         }
 
         &:disabled {
+            opacity: theme('opacity.--button-disabled');
             color: theme('colors.--button-filled-disabled-color');
             background-color: theme('colors.--button-filled-disabled-backgroundColor');
         }

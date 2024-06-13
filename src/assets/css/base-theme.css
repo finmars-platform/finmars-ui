@@ -27,17 +27,11 @@ s.zhitenev@finmars.com
 :root {
 
     --primary-color: rgb(143, 76, 54);
-    --on-primary-color: #FFFFFF;
+    --onPrimary-color: rgb(255, 255, 255);
 
-    --secondary-color: rgb(103, 80, 164);
-    --on-secondary-color: #8F4C36; /* NEW */
-
-    --disabled-backgroundColor: rgb(29, 27, 32);
-    --disabled-text-color: rgb(171, 163, 161);
-
-    --base-text-color: #231917; /* NEW */ /* default color for every text in finmars figma_keyword=surface */
+    --baseText-color: rgb(35, 25, 23); /* NEW */ /* default color for every text in finmars figma_keyword=surface */
     --base-heading-color: #53433F; /* NEW */ /* h1-h6 */
-    --base-background-color: #FFFFFF; /* NEW */ /* body, page */
+    --base-backgroundColor: #FFFFFF; /* NEW */ /* body, page */
 
     --container-background-color: #F7E4DF; /* NEW */ /* dropdowns, menu */
     --table-header-background-color: #FFF1ED; /* NEW */ /* table-header */
@@ -55,36 +49,34 @@ s.zhitenev@finmars.com
     --success-color: #F4E2A7; /* NEW */
     --error-color: #BA1A1A; /* NEW */
 
-    --button-text-color: var(--on-secondary-color);
-    --button-text-disabled-color: var(--disabled-text-color);
-    --button-text-backgroundColor: initial;
-    --button-text-hover-backgroundColor: rgba(103, 80, 164, 0.08);
-    --button-text-focus-backgroundColor: rgba(103, 80, 164, 0.12);
-    --button-text-pressed-backgroundColor: rgba(103, 80, 164, 0.12);
-    --button-text-disabled-backgroundColor: initial;
+    --button-disabled-opacity: 0.38;
 
-    --button-filled-color: var(--on-primary-color);
-    --button-filled-disabled-color: var(--disabled-text-color);
+    --button-text-color: rgb(143, 76, 54);
+    --button-text-backgroundColor: initial;
+    --button-text-state-backgroundColor-rgb: 103, 80, 164;
+    --button-text-hover-backgroundColor: rgba( var(--button-text-state-backgroundColor-rgb), 0.08 );
+    --button-text-focus-backgroundColor: rgba( var(--button-text-state-backgroundColor-rgb), 0.12 );
+    --button-text-pressed-backgroundColor: rgba( var(--button-text-state-backgroundColor-rgb), 0.12 );
+    --button-text-disabled-color: var(--baseText-color);
+    --button-text-disabled-backgroundColor: unset;
+
+    --button-filled-color: var(--onPrimary-color);
     --button-filled-backgroundColor: var(--primary-color);
     --button-filled-hover-backgroundColor: rgba(143, 76, 54, 0.92);
     --button-filled-focus-backgroundColor: rgba(143, 76, 54, 0.88);
-    --button-filled-pressed-backgroundColor: rgba(143, 76, 54, 0.88);
+    --button-filled-active-backgroundColor: rgba(143, 76, 54, 0.88);
+    --button-filled-disabled-color: var(--baseText-color);
     --button-filled-disabled-backgroundColor: rgba(29, 27, 32, 0.12);
 }
 
 /* Switch to dark mode when .dark-mode class is present on body */
 body.dark {
 
-    --primary-color: rgb(255, 181, 157);
-    --onPrimary-color: #55200D;
+    --primary-color-rgb: 255, 181, 157;
+    --primary-color: rgb(var(--primary-color-rgb));
+    --onPrimary-color: rgb(85, 32, 13);
 
-    --secondary-color: rgb(208, 188, 255);
-    --onSecondary-color: #FFB59D;
-
-    --disabled-backgroundColor: rgb(230, 224, 233);
-    --disabled-text-color: rgb(123, 110, 108);
-
-    --baseText-color: #F1DFDA; /* NEW */ /* default color for every text in finmars */
+    --baseText-color: rgb(241, 223, 218); /* NEW */ /* default color for every text in finmars */
     --baseHeading-color: #D8C2BC; /* NEW */ /* h1-h6 */
     --baseBackground-color: #1A110F; /* NEW */ /* body, page figma_keyword=surface */
 
@@ -103,28 +95,29 @@ body.dark {
     --disabled-opacity: 0.88; /* NEW */
 
     --success-color: #52461A;
-    --error-color: #BA1A1A;
+    --error-color: rgb(186, 26, 26);
 
     --tableHeader-backgroundColor: #1A110F; /* NEW */ /* table-header */
     /*--table-body-background-color: transparent; !* NEW *! !* table-body *!*/
-    --tableBody-backgroundColor: var(--base-background-color); /* NEW */ /* table-body */
+    --tableBody-backgroundColor: var(--base-backgroundColor); /* NEW */ /* table-body */
 
 
-    --button-text-color: var(--onSecondary-color);
-    --button-text-disabled-color: var(--disabled-text-color);
+    --button-text-color: var(--primary-color);
     --button-text-backgroundColor: initial;
-    --button-text-hover-backgroundColor: rgba(208, 188, 255, 0.08);
-    --button-text-focus-backgroundColor: rgba(208, 188, 255, 0.12);
-    --button-text-pressed-backgroundColor: rgba(208, 188, 255, 0.12);
-    --button-text-disabled-backgroundColor: initial;
+    --button-text-state-backgroundColor-rgb: 208, 188, 255;
+    --button-text-hover-backgroundColor: rgba(var(--button-text-state-backgroundColor-rgb), 0.08);
+    --button-text-focus-backgroundColor: rgba(var(--button-text-state-backgroundColor-rgb), 0.12);
+    --button-text-pressed-backgroundColor: rgba(var(--button-text-state-backgroundColor-rgb), 0.12);
+    --button-text-disabled-color: var(--baseText-color);
+    --button-text-disabled-backgroundColor: unset;
 
     --button-filled-color: var(--onPrimary-color);
-    --button-filled-disabled-color: var(--disabled-text-color);
     --button-filled-backgroundColor: var(--primary-color);
-    --button-filled-hover-backgroundColor: rgba(255, 181, 157, 0.92);
-    --button-filled-focus-backgroundColor: rgba(255, 181, 157, 0.88);
-    --button-filled-pressed-backgroundColor: rgba(255, 181, 157, 0.88);
-    --button-filled-disabled-backgroundColor: rgba(230, 224, 233, 0.12);
+    --button-filled-hover-backgroundColor: rgba(var(--primary-color-rgb), 0.92);
+    --button-filled-focus-backgroundColor: rgba(var(--primary-color-rgb), 0.88);
+    --button-filled-active-backgroundColor: rgba(var(--primary-color-rgb), 0.88);
+    --button-filled-disabled-color: var(--baseText-color);
+    --button-filled-disabled-backgroundColor: rgba(230, 224, 233, 0.50);
 }
 
 
