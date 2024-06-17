@@ -16,7 +16,7 @@ export default plugin(
           '--button-text-backgroundColor': 'var(--button-text-backgroundColor)',
           '--button-text-hover-backgroundColor': 'var(--button-text-hover-backgroundColor)',
           '--button-text-focus-backgroundColor': 'var(--button-text-focus-backgroundColor)',
-          '--button-text-active-backgroundColor': 'var(--button-text-hover-backgroundColor)',
+          '--button-text-active-backgroundColor': 'var(--button-text-active-backgroundColor)',
           '--button-text-disabled-color': 'var(--button-text-disabled-color)',
           '--button-text-disabled-backgroundColor': 'var(--button-text-disabled-backgroundColor)',
 

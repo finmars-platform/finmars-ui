@@ -138,6 +138,8 @@ defineProps({
     }
 }*/
 .btn {
+    outline: none;
+
     &.text {
         color: theme('colors.--button-text-color');
         background-color: theme('colors.--button-text-backgroundColor');

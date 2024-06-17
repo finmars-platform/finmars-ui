@@ -54,9 +54,9 @@ s.zhitenev@finmars.com
     --button-text-color: rgb(143, 76, 54);
     --button-text-backgroundColor: initial;
     --button-text-state-backgroundColor-rgb: 103, 80, 164;
-    --button-text-hover-backgroundColor: rgba( var(--button-text-state-backgroundColor-rgb), 0.08 );
-    --button-text-focus-backgroundColor: rgba( var(--button-text-state-backgroundColor-rgb), 0.12 );
-    --button-text-pressed-backgroundColor: rgba( var(--button-text-state-backgroundColor-rgb), 0.12 );
+    --button-text-hover-backgroundColor: rgba(var(--button-text-state-backgroundColor-rgb), 0.08);
+    --button-text-focus-backgroundColor: rgba(var(--button-text-state-backgroundColor-rgb), 0.12);
+    --button-text-active-backgroundColor: rgba(var(--button-text-state-backgroundColor-rgb), 0.12);
     --button-text-disabled-color: var(--baseText-color);
     --button-text-disabled-backgroundColor: unset;
 
@@ -75,7 +75,7 @@ body.dark {
     --primary-color-rgb: 255, 181, 157;
     --primary-color: rgb(var(--primary-color-rgb));
     --onPrimary-color: rgb(85, 32, 13);
-
+    --base-backgroundColor: rgba(26, 17, 15, 1);
     --baseText-color: rgb(241, 223, 218); /* NEW */ /* default color for every text in finmars */
     --baseHeading-color: #D8C2BC; /* NEW */ /* h1-h6 */
     --baseBackground-color: #1A110F; /* NEW */ /* body, page figma_keyword=surface */
