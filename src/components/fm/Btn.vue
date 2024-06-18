@@ -2,6 +2,7 @@
     <button
         class="h-10 px-6 flex items-center rounded-3xl text-sm"
         :class="['btn', type]"
+        @mousedown.prevent=""
     >
         <div v-if="icon"
              class="icon material-icons "
