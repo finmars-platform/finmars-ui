@@ -1,6 +1,6 @@
 <template>
     <button
-        class="h-10 px-6 flex items-center rounded-3xl text-sm"
+        class="h-10 px-6 flex items-center rounded-3xl text-sm outline-none"
         :class="['btn', type]"
         @mousedown.prevent=""
     >
@@ -139,8 +139,6 @@ defineProps({
     }
 }*/
 .btn {
-    outline: none;
-
     &.text {
         color: theme('colors.--button-text-color');
         background-color: theme('colors.--button-text-backgroundColor');
