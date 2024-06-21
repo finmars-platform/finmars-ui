@@ -31,7 +31,7 @@ s.zhitenev@finmars.com
 
     --baseText-color: rgb(35, 25, 23); /* NEW */ /* default color for every text in finmars figma_keyword=surface */
     --base-heading-color: #53433F; /* NEW */ /* h1-h6 */
-    --base-backgroundColor: #FFFFFF; /* NEW */ /* body, page */
+    --base-backgroundColor: #FFF8F6; /* NEW */ /* body, page */
 
     --container-background-color: #F7E4DF; /* NEW */ /* dropdowns, menu */
     --table-header-background-color: #FFF1ED; /* NEW */ /* table-header */
@@ -67,6 +67,8 @@ s.zhitenev@finmars.com
     --button-filled-active-backgroundColor: rgba(143, 76, 54, 0.88);
     --button-filled-disabled-color: var(--baseText-color);
     --button-filled-disabled-backgroundColor: rgba(29, 27, 32, 0.12);
+    --secondary-color: #53433F;
+    --card-background-color: #FFF1ED;
 }
 
 /* Switch to dark mode when .dark-mode class is present on body */
@@ -85,7 +87,7 @@ body.dark {
     --activeState-color: #FFDBD0; /* NEW */
 
     --border-color: #A08D87; /* NEW */ /* button borders, segments, inputs, dividers  figma_keyword=outline */
-    --light-border-color: #D8C2BC; /* NEW */ /* cards, tables, figma_keyword=outline */
+    --border-color-light: #53433F; /* NEW */ /* cards, tables, figma_keyword=outline */
 
     --hover-opacity: 0.92; /* NEW */
     --hover-primary-color: rgba(255, 181, 157, var(--hover-opacity));
@@ -118,6 +120,9 @@ body.dark {
     --button-filled-active-backgroundColor: rgba(var(--primary-color-rgb), 0.88);
     --button-filled-disabled-color: var(--baseText-color);
     --button-filled-disabled-backgroundColor: rgba(230, 224, 233, 0.50);
+
+    --secondary-color: #FFDBD0;
+    --card-background-color: #1A110F;
 }
 
 

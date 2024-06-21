@@ -9,6 +9,9 @@ export default plugin(
         colors: {
           '--primary-color': 'var(--primary-color)',
           '--baseText-color': 'var(--baseText-color)',
+          '--border-color-light': 'var(--border-color-light)',
+          '--secondary-color': 'var(--secondary-color)',
+          '--card-background-color': 'var(--card-background-color)',
 
           '--base-backgroundColor': 'var(--base-backgroundColor)',
 
