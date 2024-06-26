@@ -105,19 +105,39 @@ body.dark {
     --button-text-color: var(--primary-color);
     --button-text-backgroundColor: initial;
     --button-text-state-backgroundColor-rgb: 208, 188, 255;
+    --button-text-hover-color: var(--button-text-color);
     --button-text-hover-backgroundColor: rgba(var(--button-text-state-backgroundColor-rgb), 0.08);
+    --button-text-focus-color: var(--button-text-color);
     --button-text-focus-backgroundColor: rgba(var(--button-text-state-backgroundColor-rgb), 0.12);
+    --button-text-pressed-color: var(--button-text-color);
     --button-text-pressed-backgroundColor: rgba(var(--button-text-state-backgroundColor-rgb), 0.12);
     --button-text-disabled-color: var(--baseText-color);
     --button-text-disabled-backgroundColor: unset;
 
     --button-filled-color: var(--onPrimary-color);
     --button-filled-backgroundColor: var(--primary-color);
+    --button-filled-hover-color: var(--button-filled-color);
     --button-filled-hover-backgroundColor: rgba(var(--primary-color-rgb), 0.92);
+    --button-filled-focus-color: var(--button-filled-color);
     --button-filled-focus-backgroundColor: rgba(var(--primary-color-rgb), 0.88);
+    --button-filled-active-color: var(--button-filled-color);
     --button-filled-active-backgroundColor: rgba(var(--primary-color-rgb), 0.88);
     --button-filled-disabled-color: var(--baseText-color);
     --button-filled-disabled-backgroundColor: rgba(230, 224, 233, 0.50);
+
+
+
+    --icon-basic-color: var(--primary-color);
+    --icon-basic-backgroundColor: initial;
+    --icon-basic-state-backgroundColor-rgb: 73, 69, 79;
+    --icon-basic-hover-color: var(--icon-basic-color);
+    --icon-basic-hover-backgroundColor: rgba(var(--icon-basic-state-backgroundColor-rgb), 0.08);
+    --icon-basic-focus-color: var(--icon-basic-color);
+    --icon-basic-focus-backgroundColor: rgba(var(--icon-basic-state-backgroundColor-rgb), 0.12);
+    --icon-basic-pressed-color: var(--icon-basic-color);
+    --icon-basic-pressed-backgroundColor: rgba(var(--icon-basic-state-backgroundColor-rgb), 0.12);
+    --icon-basic-disabled-color: var(--baseText-color);
+    --icon-basic-disabled-backgroundColor: unset;
 }
 
 
