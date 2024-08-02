@@ -1,106 +1,95 @@
 <template>
     <button
-        class="fm-icon p-2 block rounded-full text-sm btn relative group outline-none"
+        class="fm-icon block rounded-full outline-none"
         :class="[
                     type,
-                    type === 'basic' ? 'cursor-default' : 'cursor-pointer',
                 ]"
     >
 
-        <div class="material-icons color-[inherit]" :style="{ fontSize: size + 'px' }">{{ icon }}</div>
+        <div class="material-icons color-[inherit]" :style="{ fontSize: size + 'rem' }">{{ icon }}</div>
     </button>
 </template>
 
 <script setup>
-defineProps({
-    icon: String,
-    size: String,
-    error: Boolean,
-    type: {
-        type: String,
-        default: 'basic',
-        validator: (value) => ['basic', 'button', 'filledButton'].includes(value),
-    }
-})
+
+    defineProps({
+        icon: String,
+        size: {
+            type: Number,
+            default: 1.5,
+        },
+        error: Boolean,
+        type: {
+            type: String,
+            default: 'basic',
+            validator: (value) => ['basic', 'button', 'filledButton'].includes(value),
+        }
+    })
+
 </script>
 
 <style scoped>
 
-
-
-.fm-icon {
-    &.basic {
-        color: theme('colors.--icon-basic-color');
-
-        &:hover {
-            background-color: theme('colors.--button-filled-hover-backgroundColor');
+    .fm-icon {
+        .material-icons {
+            padding: theme('padding.--icon-padding');
         }
 
-        &:focus {
-            background-color: theme('colors.--button-filled-focus-backgroundColor');
+        &.basic {
+            cursor: inherit;
+            color: inherit;
         }
 
-        &:active {
-            background-color: theme('colors.--button-filled-active-backgroundColor');
+        &.error {
+            color: theme('colors.--error-color');
         }
 
-        &:disabled {
-            opacity: theme('opacity.--button-disabled');
-            color: theme('colors.--button-filled-disabled-color');
-            background-color: theme('colors.--button-filled-disabled-backgroundColor');
+        &.button {
+            color: theme('colors.--icon-button-color');
+            background-color: theme('colors.--icon-button-backgroundColor');
+
+            &:hover {
+                background-color: theme('colors.--icon-button-hover-backgroundColor');
+            }
+
+            &:focus {
+                background-color: theme('colors.--icon-button-focus-backgroundColor');
+            }
+
+            &:active {
+                background-color: theme('colors.--icon-button-active-backgroundColor');
+            }
+
+            &:disabled {
+                opacity: theme('opacity.--icon-disabled');
+                color: theme('colors.--icon-button-disabled-color');
+                background-color: theme('colors.--icon-button-disabled-backgroundColor');
+            }
         }
+
+        &.filledButton {
+            color: theme('colors.--icon-filledButton-color');
+            background-color: theme('colors.--icon-filledButton-backgroundColor');
+
+            &:hover {
+                background-color: theme('colors.--icon-filledButton-hover-backgroundColor');
+            }
+
+            &:focus {
+                background-color: theme('colors.--icon-filledButton-focus-backgroundColor');
+            }
+
+            &:active {
+                background-color: theme('colors.--icon-filledButton-active-backgroundColor');
+            }
+
+            &:disabled {
+                opacity: theme('opacity.--icon-disabled');
+                color: theme('colors.--icon-filledButton-disabled-color');
+                background-color: theme('colors.--icon-filledButton-disabled-backgroundColor');
+            }
+        }
+
     }
-
-    &.error {
-        color: theme('colors.--error-color');
-    }
-
-    &.button {
-        color: theme('colors.--button-text-color');
-        background-color: theme('colors.--button-text-backgroundColor');
-
-        &:hover {
-            background-color: theme('colors.--button-text-hover-backgroundColor');
-        }
-
-        &:focus {
-            background-color: theme('colors.--button-text-focus-backgroundColor');
-        }
-
-        &:active {
-            background-color: theme('colors.--button-text-active-backgroundColor');
-        }
-
-        &:disabled {
-            opacity: theme('opacity.--button-disabled');
-            color: theme('colors.--button-text-disabled-color');
-            background-color: theme('colors.--button-text-disabled-backgroundColor');
-        }
-    }
-
-    &.filledButton {
-        color: theme('colors.--button-filled-color');
-        background-color: theme('colors.--button-filled-backgroundColor');
-
-        &:hover {
-            background-color: theme('colors.--button-filled-hover-backgroundColor');
-        }
-
-        &:focus {
-            background-color: theme('colors.--button-filled-focus-backgroundColor');
-        }
-
-        &:active {
-            background-color: theme('colors.--button-filled-active-backgroundColor');
-        }
-
-        &:disabled {
-            opacity: theme('opacity.--button-disabled');
-            color: theme('colors.--button-filled-disabled-color');
-            background-color: theme('colors.--button-filled-disabled-backgroundColor');
-        }
-    }
-
-}
 
 </style>

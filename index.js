@@ -1,10 +1,11 @@
 import './src/assets/css/base-theme.css'
 
 import FmBtn from './src/components/fm/Btn.vue'
+import FmIcon from './src/components/fm/Icon.vue';
 
 export { default as tailwindBaseCssVariables } from "./tailwind/baseCssVariablesPlugin";
 
-export { FmBtn }
+export { FmBtn, FmIcon }
 
 /**
  * VUE plugin that registers all components

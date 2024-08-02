@@ -6,12 +6,37 @@ export default plugin(
   {
     theme: {
       extend: {
+        padding: {
+          '--icon-padding': 'var(--icon-padding)',
+        },
         colors: {
           '--primary-color': 'var(--primary-color)',
           '--error-color': 'var(--error-color)',
           '--baseText-color': 'var(--baseText-color)',
 
           '--base-backgroundColor': 'var(--base-backgroundColor)',
+
+          '--icon-button-color': 'var(--icon-button-color)',
+          '--icon-button-backgroundColor': 'var(--icon-button-backgroundColor)',
+          '--icon-button-hover-color': 'var(--icon-button-hover-color)',
+          '--icon-button-hover-backgroundColor': 'var(--icon-button-hover-backgroundColor)',
+          '--icon-button-focus-color': 'var(--icon-button-focus-color)',
+          '--icon-button-focus-backgroundColor': 'var(--icon-button-focus-backgroundColor)',
+          '--icon-button-active-color': 'var(--icon-button-active-color)',
+          '--icon-button-active-backgroundColor': 'var(--icon-button-active-backgroundColor)',
+          '--icon-button-disabled-color': 'var(--icon-button-disabled-color)',
+          '--icon-button-disabled-backgroundColor': 'var(--icon-button-disabled-backgroundColor)',
+
+          '--icon-filledButton-color': 'var(--icon-filledButton-color)',
+          '--icon-filledButton-backgroundColor': 'var(--icon-filledButton-backgroundColor)',
+          '--icon-filledButton-hover-color': 'var(--icon-filledButton-hover-color)',
+          '--icon-filledButton-hover-backgroundColor': 'var(--icon-filledButton-hover-backgroundColor)',
+          '--icon-filledButton-focus-color': 'var(--icon-filledButton-focus-color)',
+          '--icon-filledButton-focus-backgroundColor': 'var(--icon-filledButton-focus-backgroundColor)',
+          '--icon-filledButton-active-color': 'var(--icon-filledButton-active-color)',
+          '--icon-filledButton-active-backgroundColor': 'var(--icon-filledButton-active-backgroundColor)',
+          '--icon-filledButton-disabled-color': 'var(--icon-filledButton-disabled-color)',
+          '--icon-filledButton-disabled-backgroundColor': 'var(--icon-filledButton-disabled-backgroundColor)',
 
           '--button-text-color': 'var(--button-text-color)',
           '--button-text-backgroundColor': 'var(--button-text-backgroundColor)',
@@ -39,19 +64,10 @@ export default plugin(
           '--button-filled-disabled-color': 'var(--button-filled-disabled-color)',
           '--button-filled-disabled-backgroundColor': 'var(--button-filled-disabled-backgroundColor)',
 
-          '--icon-basic-color': 'var(--icon-basic-color)',
-          '--icon-basic-backgroundColor': 'var(--icon-basic-backgroundColor)',
-          '--icon-basic-hover-color': 'var(--icon-basic-hover-color)',
-          '--icon-basic-hover-backgroundColor': 'var(--icon-basic-hover-backgroundColor)',
-          '--icon-basic-focus-color': 'var(--icon-basic-focus-color)',
-          '--icon-basic-focus-backgroundColor': 'var(--icon-basic-focus-backgroundColor)',
-          '--icon-basic-active-color': 'var(--icon-basic-active-color)',
-          '--icon-basic-active-backgroundColor': 'var(--icon-basic-active-backgroundColor)',
-          '--icon-basic-disabled-color': 'var(--icon-basic-disabled-color)',
-          '--icon-basic-disabled-backgroundColor': 'var(--icon-basic-disabled-backgroundColor)',
         },
         opacity: {
           '--button-disabled': 'var(--button-disabled-opacity)',
+          '--icon-disabled': 'var(--icon-disabled-opacity)',
         }
       }
     }
