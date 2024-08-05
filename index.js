@@ -21,6 +21,7 @@ export const uiComponentsPlugin = {
         const prefix = args.componentNamePrefix || "Fm"
 
         Vue.component(`${prefix}Btn`, FmBtn);
+        Vue.component(`${prefix}Icon`, FmIcon);
 
     }
 }
