@@ -2,7 +2,7 @@
     <div class="flex justify-end m-2">
         <fm-btn
             @click="toggleDarkMode"
-            type="text"
+            type="filled"
         >
             {{ toggleText }}
         </fm-btn>
@@ -12,7 +12,6 @@
 <script setup>
 import {computed, onMounted, ref} from 'vue';
 import FmBtn from './components/fm/Btn.vue'
-import FmIcon from './components/fm/Icon.vue'
 
 const darkMode = ref(false);
 
@@ -36,4 +35,5 @@ onMounted(() => {
     darkMode.value = sessionStorage.getItem('darkMode') === 'true';
     updateBodyClass(darkMode.value);
 });
+
 </script>

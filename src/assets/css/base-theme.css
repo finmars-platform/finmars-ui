@@ -54,49 +54,6 @@ s.zhitenev@finmars.com
 
     --icon-padding: 0.5rem;
 
-    --icon-button-color: var(--primary-color);
-    --icon-button-backgroundColor: initial;
-    --icon-button-state-backgroundColor-rgb: 73, 69, 79;
-    --icon-button-hover-backgroundColor: rgba(var(--icon-button-state-backgroundColor-rgb), 0.08);
-    --icon-button-focus-backgroundColor: rgba(var(--icon-button-state-backgroundColor-rgb), 0.12);
-    --icon-button-active-backgroundColor: rgba(var(--icon-button-state-backgroundColor-rgb), 0.12);
-    --icon-button-hover-color: var(--icon-button-color);
-    --icon-button-focus-color: var(--icon-button-color);
-    --icon-button-active-color: var(--icon-button-color);
-    --icon-button-disabled-color: var(--baseText-color);
-    --icon-button-disabled-backgroundColor: unset;
-
-    --icon-filledButton-color: var(--onPrimary-color);
-    --icon-filledButton-backgroundColor: var(--primary-color);
-    --icon-filledButton-state-backgroundColor-rgb: var(--primary-color-rgb);
-    --icon-filledButton-hover-backgroundColor: rgb(var(--icon-filledButton-state-backgroundColor-rgb));
-    --icon-filledButton-focus-backgroundColor: rgb(var(--icon-filledButton-state-backgroundColor-rgb));
-    --icon-filledButton-active-backgroundColor: rgb(var(--icon-filledButton-state-backgroundColor-rgb));
-    --icon-filledButton-hover-color: var(--icon-filledButton-color);
-    --icon-filledButton-focus-color: var(--icon-filledButton-color);
-    --icon-filledButton-active-color: var(--icon-filledButton-color);
-    --icon-filledButton-disabled-color: var(--baseText-color);
-    --icon-filledButton-disabled-backgroundColor: rgba(29, 27, 32, 0.50);
-
-    --button-disabled-opacity: 0.38;
-
-    --button-text-color: rgb(143, 76, 54);
-    --button-text-backgroundColor: initial;
-    --button-text-state-backgroundColor-rgb: 103, 80, 164;
-    --button-text-hover-backgroundColor: rgba(var(--button-text-state-backgroundColor-rgb), 0.08);
-    --button-text-focus-backgroundColor: rgba(var(--button-text-state-backgroundColor-rgb), 0.12);
-    --button-text-active-backgroundColor: rgba(var(--button-text-state-backgroundColor-rgb), 0.12);
-    --button-text-disabled-color: var(--baseText-color);
-    --button-text-disabled-backgroundColor: unset;
-
-    --button-filled-color: var(--onPrimary-color);
-    --button-filled-backgroundColor: var(--primary-color);
-    --button-filled-hover-backgroundColor: rgba(143, 76, 54, 0.92);
-    --button-filled-focus-backgroundColor: rgba(143, 76, 54, 0.88);
-    --button-filled-active-backgroundColor: rgba(143, 76, 54, 0.88);
-    --button-filled-disabled-color: var(--button-filled-color);
-    --button-filled-disabled-backgroundColor: rgba(var(--primary-color-rgb), 0.50);
-
 }
 
 /* Switch to dark mode when .dark-mode class is present on body */
@@ -130,43 +87,6 @@ body.dark {
     --tableHeader-backgroundColor: #1A110F; /* NEW */ /* table-header */
     /*--table-body-background-color: transparent; !* NEW *! !* table-body *!*/
     --tableBody-backgroundColor: var(--base-backgroundColor); /* NEW */ /* table-body */
-
-    --icon-button-color: var(--primary-color);
-    --icon-button-state-backgroundColor-rgb: 202, 196, 208;
-    --icon-button-hover-backgroundColor: rgba(var(--icon-button-state-backgroundColor-rgb), 0.08);
-    --icon-button-focus-backgroundColor: rgba(var(--icon-button-state-backgroundColor-rgb), 0.12);
-    --icon-button-active-backgroundColor: rgba(var(--icon-button-state-backgroundColor-rgb), 0.12);
-    --icon-button-disabled-color: var(--baseText-color);
-
-    --icon-filledButton-color: var(--onPrimary-color);
-    --icon-filledButton-backgroundColor: var(--primary-color);
-    --icon-filledButton-state-backgroundColor-rgb: var(--primary-color-rgb);
-    --icon-filledButton-hover-backgroundColor: rgb(var(--icon-filledButton-state-backgroundColor-rgb));
-    --icon-filledButton-focus-backgroundColor: rgb(var(--icon-filledButton-state-backgroundColor-rgb));
-    --icon-filledButton-active-backgroundColor: rgb(var(--icon-filledButton-state-backgroundColor-rgb));
-    --icon-filledButton-disabled-color: var(--baseText-color);
-    --icon-filledButton-disabled-backgroundColor: rgba(230, 224, 233, 0.50);
-
-    --button-text-color: var(--primary-color);
-    --button-text-state-backgroundColor-rgb: 208, 188, 255;
-    --button-text-hover-backgroundColor: rgba(var(--button-text-state-backgroundColor-rgb), 0.08);
-    --button-text-focus-backgroundColor: rgba(var(--button-text-state-backgroundColor-rgb), 0.12);
-    --button-text-active-backgroundColor: rgba(var(--button-text-state-backgroundColor-rgb), 0.12);
-    --button-text-hover-color: var(--button-text-color);
-    --button-text-focus-color: var(--button-text-color);
-    --button-text-active-color: var(--button-text-color);
-    --button-text-disabled-color: var(--baseText-color);
-
-    --button-filled-color: var(--onPrimary-color);
-    --button-filled-backgroundColor: var(--primary-color);
-    --button-filled-hover-color: var(--button-filled-color);
-    --button-filled-hover-backgroundColor: rgba(var(--primary-color-rgb), 0.92);
-    --button-filled-focus-color: var(--button-filled-color);
-    --button-filled-focus-backgroundColor: rgba(var(--primary-color-rgb), 0.88);
-    --button-filled-active-color: var(--button-filled-color);
-    --button-filled-active-backgroundColor: rgba(var(--primary-color-rgb), 0.88);
-    --button-filled-disabled-color: var(--button-filled-color);
-    --button-filled-disabled-backgroundColor: rgba(var(--primary-color-rgb), 0.50);
 
 }
 

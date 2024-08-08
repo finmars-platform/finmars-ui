@@ -4,28 +4,75 @@
         :class="['btn', type]"
         @mousedown.prevent=""
     >
-        <div v-if="icon"
-             class="icon material-icons "
-        >
-            {{ icon }}
-        </div>
+        <fm-icon
+            v-if="icon"
+            :icon="icon"
+        />
         <slot/>
     </button>
 </template>
 
 <script setup>
+    import FmIcon from "./Icon.vue";
 
-defineProps({
-    icon: String,
-    type: {
-        type: String,
-        default: 'text',
-        validator: (value) => ["text", "filled"].includes(value)
-    },
-});
+    defineProps({
+        icon: String,
+        type: {
+            type: String,
+            default: 'text',
+            validator: (value) => ["text", "filled"].includes(value)
+        },
+    });
+
 </script>
 
-<style scoped>
+<style>
+    :root {
+        --button-disabled-opacity: 0.38;
+
+        --button-text-color: rgb(143, 76, 54);
+        --button-text-backgroundColor: initial;
+        --button-text-state-backgroundColor-rgb: 103, 80, 164;
+        --button-text-hover-backgroundColor: rgba(var(--button-text-state-backgroundColor-rgb), 0.08);
+        --button-text-focus-backgroundColor: rgba(var(--button-text-state-backgroundColor-rgb), 0.12);
+        --button-text-active-backgroundColor: rgba(var(--button-text-state-backgroundColor-rgb), 0.12);
+        --button-text-disabled-color: var(--baseText-color);
+        --button-text-disabled-backgroundColor: unset;
+
+        --button-filled-color: var(--onPrimary-color);
+        --button-filled-backgroundColor: var(--primary-color);
+        --button-filled-hover-backgroundColor: rgba(143, 76, 54, 0.92);
+        --button-filled-focus-backgroundColor: rgba(143, 76, 54, 0.88);
+        --button-filled-active-backgroundColor: rgba(143, 76, 54, 0.88);
+        --button-filled-disabled-color: var(--button-filled-color);
+        --button-filled-disabled-backgroundColor: rgba(var(--primary-color-rgb), 0.50);
+    }
+
+    body.dark {
+        --button-text-color: var(--primary-color);
+        --button-text-state-backgroundColor-rgb: 208, 188, 255;
+        --button-text-hover-backgroundColor: rgba(var(--button-text-state-backgroundColor-rgb), 0.08);
+        --button-text-focus-backgroundColor: rgba(var(--button-text-state-backgroundColor-rgb), 0.12);
+        --button-text-active-backgroundColor: rgba(var(--button-text-state-backgroundColor-rgb), 0.12);
+        --button-text-hover-color: var(--button-text-color);
+        --button-text-focus-color: var(--button-text-color);
+        --button-text-active-color: var(--button-text-color);
+        --button-text-disabled-color: var(--baseText-color);
+
+        --button-filled-color: var(--onPrimary-color);
+        --button-filled-backgroundColor: var(--primary-color);
+        --button-filled-hover-color: var(--button-filled-color);
+        --button-filled-hover-backgroundColor: rgba(var(--primary-color-rgb), 0.92);
+        --button-filled-focus-color: var(--button-filled-color);
+        --button-filled-focus-backgroundColor: rgba(var(--primary-color-rgb), 0.88);
+        --button-filled-active-color: var(--button-filled-color);
+        --button-filled-active-backgroundColor: rgba(var(--primary-color-rgb), 0.88);
+        --button-filled-disabled-color: var(--button-filled-color);
+        --button-filled-disabled-backgroundColor: rgba(var(--primary-color-rgb), 0.50);
+    }
+</style>
+
+<style lang="postcss" scoped>
 /*$height: 36px;
 .fm_btn {
     height: $height;
