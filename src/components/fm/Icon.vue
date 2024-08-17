@@ -1,5 +1,5 @@
 <template>
-    <div class="icon material-icons color-[inherit]"
+    <div class="icon material-icons color-[inherit] w-[inherit]"
          :style="{ fontSize: size + 'rem' }">{{ icon }}</div>
 </template>
 

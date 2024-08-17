@@ -28,7 +28,7 @@
 
 <style>
     :root {
-        --button-disabled-opacity: 0.38;
+        --button-disabled-opacity: var(--disabled-opacity);
 
         --button-text-color: rgb(143, 76, 54);
         --button-text-backgroundColor: initial;
@@ -49,6 +49,8 @@
     }
 
     body.dark {
+        --button-disabled-opacity: var(--disabled-opacity);
+        
         --button-text-color: var(--primary-color);
         --button-text-state-backgroundColor-rgb: 208, 188, 255;
         --button-text-hover-backgroundColor: rgba(var(--button-text-state-backgroundColor-rgb), 0.08);
