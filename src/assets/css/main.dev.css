@@ -1,0 +1,12 @@
+@import 'material-icons.css';
+@import './base-theme.css';
+
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@import './popup.css';
+
+body {
+    background-color: var(--base-backgroundColor);
+}

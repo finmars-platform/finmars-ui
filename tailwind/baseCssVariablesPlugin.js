@@ -5,9 +5,32 @@ import baseInput from "../src/components/base/input/tailwindThemeExtension"
 let themeExtensionData = {
     fontSize: {
         '--baseText-fontSize': 'var(--baseText-fontSize)',
+
+        '--tooltip-fontSize': 'var(--tooltip-fontSize)',
+        '--tooltip-error-fontSize': 'var(--tooltip-error-fontSize)',
+    },
+    fontFamily: {
+        '--baseText-fontFamily': 'var(--baseText-fontFamily)',
+
+        '--tooltip-fontFamily': 'var(--tooltip-fontFamily)',
+    },
+    fontStyle: {
+        '--tooltip-fontStyle': 'var(--tooltip-fontStyle)',
+    },
+    fontWeight: {
+        '--tooltip-fontWeight': 'var(--tooltip-fontWeight)',
+    },
+    lineHeight: {
+        '--tooltip-lineHeight': 'var(--tooltip-lineHeight)',
+    },
+    letterSpacing: {
+        '--tooltip-letterSpacing': 'var(--tooltip-letterSpacing)',
     },
     padding: {
         '--icon-padding': 'var(--icon-padding)',
+
+        '--tooltip-padding': 'var(--tooltip-padding)',
+        '--tooltip-error-padding': 'var(--tooltip-error-padding)',
     },
     colors: {
         '--primary-color': 'var(--primary-color)',
@@ -61,9 +84,16 @@ let themeExtensionData = {
         '--button-filled-active-backgroundColor': 'var(--button-filled-active-backgroundColor)',
         '--button-filled-disabled-color': 'var(--button-filled-disabled-color)',
         '--button-filled-disabled-backgroundColor': 'var(--button-filled-disabled-backgroundColor)',
+
+        '--tooltip-color': 'var(--tooltip-color)',
+
+        '--tooltip-error-color': 'var(--tooltip-error-color)',
     },
     backgroundColor: {
         '--base-backgroundColor': 'var(--base-backgroundColor)',
+
+        '--tooltip-backgroundColor': 'var(--tooltip-backgroundColor)',
+        '--tooltip-error-backgroundColor': 'var(--tooltip-error-backgroundColor)',
     },
     opacity: {
         '--button-disabled': 'var(--button-disabled-opacity)',
@@ -72,6 +102,13 @@ let themeExtensionData = {
     },
     borderColor: {
         '--border-color': 'var(--border-color)',
+
+        '--light-borderColor': 'var(--light-borderColor)',
+
+        '--tooltip-borderColor': 'var(--tooltip-borderColor)',
+    },
+    borderRadius: {
+        '--tooltip-borderRadius': 'var(--tooltip-borderRadius)',
     },
 }
 

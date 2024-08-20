@@ -13,7 +13,7 @@ export default defineConfig({
         },
         rollupOptions: {
             // Make sure external dependencies are not bundled into your library
-            external: ["vue"],
+            external: ["vue", "floating-vue"],
 
             output: {
                 // Provide globals for external modules

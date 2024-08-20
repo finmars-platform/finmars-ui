@@ -1,4 +1,4 @@
-import './src/assets/css/base-theme.css';
+import './src/assets/css/main.css';
 
 import FmBtn from './src/components/fm/Btn.vue';
 import FmIcon from './src/components/fm/Icon.vue';

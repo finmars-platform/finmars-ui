@@ -101,7 +101,7 @@ border-t-transparent -border-x--input-borderColor
                 >
                     <fm-icon
                         icon="info"
-                        v-fm-tooltip.error="errorData.longMessage"
+                        v-tooltip="{ content: errorData.longMessage, theme: 'error-tooltip' }"
                     />
                 </div>
 
@@ -109,7 +109,7 @@ border-t-transparent -border-x--input-borderColor
                      class="w-6 hidden items-center group-hover:flex">
                     <fm-icon
                         icon="info_outlined"
-                        v-fm-tooltip="tooltip"
+                        v-tooltip="tooltip"
                     />
                 </div>
 

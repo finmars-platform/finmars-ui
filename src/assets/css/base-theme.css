@@ -32,6 +32,7 @@ s.zhitenev@finmars.com
 
     --baseText-color: rgb(35, 25, 23); /* NEW */ /* default color for every text in finmars figma_keyword=surface */
     --baseText-fontSize: 0.875rem;
+    --baseText-fontFamily: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue";
 
     --base-heading-color: #53433F; /* NEW */ /* h1-h6 */
     --base-backgroundColor: #FFFFFF; /* NEW */ /* body, page */
@@ -43,7 +44,7 @@ s.zhitenev@finmars.com
     --active-state-color: #2C160E; /* NEW */
 
     --border-color: #85736E; /* NEW */ /* button borders, segments, inputs, dividers figma_keyword=outline  */
-    --border-color-light: #D8C2BC; /* NEW */ /* cards, tables, */
+    --light-borderColor: #D8C2BC; /* NEW */ /* cards, tables, */
 
     --hover-opacity: 0.92; /* NEW */
     --focus-opacity: 0.88; /* NEW */
