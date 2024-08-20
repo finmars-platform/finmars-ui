@@ -17,12 +17,10 @@ export default {
     padding: {
         '--input-padding': 'var(--input-padding)',
         '--input-focus-padding': 'var(--input-focus-padding)',
-        '--input-error-padding': 'var(--input-error-padding)',
     },
     borderWidth: {
         '--input-borderWidth': 'var(--input-borderWidth)',
         '--input-focus-borderWidth': 'var(--input-focus-borderWidth)',
-        '--input-error-borderWidth': 'var(--input-error-borderWidth)',
     },
     borderColor: {
         '--input-borderColor': 'var(--input-borderColor)',

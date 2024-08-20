@@ -114,7 +114,7 @@ border-t-transparent -border-x--input-borderColor
                 </div>
 
                 <div class="mr-2.5">
-                    <slot name="rightButton"></slot>
+                    <slot name="rightPart"></slot>
                 </div>
             </div>
         </div>
@@ -222,11 +222,8 @@ border-t-transparent -border-x--input-borderColor
         --input-focus-border: var(--input-focus-borderWidth) var(--input-focus-borderStyle) var(--input-focus-borderColor);
         --input-focus-padding: 0; /* prevents movement of elements when width of borders changes */
 
-        --input-error-borderWidth: var(--input-thick-borderWidth);
         --input-error-borderColor: var(--error-color);
         --input-error-borderStyle: var(--input-borderStyle);
-        --input-error-border: var(--input-error-borderWidth) var(--input-error-borderStyle) var(--input-error-borderColor);
-        --input-error-padding: 0; /* prevents movement of elements when width of borders changes */
 
         --input-disabled-opacity: var(--disabled-opacity);
         --input-disabled-color: var(--baseText-color);
@@ -247,10 +244,8 @@ border-t-transparent -border-x--input-borderColor
         --input-focus-borderStyle: var(--input-borderStyle);
         --input-focus-border: var(--input-focus-borderWidth) var(--input-focus-borderStyle) var(--input-focus-borderColor);
 
-        --input-error-borderWidth: var(--input-thick-borderWidth);
         --input-error-borderColor: var(--error-color);
         --input-error-borderStyle: var(--input-borderStyle);
-        --input-error-border: var(--input-error-borderWidth) var(--input-error-borderStyle) var(--input-error-borderColor);
 
         --input-disabled-opacity: var(--disabled-opacity);
         --input-disabled-color: var(--baseText-color);
@@ -277,6 +272,26 @@ border-t-transparent -border-x--input-borderColor
 
     .base-input {
 
+        &.error:not(.disabled) {
+
+            .bi_top {
+                .top-left-border, .top-right-border {
+                    border-top-style: var(--input-error-borderStyle);
+                    border-top-color: var(--input-error-borderColor);
+                }
+            }
+
+            .bi-wrap {
+                border-right-style: var(--input-error-borderStyle);
+                border-right-color: var(--input-error-borderColor);
+                border-bottom-style: var(--input-error-borderStyle);
+                border-bottom-color: var(--input-error-borderColor);
+                border-left-style: var(--input-error-borderStyle);
+                border-left-color: var(--input-error-borderColor);
+            }
+
+        }
+
         &:hover {
             .side-items:not(.empty) {
                 display: flex;
@@ -289,6 +304,17 @@ border-t-transparent -border-x--input-borderColor
                 @mixin show-label;
             }
 
+            .bi_top {
+                .top-left-border, .top-right-border {
+                    border-top-width: theme('borderWidth.--input-focus-borderWidth');
+                }
+            }
+
+            .bi-wrap {
+                padding: theme('padding.--input-focus-padding');
+                border-width: theme('borderWidth.--input-focus-borderWidth');
+            }
+
             &:not(.error) {
                 .bi_top {
                     .top-left-border, .top-right-border {
@@ -297,8 +323,6 @@ border-t-transparent -border-x--input-borderColor
                 }
 
                 .bi-wrap {
-                    padding: theme('padding.--input-focus-padding');
-                    border-width: theme('borderWidth.--input-focus-borderWidth');
                     border-right: var(--input-focus-border);
                     border-bottom: var(--input-focus-border);
                     border-left: var(--input-focus-border);
@@ -311,28 +335,6 @@ border-t-transparent -border-x--input-borderColor
             .bi-label {
                 @mixin show-label;
             }
-        }
-
-        &.error:not(.disabled) {
-
-            .bi_top {
-                .top-left-border, .top-right-border {
-                    border-top: var(--input-error-border);
-                }
-            }
-
-            .bi-wrap {
-                padding: theme('padding.--input-error-padding');
-                border-width: theme('borderWidth.--input-error-borderWidth');
-                border-right: var(--input-error-border);
-                border-bottom: var(--input-error-border);
-                border-left: var(--input-error-border);
-            }
-
-            &:focus, &:focus-within {
-
-            }
-
         }
 
         &.disabled {
