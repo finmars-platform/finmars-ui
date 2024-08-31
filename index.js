@@ -5,10 +5,11 @@ import FmIcon from './src/components/fm/Icon.vue';
 import FmIconBtn from './src/components/fm/IconBtn.vue';
 import BaseInput from './src/components/base/input/index.vue';
 import BaseInputBtn from './src/components/base/input/Btn.vue';
+import BaseModal from './src/components/base/modal/index.vue';
 
 export { default as tailwindBaseCssVariables } from "./tailwind/baseCssVariablesPlugin";
 
-export { FmBtn, FmIcon, FmIconBtn, BaseInput, BaseInputBtn }
+export { FmBtn, FmIcon, FmIconBtn, BaseInput, BaseInputBtn, BaseModal }
 
 /**
  * VUE plugin that registers all components
@@ -33,6 +34,8 @@ export const uiComponentsPlugin = {
         Vue.component(`${prefix}Btn`, FmBtn);
         Vue.component(`${prefix}Icon`, FmIcon);
         Vue.component(`${prefix}IconBtn`, FmIconBtn);
+
+        Vue.components(`${prefix}BaseModal`, BaseModal);
 
         Vue.components(`${prefix}BaseInput`, BaseInput);
         Vue.components(`${prefix}BaseInputBtn`, BaseInputBtn);

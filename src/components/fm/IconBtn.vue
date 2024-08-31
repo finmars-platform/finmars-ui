@@ -1,10 +1,14 @@
 <template>
 
     <button
-        class="icon-btn block leading-4 rounded-full outline-none"
+        class="icon-btn
+block leading-none rounded-full outline-none
+        "
         :class="[type]"
     >
-        <fm-icon :icon="icon" :size="size" />
+        <!-- Without .block height for the <button> above calculated
+        more than required  -->
+        <fm-icon class="block" :icon="icon" :size="size" />
     </button>
 
 </template>
@@ -44,6 +48,7 @@
 
 :root {
     --iconButton-color: var(--primary-color);
+    --iconButton-padding: 0.25rem;
     --iconButton-backgroundColor: initial;
     --iconButton-state-backgroundColor-rgb: 73, 69, 79;
     --iconButton-hover-backgroundColor: rgba(var(--iconButton-state-backgroundColor-rgb), 0.08);
@@ -89,7 +94,7 @@ body.dark {
 
 <style lang=postcss scoped>
     .icon-btn {
-        padding: theme('padding.--icon-padding');
+        padding: theme('padding.--iconButton-padding');
 
         &.basic {
             color: theme('colors.--iconButton-color');

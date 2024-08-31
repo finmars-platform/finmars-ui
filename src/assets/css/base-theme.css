@@ -32,6 +32,9 @@ s.zhitenev@finmars.com
 
     --baseText-color: rgb(35, 25, 23); /* NEW */ /* default color for every text in finmars figma_keyword=surface */
     --baseText-fontSize: 0.875rem;
+    --baseText-fontWeight: 400;
+    --baseText-lineHeight: 1.25rem;
+    --baseText-letterSpacing: 0.01563rem;
     --baseText-fontFamily: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue";
 
     --base-heading-color: #53433F; /* NEW */ /* h1-h6 */

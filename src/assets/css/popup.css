@@ -1,8 +1,7 @@
 /*# region vTooltip */
 :root {
-    --tooltip-fontSize: 0.75rem;
     --tooltip-fontFamily: var(--baseText-fontFamily);
-    --tooltip-fontStyle: normal;
+    --tooltip-fontSize: 0.75rem;
     --tooltip-fontWeight: 400;
     --tooltip-lineHeight: 1rem;
     --tooltip-letterSpacing: theme('letterSpacing.--tooltip-letterSpacing');
@@ -43,7 +42,6 @@ body.dark {
         .v-popper__inner {
             font-family: theme('fontFamily.--tooltip-fontFamily');
             font-size: theme('fontSize.--tooltip-fontSize');
-            font-style: normal;
             font-weight: 400;
             line-height: 1rem; /* 133.333% */
             letter-spacing: 0.025rem;

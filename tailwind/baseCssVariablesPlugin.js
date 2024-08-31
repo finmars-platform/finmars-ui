@@ -1,6 +1,7 @@
 import plugin from "tailwindcss/plugin"
 
-import baseInput from "../src/components/base/input/tailwindThemeExtension"
+import baseInput from "../src/components/base/input/tailwindThemeExtension";
+import baseModal from "../src/components/base/modal/tailwindThemeExtension";
 
 let themeExtensionData = {
     fontSize: {
@@ -14,20 +15,24 @@ let themeExtensionData = {
 
         '--tooltip-fontFamily': 'var(--tooltip-fontFamily)',
     },
-    fontStyle: {
-        '--tooltip-fontStyle': 'var(--tooltip-fontStyle)',
-    },
     fontWeight: {
+        '--baseText-fontWeight': 'var(--baseText-fontWeight)',
+
         '--tooltip-fontWeight': 'var(--tooltip-fontWeight)',
     },
     lineHeight: {
+        '--baseText-lineHeight': 'var(--baseText-lineHeight)',
+
         '--tooltip-lineHeight': 'var(--tooltip-lineHeight)',
     },
     letterSpacing: {
+        '--baseText-letterSpacing': 'var(--baseText-letterSpacing)',
+
         '--tooltip-letterSpacing': 'var(--tooltip-letterSpacing)',
     },
     padding: {
         '--icon-padding': 'var(--icon-padding)',
+        '--iconButton-padding': 'var(--iconButton-padding)',
 
         '--tooltip-padding': 'var(--tooltip-padding)',
         '--tooltip-error-padding': 'var(--tooltip-error-padding)',
@@ -158,11 +163,11 @@ function createDefaultThemeExtension() {
     return extensionData;
 
 }
-// TODO: create a function to merge component specific theme extensions. It must validate theme extensions for duplicated names of CSS variables.
 
 themeExtensionData = createDefaultThemeExtension(
     themeExtensionData,
     baseInput,
+    baseModal,
 )
 
 export default plugin(

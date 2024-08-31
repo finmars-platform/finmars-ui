@@ -5,8 +5,5 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
+@import './base.css';
 @import './popup.css';
-
-body {
-    background-color: var(--base-backgroundColor);
-}
