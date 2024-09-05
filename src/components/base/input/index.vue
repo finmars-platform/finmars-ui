@@ -96,7 +96,7 @@ border-t-transparent -border-x--input-borderColor
                 </div>
 
                 <div
-                    v-if="errorData && errorData.longMessage"
+                    v-if="errorData"
                     class="w-6 flex items-center -text--error-color"
                 >
                     <fm-icon

@@ -8,15 +8,25 @@
         </fm-btn>
     </div>
 
+    <fm-input-text
+        label="test"
+        :model-value="inputVal" @update:modelValue="onModelValChange"
+        :error-data="errorData"
+    />
+
 </template>
 
 <script setup>
 import {computed, onMounted, ref} from 'vue';
 import FmBtn from './components/fm/Btn.vue';
-import BaseInput from './components/base/input/index.vue'
-import BaseModal from './components/base/modal/index.vue'
+import FmInputText from './components/fm/input/Text.vue';
 
 const darkMode = ref(false);
+
+function onModelValChange(newVal) {
+    inputVal.value = newVal;
+    console.log("testing onModelValChange inputVal.value", inputVal.value);
+}
 
 function updateBodyClass(isDark) {
     if (isDark) {
