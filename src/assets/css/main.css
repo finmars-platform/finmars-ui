@@ -1,10 +1,3 @@
-@import 'material-icons.css';
 @import './base-theme.css';
-
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
-
-body {
-    background-color: var(--base-backgroundColor);
-}
+@import './base.css';
+@import './popup.css';

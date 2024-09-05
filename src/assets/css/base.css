@@ -1,0 +1,10 @@
+body {
+    font-family: theme('fontFamily.--baseText-fontFamily');
+    font-size: theme('fontSize.--baseText-fontSize');
+    font-weight: theme('fontWeight.--baseText-fontWeight');
+    line-height: theme('lineHeight.--baseText-lineHeight');
+    letter-spacing: theme('letterSpacing.--baseText-letterSpacing');
+
+    color: theme('colors.--baseText-color');
+    background-color: theme('backgroundColor.--base-backgroundColor');
+}

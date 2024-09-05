@@ -1,5 +1,4 @@
 /** @type {import('tailwindcss').Config} */
-import themeColors from "./tailwind/themeColors";
 import baseCssVariablesPlugin from "./tailwind/baseCssVariablesPlugin";
 
 export default {
