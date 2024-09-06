@@ -7,6 +7,7 @@ import "floating-vue/dist/style.css"
 import FmIcon from "./components/fm/Icon.vue";
 import FmIconBtn from "./components/fm/IconBtn.vue";
 import FmBtn from "./components/fm/Btn.vue";
+import FmCard from "./components/fm/card/index.vue";
 import BaseModal from "./components/base/modal/index.vue";
 
 import "./assets/css/main.dev.css";
@@ -24,6 +25,7 @@ app.use(FloatingVue, {
 app.component("FmIcon", FmIcon);
 app.component("FmIconBtn", FmIconBtn);
 app.component("FmBtn", FmBtn);
+app.component("FmCard", FmCard);
 app.component("BaseModal", BaseModal);
 
 app.mount("#app")

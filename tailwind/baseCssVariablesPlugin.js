@@ -1,7 +1,8 @@
 import plugin from "tailwindcss/plugin"
 
-import baseInput from "../src/components/base/input/tailwindThemeExtension";
-import baseModal from "../src/components/base/modal/tailwindThemeExtension";
+import baseInput from "../src/components/base/input/baseInput.tw";
+import baseModal from "../src/components/base/modal/baseModal.tw";
+import FmCard from "../src/components/fm/card/card.tw";
 
 let themeExtensionData = {
     fontSize: {
@@ -168,6 +169,8 @@ themeExtensionData = createDefaultThemeExtension(
     themeExtensionData,
     baseInput,
     baseModal,
+
+    FmCard
 )
 
 export default plugin(

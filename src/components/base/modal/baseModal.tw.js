@@ -9,15 +9,6 @@ export default {
         '--modalContent-backgroundColor': 'var(--modalContent-backgroundColor)',
         '--modalFooter-backgroundColor': 'var(--modalFooter-backgroundColor)',
     },
-    colors: {
-    },
-    padding: {
-    },
-    borderWidth: {
-    },
-    borderColor: {
-
-    },
     borderRadius: {
         '--modal-borderRadius': 'var(--modal-borderRadius)',
     },
