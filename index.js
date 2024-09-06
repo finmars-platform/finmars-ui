@@ -45,7 +45,7 @@ export const uiComponentsPlugin = {
         Vue.component(`${prefix}Btn`, FmBtn);
         Vue.component(`${prefix}Icon`, FmIcon);
         Vue.component(`${prefix}IconBtn`, FmIconBtn);
-        Vue.component(`${prefix}IconBtn`, FmCard);
+        Vue.component(`${prefix}FmCard`, FmCard);
         Vue.component(`${prefix}BaseModal`, BaseModal);
 
         Vue.component(`${prefix}BaseInput`, BaseInput);
