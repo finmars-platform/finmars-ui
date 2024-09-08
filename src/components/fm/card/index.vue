@@ -1,32 +1,30 @@
 <template>
-    <div>
-        <div
-            class="relative break-words -bg--card-backgroundColor
+    <div
+        class="relative break-words -bg--card-backgroundColor
 -p--card-padding -border--card-borderWidth border-solid
--border--card-borderColor -rounded--card-borderRadius
-        "
-        :class="{
-            '-pb--cardFooterSpace-paddingBottom': $slots.footer,
-        }"
-        >
-            <div
-                v-if="title"
-                class="break-words text-2xl mb-6 -text--cardTitle-fontSize
+-border--card-borderColor -rounded--card-borderRadius box-border
+    "
+    :class="{
+        '-pb--cardFooterSpace-paddingBottom': $slots.footer,
+    }"
+    >
+        <div
+            v-if="title"
+            class="break-words text-2xl mb-6 -text--cardTitle-fontSize
 -font--cardTitle-fontFamily -font--cardTitle-fontWeight
 -leading--cardTitle-lineHeight -tracking--cardTitle-letterSpacing
-                ">
-                {{ title }}
-            </div>
+            ">
+            {{ title }}
+        </div>
 
-            <slot></slot>
+        <slot></slot>
 
-            <div v-if="$slots.footer"
-                 class="absolute bottom-0 left-0 w-full box-border
+        <div v-if="$slots.footer"
+             class="absolute bottom-0 left-0 w-full box-border
 -h--cardFooter-height -pt--cardFooter-paddingTop -pb--cardFooter-paddingBottom px-5
-                 "
-            >
-                <slot name="footer"></slot>
-            </div>
+             "
+        >
+            <slot name="footer"></slot>
         </div>
     </div>
 </template>

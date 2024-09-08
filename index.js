@@ -12,7 +12,7 @@ import FmInputText from './src/components/fm/input/Text.vue';
 import BaseModal from './src/components/base/modal/index.vue';
 
 
-export { default as tailwindBaseCssVariables } from "./tailwind/baseCssVariablesPlugin";
+export { default as tailwindCssVariables } from "./tailwind/cssVariablesPlugin.tw";
 
 export {
     FmBtn, FmIcon, FmIconBtn, FmCard, BaseModal,
@@ -45,7 +45,7 @@ export const uiComponentsPlugin = {
         Vue.component(`${prefix}Btn`, FmBtn);
         Vue.component(`${prefix}Icon`, FmIcon);
         Vue.component(`${prefix}IconBtn`, FmIconBtn);
-        Vue.component(`${prefix}FmCard`, FmCard);
+        Vue.component(`${prefix}Card`, FmCard);
         Vue.component(`${prefix}BaseModal`, BaseModal);
 
         Vue.component(`${prefix}BaseInput`, BaseInput);

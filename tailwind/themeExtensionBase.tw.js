@@ -1,42 +1,22 @@
-import plugin from "tailwindcss/plugin"
-
-import baseInput from "../src/components/base/input/baseInput.tw";
-import baseModal from "../src/components/base/modal/baseModal.tw";
-import FmCard from "../src/components/fm/card/card.tw";
-
-let themeExtensionData = {
+export default {
     fontSize: {
         '--baseText-fontSize': 'var(--baseText-fontSize)',
-
-        '--tooltip-fontSize': 'var(--tooltip-fontSize)',
-        '--tooltip-error-fontSize': 'var(--tooltip-error-fontSize)',
     },
     fontFamily: {
         '--baseText-fontFamily': 'var(--baseText-fontFamily)',
-
-        '--tooltip-fontFamily': 'var(--tooltip-fontFamily)',
     },
     fontWeight: {
         '--baseText-fontWeight': 'var(--baseText-fontWeight)',
-
-        '--tooltip-fontWeight': 'var(--tooltip-fontWeight)',
     },
     lineHeight: {
         '--baseText-lineHeight': 'var(--baseText-lineHeight)',
-
-        '--tooltip-lineHeight': 'var(--tooltip-lineHeight)',
     },
     letterSpacing: {
         '--baseText-letterSpacing': 'var(--baseText-letterSpacing)',
-
-        '--tooltip-letterSpacing': 'var(--tooltip-letterSpacing)',
     },
     padding: {
         '--icon-padding': 'var(--icon-padding)',
         '--iconButton-padding': 'var(--iconButton-padding)',
-
-        '--tooltip-padding': 'var(--tooltip-padding)',
-        '--tooltip-error-padding': 'var(--tooltip-error-padding)',
     },
     colors: {
         '--primary-color': 'var(--primary-color)',
@@ -90,16 +70,9 @@ let themeExtensionData = {
         '--button-filled-active-backgroundColor': 'var(--button-filled-active-backgroundColor)',
         '--button-filled-disabled-color': 'var(--button-filled-disabled-color)',
         '--button-filled-disabled-backgroundColor': 'var(--button-filled-disabled-backgroundColor)',
-
-        '--tooltip-color': 'var(--tooltip-color)',
-
-        '--tooltip-error-color': 'var(--tooltip-error-color)',
     },
     backgroundColor: {
         '--base-backgroundColor': 'var(--base-backgroundColor)',
-
-        '--tooltip-backgroundColor': 'var(--tooltip-backgroundColor)',
-        '--tooltip-error-backgroundColor': 'var(--tooltip-error-backgroundColor)',
     },
     opacity: {
         '--button-disabled': 'var(--button-disabled-opacity)',
@@ -110,74 +83,5 @@ let themeExtensionData = {
         '--border-color': 'var(--border-color)',
 
         '--light-borderColor': 'var(--light-borderColor)',
-
-        '--tooltip-borderColor': 'var(--tooltip-borderColor)',
-    },
-    borderRadius: {
-        '--tooltip-borderRadius': 'var(--tooltip-borderRadius)',
     },
 }
-
-function createDefaultThemeExtension() {
-
-    const extensionData = {};
-
-    /**
-     *
-     * @param {Object} themeExt - object with keys like 'color', 'opacity' etc.
-     */
-    function applyThemeExt(themeExt) {
-
-        let key;
-        /**
-         * keys - names of custom values. E.g. '--icon-disabled'.
-         * values - strings that will be converted into CSS values.
-         * E.g. 'var(--icon-disabled-opacity)'
-         * @type {Object}
-         */
-        let cssPropertyData;
-
-        for ([key, cssPropertyData] of Object.entries(themeExt)) {
-
-            if ( !extensionData.hasOwnProperty(key) ) {
-                extensionData[key] = {};
-            }
-
-            const cssPropData = extensionData[key];
-
-            for (const [customValName, stringValue] of Object.entries(cssPropertyData)) {
-
-                if ( cssPropData.hasOwnProperty(customValName) ) {
-                    throw new Error(`A name of a CSS value is duplicated: '${customValName}'`);
-                }
-
-                cssPropData[customValName] = stringValue;
-
-            }
-
-        }
-
-    }
-
-    Object.values(arguments).forEach(applyThemeExt);
-
-    return extensionData;
-
-}
-
-themeExtensionData = createDefaultThemeExtension(
-    themeExtensionData,
-    baseInput,
-    baseModal,
-
-    FmCard
-)
-
-export default plugin(
-    function () {},
-    {
-        theme: {
-            extend: themeExtensionData
-        }
-    }
-)

@@ -1,5 +1,5 @@
 /** @type {import('tailwindcss').Config} */
-import baseCssVariablesPlugin from "./tailwind/baseCssVariablesPlugin";
+import cssVariablesPlugin from "./tailwind/cssVariablesPlugin.tw";
 
 export default {
     content: [
@@ -10,6 +10,6 @@ export default {
         extend: {},
     },
     plugins: [
-        baseCssVariablesPlugin
+        cssVariablesPlugin
     ],
 }

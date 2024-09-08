@@ -17,6 +17,13 @@
   ],
   "main": "dist/finmars-ui.umd.js",
   "module": "dist/finmars-ui.es.js",
+  "exports": {
+    ".": {
+      "require": "./dist/finmars-ui.umd.js",
+      "import": "./dist/finmars-ui.es.js"
+    },
+    "./dist/finmars-ui.css": "./dist/finmars-ui.css"
+  },
   "keywords": [],
   "author": "Sergei Zhitenev",
   "license": "SEE LICENSE IN LICENSE.md",

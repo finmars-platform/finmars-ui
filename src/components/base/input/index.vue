@@ -1,7 +1,10 @@
 <template>
+    <!-- `.z-[1]` needed to display `.bi_top` properly when `<base-input>`
+    locates inside a relative HTML element
+     -->
     <div
         class="base-input group
-my-1.5 relative -rounded--input-borderRadius -text--input-color
+my-1.5 relative z-[1] -rounded--input-borderRadius -text--input-color
 transition-[border] duration-300
         "
         :class="{
