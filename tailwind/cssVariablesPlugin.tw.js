@@ -5,6 +5,7 @@ import tooltip from "./tooltip.tw";
 import baseInput from "../src/components/base/input/baseInput.tw";
 import baseModal from "../src/components/base/modal/baseModal.tw";
 import FmCard from "../src/components/fm/card/card.tw";
+import baseSideNav from "../src/components/base/sideNav/baseSideNav.tw";
 
 function createDefaultThemeExtension() {
 
@@ -58,6 +59,7 @@ const themeExtensionData = createDefaultThemeExtension(
     tooltip,
     baseInput,
     baseModal,
+    baseSideNav,
 
     FmCard
 )

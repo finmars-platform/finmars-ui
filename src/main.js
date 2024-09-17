@@ -14,6 +14,9 @@ import FmCard from "./components/fm/card/index.vue";
 
 import FmInputText from "./components/fm/input/Text.vue";
 
+import BaseSideNav from './components/base/sideNav/index.vue'
+import FmSideNavPortal from './components/fm/sideNav/portal.vue'
+
 import "./assets/css/main.dev.css";
 
 const app = createApp(App);
@@ -30,6 +33,8 @@ app.component("FmIcon", FmIcon);
 app.component("FmIconBtn", FmIconBtn);
 app.component("FmBtn", FmBtn);
 app.component("BaseModal", BaseModal);
+app.component("BaseSideNav", BaseSideNav);
+app.component("FmSideNavPortal", FmSideNavPortal);
 
 app.component("FmCard", FmCard);
 

@@ -1,6 +1,6 @@
 {
   "name": "@finmars/ui",
-  "version": "1.0.4",
+  "version": "1.0.24",
   "description": "",
   "scripts": {
     "dev": "vite dev --config vite.config.dev.js",
@@ -48,6 +48,7 @@
     "tailwindcss": "^3.4.3"
   },
   "dependencies": {
-    "@vitejs/plugin-vue": "^5.0.4"
+    "@vitejs/plugin-vue": "^5.0.4",
+    "vite": "^5.4.5"
   }
 }

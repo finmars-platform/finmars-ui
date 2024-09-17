@@ -9,6 +9,7 @@
         icon: {
             type: String,
             required: true,
+            default: '',
         },
         size: {
             type: Number,

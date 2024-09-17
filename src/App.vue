@@ -1,5 +1,6 @@
 <template>
     <div class="flex justify-end m-2">
+      <fm-sideNav-portal base="https://stage.finmars.com" />
         <fm-btn
             @click="toggleDarkMode"
             type="filled"
