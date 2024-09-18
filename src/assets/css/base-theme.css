@@ -61,10 +61,12 @@ s.zhitenev@finmars.com
 
     --icon-padding: 0.5rem;
 
+    --scrole-color: #85736E;
+    --primary-hover: rgb(152, 90, 70);
 }
 
 /* Switch to dark mode when .dark-mode class is present on body */
-body.dark {
+body.dark-mode {
 
     --primary-color-rgb: 255, 181, 157;
     --primary-color: rgb(var(--primary-color-rgb));
@@ -95,6 +97,8 @@ body.dark {
     /*--table-body-background-color: transparent; !* NEW *! !* table-body *!*/
     --tableBody-backgroundColor: var(--base-backgroundColor); /* NEW */ /* table-body */
 
+    --scrole-color: #85736E;
+    --primary-hover: rgb(239, 169, 154);
 }
 
 

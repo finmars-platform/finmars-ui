@@ -10,7 +10,8 @@ const props = defineProps({
   isFloat: Boolean,
   base: String,
   alternativeLink: String,
-  route: Object
+  route: Object,
+  isVue: Boolean
 })
 
 const route = computed(() => {
@@ -810,11 +811,12 @@ const items = ref([
 ])
 
 function getUrlToOldApp(suffix) {
-  console.log('window.location', window.location)
-  console.log('suffix', suffix)
   const store = route.value.params
-  // const apiUrl = useRuntimeConfig()?.public?.apiURL || ''
-  const apiUrl = props.base
+
+  let apiUrl = ''
+  if (props.isVue && props.base !== window.location.origin) {
+    apiUrl = props.base
+  }
   let baseApiUrl = ''
 
   if (store.realm_code) {
@@ -827,11 +829,15 @@ function getUrlToOldApp(suffix) {
 }
 
 function useGetNuxtLink(linkEnd, params) {
+  let apiUrl = ''
+  if (!props.isVue && props.base !== window.location.origin) {
+    apiUrl = props.base
+  }
 
   const realm_code = params['realm_code'];
   const space_code = params['space_code'];
 
-  return '/' + realm_code + '/' + space_code + '/v' + linkEnd;
+  return apiUrl + '/' + realm_code + '/' + space_code + '/v' + linkEnd;
 
 }
 </script>

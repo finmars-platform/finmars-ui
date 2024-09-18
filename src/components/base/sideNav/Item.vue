@@ -3,6 +3,7 @@
       v-if="to && !children"
       :is="linkTag"
       :to="to"
+      :href="to"
       class="sidebar-item"
   >
     <SideNavItemLabel
@@ -88,7 +89,7 @@ const props = defineProps({
 const isOpen = ref(false)
 const nestedItemsRefs = ref([])
 
-const isActive = computed(() => props.route?.path === props.to || window.location?.href === props.href)
+const isActive = computed(() => props.route?.path === props.to || !!props.href && window.location?.href?.includes(props.href))
 const isNestedActive = computed(() => {
   for (const el of nestedItemsRefs.value) {
     if (el.isActive || el.isNestedActive) return true
