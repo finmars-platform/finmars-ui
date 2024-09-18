@@ -1,5 +1,8 @@
 <template>
-  <BaseSideNav :items="items" :alternativeLink="alternativeLink" :base="base" :route="route"/>
+  <div>
+    {{ test }}
+    <BaseSideNav :items="items" :alternativeLink="alternativeLink" :base="base" :route="route"/>
+  </div>
 </template>
 
 <script setup>
@@ -11,7 +14,8 @@ const props = defineProps({
   base: String,
   alternativeLink: String,
   route: Object,
-  isVue: Boolean
+  isVue: Boolean,
+  test: Boolean
 })
 
 const route = computed(() => {
@@ -392,7 +396,8 @@ const items = ref([
     icon: 'folder',
     action: undefined,
     to: '',
-    href: getUrlToOldApp('/explorer')
+    href: getUrlToOldApp('/explorer1'),
+    classes: 'separator-side-nav'
   },
   {
     key: 'configuration',
@@ -731,7 +736,7 @@ const items = ref([
           }
         ]
       }
-    ]
+    ],
   },
   {
     key: 'administration',
@@ -841,3 +846,14 @@ function useGetNuxtLink(linkEnd, params) {
 
 }
 </script>
+
+<style lang="postcss">
+.separator-side-nav {
+  @apply mb-[8px];
+
+  &::after {
+    content: '';
+    @apply block h-px bg-[var(--sidenav-borderColor)] my-2 mx-4;
+  }
+}
+</style>

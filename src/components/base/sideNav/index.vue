@@ -1,6 +1,6 @@
 <template>
   <aside
-      class="sidebar z-[62] flex-col h-[calc(100vh-52px)] p-4 border-r border-solid border-sidenav-borderColor bg-sidenav-backgroundColor"
+      class="sidebar z-[62] flex-col h-[calc(100vh-52px)] p-[16px] border-r border-solid border-sidenav-borderColor bg-sidenav-backgroundColor"
       :class="[
 			{
 				hoverable: isOnlyIcon && !isFloat,
@@ -11,41 +11,25 @@
 		]"
   >
     <div class="overflow-y-scroll max-h-[calc(100vh-132px)]">
-      <div v-for="item in items.slice(0, -2)" :key="item.key">
-        <SideNavItem
-            :label="item.label"
-            :icon="item.icon"
-            :action="item.action"
-            :to="item.to"
-            :href="item.href"
-            :style="item.style"
-            :children="item.children"
-            :isOnlyIcon="isOnlyIcon"
-            :alternativeLink="alternativeLink"
-            :route="route"
-            :level="0"
-        />
-      </div>
-      <div class="h-px bg-[var(--sidenav-borderColor)] my-2 mx-4"></div>
-      <div v-for="item in items.slice(-2)" :key="item.key">
-        <SideNavItem
-            :label="item.label"
-            :icon="item.icon"
-            :action="item.action"
-            :to="item.to"
-            :href="item.href"
-            :style="item.style"
-            :children="item.children"
-            :isOnlyIcon="isOnlyIcon"
-            :alternativeLink="alternativeLink"
-            :route="route"
-            :level="0"
-        />
-      </div>
+      <SideNavItem
+          v-for="item in items" :key="item.key"
+          :label="item.label"
+          :icon="item.icon"
+          :action="item.action"
+          :to="item.to"
+          :href="item.href"
+          :style="item.style"
+          :classes="item.classes"
+          :children="item.children"
+          :isOnlyIcon="isOnlyIcon"
+          :alternativeLink="alternativeLink"
+          :route="route"
+          :level="0"
+      />
     </div>
 
     <div
-        class="mt-auto flex grow-0 items-center justify-end h-[48px] p-4 border-solid border-t border-t-sidenavFooter-borderColor bg-sidenavFooter-backgroundColor"
+        class="mt-auto flex grow-0 items-center justify-end h-[48px] p-[16px] border-solid border-t border-t-sidenavFooter-borderColor bg-sidenavFooter-backgroundColor"
     >
       <FmIconBtn
           :style="{

@@ -5,6 +5,7 @@
       :to="to"
       :href="to"
       class="sidebar-item"
+      :class="classes"
   >
     <SideNavItemLabel
         :level="level"
@@ -14,7 +15,8 @@
     >{{ label }}
     </SideNavItemLabel>
   </component>
-  <a v-if="href && !children && !to" :href="href" class="sidebar-item">
+  <a v-if="href && !children && !to" :href="href" class="sidebar-item"
+     :class="classes">
     <SideNavItemLabel
         :level="level"
         :isActive="isActive"
@@ -23,7 +25,8 @@
     >{{ label }}
     </SideNavItemLabel>
   </a>
-  <div v-if="children" class="sidebar-item">
+  <div v-if="children" class="sidebar-item"
+       :class="classes">
     <div>
       <SideNavItemLabel
           @click="isOpen = !isOpen"
@@ -56,7 +59,8 @@
     </div>
   </div>
 
-  <div v-if="!to && !children && !href" class="sidebar-item">
+  <div v-if="!to && !children && !href" class="sidebar-item"
+       :class="classes">
     <SideNavItemLabel
         :level="level"
         :isActive="isActive"
@@ -78,6 +82,7 @@ const props = defineProps({
   action: Function,
   to: String,
   href: String,
+  classes: String,
   style: Object,
   children: Array,
   isOnlyIcon: Boolean,
