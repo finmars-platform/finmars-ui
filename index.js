@@ -1,25 +1,14 @@
 import './src/assets/css/main.css';
 
-import FmBtn from './src/components/fm/Btn.vue';
-import FmIcon from './src/components/fm/Icon.vue';
-import FmIconBtn from './src/components/fm/IconBtn.vue';
-import FmCard from './src/components/fm/card/index.vue';
-
-import BaseInput from './src/components/base/input/index.vue';
-import BaseInputBtn from './src/components/base/input/Btn.vue';
-import FmInputText from './src/components/fm/input/Text.vue';
-
-import BaseModal from './src/components/base/modal/index.vue';
+/*import FmBtn from './src/components/fm/Btn.vue';*/
 
 
 export { default as tailwindCssVariables } from "./tailwind/cssVariablesPlugin.tw";
 
-export {
-    FmBtn, FmIcon, FmIconBtn, FmCard, BaseModal,
+/*export {
+    FmBtn
 
-    BaseInput, BaseInputBtn, FmInputText,
-
-}
+}*/
 
 /**
  * VUE plugin that registers all components
@@ -42,15 +31,7 @@ export const uiComponentsPlugin = {
             prefix = 'Fm';
         }
 
-        Vue.component(`${prefix}Btn`, FmBtn);
-        Vue.component(`${prefix}Icon`, FmIcon);
-        Vue.component(`${prefix}IconBtn`, FmIconBtn);
-        Vue.component(`${prefix}Card`, FmCard);
-        Vue.component(`${prefix}BaseModal`, BaseModal);
-
-        Vue.component(`${prefix}BaseInput`, BaseInput);
-        Vue.component(`${prefix}BaseInputBtn`, BaseInputBtn);
-        Vue.component(`${prefix}InputText`, FmInputText);
+        /*Vue.component(`${prefix}Btn`, FmBtn);*/
 
     }
 }

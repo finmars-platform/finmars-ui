@@ -3,6 +3,8 @@ const config = {
   stories: [
     "../stories/**/*.mdx",
     "../stories/**/*.stories.@(js|jsx|mjs|ts|tsx)",
+    '../src/**/*.stories.mdx',
+    '../src/**/*.stories.@(js|jsx|ts|tsx)'
   ],
   addons: [
     "@storybook/addon-links",
@@ -15,6 +17,7 @@ const config = {
     name: "@storybook/vue3-vite",
     options: {},
   },
-  docs: {},
+  docs: {
+    autodocs: true},
 };
 export default config;

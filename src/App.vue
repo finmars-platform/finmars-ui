@@ -1,19 +1,23 @@
 <template>
     <div class="flex justify-end m-2">
-        <fm-btn
+        <div
             @click="toggleDarkMode"
-            type="filled"
         >
             {{ toggleText }}
-        </fm-btn>
+        </div>
+
+      <FmChip >Label</FmChip>
+      <FmChip variant="outlined" >Label</FmChip>
     </div>
 
 </template>
 
 <script setup>
 import {computed, onMounted, ref} from 'vue';
+import { useTheme } from 'vuetify'
 
 const darkMode = ref(false);
+const theme = useTheme()
 
 function updateBodyClass(isDark) {
     if (isDark) {
@@ -29,6 +33,7 @@ function toggleDarkMode() {
     darkMode.value = !darkMode.value;
     updateBodyClass(darkMode.value);
     sessionStorage.setItem('darkMode', darkMode.value ? 'true' : 'false');
+    theme.global.name.value = darkMode.value ? 'dark' : 'light'
 }
 
 onMounted(() => {
