@@ -11,7 +11,7 @@ import FloatingVue from "floating-vue";
 import "floating-vue/dist/style.css"
 
 
-import FmChip from "./components/fm/Checkbox/FmChip.vue";
+import FmChip from "./components/fm/Chip/Chip.vue";
 
 import "./assets/css/main.dev.css";
 

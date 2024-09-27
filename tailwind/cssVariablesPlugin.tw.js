@@ -2,9 +2,6 @@ import plugin from "tailwindcss/plugin"
 
 import themeExtensionBase from "./themeExtensionBase.tw";
 import tooltip from "./tooltip.tw";
-import baseInput from "../src/components/base/input/baseInput.tw";
-import baseModal from "../src/components/base/modal/baseModal.tw";
-import FmCard from "../src/components/fm/card/card.tw";
 
 function createDefaultThemeExtension() {
 
@@ -56,10 +53,6 @@ function createDefaultThemeExtension() {
 const themeExtensionData = createDefaultThemeExtension(
     themeExtensionBase,
     tooltip,
-    baseInput,
-    baseModal,
-
-    FmCard
 )
 
 export default plugin(
