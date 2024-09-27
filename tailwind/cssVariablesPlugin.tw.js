@@ -5,6 +5,7 @@ import tooltip from "./tooltip.tw";
 import baseInput from "../src/components/base/input/baseInput.tw";
 import baseModal from "../src/components/base/modal/baseModal.tw";
 import FmCard from "../src/components/fm/card/card.tw";
+import FmTextarea from "../src/components/fm/input/textarea/textarea.tw";
 
 function createDefaultThemeExtension() {
 
@@ -59,7 +60,9 @@ const themeExtensionData = createDefaultThemeExtension(
     baseInput,
     baseModal,
 
-    FmCard
+    FmCard,
+
+    FmTextarea
 )
 
 export default plugin(

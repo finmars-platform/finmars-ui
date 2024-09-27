@@ -20,6 +20,7 @@ export default {
     },
     borderWidth: {
         '--input-borderWidth': 'var(--input-borderWidth)',
+        '--input-thick-borderWidth': 'var(--input-thick-borderWidth)',
         '--input-focus-borderWidth': 'var(--input-focus-borderWidth)',
     },
     borderColor: {

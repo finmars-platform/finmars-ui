@@ -12,6 +12,7 @@ import BaseModal from "./components/base/modal/index.vue";
 
 import FmCard from "./components/fm/card/index.vue";
 
+import FmInputTextarea from "./components/fm/input/textarea/index.vue";
 import FmInputText from "./components/fm/input/Text.vue";
 
 import "./assets/css/main.dev.css";
@@ -33,6 +34,7 @@ app.component("BaseModal", BaseModal);
 
 app.component("FmCard", FmCard);
 
+app.component("FmInputTextarea", FmInputTextarea);
 app.component("FmInputText", FmInputText);
 
 app.mount("#app")
