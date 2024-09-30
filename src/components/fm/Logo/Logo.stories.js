@@ -8,7 +8,13 @@ const meta = {
 	argTypes: {
 		size: {
 			control: 'select',
-			options: ['small', null]
+			options: ['small', 'normal']
+		},
+		theme: {
+			control: false
+		},
+		maxHeight: {
+			control: false
 		}
 	},
 	args: {}
@@ -36,6 +42,6 @@ export const Default = {
 			}
 		},
 		template: `
-          <FmLogo v-bind="args" :theme="theme.global.name" maxHeight="30" :key="key"/>`
+          <FmLogo v-bind="args" :theme="theme?.global?.name?.value" maxHeight="30" :key="key"/>`
 	})
 }
