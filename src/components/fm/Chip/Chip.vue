@@ -1,26 +1,29 @@
 <template>
-  <VChip :variant="variant" :closable="closable"
-         :prepend-icon="prependIcon"
-         :append-icon="appendIcon">
-    <slot/>
-  </VChip>
+	<VChip
+		:variant="variant"
+		:closable="closable"
+		:prepend-icon="prependIcon"
+		:append-icon="appendIcon"
+	>
+		<slot />
+	</VChip>
 </template>
 
 <script setup>
-import {VChip} from 'vuetify/components'
+	import { VChip } from 'vuetify/components'
 
-defineProps({
-  variant: String,
-  closable: Boolean,
-  prependIcon: String,
-  appendIcon: String,
-})
+	defineProps({
+		variant: String,
+		closable: Boolean,
+		prependIcon: String,
+		appendIcon: String
+	})
 </script>
 
 <style>
-:root {
-}
+	:root {
+	}
 
-body.dark {
-}
+	body.dark-mode {
+	}
 </style>

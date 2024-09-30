@@ -2,11 +2,12 @@
 import { setup } from "@storybook/vue3";
 import '../src/assets/css/base-theme.css';
 import '../src/assets/css/base.css';
-import {createVuetify} from 'vuetify';
+import {createVuetify, useTheme} from 'vuetify';
 import 'vuetify/styles';  // Импорт глобальных стилей Vuetify
 import '@mdi/font/css/materialdesignicons.css'
 import * as components from 'vuetify/components';
 import * as directives from 'vuetify/directives';
+
 const vuetify = createVuetify({
     components,
     directives,
@@ -15,7 +16,6 @@ const vuetify = createVuetify({
 setup(app => {
     app.use(vuetify);
 })
-
 
 const preview = {
     parameters: {
@@ -55,15 +55,23 @@ const preview = {
             }
 
             return {
-                components: {story},
+                setup() {
+                    const themeStorybook = useTheme();
+
+                    const backgroundColor = theme === 'dark' ? '#1A110F' : '#FFFEFC';
+
+                    themeStorybook.global.name.value = theme;
+
+                    return { story, backgroundColor };
+                },
                 template: `
-          <div>
-            <story/>
-          </div>
-      `,
-      };
-    },
-  ],
+                  <div :style="{ backgroundColor }" style="border-radius: 16px; padding: 20px">
+                    <story/>
+                  </div>
+                `,
+            };
+        },
+    ],
 };
 
 export default preview;

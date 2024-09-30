@@ -39,6 +39,9 @@
 		--prependIconColor-search: var(--secondary-color);
 	}
 
-	body.dark {
+	body.dark-mode {
+		--color-search: var(--on-surface-color);
+		--backgroundColor-search: var(--surface-container);
+		--prependIconColor-search: #d8c2bc;
 	}
 </style>

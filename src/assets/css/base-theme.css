@@ -14,7 +14,7 @@
 }
 
 /* Switch to dark mode when .dark-mode class is present on body */
-body.dark {
+body.dark-mode {
     --primary-color: #FFB59D;
     --on-primary-color: #55200D;
 
@@ -23,4 +23,7 @@ body.dark {
 
     --error-color: #FFB4AB;
     --on-error-color: #690005;
+
+    --surface-container: #322825;
+    --on-surface-color: #F1DFDA;
 }
