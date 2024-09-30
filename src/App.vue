@@ -6,8 +6,7 @@
             {{ toggleText }}
         </div>
 
-      <FmChip >Label</FmChip>
-      <FmChip variant="outlined" >Label</FmChip>
+      <FmSearch :items="items" variant="solo" rounded />
     </div>
 
 </template>
@@ -18,6 +17,28 @@ import { useTheme } from 'vuetify'
 
 const darkMode = ref(false);
 const theme = useTheme()
+const items = [
+  {
+    prependIcon: 'mdi-clock-outline',
+    title: 'recipe with chicken',
+  },
+  {
+    prependIcon: 'mdi-clock-outline',
+    title: 'best hiking trails near me',
+  },
+  {
+    prependIcon: 'mdi-clock-outline',
+    title: 'how to learn a new language',
+  },
+  {
+    prependIcon: 'mdi-clock-outline',
+    title: 'DIY home organization ideas',
+  },
+  {
+    prependIcon: 'mdi-clock-outline',
+    title: 'latest fashion trends',
+  },
+]
 
 function updateBodyClass(isDark) {
     if (isDark) {

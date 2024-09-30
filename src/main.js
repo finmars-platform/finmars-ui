@@ -11,7 +11,7 @@ import FloatingVue from "floating-vue";
 import "floating-vue/dist/style.css"
 
 
-import FmChip from "./components/fm/Chip/Chip.vue";
+import FmSearch from "./components/fm/Search/Search.vue";
 
 import "./assets/css/main.dev.css";
 
@@ -26,6 +26,6 @@ app.use(FloatingVue, {
         }
     }
 })
-app.component("FmCheckbox", FmChip);
+app.component("FmSearch", FmSearch);
 
 app.mount("#app")

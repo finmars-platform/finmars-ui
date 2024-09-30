@@ -5,8 +5,11 @@
     --secondary-color: #53433F;
     --on-secondary-color: #FFDBD0;
 
-    --error-color: #BA1A1A; /* NEW */
-    --on-error-color: #BA1A1A; /* NEW */
+    --error-color: #BA1A1A;
+    --on-error-color: #BA1A1A;
+
+    --surface-container: #FCEAE5;
+    --on-surface-color: #231917;
 
 }
 

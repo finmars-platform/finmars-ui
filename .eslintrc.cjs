@@ -13,6 +13,7 @@ module.exports = {
 		ecmaVersion: 2020,
 		sourceType: 'module'
 	},
+
 	rules: {
 		'prettier/prettier': [
 			'error',
@@ -26,8 +27,5 @@ module.exports = {
 				trailingComma: 'none'
 			}
 		],
-		'vue/multi-word-component-names': 'off',
-		'vue/no-unused-components': 'off',
-		'no-undef': 'off'
 	}
 }
