@@ -1,19 +1,17 @@
 import FmLogo from './Logo.vue'
 import { ref, watch } from 'vue'
+import { useTheme } from 'vuetify'
 
 const meta = {
 	title: 'Components/FmLogo',
 	component: FmLogo,
 	argTypes: {
-		variant: {
+		size: {
 			control: 'select',
-			options: ['solo']
+			options: ['small', null]
 		}
 	},
-	args: {
-		rounded: true,
-		variant: 'solo'
-	}
+	args: {}
 }
 
 export default meta
@@ -25,6 +23,7 @@ export const Default = {
 		},
 		setup() {
 			const key = ref(1)
+			const theme = useTheme()
 
 			watch(args, () => {
 				key.value = new Date().getTime()
@@ -32,10 +31,11 @@ export const Default = {
 
 			return {
 				args,
-				key
+				key,
+				theme
 			}
 		},
 		template: `
-          <FmLogo v-bind="args" :key="key"/>`
+          <FmLogo v-bind="args" :theme="theme.global.name" maxHeight="30" :key="key"/>`
 	})
 }

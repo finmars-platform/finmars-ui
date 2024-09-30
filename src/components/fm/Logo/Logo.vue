@@ -1,26 +1,35 @@
 <template>
-	<VImg
-		:width="width"
-		:height="height"
-		:maxHeight="maxHeight"
-		:maxWidth="maxWidth"
-		:aspect-ratio="aspectRatio"
-		:cover="cover"
-		:src="src"
-	/>
+	<FmImg :src="logo" :maxHeight="maxHeight" />
 </template>
 
 <script setup>
-	import { VImg } from 'vuetify/components'
+	import FmImg from '@/components/fm/Img/Img.vue'
+	import logoLight from '@/components/fm/Logo/assets/logo-light.svg?url'
+	import logoCollapsedLight from '@/components/fm/Logo/assets/logo-collapsed-light.svg?url'
+	import logoDark from '@/components/fm/Logo/assets/logo-dark.svg?url'
+	import logoCollapsedDark from '@/components/fm/Logo/assets/logo-collapsed-dark.svg?url'
+	import { computed } from 'vue'
 
-	defineProps({
-		aspectRatio: String,
-		width: String,
-		height: String,
-		cover: Boolean,
-		src: String,
+	const props = defineProps({
+		theme: String,
 		maxHeight: String,
-		maxWidth: String
+		size: String
+	})
+
+	const logo = computed(() => {
+		if (props.theme === 'light') {
+			if (props.size === 'small') {
+				return logoCollapsedLight
+			} else {
+				return logoLight
+			}
+		} else {
+			if (props.size === 'small') {
+				return logoCollapsedDark
+			} else {
+				return logoDark
+			}
+		}
 	})
 </script>
 

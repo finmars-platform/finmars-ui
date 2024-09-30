@@ -4,19 +4,15 @@
 			{{ toggleText }}
 		</div>
 
-		<FMImg
-			:width="213"
-			aspect-ratio="16/9"
-			cover
-			src="https://cdn.vuetifyjs.com/images/parallax/material.jpg"
-		/>
+		<FmLogo :theme="darkMode ? 'dark' : 'light'" />
+		<FmLogo size="small" />
 	</div>
 </template>
 
 <script setup>
 	import { computed, onMounted, ref } from 'vue'
 	import { useTheme } from 'vuetify'
-	import FMImg from './components/fm/Img/Img.vue'
+	import FmLogo from '@/components/fm/Logo/Logo.vue'
 
 	const darkMode = ref(false)
 	const theme = useTheme()
