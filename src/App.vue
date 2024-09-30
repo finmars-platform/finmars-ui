@@ -1,65 +1,47 @@
 <template>
-    <div class="flex justify-end m-2">
-        <div
-            @click="toggleDarkMode"
-        >
-            {{ toggleText }}
-        </div>
+	<div class="flex justify-end m-2">
+		<div @click="toggleDarkMode">
+			{{ toggleText }}
+		</div>
 
-      <FmSearch :items="items" variant="solo" rounded />
-    </div>
-
+		<FMImg
+			:width="213"
+			aspect-ratio="16/9"
+			cover
+			src="https://cdn.vuetifyjs.com/images/parallax/material.jpg"
+		/>
+	</div>
 </template>
 
 <script setup>
-import {computed, onMounted, ref} from 'vue';
-import { useTheme } from 'vuetify'
+	import { computed, onMounted, ref } from 'vue'
+	import { useTheme } from 'vuetify'
+	import FMImg from './components/fm/Img/Img.vue'
 
-const darkMode = ref(false);
-const theme = useTheme()
-const items = [
-  {
-    prependIcon: 'mdi-clock-outline',
-    title: 'recipe with chicken',
-  },
-  {
-    prependIcon: 'mdi-clock-outline',
-    title: 'best hiking trails near me',
-  },
-  {
-    prependIcon: 'mdi-clock-outline',
-    title: 'how to learn a new language',
-  },
-  {
-    prependIcon: 'mdi-clock-outline',
-    title: 'DIY home organization ideas',
-  },
-  {
-    prependIcon: 'mdi-clock-outline',
-    title: 'latest fashion trends',
-  },
-]
+	const darkMode = ref(false)
+	const theme = useTheme()
 
-function updateBodyClass(isDark) {
-    if (isDark) {
-        document.body.classList.add('dark');
-    } else {
-        document.body.classList.remove('dark');
-    }
-}
+	function updateBodyClass(isDark) {
+		if (isDark) {
+			document.body.classList.add('dark')
+		} else {
+			document.body.classList.remove('dark')
+		}
+	}
 
-const toggleText = computed(() => !darkMode.value ? 'Enable Dark Theme' : 'Disable Dark Theme');
+	const toggleText = computed(() =>
+		!darkMode.value ? 'Enable Dark Theme' : 'Disable Dark Theme'
+	)
 
-function toggleDarkMode() {
-    darkMode.value = !darkMode.value;
-    updateBodyClass(darkMode.value);
-    sessionStorage.setItem('darkMode', darkMode.value ? 'true' : 'false');
-    theme.global.name.value = darkMode.value ? 'dark' : 'light'
-}
+	function toggleDarkMode() {
+		darkMode.value = !darkMode.value
+		updateBodyClass(darkMode.value)
+		sessionStorage.setItem('darkMode', darkMode.value ? 'true' : 'false')
+		theme.global.name.value = darkMode.value ? 'dark' : 'light'
+	}
 
-onMounted(() => {
-    darkMode.value = sessionStorage.getItem('darkMode') === 'true';
-    updateBodyClass(darkMode.value);
-});
-
+	onMounted(() => {
+		darkMode.value = sessionStorage.getItem('darkMode') === 'true'
+		updateBodyClass(darkMode.value)
+	})
 </script>
