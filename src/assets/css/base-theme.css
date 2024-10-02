@@ -11,6 +11,8 @@
     --surface-container: #FCEAE5;
     --on-surface-color: #231917;
 
+    --on-surface-variant: rgba(73, 69, 79, 0.12)
+
 }
 
 /* Switch to dark mode when .dark-mode class is present on body */
@@ -26,4 +28,6 @@ body.dark-mode {
 
     --surface-container: #322825;
     --on-surface-color: #F1DFDA;
+
+    --on-surface-variant: rgba(73, 69, 79, 0.12)
 }

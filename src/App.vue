@@ -3,16 +3,35 @@
 		<div @click="toggleDarkMode">
 			{{ toggleText }}
 		</div>
-
-		<FmLogo :theme="darkMode ? 'dark' : 'light'" />
-		<FmLogo size="small" />
+		<div class="flex-col">
+			<div class="flex">
+				<FmIconButton size="small" icon="mdi-plus" />
+				<FmIconButton icon="mdi-plus" />
+			</div>
+			<div class="flex">
+				<FmIconButton variant="tonal" size="small" icon="mdi-plus" />
+				<FmIconButton variant="tonal" icon="mdi-plus" />
+			</div>
+			<div class="flex">
+				<FmIconButton variant="filled" size="small" icon="mdi-plus" />
+				<FmIconButton variant="filled" icon="mdi-plus" />
+			</div>
+			<div class="flex">
+				<FmIconButton variant="outlined" size="small" icon="mdi-plus" />
+				<FmIconButton variant="outlined" icon="mdi-plus" />
+			</div>
+			<div class="flex">
+				<FmIconButton size="small" icon="mdi-plus" disabled />
+				<FmIconButton icon="mdi-plus" disabled />
+			</div>
+		</div>
 	</div>
 </template>
 
 <script setup>
 	import { computed, onMounted, ref } from 'vue'
 	import { useTheme } from 'vuetify'
-	import FmLogo from '@/components/fm/Logo/Logo.vue'
+	import FmIconButton from '@/components/fm/IconButton/IconButton.vue'
 
 	const darkMode = ref(false)
 	const theme = useTheme()
