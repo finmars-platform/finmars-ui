@@ -1,6 +1,7 @@
 <template>
 	<div>
 		<Header />
+		<NavigationPortal />
 		<div @click="toggleDarkMode">
 			{{ toggleText }}
 		</div>
@@ -12,6 +13,7 @@
 	import { computed, onMounted, ref } from 'vue'
 	import { useTheme } from 'vuetify'
 	import Header from '~/stories/Header.vue'
+	import NavigationPortal from '@/components/fm/Navigation/NavigationPortal.vue'
 
 	const darkMode = ref(false)
 	const theme = useTheme()
