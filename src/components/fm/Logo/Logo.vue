@@ -1,9 +1,8 @@
 <template>
-	<FmImg :src="logo" :maxHeight="maxHeight" />
+	<img :src="logo" />
 </template>
 
 <script setup>
-	import FmImg from '@/components/fm/Img/Img.vue'
 	import logoLight from '@/components/fm/Logo/assets/logo-light.svg?url'
 	import logoCollapsedLight from '@/components/fm/Logo/assets/logo-collapsed-light.svg?url'
 	import logoDark from '@/components/fm/Logo/assets/logo-dark.svg?url'

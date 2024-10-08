@@ -15,6 +15,7 @@
 		color="var(--color-search)"
 		bg-color="var(--backgroundColor-search)"
 		prepend-icon-color="var(--prependIconColor-search)"
+		hide-details="hideDetails"
 		loader-color="red"
 		text-color="green"
 		border-color="bl"
@@ -28,7 +29,8 @@
 		rounded: Boolean,
 		style: String,
 		items: Array,
-		variant: String
+		variant: String,
+		hideDetails: Boolean
 	})
 </script>
 

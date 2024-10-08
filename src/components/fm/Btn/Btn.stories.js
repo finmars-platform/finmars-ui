@@ -1,9 +1,9 @@
-import FmSearch from './Search.vue'
+import FmBtn from './Btn.vue'
 import { ref, watch } from 'vue'
 
 const meta = {
-	title: 'Components/FmSearch',
-	component: FmSearch,
+	title: 'Components/FmBtn',
+	component: FmBtn,
 	argTypes: {
 		variant: {
 			control: 'select',
@@ -21,7 +21,7 @@ export default meta
 export const Default = {
 	render: (args) => ({
 		components: {
-			FmSearch
+			FmBtn
 		},
 		setup() {
 			const key = ref(1)
@@ -36,6 +36,6 @@ export const Default = {
 			}
 		},
 		template: `
-          <FmSearch v-bind="args" :key="key"/>`
+          <FmBtn v-bind="args" :key="key"/>`
 	})
 }

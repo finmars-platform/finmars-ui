@@ -1,65 +1,58 @@
-import plugin from "tailwindcss/plugin"
+import plugin from 'tailwindcss/plugin'
 
-import themeExtensionBase from "./themeExtensionBase.tw";
-import tooltip from "./tooltip.tw";
+import themeExtensionBase from './themeExtensionBase.tw'
+import tooltip from './tooltip.tw'
 
 function createDefaultThemeExtension() {
+	const extensionData = {}
 
-    const extensionData = {};
+	/**
+	 *
+	 * @param {Object} themeExt - object with keys like 'color', 'opacity' etc.
+	 */
+	function applyThemeExt(themeExt) {
+		let key
+		/**
+		 * keys - names of custom values. E.g. '--icon-disabled'.
+		 * values - strings that will be converted into CSS values.
+		 * E.g. 'var(--icon-disabled-opacity)'
+		 * @type {Object}
+		 */
+		let cssPropertyData
 
-    /**
-     *
-     * @param {Object} themeExt - object with keys like 'color', 'opacity' etc.
-     */
-    function applyThemeExt(themeExt) {
+		for ([key, cssPropertyData] of Object.entries(themeExt)) {
+			if (!extensionData.hasOwnProperty(key)) {
+				extensionData[key] = {}
+			}
 
-        let key;
-        /**
-         * keys - names of custom values. E.g. '--icon-disabled'.
-         * values - strings that will be converted into CSS values.
-         * E.g. 'var(--icon-disabled-opacity)'
-         * @type {Object}
-         */
-        let cssPropertyData;
+			const cssPropData = extensionData[key]
 
-        for ([key, cssPropertyData] of Object.entries(themeExt)) {
+			for (const [customValName, stringValue] of Object.entries(
+				cssPropertyData
+			)) {
+				if (cssPropData.hasOwnProperty(customValName)) {
+					throw new Error(
+						`A name of a CSS value is duplicated: '${customValName}'`
+					)
+				}
 
-            if ( !extensionData.hasOwnProperty(key) ) {
-                extensionData[key] = {};
-            }
+				cssPropData[customValName] = stringValue
+			}
+		}
+	}
 
-            const cssPropData = extensionData[key];
+	Object.values(arguments).forEach(applyThemeExt)
 
-            for (const [customValName, stringValue] of Object.entries(cssPropertyData)) {
-
-                if ( cssPropData.hasOwnProperty(customValName) ) {
-                    throw new Error(`A name of a CSS value is duplicated: '${customValName}'`);
-                }
-
-                cssPropData[customValName] = stringValue;
-
-            }
-
-        }
-
-    }
-
-    Object.values(arguments).forEach(applyThemeExt);
-
-    return extensionData;
-
+	return extensionData
 }
 
 const themeExtensionData = createDefaultThemeExtension(
-    themeExtensionBase,
-    tooltip,
+	themeExtensionBase,
+	tooltip
 )
 
-export default plugin(
-    function () {},
-    {
-        theme: {
-            extend: themeExtensionData
-        }
-    }
-)
+export default plugin(function () {}, {
+	theme: {
+		extend: themeExtensionData
+	}
+})

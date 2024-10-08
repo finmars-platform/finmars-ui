@@ -1,6 +1,5 @@
 import ViteSvgLoader from 'vite-svg-loader'
 import { mergeConfig } from 'vite';
-import path from 'path'
 
 /** @type { import('@storybook/vue3-vite').StorybookConfig } */
 const config = {

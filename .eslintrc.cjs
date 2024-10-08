@@ -27,5 +27,6 @@ module.exports = {
 				trailingComma: 'none'
 			}
 		],
+		'vue/multi-word-component-names': 'off',
 	}
 }
