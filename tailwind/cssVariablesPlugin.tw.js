@@ -1,6 +1,7 @@
 import plugin from 'tailwindcss/plugin'
 
 import themeExtensionBase from './themeExtensionBase.tw'
+import navigation from '../src/components/fm/Navigation/Navigation.tw'
 import tooltip from './tooltip.tw'
 
 function createDefaultThemeExtension() {
@@ -48,7 +49,8 @@ function createDefaultThemeExtension() {
 
 const themeExtensionData = createDefaultThemeExtension(
 	themeExtensionBase,
-	tooltip
+	tooltip,
+	navigation
 )
 
 export default plugin(function () {}, {

@@ -229,7 +229,7 @@
 		{
 			key: 'valuations',
 			label: 'Valuations',
-			icon: 'currency_exchange',
+			icon: 'mdi-wallet-outline',
 			action: undefined,
 			to: '',
 			href: '',
@@ -288,7 +288,7 @@
 		{
 			key: 'import',
 			label: 'Import',
-			icon: 'file_upload',
+			icon: 'mdi-upload-outline',
 			action: undefined,
 			to: '',
 			href: '',
@@ -340,7 +340,7 @@
 		{
 			key: 'reconciliation',
 			label: 'Reconciliation',
-			icon: 'balance',
+			icon: 'mdi-scale-balance',
 			action: undefined,
 			to: '',
 			href: '',
@@ -364,7 +364,7 @@
 		{
 			key: 'add-ons',
 			label: 'Add-ons',
-			icon: 'extension',
+			icon: 'mdi-puzzle-outline',
 			action: undefined,
 			to: '',
 			href: '',
@@ -397,7 +397,7 @@
 		{
 			key: 'explorer',
 			label: 'Explorer',
-			icon: 'folder',
+			icon: 'mdi-folder-outline',
 			action: undefined,
 			to: '',
 			href: getUrlToOldApp('/explorer1'),
@@ -406,7 +406,7 @@
 		{
 			key: 'configuration',
 			label: 'Configuration',
-			icon: 'tune',
+			icon: 'mdi-tune',
 			action: undefined,
 			to: '',
 			href: '',
@@ -745,7 +745,7 @@
 		{
 			key: 'administration',
 			label: 'Administration',
-			icon: 'admin_panel_settings',
+			icon: 'mdi-shield-account-variant-outline',
 			action: undefined,
 			to: '',
 			href: '',
