@@ -1,15 +1,15 @@
 <template>
 	<div class="layout">
 		<Header />
-    <div class="flex">
-      <NavigationPortal />
-      <div class="page">
-        <div @click="toggleDarkMode">
-          {{ toggleText }}
-        </div>
-        <div class="flex-col"></div>
-      </div>
-    </div>
+		<div class="flex">
+			<NavigationPortal />
+			<div class="page">
+				<div @click="toggleDarkMode">
+					{{ toggleText }}
+				</div>
+				<div class="flex-col"></div>
+			</div>
+		</div>
 	</div>
 </template>
 

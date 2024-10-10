@@ -3,6 +3,7 @@
 		:variant="variant || undefined"
 		:icon="icon"
 		:rounded="rounded || undefined"
+		:href="href || undefined"
 	>
 		<slot />
 	</VBtn>
@@ -14,7 +15,8 @@
 	defineProps({
 		icon: Boolean,
 		rounded: Boolean,
-		variant: String // 'text'
+		variant: String, // 'text'
+		href: String
 	})
 </script>
 

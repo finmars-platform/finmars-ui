@@ -1,6 +1,6 @@
 {
   "name": "@finmars/ui",
-  "version": "1.0.4",
+  "version": "1.0.54",
   "description": "",
   "scripts": {
     "dev": "vite dev --config vite.config.dev.js",
@@ -56,6 +56,7 @@
   "dependencies": {
     "@mdi/font": "^7.4.47",
     "@vitejs/plugin-vue": "^5.0.4",
+    "dayjs": "^1.11.7",
     "vite-plugin-vuetify": "^2.0.4",
     "vite-svg-loader": "^5.1.0",
     "vue": "^3.5.9",
