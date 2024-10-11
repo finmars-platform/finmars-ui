@@ -36,8 +36,8 @@
 			label: 'Dashboard',
 			icon: 'mdi-view-dashboard',
 			action: undefined,
-			to: useGetNuxtLink('/home', route.value.params),
-			href: '',
+			to: '',
+			href: getUrlToOldApp('/dashboard', route.value.params),
 			style: {}
 		},
 		{
@@ -98,7 +98,7 @@
 					label: 'Portfolios',
 					action: undefined,
 					to: '',
-					href: getUrlToOldApp('/data/portfolio')
+					href: getUrlToOldApp('/data/portfolios')
 				},
 				{
 					key: 'registers',
@@ -400,7 +400,7 @@
 			icon: 'mdi-folder-outline',
 			action: undefined,
 			to: '',
-			href: getUrlToOldApp('/explorer1'),
+			href: getUrlToOldApp('/explorer'),
 			classes: 'separator-side-nav'
 		},
 		{
@@ -444,7 +444,7 @@
 							label: 'Entity Viewer Layouts',
 							action: undefined,
 							to: '',
-							href: getUrlToOldApp('/import/layout')
+							href: getUrlToOldApp('/settings/layout')
 						},
 						{
 							key: 'Dashboard-Layouts',
