@@ -13,6 +13,9 @@
 
     --on-surface-variant: rgba(73, 69, 79, 0.12);
 
+    --scrole-color: #85736E;
+    --base-backgroundColor: #FFFFFF;
+    --primary-hover: rgb(152, 90, 70);
 }
 
 /* Switch to dark mode when .dark-mode class is present on body */
@@ -30,4 +33,8 @@ body.dark-mode {
     --on-surface-color: #F1DFDA;
 
     --on-surface-variant: rgba(73, 69, 79, 0.12);
+
+    --scrole-color: #85736E;
+    --base-backgroundColor: #1A110F;
+    --primary-hover: rgb(239, 169, 154);
 }

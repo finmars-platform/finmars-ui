@@ -2,10 +2,7 @@ import './src/assets/css/main.css'
 import FmNavigationPortal from '@/components/fm/Navigation/NavigationPortal.vue'
 import FmHeader from '~/stories/Header.vue'
 import { createVuetify } from 'vuetify'
-import 'vuetify/styles'
-import '@mdi/font/css/materialdesignicons.css'
-
-export { default as tailwindCssVariables } from './tailwind/cssVariablesPlugin.tw'
+import '@/assets/css/tailwind.css'
 
 export { FmNavigationPortal, FmHeader }
 
