@@ -575,6 +575,13 @@
 							action: undefined,
 							to: '',
 							href: getUrlToOldApp('/portfolio-bundle')
+						},
+						{
+							key: 'Portfolio-Types',
+							label: 'Portfolio Types',
+							action: undefined,
+							to: '',
+							href: getUrlToOldApp('/data/portfolio-type')
 						}
 					]
 				},
@@ -781,6 +788,13 @@
 					href: ''
 				},
 				{
+					key: 'Default-settings',
+					label: 'Default settings',
+					action: undefined,
+					to: useGetNuxtLink('/settings/default-settings', route.value.params),
+					href: ''
+				},
+				{
 					key: 'Recycle-Bin',
 					label: 'Recycle Bin',
 					action: undefined,
@@ -793,6 +807,20 @@
 					action: undefined,
 					to: '',
 					href: getUrlToOldApp('/system-dashboard')
+				},
+				{
+					key: 'Balance-Report-Instance',
+					label: 'Balance Report Instance',
+					action: undefined,
+					to: '',
+					href: getUrlToOldApp('/balance-report-instance')
+				},
+				{
+					key: 'PL Report Instance',
+					label: 'PL-Report-Instance',
+					action: undefined,
+					to: '',
+					href: getUrlToOldApp('/pl-report-instance')
 				},
 				{
 					key: 'Vault',
@@ -833,9 +861,16 @@
 						route.value.params
 					),
 					href: ''
+				},
+				{
+					key: 'journal',
+					label: 'Journal',
+					action: undefined,
+					to: '',
+					href: getUrlToOldApp('/journal')
 				}
 			]
-		}
+		},
 	])
 
 	function getUrlToOldApp(suffix) {
