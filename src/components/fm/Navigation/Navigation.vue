@@ -30,7 +30,7 @@
 		</div>
 
 		<div
-			class="mt-auto flex grow-0 items-center justify-end h-[48px] p-[16px] border-solid border-t border-t-sidenavFooter-borderColor bg-sidenavFooter-backgroundColor"
+			class="mt-auto flex grow-0 items-center justify-end h-[48px] px-[12px] py-[16px] border-solid border-t border-t-sidenavFooter-borderColor bg-sidenavFooter-backgroundColor"
 		>
 			<FmIconButton
 				:style="{
@@ -39,7 +39,7 @@
 				class="icon hover:bg-sidenavToggleButton-backgroundColor text-2xl bg-sidenavToggleButton-backgroundColor p-0 m-0 border-sidenavToggleButton-borderColor"
 				:icon="isOnlyIcon || isFloat ? 'mdi-chevron-right' : 'mdi-chevron-left'"
 				@click="onIconClick"
-        variant="text"
+				variant="text"
 			/>
 		</div>
 
@@ -184,7 +184,7 @@
 
 	body.dark-mode {
 		--sidenav-backgroundColor: #1a110f;
-		--sidenav-borderColor: #ffdbd0;
+		--sidenav-borderColor: var(--on-secondary-color);
 
 		/* --sidenavOption (styles for menu options) */
 		--sidenavOption-color: #d8c2bc;
@@ -273,9 +273,10 @@
 		--sidenavToggleButton-color: #d8c2bc;
 		--sidenavToggleButton-backgroundColor: transparent;
 	}
+
 	body.dark {
 		--sidenav-backgroundColor: #1a110f;
-		--sidenav-borderColor: #ffdbd0;
+		--sidenav-borderColor: var(--on-secondary-color);
 
 		/* --sidenavOption (styles for menu options) */
 		--sidenavOption-color: #d8c2bc;
