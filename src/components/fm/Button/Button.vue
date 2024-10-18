@@ -119,6 +119,7 @@
 		--color-fmButton: var(--on-primary-color);
 
 		color: var(--color-fmButton) !important;
+		max-width: max-content !important;
 
 		&.fm-button--primary:hover {
 			box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
