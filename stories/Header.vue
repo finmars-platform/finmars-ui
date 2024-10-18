@@ -133,9 +133,7 @@
 						<FmBtn @click="emit('security')" variant="text" rounded>
 							Account Security
 						</FmBtn>
-						<FmBtn :href="logoutUrl" variant="text" rounded>
-							Log Out
-						</FmBtn>
+						<FmBtn :href="logoutUrl" variant="text" rounded> Log Out</FmBtn>
 					</div>
 				</VCardText>
 			</VCard>
@@ -157,24 +155,39 @@
 	dayjs.extend(relativeTime)
 
 	const props = defineProps({
-		notifications: Array,
-		currentWorkspaceName: String,
-		workspaces: Array,
-		isDark: Boolean,
-		documentationUrl: String,
-		apiReferenceUrl: String,
-		logo: String,
-		logoutUrl: String,
-		avatar: String,
-		letters: String
+		notifications: {
+			type: Array
+		},
+		currentWorkspaceName: {
+			type: String
+		},
+		workspaces: {
+			type: Array
+		},
+		isDark: {
+			type: Boolean
+		},
+		documentationUrl: {
+			type: String
+		},
+		apiReferenceUrl: {
+			type: String
+		},
+		logo: {
+			type: String
+		},
+		logoutUrl: {
+			type: String
+		},
+		avatar: {
+			type: String
+		},
+		letters: {
+			type: String
+		}
 	})
 
-	const emit = defineEmits([
-		'profile',
-		'setTheme',
-		'security',
-		'setCurrent'
-	])
+	const emit = defineEmits(['profile', 'setTheme', 'security', 'setCurrent'])
 
 	const SECTIONS = {
 		1: 'Events',
