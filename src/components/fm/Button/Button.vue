@@ -1,0 +1,127 @@
+<template>
+	<VBtn
+		v-bind="vBtnProps"
+		:class="[
+			'fm-button',
+			{ 'fm-button--primary': type === 'primary' },
+		]"
+		:style="vBtnStyle"
+	>
+		<template #default>
+			<slot />
+		</template>
+
+		<template #loader>
+			<slot name="loader">
+				<VProgressCircular v-if="loading" indeterminate />
+			</slot>
+		</template>
+
+		<template #append>
+			<slot name="append">
+				<VIcon v-if="appendIcon" :icon="appendIcon" />
+			</slot>
+		</template>
+
+		<template #prepend>
+			<slot name="prepend">
+				<VIcon v-if="prependIcon" :icon="prependIcon" />
+			</slot>
+		</template>
+	</VBtn>
+</template>
+
+<script setup>
+	import { computed } from 'vue'
+	import { VBtn, VIcon, VProgressCircular } from 'vuetify/components'
+
+	const props = defineProps({
+		type: {
+			type: String,
+			default: 'primary',
+			validator(value) {
+				return ['primary', 'secondary', 'tertiary'].includes(value)
+			}
+		},
+		href: {
+			type: [String, undefined],
+		},
+		to: {
+			type: [String, Object, undefined],
+		},
+		minWidth: {
+			type: [String, Number, undefined],
+		},
+		rounded: {
+			type: Boolean,
+		},
+		loading: {
+			type: Boolean,
+		},
+		appendIcon: {
+			type: [String, undefined],
+		},
+		prependIcon: {
+			type: [String, undefined],
+		},
+		disabled: {
+			type: Boolean,
+		},
+	})
+
+	const vBtnProps = computed(() => {
+		const value = {
+			flat: true,
+			disabled: !!props.disabled || !!props.loading,
+			loading: !!props.loading,
+			...(props.to && { to: props.to }),
+			...(props.href && { href: props.href }),
+			...(props.minWidth && { minWidth: props.minWidth }),
+			...(props.rounded && { rounded: 'xl' }),
+			...(props.type === 'primary' && { variant: 'flat' }),
+			...(props.type === 'secondary' && { variant: 'text' }),
+			...(props.type === 'tertiary' && { variant: 'outlined' }),
+		}
+
+		if (props.type === 'primary') {
+			value['base-color'] = 'var(--on-primary-color)'
+			value.color = 'var(--primary-color)'
+		}
+
+		if (props.type === 'primary' && !props.rounded) {
+			value.rounded = 'xs';
+		}
+
+		return value
+	})
+
+	const vBtnStyle = computed(() => {
+		const value = {}
+
+		if (props.type === 'primary') {
+			value['--color-fmButton'] ='var(--on-primary-color)'
+		}
+
+		if (props.type === 'secondary') {
+			value['--color-fmButton'] ='var(--primary-color)'
+		}
+
+		if (props.type === 'tertiary') {
+			value['--color-fmButton'] ='var(--on-surface-color)'
+		}
+
+		return value;
+	})
+</script>
+
+<style scoped>
+	.fm-button {
+		--color-fmButton: var(--on-primary-color);
+
+		color: var(--color-fmButton) !important;
+
+		&.fm-button--primary:hover {
+			box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+		}
+	}
+</style>

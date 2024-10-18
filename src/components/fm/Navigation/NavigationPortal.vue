@@ -408,9 +408,9 @@
 			label: 'Explorer',
 			icon: 'mdi-folder-outline',
 			action: undefined,
-			to: '',
-			href: getUrlToOldApp('/explorer'),
-			classes: 'separator-side-nav'
+			to: useGetNuxtLink('/explorer'),
+			classes: 'separator-side-nav',
+			href: ''
 		},
 		{
 			key: 'configuration',
@@ -870,7 +870,7 @@
 					href: getUrlToOldApp('/journal')
 				}
 			]
-		},
+		}
 	])
 
 	function getUrlToOldApp(suffix) {
