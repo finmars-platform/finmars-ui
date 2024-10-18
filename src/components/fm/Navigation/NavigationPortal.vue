@@ -409,6 +409,7 @@
 			icon: 'mdi-folder-outline',
 			action: undefined,
 			to: useGetNuxtLink('/explorer'),
+			classes: 'separator-side-nav',
 			href: ''
 		},
 		{
