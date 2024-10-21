@@ -816,8 +816,8 @@
 					href: getUrlToOldApp('/balance-report-instance')
 				},
 				{
-					key: 'PL Report Instance',
-					label: 'PL-Report-Instance',
+					key: 'PL-Report-Instance',
+					label: 'PL Report Instance',
 					action: undefined,
 					to: '',
 					href: getUrlToOldApp('/pl-report-instance')
