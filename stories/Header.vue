@@ -2,7 +2,6 @@
 	<header
 		class="flex w-full items-center max-h-20 h-20 py-3 px-[22px] gap-x-4 border-b-[1px] border-[var(--boredColor-header)] border-solid"
 	>
-		<div></div>
 		<FmLogo :logo="logo" class="mr-12" />
 		<FmSearch
 			v-if="false"

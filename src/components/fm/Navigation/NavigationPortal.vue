@@ -408,7 +408,7 @@
 			label: 'Explorer',
 			icon: 'mdi-folder-outline',
 			action: undefined,
-			to: useGetNuxtLink('/explorer'),
+			to: useGetNuxtLink('/explorer', route.value.params),
 			classes: 'separator-side-nav',
 			href: ''
 		},
