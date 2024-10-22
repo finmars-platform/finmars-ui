@@ -7,10 +7,7 @@
 		@end="emits('end', $event)"
 		@start="emits('start', $event)"
 		@update:model-value="onUpdate"
-		:class="[
-			'fm-slider',
-			{ 'fm-slider--centered': props.type === 'centered' },
-		]"
+		:class="['fm-slider', { 'fm-slider--centered': props.type === 'centered' }]"
 	>
 		<template #prepend>
 			<slot name="prepend" />
@@ -41,38 +38,38 @@
 			default: 'continuous',
 			validator(value) {
 				return ['continuous', 'discrete', 'centered'].includes(value)
-			},
+			}
 		},
 		min: {
 			type: [String, Number],
 			default: 0,
 			validator(value) {
-				return !isNaN(Number(value));
-			},
+				return !isNaN(Number(value))
+			}
 		},
 		max: {
 			type: [String, Number],
 			default: 100,
 			validator(value) {
-				return !isNaN(Number(value));
-			},
+				return !isNaN(Number(value))
+			}
 		},
 		prependIcon: {
-			type: [String, undefined],
+			type: [String, undefined]
 		},
 		appendIcon: {
-			type: [String, undefined],
+			type: [String, undefined]
 		},
 		step: {
 			type: [String, Number],
 			default: 10,
 			validator(value) {
-				return !isNaN(Number(value));
-			},
+				return !isNaN(Number(value))
+			}
 		},
 		disabled: {
-			type: Boolean,
-		},
+			type: Boolean
+		}
 	})
 
 	const emits = defineEmits([
@@ -80,16 +77,16 @@
 		'click:prepend',
 		'end',
 		'start',
-		'update:modelValue',
+		'update:modelValue'
 	])
 
-	const innerValue = ref(Number(props.modelValue));
+	const innerValue = ref(Number(props.modelValue))
 
 	const vSliderProps = computed(() => ({
 		color: 'var(--color-fmSlider)',
 		disabled: !!props.disabled,
 		hideDetails: true,
-		min: props.type === 'centered' ? -Math.abs(Number(props.max))  : props.min,
+		min: props.type === 'centered' ? -Math.abs(Number(props.max)) : props.min,
 		max: props.type === 'centered' ? Math.abs(Number(props.max)) : props.max,
 		ripple: false,
 		trackSize: 16,
@@ -100,9 +97,9 @@
 		trackFillColor: 'var(--color-fmSlider)',
 		rounded: true,
 		showTicks: props.type === 'continuous' ? false : 'always',
-		...(props.type !== 'continuous' && props.step  && { step: props.step }),
+		...(props.type !== 'continuous' && props.step && { step: props.step }),
 		...(props.prependIcon && { prependIcon: props.prependIcon }),
-		...(props.appendIcon && { appendIcon: props.appendIcon }),
+		...(props.appendIcon && { appendIcon: props.appendIcon })
 	}))
 
 	function getThumbLabel(value) {
@@ -120,7 +117,7 @@
 			if (val !== oldValue) {
 				innerValue.value = Number(props.modelValue)
 			}
-		},
+		}
 	)
 </script>
 
@@ -130,6 +127,8 @@
 		--backgroundColor-fmSlider: var(--on-secondary-color);
 		--backgroundColor-fmSlider-thumbLabel: #392e2b;
 		--color-fmSlider-thumbLabel: #f5eff7;
+
+		--v-theme-surface-variant: #ffffff;
 	}
 
 	body.dark-mode {
@@ -140,14 +139,15 @@
 	}
 </style>
 
-<style lang="scss" scoped>
+<style scoped>
 	.fm-slider {
 		--thumbWidth-fmSlider: 4px;
 
-		:deep(.v-input__control) {
-			.v-slider-thumb__surface {
+		& .v-input__control {
+			& .v-slider-thumb__surface {
 				width: var(--thumbWidth-fmSlider);
 				border-radius: calc(var(--thumbWidth-fmSlider) / 2);
+				position: relative;
 
 				&:before {
 					content: '';
@@ -164,34 +164,37 @@
 				}
 			}
 
-			.v-slider-track__background--opacity {
+			& .v-slider-track__background--opacity {
 				opacity: 1;
 			}
 		}
 
 		&.v-input--horizontal {
-			:deep(.v-slider-thumb) {
+			& .v-slider-thumb {
 				z-index: 1;
-				inset-inline-start: calc(var(--v-slider-thumb-position) - calc(var(--thumbWidth-fmSlider) / 2));
+				inset-inline-start: calc(
+					var(--v-slider-thumb-position) - calc(var(--thumbWidth-fmSlider) / 2)
+				);
 
-				.v-slider-thumb__label-container {
+				& .v-slider-thumb__label-container {
 					left: 0;
 					top: 18px;
+					position: absolute;
+				}
 
-					.v-slider-thumb__label {
-						width: max-content;
-						height: auto;
-						padding: 0;
-						background-color: transparent;
+				& .v-slider-thumb__label {
+					width: max-content;
+					height: auto;
+					padding: 0;
+					background-color: transparent;
 
-						&::before {
-							content: none;
-						}
+					&::before {
+						content: none;
 					}
 				}
 
 				&:hover {
-					.v-slider-thumb__surface:before {
+					& .v-slider-thumb__surface:before {
 						transform: none !important;
 					}
 				}
@@ -214,15 +217,15 @@
 		&.fm-slider--centered {
 			--color-fmSlider: var(--backgroundColor-fmSlider);
 
-			:deep(.v-slider-thumb__surface) {
+			& .v-slider-thumb__surface {
 				--color-fmSlider: var(--primary-color);
 			}
 
-			:deep(.v-slider-track__fill) {
+			& .v-slider-track__fill {
 				opacity: 0.3;
 			}
 
-			:deep(.v-slider-track__tick--filled) {
+			& .v-slider-track__tick--filled {
 				background-color: rgb(var(--v-theme-surface-variant));
 			}
 		}

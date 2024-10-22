@@ -18,7 +18,9 @@
 		</template>
 
 		<template #thumb-label="{ modelValue }">
-			<div class="fm-range-slider__thumbLabel">{{ getThumbLabel(modelValue) }}</div>
+			<div class="fm-range-slider__thumbLabel">
+				{{ getThumbLabel(modelValue) }}
+			</div>
 		</template>
 	</VRangeSlider>
 </template>
@@ -37,32 +39,32 @@
 			type: [String, Number],
 			default: 0,
 			validator(value) {
-				return !isNaN(Number(value));
-			},
+				return !isNaN(Number(value))
+			}
 		},
 		max: {
 			type: [String, Number],
 			default: 100,
 			validator(value) {
-				return !isNaN(Number(value));
-			},
+				return !isNaN(Number(value))
+			}
 		},
 		prependIcon: {
-			type: [String, undefined],
+			type: [String, undefined]
 		},
 		appendIcon: {
-			type: [String, undefined],
+			type: [String, undefined]
 		},
 		step: {
 			type: [String, Number],
 			default: 10,
 			validator(value) {
-				return !isNaN(Number(value));
-			},
+				return !isNaN(Number(value))
+			}
 		},
 		disabled: {
-			type: Boolean,
-		},
+			type: Boolean
+		}
 	})
 
 	const emits = defineEmits([
@@ -70,13 +72,12 @@
 		'click:prepend',
 		'end',
 		'start',
-		'update:modelValue',
+		'update:modelValue'
 	])
 
-	const innerValue = ref(structuredClone([
-		Number(props.modelValue[0]),
-		Number(props.modelValue[1]),
-	]));
+	const innerValue = ref(
+		structuredClone([Number(props.modelValue[0]), Number(props.modelValue[1])])
+	)
 
 	const vSliderProps = computed(() => ({
 		color: 'var(--color-fmSlider)',
@@ -95,7 +96,7 @@
 		showTicks: 'always',
 		...(props.step && { step: props.step }),
 		...(props.prependIcon && { prependIcon: props.prependIcon }),
-		...(props.appendIcon && { appendIcon: props.appendIcon }),
+		...(props.appendIcon && { appendIcon: props.appendIcon })
 	}))
 
 	function getThumbLabel(value) {
@@ -110,16 +111,16 @@
 	watch(
 		() => props.modelValue,
 		(val, oldValue) => {
-			const [val0, val1] = val ?? [];
-			const [oVal0, oVal1] = oldValue ?? [];
+			const [val0, val1] = val ?? []
+			const [oVal0, oVal1] = oldValue ?? []
 
 			if (val0 !== oVal0 || val1 !== oVal1) {
 				innerValue.value = structuredClone([
 					Number(props.modelValue[0]),
-					Number(props.modelValue[1]),
+					Number(props.modelValue[1])
 				])
 			}
-		},
+		}
 	)
 </script>
 
@@ -129,6 +130,8 @@
 		--backgroundColor-fmSlider: var(--on-secondary-color);
 		--backgroundColor-fmSlider-thumbLabel: #392e2b;
 		--color-fmSlider-thumbLabel: #f5eff7;
+
+		--v-slider-thumb-position: 0px;
 	}
 
 	body.dark-mode {
@@ -139,14 +142,15 @@
 	}
 </style>
 
-<style lang="scss" scoped>
+<style scoped>
 	.fm-range-slider {
 		--thumbWidth-fmSlider: 4px;
 
-		:deep(.v-input__control) {
-			.v-slider-thumb__surface {
+		& .v-input__control {
+			& .v-slider-thumb__surface {
 				width: var(--thumbWidth-fmSlider);
 				border-radius: calc(var(--thumbWidth-fmSlider) / 2);
+				position: relative;
 
 				&:before {
 					content: '';
@@ -163,34 +167,37 @@
 				}
 			}
 
-			.v-slider-track__background--opacity {
+			& .v-slider-track__background--opacity {
 				opacity: 1;
 			}
 		}
 
 		&.v-input--horizontal {
-			:deep(.v-slider-thumb) {
+			& .v-slider-thumb {
 				z-index: 1;
-				inset-inline-start: calc(var(--v-slider-thumb-position) - calc(var(--thumbWidth-fmSlider) / 2));
+				inset-inline-start: calc(
+					var(--v-slider-thumb-position) - calc(var(--thumbWidth-fmSlider) / 2)
+				);
 
-				.v-slider-thumb__label-container {
+				& .v-slider-thumb__label-container {
 					left: 0;
 					top: 18px;
+					position: absolute;
+				}
 
-					.v-slider-thumb__label {
-						width: max-content;
-						height: auto;
-						padding: 0;
-						background-color: transparent;
+				& .v-slider-thumb__label {
+					width: max-content;
+					height: auto;
+					padding: 0;
+					background-color: transparent;
 
-						&::before {
-							content: none;
-						}
+					&::before {
+						content: none;
 					}
 				}
 
 				&:hover {
-					.v-slider-thumb__surface:before {
+					& .v-slider-thumb__surface:before {
 						transform: none !important;
 					}
 				}
