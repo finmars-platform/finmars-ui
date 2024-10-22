@@ -4,6 +4,7 @@
 		:alternativeLink="alternativeLink"
 		:base="base"
 		:route="route"
+		@resizeSideNav="emit('resizeSideNav', $event)"
 	/>
 </template>
 
@@ -28,6 +29,8 @@
 			type: Boolean
 		}
 	})
+
+	const emit = defineEmits(['resizeSideNav'])
 
 	const route = computed(() => {
 		if (props.route) return props.route

@@ -72,7 +72,7 @@
 		route: Object // $route of main app
 	})
 
-	const emit = defineEmits(['close'])
+	const emit = defineEmits(['close', 'resizeSideNav'])
 
 	const isOnlyIcon = ref(false)
 
@@ -80,12 +80,17 @@
 		if (props.isFloat) {
 			emit('close')
 		} else {
-			isOnlyIcon.value = true
+			setIsOnlyIcon(true)
 		}
 	}
 
 	async function onClose() {
-		isOnlyIcon.value = false
+		setIsOnlyIcon(false)
+	}
+
+	function setIsOnlyIcon(val) {
+		isOnlyIcon.value = val
+		emit('resizeSideNav', isOnlyIcon.value)
 	}
 </script>
 
