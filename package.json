@@ -1,6 +1,6 @@
 {
   "name": "@finmars/ui",
-  "version": "1.0.16",
+  "version": "1.0.17",
   "description": "",
   "scripts": {
     "dev": "vite dev --config vite.config.dev.js",
