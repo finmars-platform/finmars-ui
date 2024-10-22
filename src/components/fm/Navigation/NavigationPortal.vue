@@ -107,7 +107,7 @@
 					label: 'Portfolios',
 					action: undefined,
 					to: '',
-					href: getUrlToOldApp('/data/portfolios')
+					href: getUrlToOldApp('/data/portfolio')
 				},
 				{
 					key: 'registers',

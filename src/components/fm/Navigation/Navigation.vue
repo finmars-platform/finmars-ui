@@ -10,7 +10,9 @@
 			}
 		]"
 	>
-		<div class="overflow-y-scroll max-h-[calc(100vh-132px)]">
+		<div
+			class="scroll-variant-thin overflow-y-scroll max-h-[calc(100vh-132px)]"
+		>
 			<NavigationItem
 				v-for="item in items"
 				:key="item.key"
