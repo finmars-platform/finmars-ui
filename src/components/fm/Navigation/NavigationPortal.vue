@@ -359,14 +359,14 @@
 					label: 'Portfolio reconciliation',
 					action: undefined,
 					to: '',
-					href: getUrlToOldApp('/portfolio-reconcile-group')
+					href: getUrlToOldApp('/data/portfolio-reconcile-group')
 				},
 				{
 					key: 'Reconciliation-History',
 					label: 'Reconciliation history',
 					action: undefined,
 					to: '',
-					href: getUrlToOldApp('/portfolio-reconcile-history')
+					href: getUrlToOldApp('/data/portfolio-reconcile-history')
 				}
 			]
 		},
