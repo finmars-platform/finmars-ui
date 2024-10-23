@@ -4,9 +4,10 @@
 		:variant="variant"
 		:disabled="disabled"
 		:size="buttonSize"
-		color="var(--backgroundColor-iconButton)"
+		:color="fmIconBtnColor.btnColor"
+		:style="{ opacity: disabled ? '0.3' : '1' }"
 	>
-		<VIcon :icon="icon" :size="iconSize" color="var(--iconColor-iconButton)" />
+		<VIcon :icon="icon" :size="iconSize" :color="fmIconBtnColor.iconColor" />
 	</VBtn>
 </template>
 
@@ -15,10 +16,27 @@
 	import { computed } from 'vue'
 
 	const props = defineProps({
-		size: String, // normal, small
-		icon: String,
-		disabled: Boolean,
-		variant: String // tonal, filled, outlined, default
+		size: {
+			type: String,
+			default: 'normal',
+			validator(value) {
+				return ['normal', 'small'].includes(value)
+			},
+		},
+		icon: {
+			type: String,
+			required: true,
+		},
+		disabled: {
+			type: Boolean,
+		},
+		variant: {
+			type: String,
+			default: 'flat',
+			validator(value) {
+				return ['flat', 'outlined', 'text', 'tonal'].includes(value)
+			}
+		}
 	})
 
 	const buttonSize = computed(() => {
@@ -36,16 +54,18 @@
 			return '24'
 		}
 	})
+
+	const fmIconBtnColor = computed(() => {
+		const btnColor = props.variant === 'text'
+			? 'var(--on-primary)'
+			: 'var(--primary)'
+		const iconColor = props.variant === 'flat'
+			? 'var(--on-primary)'
+			: 'var(--primary)'
+
+		return {
+			btnColor,
+			iconColor
+		}
+	})
 </script>
-
-<style>
-	:root {
-		--backgroundColor-iconButton: var(--on-primary-color);
-		--iconColor-iconButton: var(--primary-color);
-	}
-
-	body.dark-mode {
-		--backgroundColor-iconButton: var(--on-primary-color);
-		--iconColor-iconButton: var(--primary-color);
-	}
-</style>

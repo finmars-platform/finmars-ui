@@ -7,7 +7,7 @@ const meta = {
 	argTypes: {
 		variant: {
 			control: 'select',
-			options: ['solo']
+			options: ['solo', 'text', 'flat']
 		}
 	},
 	args: {
@@ -36,6 +36,6 @@ export const Default = {
 			}
 		},
 		template: `
-          <FmBtn v-bind="args" :key="key"/>`
+			<FmBtn v-bind="args" :key="key">Label</FmBtn>`
 	})
 }

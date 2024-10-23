@@ -1,7 +1,7 @@
 <template>
 	<VBadge
-		color="var(--backgroundColor-badge)"
-		text-color="var(--color-badge)"
+		color="var(--error)"
+		text-color="var(--on-error)"
 		:content="content"
 		:dot="dot"
 	>
@@ -17,15 +17,3 @@
 		dot: Boolean
 	})
 </script>
-
-<style>
-	:root {
-		--backgroundColor-badge: var(--error-color);
-		--color-badge: var(--on-primary-color);
-	}
-
-	body.dark-mode {
-		--backgroundColor-badge: var(--error-color);
-		--color-badge: var(--on-error-color);
-	}
-</style>

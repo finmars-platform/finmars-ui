@@ -8,23 +8,23 @@ const meta = {
 	argTypes: {
 		icon: {
 			control: 'select',
-			options: ['mdi-plus', 'mdi-open-in-new']
+			options: ['mdi-plus', 'mdi-open-in-new'],
 		},
 		size: {
 			control: 'select',
-			options: ['normal', 'small']
+			options: ['normal', 'small'],
 		},
 		variant: {
 			control: 'select',
-			options: ['elevated', 'tonal', 'filled', 'outlined']
+			options: ['flat', 'outlined', 'text', 'tonal'],
 		}
 	},
 	args: {
 		size: 'normal',
-		variant: 'elevated',
+		variant: 'flat',
 		disabled: false,
-		icon: 'mdi-plus'
-	}
+		icon: 'mdi-plus',
+	},
 }
 
 export default meta

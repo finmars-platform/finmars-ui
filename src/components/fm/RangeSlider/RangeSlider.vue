@@ -39,32 +39,32 @@
 			type: [String, Number],
 			default: 0,
 			validator(value) {
-				return !isNaN(Number(value))
-			}
+				return !isNaN(Number(value));
+			},
 		},
 		max: {
 			type: [String, Number],
 			default: 100,
 			validator(value) {
-				return !isNaN(Number(value))
-			}
+				return !isNaN(Number(value));
+			},
 		},
 		prependIcon: {
-			type: [String, undefined]
+			type: [String, undefined],
 		},
 		appendIcon: {
-			type: [String, undefined]
+			type: [String, undefined],
 		},
 		step: {
 			type: [String, Number],
 			default: 10,
 			validator(value) {
-				return !isNaN(Number(value))
-			}
+				return !isNaN(Number(value));
+			},
 		},
 		disabled: {
-			type: Boolean
-		}
+			type: Boolean,
+		},
 	})
 
 	const emits = defineEmits([
@@ -72,31 +72,32 @@
 		'click:prepend',
 		'end',
 		'start',
-		'update:modelValue'
+		'update:modelValue',
 	])
 
-	const innerValue = ref(
-		structuredClone([Number(props.modelValue[0]), Number(props.modelValue[1])])
-	)
+	const innerValue = ref(structuredClone([
+		Number(props.modelValue[0]),
+		Number(props.modelValue[1]),
+	]))
 
 	const vSliderProps = computed(() => ({
-		color: 'var(--color-fmSlider)',
+		color: 'var(--primary)',
 		disabled: !!props.disabled,
 		hideDetails: true,
 		min: props.min,
 		max: props.max,
 		ripple: false,
 		trackSize: 16,
-		thumbColor: 'var(--color-fmSlider)',
+		thumbColor: 'var(--primary)',
 		thumbLabel: true,
 		thumbSize: 44,
-		trackColor: 'var(--backgroundColor-fmSlider)',
-		trackFillColor: 'var(--color-fmSlider)',
+		trackColor: 'var(--primary-container)',
+		trackFillColor: 'var(--primary)',
 		rounded: true,
 		showTicks: 'always',
 		...(props.step && { step: props.step }),
 		...(props.prependIcon && { prependIcon: props.prependIcon }),
-		...(props.appendIcon && { appendIcon: props.appendIcon })
+		...(props.appendIcon && { appendIcon: props.appendIcon }),
 	}))
 
 	function getThumbLabel(value) {
@@ -117,37 +118,19 @@
 			if (val0 !== oVal0 || val1 !== oVal1) {
 				innerValue.value = structuredClone([
 					Number(props.modelValue[0]),
-					Number(props.modelValue[1])
+					Number(props.modelValue[1]),
 				])
 			}
-		}
+		},
 	)
 </script>
 
-<style>
-	:root {
-		--color-fmSlider: var(--primary-color);
-		--backgroundColor-fmSlider: var(--on-secondary-color);
-		--backgroundColor-fmSlider-thumbLabel: #392e2b;
-		--color-fmSlider-thumbLabel: #f5eff7;
-
-		--v-slider-thumb-position: 0px;
-	}
-
-	body.dark-mode {
-		--color-fmSlider: var(--primary-color);
-		--backgroundColor-fmSlider: var(--on-secondary-color);
-		--backgroundColor-fmSlider-thumbLabel: var(--on-surface-color);
-		--color-fmSlider-thumbLabel: #392e2b;
-	}
-</style>
-
-<style scoped>
+<style lang="scss" scoped>
 	.fm-range-slider {
 		--thumbWidth-fmSlider: 4px;
 
-		& .v-input__control {
-			& .v-slider-thumb__surface {
+		:deep(.v-input__control) {
+			.v-slider-thumb__surface {
 				width: var(--thumbWidth-fmSlider);
 				border-radius: calc(var(--thumbWidth-fmSlider) / 2);
 				position: relative;
@@ -157,7 +140,7 @@
 					position: absolute;
 					width: 16px;
 					height: 20px;
-					background-color: var(--base-backgroundColor);
+					background-color: var(--surface);
 					left: -6px;
 					top: 12px;
 					opacity: 1;
@@ -167,37 +150,34 @@
 				}
 			}
 
-			& .v-slider-track__background--opacity {
+			.v-slider-track__background--opacity {
 				opacity: 1;
 			}
 		}
 
 		&.v-input--horizontal {
-			& .v-slider-thumb {
+			:deep(.v-slider-thumb) {
 				z-index: 1;
-				inset-inline-start: calc(
-					var(--v-slider-thumb-position) - calc(var(--thumbWidth-fmSlider) / 2)
-				);
+				inset-inline-start: calc(var(--v-slider-thumb-position) - calc(var(--thumbWidth-fmSlider) / 2));
 
-				& .v-slider-thumb__label-container {
+				.v-slider-thumb__label-container {
 					left: 0;
 					top: 18px;
-					position: absolute;
-				}
 
-				& .v-slider-thumb__label {
-					width: max-content;
-					height: auto;
-					padding: 0;
-					background-color: transparent;
+					.v-slider-thumb__label {
+						width: max-content;
+						height: auto;
+						padding: 0;
+						background-color: transparent;
 
-					&::before {
-						content: none;
+						&::before {
+							content: none;
+						}
 					}
 				}
 
 				&:hover {
-					& .v-slider-thumb__surface:before {
+					.v-slider-thumb__surface:before {
 						transform: none !important;
 					}
 				}
@@ -212,9 +192,9 @@
 			display: flex;
 			justify-content: center;
 			align-items: center;
-			background-color: var(--backgroundColor-fmSlider-thumbLabel);
+			background-color: var(--inverse-surface);
 			font-size: 14px;
-			color: var(--color-fmSlider-thumbLabel);
+			color: var(--inverse-on-surface);
 		}
 	}
 </style>

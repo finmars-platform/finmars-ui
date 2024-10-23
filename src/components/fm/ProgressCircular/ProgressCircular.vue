@@ -33,8 +33,8 @@
 
 	const vProgressCircularProps = computed(() => ({
 		size: props.size,
-		color: 'var(--color-fmProgressCircular)',
-		bgColor: props.indeterminate ? 'transparent' : 'var(--backgroundColor-fmProgressCircular)',
+		color: 'var(--primary)',
+		bgColor: props.indeterminate ? 'transparent' : 'var(--primary-container)',
 		indeterminate: !!props.indeterminate,
 	}))
 
@@ -43,15 +43,3 @@
 		fontWeight: 600,
 	}))
 </script>
-
-<style>
-	:root {
-		--color-fmProgressCircular: var(--primary-color);
-		--backgroundColor-fmProgressCircular: var(--on-secondary-color);
-	}
-
-	body.dark-mode {
-		--color-fmProgressCircular: var(--primary-color);
-		--backgroundColor-fmProgressCircular: #723521;
-	}
-</style>

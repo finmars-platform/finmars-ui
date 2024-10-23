@@ -25,22 +25,10 @@
 	const vProgressLinearProps = computed(() => ({
 		rounded: true,
 		roundedBar: true,
-		color: 'var(--color-fmProgressLinear)',
-		bgColor: 'var(--backgroundColor-fmProgressLinear)',
-		bufferColor: 'var(--backgroundColor-fmProgressLinear)',
+		color: 'var(--primary)',
+		bgColor: 'var(--primary-container)',
+		bufferColor: 'var(--primary-container)',
 		bgOpacity: 1,
 		indeterminate: !!props.indeterminate,
 	}))
 </script>
-
-<style>
-	:root {
-		--color-fmProgressLinear: var(--primary-color);
-		--backgroundColor-fmProgressLinear: var(--on-secondary-color);
-	}
-
-	body.dark-mode {
-		--color-fmProgressLinear: var(--primary-color);
-		--backgroundColor-fmProgressLinear: #723521;
-	}
-</style>

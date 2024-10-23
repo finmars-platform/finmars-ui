@@ -1,4 +1,11 @@
 import './src/assets/css/main.css'
+import FmButton from '@/components/fm/Button/Button.vue'
+import FmIconButton from '@/components/fm/IconButton/IconButton.vue'
+import FmCheckbox from '@/components/fm/Checkbox/Checkbox.vue'
+import FmProgressCircular from '@/components/fm/ProgressCircular/ProgressCircular.vue'
+import FmProgressLinear from '@/components/fm/ProgressLinear/ProgressLinear.vue'
+import FmSlider from '@/components/fm/Slider/Slider.vue'
+import FmRangeSlider from '@/components/fm/RangeSlider/RangeSlider.vue'
 import FmNavigationPortal from '@/components/fm/Navigation/NavigationPortal.vue'
 import FmHeader from '~/stories/Header.vue'
 import { createVuetify } from 'vuetify'
@@ -30,6 +37,13 @@ export const uiComponentsPlugin = {
 		const vuetify = createVuetify()
 		Vue.use(vuetify)
 
+		Vue.component(`${prefix}Button`, FmButton)
+		Vue.component(`${prefix}IconButton`, FmIconButton)
+		Vue.component(`${prefix}Checkbox`, FmCheckbox)
+		Vue.component(`${prefix}ProgressCircular`, FmProgressCircular)
+		Vue.component(`${prefix}ProgressLinear`, FmProgressLinear)
+		Vue.component(`${prefix}Slider`, FmSlider)
+		Vue.component(`${prefix}RangeSlider`, FmRangeSlider)
 		Vue.component(`${prefix}NavigationPortal`, FmNavigationPortal)
 		Vue.component(`${prefix}Header`, FmHeader)
 	}

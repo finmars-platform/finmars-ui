@@ -1,22 +1,23 @@
 <template>
-	<div class="flex-col">
-		<div class="flex">
+	<div class="flex-col gap-4">
+		<div class="flex gap-4">
 			<FmIconButton size="small" icon="mdi-plus" />
 			<FmIconButton icon="mdi-plus" />
 		</div>
-		<div class="flex">
-			<FmIconButton variant="tonal" size="small" icon="mdi-plus" />
-			<FmIconButton variant="tonal" icon="mdi-plus" />
-		</div>
-		<div class="flex">
-			<FmIconButton variant="filled" size="small" icon="mdi-plus" />
-			<FmIconButton variant="filled" icon="mdi-plus" />
-		</div>
-		<div class="flex">
+		<div class="flex gap-4">
 			<FmIconButton variant="outlined" size="small" icon="mdi-plus" />
 			<FmIconButton variant="outlined" icon="mdi-plus" />
 		</div>
-		<div class="flex">
+		<div class="flex gap-4">
+			<FmIconButton variant="text" size="small" icon="mdi-plus" />
+			<FmIconButton variant="text" icon="mdi-plus" />
+		</div>
+		<div class="flex gap-4">
+			<FmIconButton variant="tonal" size="small" icon="mdi-plus" />
+			<FmIconButton variant="tonal" icon="mdi-plus" />
+		</div>
+
+		<div class="flex gap-4">
 			<FmIconButton size="small" icon="mdi-plus" disabled />
 			<FmIconButton icon="mdi-plus" disabled />
 		</div>

@@ -1,6 +1,6 @@
 /** @type { import('@storybook/vue3').Preview } */
 import { setup } from '@storybook/vue3'
-import '../src/assets/css/base-theme.css'
+import '../src/assets/css/themes.css'
 import '../src/assets/css/base.css'
 import 'tailwindcss/tailwind.css'; // Подключаем Tailwind CSS
 import { createVuetify, useTheme } from 'vuetify'
@@ -48,11 +48,11 @@ const preview = {
 			const theme = context.globals.theme || 'light'
 
 			if (theme === 'dark') {
-				document.body.classList.add('dark-mode')
-				document.body.classList.remove('light-mode')
+				document.body.classList.add('dark-theme')
+				document.body.classList.remove('light-theme')
 			} else {
-				document.body.classList.add('light-mode')
-				document.body.classList.remove('dark-mode')
+				document.body.classList.add('light-theme')
+				document.body.classList.remove('dark-theme')
 			}
 
 			return {
@@ -66,10 +66,10 @@ const preview = {
 					return { story, backgroundColor }
 				},
 				template: `
-                  <div :style="{ backgroundColor }" style="border-radius: 16px; padding: 20px">
-                    <story/>
-                  </div>
-                `
+					<div :style="{ backgroundColor }" style="border-radius: 16px; padding: 20px">
+						<story/>
+					</div>
+				`
 			}
 		}
 	]
