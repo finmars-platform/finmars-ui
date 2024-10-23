@@ -156,6 +156,14 @@
   --outline-variant: var(--nv-80);
   --scrim: var(--n-0);
   --shadow: var(--n-0);
+  --dataviz1: var(--p-80);
+  --dataviz2: var(--p-70);
+  --dataviz3: var(--p-60);
+  --dataviz4: var(--p-50);
+  --dataviz5: var(--p-40);
+  --dataviz6: var(--p-30);
+  --dataviz7: var(--p-20);
+  --dataviz8: var(--t-40);
 }
 
 .dark-theme {
@@ -192,4 +200,12 @@
   --outline-variant: var(--nv-30);
   --scrim: var(--n-0);
   --shadow: var(--n-0);
+  --dataviz1: var(--p-20);
+  --dataviz2: var(--p-30);
+  --dataviz3: var(--p-40);
+  --dataviz4: var(--p-50);
+  --dataviz5: var(--p-60);
+  --dataviz6: var(--p-70);
+  --dataviz7: var(--p-80);
+  --dataviz8: var(--t-60);
 }
