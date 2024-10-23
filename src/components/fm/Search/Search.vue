@@ -1,7 +1,6 @@
 <template>
 	<VAutocomplete
 		:items="items"
-		class="search"
 		density="comfortable"
 		menu-icon=""
 		placeholder="Search"
@@ -12,9 +11,9 @@
 		item-props
 		:rounded="rounded"
 		:style="style"
-		color="var(--color-search)"
-		bg-color="var(--backgroundColor-search)"
-		prepend-icon-color="var(--prependIconColor-search)"
+		color="var(--on-surface-variant)"
+		bg-color="var(--surface-container)"
+		prepend-icon-color="var(--on-surface-variant)"
 		hide-details="hideDetails"
 		loader-color="red"
 		text-color="green"
@@ -26,24 +25,26 @@
 	import { VAutocomplete } from 'vuetify/components'
 
 	defineProps({
-		rounded: Boolean,
-		style: String,
-		items: Array,
-		variant: String,
-		hideDetails: Boolean
+		rounded: {
+			type: Boolean,
+		},
+		style: {
+			type: Object,
+			default: () => ({}),
+		},
+		items: {
+			type: Array,
+			default: () => [],
+		},
+		variant: {
+			type: String,
+			default: 'solo',
+			validator(value) {
+				return ['outlined', 'plain', 'underlined', 'filled', 'solo', 'solo-inverted', 'solo-filled'].includes(value)
+			},
+		},
+		hideDetails: {
+			type: Boolean
+		},
 	})
 </script>
-
-<style>
-	:root {
-		--color-search: var(--on-surface-color);
-		--backgroundColor-search: var(--surface-container);
-		--prependIconColor-search: var(--secondary-color);
-	}
-
-	body.dark-mode {
-		--color-search: var(--on-surface-color);
-		--backgroundColor-search: var(--surface-container);
-		--prependIconColor-search: #d8c2bc;
-	}
-</style>

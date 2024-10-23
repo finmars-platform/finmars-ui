@@ -1,13 +1,14 @@
 {
   "name": "@finmars/ui",
-  "version": "1.0.17",
+  "version": "1.0.18",
   "description": "",
   "scripts": {
     "dev": "vite dev --config vite.config.dev.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "build": "vite build"
+    "copy:css": "cp ./src/assets/css/themes.css ./dist",
+    "build": "vite build && npm run copy:css"
   },
   "files": [
     "dist/",

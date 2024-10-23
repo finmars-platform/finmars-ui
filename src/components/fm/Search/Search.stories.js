@@ -7,7 +7,7 @@ const meta = {
 	argTypes: {
 		variant: {
 			control: 'select',
-			options: ['solo']
+			options: ['outlined', 'plain', 'underlined', 'filled', 'solo', 'solo-inverted', 'solo-filled']
 		}
 	},
 	args: {

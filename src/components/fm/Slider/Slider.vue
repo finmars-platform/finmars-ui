@@ -83,18 +83,18 @@
 	const innerValue = ref(Number(props.modelValue))
 
 	const vSliderProps = computed(() => ({
-		color: 'var(--color-fmSlider)',
+		color: props.type === 'centered' ? 'var(--primary-container)' : 'var(--primary)',
 		disabled: !!props.disabled,
 		hideDetails: true,
 		min: props.type === 'centered' ? -Math.abs(Number(props.max)) : props.min,
 		max: props.type === 'centered' ? Math.abs(Number(props.max)) : props.max,
 		ripple: false,
 		trackSize: 16,
-		thumbColor: 'var(--color-fmSlider)',
+		thumbColor: 'var(--primary)',
 		thumbLabel: true,
 		thumbSize: 44,
-		trackColor: 'var(--backgroundColor-fmSlider)',
-		trackFillColor: 'var(--color-fmSlider)',
+		trackColor: 'var(--primary-container)',
+		trackFillColor: props.type === 'centered' ? 'var(--primary-container)' : 'var(--primary)',
 		rounded: true,
 		showTicks: props.type === 'continuous' ? false : 'always',
 		...(props.type !== 'continuous' && props.step && { step: props.step }),
@@ -121,30 +121,12 @@
 	)
 </script>
 
-<style>
-	:root {
-		--color-fmSlider: var(--primary-color);
-		--backgroundColor-fmSlider: var(--on-secondary-color);
-		--backgroundColor-fmSlider-thumbLabel: #392e2b;
-		--color-fmSlider-thumbLabel: #f5eff7;
-
-		--v-theme-surface-variant: #ffffff;
-	}
-
-	body.dark-mode {
-		--color-fmSlider: var(--primary-color);
-		--backgroundColor-fmSlider: var(--on-secondary-color);
-		--backgroundColor-fmSlider-thumbLabel: var(--on-surface-color);
-		--color-fmSlider-thumbLabel: #392e2b;
-	}
-</style>
-
-<style scoped>
+<style lang="scss" scoped>
 	.fm-slider {
 		--thumbWidth-fmSlider: 4px;
 
-		& .v-input__control {
-			& .v-slider-thumb__surface {
+		:deep(.v-input__control) {
+			.v-slider-thumb__surface {
 				width: var(--thumbWidth-fmSlider);
 				border-radius: calc(var(--thumbWidth-fmSlider) / 2);
 				position: relative;
@@ -154,7 +136,7 @@
 					position: absolute;
 					width: 16px;
 					height: 20px;
-					background-color: var(--base-backgroundColor);
+					background-color: var(--surface);
 					left: -6px;
 					top: 12px;
 					opacity: 1;
@@ -164,25 +146,25 @@
 				}
 			}
 
-			& .v-slider-track__background--opacity {
+			.v-slider-track__background--opacity {
 				opacity: 1;
 			}
 		}
 
 		&.v-input--horizontal {
-			& .v-slider-thumb {
+			:deep(.v-slider-thumb) {
 				z-index: 1;
 				inset-inline-start: calc(
 					var(--v-slider-thumb-position) - calc(var(--thumbWidth-fmSlider) / 2)
 				);
 
-				& .v-slider-thumb__label-container {
+				.v-slider-thumb__label-container {
 					left: 0;
 					top: 18px;
 					position: absolute;
 				}
 
-				& .v-slider-thumb__label {
+				.v-slider-thumb__label {
 					width: max-content;
 					height: auto;
 					padding: 0;
@@ -209,23 +191,23 @@
 			display: flex;
 			justify-content: center;
 			align-items: center;
-			background-color: var(--backgroundColor-fmSlider-thumbLabel);
+			background-color: var(--inverse-surface);
 			font-size: 14px;
-			color: var(--color-fmSlider-thumbLabel);
+			color: var(--inverse-on-surface);
 		}
 
 		&.fm-slider--centered {
 			--color-fmSlider: var(--backgroundColor-fmSlider);
 
-			& .v-slider-thumb__surface {
+			:deep(.v-slider-thumb__surface) {
 				--color-fmSlider: var(--primary-color);
 			}
 
-			& .v-slider-track__fill {
+			:deep(.v-slider-track__fill) {
 				opacity: 0.3;
 			}
 
-			& .v-slider-track__tick--filled {
+			:deep(.v-slider-track__tick--filled) {
 				background-color: rgb(var(--v-theme-surface-variant));
 			}
 		}
