@@ -7,6 +7,8 @@ import FmProgressLinear from '@/components/fm/ProgressLinear/ProgressLinear.vue'
 import FmSlider from '@/components/fm/Slider/Slider.vue'
 import FmRangeSlider from '@/components/fm/RangeSlider/RangeSlider.vue'
 import FmTextField from '@/components/fm/TextField/TextField.vue'
+import FmDatePicker from '@/components/fm/DatePicker/DatePicker.vue'
+import FmDateEditor from '@/components/fm/DateEditor/DateEditor.vue'
 import FmNavigationPortal from '@/components/fm/Navigation/NavigationPortal.vue'
 import FmHeader from '~/stories/Header.vue'
 import { createVuetify } from 'vuetify'
@@ -46,6 +48,8 @@ export const uiComponentsPlugin = {
 		Vue.component(`${prefix}Slider`, FmSlider)
 		Vue.component(`${prefix}RangeSlider`, FmRangeSlider)
 		Vue.component(`${prefix}TextField`, FmTextField)
+		Vue.component(`${prefix}DatePicker`, FmDatePicker)
+		Vue.component(`${prefix}DateEditor`, FmDateEditor)
 		Vue.component(`${prefix}NavigationPortal`, FmNavigationPortal)
 		Vue.component(`${prefix}Header`, FmHeader)
 	}
