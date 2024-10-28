@@ -787,8 +787,50 @@
 					key: 'Permissions',
 					label: 'Permissions',
 					action: undefined,
-					to: useGetNuxtLink('/settings/permissions', route.value.params),
-					href: ''
+					to: '',
+					href: '',
+					children: [
+						{
+							key: 'Members',
+							label: 'Members',
+							action: undefined,
+							href: '',
+							to: useGetNuxtLink(
+								'/settings/permission/members',
+								route.value.params
+							)
+						},
+						{
+							key: 'Groups',
+							label: 'Groups',
+							action: undefined,
+							href: '',
+							to: useGetNuxtLink(
+								'/settings/permission/groups',
+								route.value.params
+							)
+						},
+						{
+							key: 'Roles',
+							label: 'Roles',
+							action: undefined,
+							href: '',
+							to: useGetNuxtLink(
+								'/settings/permission/roles',
+								route.value.params
+							)
+						},
+						{
+							key: 'Access-policy',
+							label: 'Access Policy',
+							action: undefined,
+							href: '',
+							to: useGetNuxtLink(
+								'/settings/permission/access-policy',
+								route.value.params
+							)
+						}
+					]
 				},
 				{
 					key: 'Default-settings',
