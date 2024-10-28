@@ -2,14 +2,17 @@
 	<VTextField
 		ref="vtf"
 		v-bind="vTextFieldProps"
+		v-maska="props.mask"
 		:class="[
 			'fm-text-field',
 			{ 'fm-text-field--placeholder': placeholder },
 		]"
 		@click:clear="emits('click:clear', $event)"
 		@click:control="onClickControl"
+		@click:prepend-inner="emits('click:prependInner', $event)"
 		@mousedown:control="emits('mousedown:control', $event)"
-		@update:focused="emits('update:focused', $event)"
+		@keydown.enter="onKeydownEnter"
+		@update:focused="onFocused"
 		@update:model-value="onUpdate"
 	>
 		<template #append-inner>
@@ -19,7 +22,8 @@
 </template>
 
 <script setup>
-	import { computed, ref } from 'vue'
+	import { computed, ref, watch } from 'vue'
+	import { vMaska } from 'maska/vue'
 	import { VIcon, VTextField } from 'vuetify/components'
 
 	const props = defineProps({
@@ -54,6 +58,9 @@
 		hideDetails: {
 			type: Boolean,
 		},
+		mask: {
+			type: [String, Object, undefined],
+		},
 		messages: {
 			type: [String, Array],
 			default: () => [],
@@ -80,18 +87,23 @@
 	const emits = defineEmits([
 		'click:clear',
 		'click:control',
+		'click:prependInner',
 		'mousedown:control',
 		'update:focused',
 		'update:modelValue',
+		'change',
 	])
 
 	const vtf = ref()
 	const dirty = ref(false)
+	const innerValue = ref(props.modelValue)
 
 	const vTextFieldProps = computed(() => ({
-		color: 'var(--primary)',
-		bgColor: props.outlined ? 'var(--surface)' : 'var(--surface-container-highest)',
-		modelValue: props.modelValue,
+		color: 'var(--color-fmTextField)',
+		bgColor: props.outlined
+			? 'var(--backgroundColor-fmTextField-outlined)'
+			: 'var(--backgroundColor-fmTextField)',
+		modelValue: innerValue.value,
 		type: props.type,
 		...(props.label && { label: props.label }),
 		...(props.placeholder && { placeholder: props.placeholder }),
@@ -113,12 +125,24 @@
 
 	function onUpdate(val) {
 		dirty.value = true
+		innerValue.value = val
 		emits('update:modelValue', val)
 	}
 
 	function onClickControl(ev) {
 		dirty.value = true
 		emits('click:control', ev)
+	}
+
+	function onFocused(val) {
+		emits('update:focused', val)
+		if (!val) {
+			emits('change', innerValue.value)
+		}
+	}
+
+	function onKeydownEnter() {
+		emits('change', innerValue.value)
 	}
 
 	defineExpose({
@@ -128,13 +152,31 @@
 		resetValidation: vtf.value?.resetValidation,
 		validate: vtf.value?.validate,
 	})
+
+	watch(
+		() => props.modelValue,
+		(val) => {
+			if (val !== innerValue.value) {
+				innerValue.value = val
+			}
+		},
+		{ immediate: true },
+	)
 </script>
 
 <style scoped lang="scss">
 	.fm-text-field {
+		--color-fmTextField: var(--primary);
+		--backgroundColor-fmTextField: var(--surface-container-highest);
+		--backgroundColor-fmTextField-outlined: var(--surface);
+
 		position: relative;
 
 		:deep(.v-input__control) {
+			.v-field__prepend-inner {
+				color: var(--on-surface-variant);
+			}
+
 			.v-label {
 				color: var(--on-surface-variant);
 			}
