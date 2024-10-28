@@ -5,6 +5,7 @@
 		:color="color"
 		:disabled="disabled"
 		:base-color="baseColor"
+		class="fm-checkbox"
 		@update:modelValue="(newVal) => emit('update:modelValue', newVal)"
 		hide-details
 	/>
@@ -46,16 +47,10 @@
 	})
 </script>
 
-<style>
-	:root {
-		--backgroundColor-checkbox: var(--primary-color);
-		--backgroundColor-error-checkbox: var(--error-color);
-		--borderColor-checkbox: var(--secondary-color);
-	}
-
-	body.dark-mode {
-		--backgroundColor-checkbox: var(--primary-color);
-		--backgroundColor-error-checkbox: var(--error-color);
-		--borderColor-checkbox: var(--secondary-color);
+<style scoped>
+	.fm-checkbox {
+		--backgroundColor-checkbox: var(--primary);
+		--backgroundColor-error-checkbox: var(--error);
+		--borderColor-checkbox: var(--secondary);
 	}
 </style>

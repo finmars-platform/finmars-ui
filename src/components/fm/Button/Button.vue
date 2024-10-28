@@ -84,8 +84,8 @@
 		}
 
 		if (props.type === 'primary') {
-			value['base-color'] = 'var(--on-primary-color)'
-			value.color = 'var(--primary-color)'
+			value['base-color'] = 'var(--on-primary)'
+			value.color = 'var(--primary)'
 		}
 
 		if (props.type === 'primary' && !props.rounded) {
@@ -99,15 +99,15 @@
 		const value = {}
 
 		if (props.type === 'primary') {
-			value['--color-fmButton'] ='var(--on-primary-color)'
+			value['--color-fmButton'] ='var(--on-primary)'
 		}
 
 		if (props.type === 'secondary') {
-			value['--color-fmButton'] ='var(--primary-color)'
+			value['--color-fmButton'] ='var(--primary)'
 		}
 
 		if (props.type === 'tertiary') {
-			value['--color-fmButton'] ='var(--on-surface-color)'
+			value['--color-fmButton'] ='var(--on-surface)'
 		}
 
 		return value;
@@ -116,9 +116,10 @@
 
 <style scoped>
 	.fm-button {
-		--color-fmButton: var(--on-primary-color);
+		--color-fmButton: var(--on-primary);
 
 		color: var(--color-fmButton) !important;
+		max-width: max-content !important;
 
 		&.fm-button--primary:hover {
 			box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.3);

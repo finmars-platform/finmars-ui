@@ -1,4 +1,4 @@
-import FmLogo from './Logo.vue'
+import FmLogo from '@/components/fm/Logo/Logo.vue'
 import { ref, watch } from 'vue'
 import { useTheme } from 'vuetify'
 

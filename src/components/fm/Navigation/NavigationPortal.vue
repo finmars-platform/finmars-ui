@@ -4,6 +4,7 @@
 		:alternativeLink="alternativeLink"
 		:base="base"
 		:route="route"
+		@resizeSideNav="emit('resizeSideNav', $event)"
 	/>
 </template>
 
@@ -28,6 +29,8 @@
 			type: Boolean
 		}
 	})
+
+	const emit = defineEmits(['resizeSideNav'])
 
 	const route = computed(() => {
 		if (props.route) return props.route
@@ -107,7 +110,7 @@
 					label: 'Portfolios',
 					action: undefined,
 					to: '',
-					href: getUrlToOldApp('/data/portfolios')
+					href: getUrlToOldApp('/data/portfolio')
 				},
 				{
 					key: 'registers',
@@ -359,14 +362,14 @@
 					label: 'Portfolio reconciliation',
 					action: undefined,
 					to: '',
-					href: getUrlToOldApp('/portfolio-reconcile-group')
+					href: getUrlToOldApp('/data/portfolio-reconcile-group')
 				},
 				{
 					key: 'Reconciliation-History',
 					label: 'Reconciliation history',
 					action: undefined,
 					to: '',
-					href: getUrlToOldApp('/portfolio-reconcile-history')
+					href: getUrlToOldApp('/data/portfolio-reconcile-history')
 				}
 			]
 		},
@@ -408,7 +411,7 @@
 			label: 'Explorer',
 			icon: 'mdi-folder-outline',
 			action: undefined,
-			to: useGetNuxtLink('/explorer'),
+			to: useGetNuxtLink('/explorer', route.value.params),
 			classes: 'separator-side-nav',
 			href: ''
 		},
@@ -858,8 +861,8 @@
 					href: getUrlToOldApp('/balance-report-instance')
 				},
 				{
-					key: 'PL Report Instance',
-					label: 'PL-Report-Instance',
+					key: 'PL-Report-Instance',
+					label: 'PL Report Instance',
 					action: undefined,
 					to: '',
 					href: getUrlToOldApp('/pl-report-instance')

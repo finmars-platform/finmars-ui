@@ -1,4 +1,4 @@
-import FmSearch from './Search.vue'
+import FmSearch from '@/components/fm/Search/Search.vue'
 import { ref, watch } from 'vue'
 
 const meta = {
@@ -7,7 +7,7 @@ const meta = {
 	argTypes: {
 		variant: {
 			control: 'select',
-			options: ['solo']
+			options: ['outlined', 'plain', 'underlined', 'filled', 'solo', 'solo-inverted', 'solo-filled']
 		}
 	},
 	args: {

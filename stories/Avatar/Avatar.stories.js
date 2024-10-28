@@ -1,5 +1,5 @@
-import FmAvatar from './Avatar.vue'
-import AvatarListStory from './AvatarListStory.vue'
+import FmAvatar from '@/components/fm/Avatar/Avatar.vue'
+import AvatarDemo from './AvatarDemo.vue'
 import { ref, watch } from 'vue'
 
 const meta = {
@@ -44,7 +44,7 @@ export const Default = {
 export const List = {
 	render: (args) => ({
 		components: {
-			AvatarListStory
+			AvatarDemo
 		},
 		setup() {
 			return {
@@ -52,6 +52,6 @@ export const List = {
 			}
 		},
 		template: `
-          <AvatarListStory/>`
+          <AvatarDemo />`
 	})
 }

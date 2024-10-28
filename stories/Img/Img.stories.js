@@ -1,4 +1,4 @@
-import FmImg from './Img.vue'
+import FmImg from '@/components/fm/Img/Img.vue'
 import { ref, watch } from 'vue'
 
 const meta = {

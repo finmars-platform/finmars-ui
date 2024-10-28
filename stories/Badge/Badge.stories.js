@@ -1,4 +1,4 @@
-import FmBadge from "./Badge.vue";
+import FmBadge from "@/components/fm/Badge/Badge.vue";
 import { ref, watch } from 'vue';
 
 const meta = {

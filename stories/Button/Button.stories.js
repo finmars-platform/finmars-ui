@@ -1,5 +1,6 @@
 import { ref, watch } from 'vue'
-import FmButton from './Button.vue'
+import FmButton from '@/components/fm/Button/Button.vue'
+import ButtonDemo from './ButtonDemo.vue'
 
 const meta = {
 	title: 'Components/FmButton',
@@ -159,5 +160,17 @@ export const Tertiary = {
 			return { args }
 		},
 		template: `<FmButton type="tertiary">Tertiary</FmButton>`,
+	})
+}
+
+export const AllVariants = {
+	render: (args) => ({
+		components: {
+			ButtonDemo
+		},
+		setup() {
+			return { args }
+		},
+		template: `<ButtonDemo />`,
 	})
 }

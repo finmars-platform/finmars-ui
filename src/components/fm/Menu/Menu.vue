@@ -11,8 +11,12 @@
 	import { VMenu } from 'vuetify/components'
 
 	defineProps({
-		rounded: Boolean,
-		minWidth: String
+		rounded: {
+			type: Boolean,
+		},
+		minWidth: {
+			type: String,
+		},
 	})
 </script>
 

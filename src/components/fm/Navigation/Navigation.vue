@@ -10,7 +10,9 @@
 			}
 		]"
 	>
-		<div class="overflow-y-scroll max-h-[calc(100vh-132px)]">
+		<div
+			class="scroll-variant-thin overflow-y-scroll max-h-[calc(100vh-132px)]"
+		>
 			<NavigationItem
 				v-for="item in items"
 				:key="item.key"
@@ -70,7 +72,7 @@
 		route: Object // $route of main app
 	})
 
-	const emit = defineEmits(['close'])
+	const emit = defineEmits(['close', 'resizeSideNav'])
 
 	const isOnlyIcon = ref(false)
 
@@ -78,41 +80,46 @@
 		if (props.isFloat) {
 			emit('close')
 		} else {
-			isOnlyIcon.value = true
+			setIsOnlyIcon(true)
 		}
 	}
 
 	async function onClose() {
-		isOnlyIcon.value = false
+		setIsOnlyIcon(false)
+	}
+
+	function setIsOnlyIcon(val) {
+		isOnlyIcon.value = val
+		emit('resizeSideNav', isOnlyIcon.value)
 	}
 </script>
 
-<style>
-	:root {
-		--sidenav-backgroundColor: #ffffff;
-		--sidenav-borderColor: #d8c2bc;
+<style scoped lang="postcss">
+	.sidebar {
+		--sidenav-backgroundColor: var(--surface);
+		--sidenav-borderColor: var(--outline-variant);
 
 		/* --sidenavOption (styles for menu options) */
-		--sidenavOption-color: #53433f;
+		--sidenavOption-color: var(--on-surface-variant);
 		--sidenavOption-backgroundColor: transparent;
-		--sidenavOptionLeftIcon-color: #53433f;
-		--sidenavOptionRightIcon-color: #53433f;
+		--sidenavOptionLeftIcon-color: var(--on-surface-variant);
+		--sidenavOptionRightIcon-color: var(--on-surface-variant);
 
 		/* Sidenav options states */
 		/* Hover */
 		--sidenavOption-hover-backgroundColor: rgba(29, 27, 32, 0.08);
-		--sidenavOption-hover-color: #53433f;
+		--sidenavOption-hover-color: var(--on-surface-variant);
 
 		/* Focus */
 		--sidenavOption-focus-backgroundColor: rgba(29, 27, 32, 0.12);
-		--sidenavOption-focus-color: #53433f;
+		--sidenavOption-focus-color: var(--on-surface-variant);
 
 		/* Active (called Pressed inside figma) */
 		--sidenavOption-active-backgroundColor: rgba(29, 27, 32, 0.12);
 
 		/* Activated (Highlighted menu option that matches to the web page that a user currently on) */
-		--sidenavOption-activated-backgroundColor: #ffdbd0;
-		--sidenavOption-activated-color: #2c160e;
+		--sidenavOption-activated-backgroundColor: var(--primary-container);
+		--sidenavOption-activated-color: var(--on-surface);
 
 		/* Disabled */
 		--sidenavOption-disabled-backgroundColor: var(
@@ -122,8 +129,8 @@
 
 		/* --sidenavOption2 (options inside the first level groups) */
 		--sidenavOption2-color: var(--sidenavOption-color);
-		--sidenavOption2LeftIcon-color: #53433f;
-		--sidenavOption2RightIcon-color: #53433f;
+		--sidenavOption2LeftIcon-color: var(--on-surface-variant);
+		--sidenavOption2RightIcon-color: var(--on-surface-variant);
 
 		/* Sidenav options states */
 		/* Hover */
@@ -148,8 +155,8 @@
 
 		/* --sidenavOption3 (options inside the second level groups) */
 		--sidenavOption3-color: var(--sidenavOption-color);
-		--sidenavOption3LeftIcon-color: #53433f;
-		--sidenavOption3RightIcon-color: #53433f;
+		--sidenavOption3LeftIcon-color: var(--on-surface-variant);
+		--sidenavOption3RightIcon-color: var(--on-surface-variant);
 
 		/* States of sidenav options */
 		/* Hover */
@@ -174,200 +181,11 @@
 		--sidenavOption3-disabled-color: var(--sidenavOption-color);
 
 		/* Footer */
-		--sidenavFooter-borderColor: #d8c2bc;
+		--sidenavFooter-borderColor: var(--outline-variant);
 		--sidenavFooter-backgroundColor: transparent;
-		--sidenavToggleButton-color: #53433f;
+		--sidenavToggleButton-color: var(--on-surface-variant);
 		--sidenavToggleButton-backgroundColor: transparent;
-	}
 
-	/* Переменные для тёмной темы */
-
-	body.dark-mode {
-		--sidenav-backgroundColor: #1a110f;
-		--sidenav-borderColor: var(--on-secondary-color);
-
-		/* --sidenavOption (styles for menu options) */
-		--sidenavOption-color: #d8c2bc;
-		--sidenavOption-backgroundColor: transparent;
-		--sidenavOptionLeftIcon-color: #d8c2bc;
-		--sidenavOptionRightIcon-color: #d8c2bc;
-		--sidenavOption-hover-backgroundColor: rgba(230, 224, 233, 0.08);
-		--sidenavOption-hover-color: #d8c2bc;
-
-		/* Focus */
-		--sidenavOption-focus-backgroundColor: rgba(230, 224, 233, 0.12);
-		--sidenavOption-focus-color: #d8c2bc;
-
-		/* Active (called Pressed inside figma) */
-		--sidenavOption-active-backgroundColor: rgba(230, 224, 233, 0.12);
-
-		/* Activated (Highlighted menu option that matches to the web page that a user currently on) */
-		--sidenavOption-activated-backgroundColor: #5d4036;
-		--sidenavOption-activated-color: #ffdbd0;
-
-		/* Disabled */
-		--sidenavOption-disabled-backgroundColor: var(
-			--sidenavOption-backgroundColor
-		);
-		--sidenavOption-disabled-color: var(--sidenavOption-color);
-
-		/* --sidenavOption2 (options inside the first level groups) */
-		--sidenavOption2-color: var(--sidenavOption-color);
-		--sidenavOption2LeftIcon-color: #d8c2bc;
-		--sidenavOption2RightIcon-color: #d8c2bc;
-
-		/* Sidenav options states */
-		/* Hover */
-
-		/* Focus */
-		--sidenavOption2-focus-backgroundColor: var(
-			--sidenavOption-focus-backgroundColor
-		);
-
-		/* Active (called Pressed inside figma) */
-		--sidenavOption2-active-backgroundColor: var(
-			--sidenavOption-active-backgroundColor
-		);
-		--sidenavOption2-activated-color: var(--sidenavOption-activated-color);
-
-		/* Disabled */
-		--sidenavOption2-disabled-backgroundColor: var(
-			--sidenavOption-backgroundColor
-		);
-		--sidenavOption2-disabled-color: var(--sidenavOption-color);
-
-		/* --sidenavOption3 (options inside the second level groups) */
-		--sidenavOption3-color: var(--sidenavOption-color);
-		--sidenavOption3LeftIcon-color: #d8c2bc;
-		--sidenavOption3RightIcon-color: #d8c2bc;
-
-		/* States of sidenav options */
-		/* Hover */
-		--sidenavOption3-hover-backgroundColor: var(
-			--sidenavOption-hover-backgroundColor
-		);
-
-		--sidenavOption3-focus-color: var(--sidenavOption-focus-color);
-
-		/* Active (called Pressed inside figma) */
-		--sidenavOption3-active-backgroundColor: var(
-			--sidenavOption-active-backgroundColor
-		);
-
-		/* Activated (Highlighted menu option that matches to the web page that a user currently on) */
-		--sidenavOption3-activated-backgroundColor: var(
-			--sidenavOption-activated-backgroundColor
-		);
-		--sidenavOption3-activated-color: var(--sidenavOption-activated-color);
-
-		/* Disabled */
-		--sidenavOption3-disabled-backgroundColor: var(
-			--sidenavOption-backgroundColor
-		);
-		--sidenavOption3-disabled-color: var(--sidenavOption-color);
-
-		/* Footer */
-		--sidenavFooter-borderColor: #53433f;
-		--sidenavFooter-backgroundColor: transparent;
-
-		--sidenavToggleButton-color: #d8c2bc;
-		--sidenavToggleButton-backgroundColor: transparent;
-	}
-
-	body.dark {
-		--sidenav-backgroundColor: #1a110f;
-		--sidenav-borderColor: var(--on-secondary-color);
-
-		/* --sidenavOption (styles for menu options) */
-		--sidenavOption-color: #d8c2bc;
-		--sidenavOption-backgroundColor: transparent;
-		--sidenavOptionLeftIcon-color: #d8c2bc;
-		--sidenavOptionRightIcon-color: #d8c2bc;
-		--sidenavOption-hover-backgroundColor: rgba(230, 224, 233, 0.08);
-		--sidenavOption-hover-color: #d8c2bc;
-
-		/* Focus */
-		--sidenavOption-focus-backgroundColor: rgba(230, 224, 233, 0.12);
-		--sidenavOption-focus-color: #d8c2bc;
-
-		/* Active (called Pressed inside figma) */
-		--sidenavOption-active-backgroundColor: rgba(230, 224, 233, 0.12);
-
-		/* Activated (Highlighted menu option that matches to the web page that a user currently on) */
-		--sidenavOption-activated-backgroundColor: #5d4036;
-		--sidenavOption-activated-color: #ffdbd0;
-
-		/* Disabled */
-		--sidenavOption-disabled-backgroundColor: var(
-			--sidenavOption-backgroundColor
-		);
-		--sidenavOption-disabled-color: var(--sidenavOption-color);
-
-		/* --sidenavOption2 (options inside the first level groups) */
-		--sidenavOption2-color: var(--sidenavOption-color);
-		--sidenavOption2LeftIcon-color: #d8c2bc;
-		--sidenavOption2RightIcon-color: #d8c2bc;
-
-		/* Sidenav options states */
-		/* Hover */
-
-		/* Focus */
-		--sidenavOption2-focus-backgroundColor: var(
-			--sidenavOption-focus-backgroundColor
-		);
-
-		/* Active (called Pressed inside figma) */
-		--sidenavOption2-active-backgroundColor: var(
-			--sidenavOption-active-backgroundColor
-		);
-		--sidenavOption2-activated-color: var(--sidenavOption-activated-color);
-
-		/* Disabled */
-		--sidenavOption2-disabled-backgroundColor: var(
-			--sidenavOption-backgroundColor
-		);
-		--sidenavOption2-disabled-color: var(--sidenavOption-color);
-
-		/* --sidenavOption3 (options inside the second level groups) */
-		--sidenavOption3-color: var(--sidenavOption-color);
-		--sidenavOption3LeftIcon-color: #d8c2bc;
-		--sidenavOption3RightIcon-color: #d8c2bc;
-
-		/* States of sidenav options */
-		/* Hover */
-		--sidenavOption3-hover-backgroundColor: var(
-			--sidenavOption-hover-backgroundColor
-		);
-
-		--sidenavOption3-focus-color: var(--sidenavOption-focus-color);
-
-		/* Active (called Pressed inside figma) */
-		--sidenavOption3-active-backgroundColor: var(
-			--sidenavOption-active-backgroundColor
-		);
-
-		/* Activated (Highlighted menu option that matches to the web page that a user currently on) */
-		--sidenavOption3-activated-backgroundColor: var(
-			--sidenavOption-activated-backgroundColor
-		);
-		--sidenavOption3-activated-color: var(--sidenavOption-activated-color);
-
-		/* Disabled */
-		--sidenavOption3-disabled-backgroundColor: var(
-			--sidenavOption-backgroundColor
-		);
-		--sidenavOption3-disabled-color: var(--sidenavOption-color);
-
-		/* Footer */
-		--sidenavFooter-borderColor: #53433f;
-		--sidenavFooter-backgroundColor: transparent;
-
-		--sidenavToggleButton-color: #d8c2bc;
-		--sidenavToggleButton-backgroundColor: transparent;
-	}
-</style>
-<style scoped lang="postcss">
-	.sidebar {
 		&.hoverable {
 			&:hover {
 				.float {
@@ -377,13 +195,11 @@
 		}
 
 		&.float {
-			box-shadow:
-				0 4px 8px 3px rgba(0, 0, 0, 0.15),
-				0 1px 3px 0 rgba(0, 0, 0, 0.3);
+			box-shadow: 0 4px 8px 3px rgba(0, 0, 0, 0.15),
+			0 1px 3px 0 rgba(0, 0, 0, 0.3);
 			transform: translateX(-50%);
-			transition:
-				transform 0.3s,
-				opacity 0.3s;
+			transition: transform 0.3s,
+			opacity 0.3s;
 			opacity: 0;
 
 			&:hover {

@@ -1,9 +1,9 @@
-import FmBtn from './Btn.vue'
+import FmMenu from '@/components/fm/Menu/Menu.vue'
 import { ref, watch } from 'vue'
 
 const meta = {
-	title: 'Components/FmBtn',
-	component: FmBtn,
+	title: 'Components/FmMenu',
+	component: FmMenu,
 	argTypes: {
 		variant: {
 			control: 'select',
@@ -21,7 +21,7 @@ export default meta
 export const Default = {
 	render: (args) => ({
 		components: {
-			FmBtn
+			FmMenu
 		},
 		setup() {
 			const key = ref(1)
@@ -36,6 +36,6 @@ export const Default = {
 			}
 		},
 		template: `
-          <FmBtn v-bind="args" :key="key"/>`
+          <FmMenu v-bind="args" :key="key"/>`
 	})
 }
