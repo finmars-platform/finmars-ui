@@ -74,7 +74,6 @@
 	watch(
 		() => innerValue.value,
 		(val) => {
-			console.log('W1: ', val)
 			emits('update:modelValue', val)
 		},
 		{ immediate: true },
