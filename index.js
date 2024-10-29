@@ -12,6 +12,7 @@ import FmDateEditor from '@/components/fm/DateEditor/DateEditor.vue'
 import FmChip from '@/components/fm/Chip/Chip.vue'
 import FmRadio from '@/components/fm/Radio/Radio.vue'
 import FmRadioGroup from '@/components/fm/Radio/RadioGroup.vue'
+import FmTooltip from '@/components/fm/Tooltip/Tooltip.vue'
 import FmNavigationPortal from '@/components/fm/Navigation/NavigationPortal.vue'
 import FmHeader from '~/stories/Header.vue'
 import { createVuetify } from 'vuetify'
@@ -56,6 +57,7 @@ export const uiComponentsPlugin = {
 		Vue.component(`${prefix}Chip`, FmChip)
 		Vue.component(`${prefix}Radio`, FmRadio)
 		Vue.component(`${prefix}RadioGroup`, FmRadioGroup)
+		Vue.component(`${prefix}Tooltip`, FmTooltip)
 		Vue.component(`${prefix}NavigationPortal`, FmNavigationPortal)
 		Vue.component(`${prefix}Header`, FmHeader)
 	}
