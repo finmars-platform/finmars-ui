@@ -782,39 +782,39 @@
 					href: getUrlToOldApp('/settings/init-configuration')
 				},
 				{
-					key: 'Permissions',
-					label: 'Permissions',
+					key: 'Permission',
+					label: 'Permission',
 					action: undefined,
 					to: '',
 					href: '',
 					children: [
 						{
-							key: 'Members',
-							label: 'Members',
+							key: 'Member',
+							label: 'Member',
 							action: undefined,
 							href: '',
 							to: useGetNuxtLink(
-								'/settings/permission/members',
+								'/settings/permission/member',
 								route.value.params
 							)
 						},
 						{
-							key: 'Groups',
-							label: 'Groups',
+							key: 'Group',
+							label: 'Group',
 							action: undefined,
 							href: '',
 							to: useGetNuxtLink(
-								'/settings/permission/groups',
+								'/settings/permission/group',
 								route.value.params
 							)
 						},
 						{
-							key: 'Roles',
-							label: 'Roles',
+							key: 'Role',
+							label: 'Role',
 							action: undefined,
 							href: '',
 							to: useGetNuxtLink(
-								'/settings/permission/roles',
+								'/settings/permission/role',
 								route.value.params
 							)
 						},
