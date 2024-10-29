@@ -64,6 +64,12 @@
 		prependIcon: {
 			type: [String, undefined],
 		},
+		tag: {
+			type: String,
+		},
+		symbol: {
+			type: [String, Object],
+		},
 		disabled: {
 			type: Boolean,
 		},
@@ -81,6 +87,8 @@
 			...(props.type === 'primary' && { variant: 'flat' }),
 			...(props.type === 'secondary' && { variant: 'text' }),
 			...(props.type === 'tertiary' && { variant: 'outlined' }),
+			...(props.tag && { tag: props.tag }),
+			...(props.symbol && { symbol: props.symbol }),
 		}
 
 		if (props.type === 'primary') {
