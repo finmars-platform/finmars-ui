@@ -17,7 +17,8 @@
 		/>
 		<div
 			v-if="!isOnlyIcon"
-			class="pointer-events-none font-medium ml-[16px] text-sm text-sidenavOption-color"
+			class="pointer-events-none font-medium text-sm text-sidenavOption-color"
+			:class="level > 1 ? 'ml-[52px]' : 'ml-[16px]'"
 		>
 			<slot />
 		</div>

@@ -393,16 +393,14 @@
 					label: 'Add-on 2',
 					action: undefined,
 					to: '',
-					href: '',
-					children: [
-						{
-							key: 'marketplace',
-							label: 'Marketplace',
-							action: undefined,
-							to: useGetNuxtLink('/marketplace', route.value.params),
-							href: ''
-						}
-					]
+					href: ''
+				},
+				{
+					key: 'marketplace',
+					label: 'Marketplace',
+					action: undefined,
+					to: useGetNuxtLink('/marketplace', route.value.params),
+					href: ''
 				}
 			]
 		},

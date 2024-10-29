@@ -32,7 +32,7 @@
 		</div>
 
 		<div
-			class="mt-auto flex grow-0 items-center justify-end h-[48px] px-[12px] py-[16px] border-solid border-t border-t-sidenavFooter-borderColor bg-sidenavFooter-backgroundColor"
+			class="mt-auto flex grow-0 items-center justify-end h-[48px] px-[12px] py-[16px] border-solid border-t-[1px] border-t-sidenavFooter-borderColor bg-sidenavFooter-backgroundColor"
 		>
 			<FmIconButton
 				:style="{
