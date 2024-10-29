@@ -103,14 +103,18 @@
 	const isOpen = ref(false)
 	const nestedItemsRefs = ref([])
 
-	const isActive = computed(
-		() =>
+	const isActive = computed(() => {
+		return (
 			(props.to && props.route?.path === props.to) ||
 			(props.href &&
-				props.route?.path?.includes(props.href) &&
-				props.route?.path?.slice(-2) === props.href?.slice(-2)) ||
-			(!!props.href && window.location?.href?.includes(props.href))
-	)
+				props.route?.value?.path?.includes(props.href) &&
+				props.route?.value?.path?.slice(-2) === props.href?.slice(-2)) ||
+			(!!props.href &&
+				window.location?.href?.includes(props.href) &&
+				window.location?.href?.split('?')?.[0].slice(-2) ===
+					props.href?.slice(-2))
+		)
+	})
 	const isNestedActive = computed(() => {
 		for (const el of nestedItemsRefs.value) {
 			if (el.isActive || el.isNestedActive) return true
