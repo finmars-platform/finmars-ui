@@ -94,7 +94,7 @@
 	}
 </script>
 
-<style scoped lang="postcss">
+<style scoped lang="scss">
 	.sidebar {
 		--sidenav-backgroundColor: var(--surface);
 		--sidenav-borderColor: var(--outline-variant);
@@ -107,15 +107,27 @@
 
 		/* Sidenav options states */
 		/* Hover */
-		--sidenavOption-hover-backgroundColor: rgba(29, 27, 32, 0.08);
+		--sidenavOption-hover-backgroundColor: color-mix(
+			in srgb,
+			var(--on-surface-variant) 8%,
+			transparent
+		);
 		--sidenavOption-hover-color: var(--on-surface-variant);
 
 		/* Focus */
-		--sidenavOption-focus-backgroundColor: rgba(29, 27, 32, 0.12);
+		--sidenavOption-focus-backgroundColor: color-mix(
+			in srgb,
+			var(--on-surface-variant) 12%,
+			transparent
+		);
 		--sidenavOption-focus-color: var(--on-surface-variant);
 
 		/* Active (called Pressed inside figma) */
-		--sidenavOption-active-backgroundColor: rgba(29, 27, 32, 0.12);
+		--sidenavOption-active-backgroundColor: color-mix(
+			in srgb,
+			var(--on-surface-variant) 12%,
+			transparent
+		);
 
 		/* Activated (Highlighted menu option that matches to the web page that a user currently on) */
 		--sidenavOption-activated-backgroundColor: var(--secondary-container);
