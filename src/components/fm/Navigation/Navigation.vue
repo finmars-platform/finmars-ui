@@ -118,7 +118,7 @@
 		--sidenavOption-active-backgroundColor: rgba(29, 27, 32, 0.12);
 
 		/* Activated (Highlighted menu option that matches to the web page that a user currently on) */
-		--sidenavOption-activated-backgroundColor: var(--primary-container);
+		--sidenavOption-activated-backgroundColor: var(--secondary-container);
 		--sidenavOption-activated-color: var(--on-surface);
 
 		/* Disabled */
