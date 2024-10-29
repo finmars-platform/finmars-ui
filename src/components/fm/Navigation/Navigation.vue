@@ -195,11 +195,13 @@
 		}
 
 		&.float {
-			box-shadow: 0 4px 8px 3px rgba(0, 0, 0, 0.15),
-			0 1px 3px 0 rgba(0, 0, 0, 0.3);
+			box-shadow:
+				0 4px 8px 3px rgba(0, 0, 0, 0.15),
+				0 1px 3px 0 rgba(0, 0, 0, 0.3);
 			transform: translateX(-50%);
-			transition: transform 0.3s,
-			opacity 0.3s;
+			transition:
+				transform 0.3s,
+				opacity 0.3s;
 			opacity: 0;
 
 			&:hover {
