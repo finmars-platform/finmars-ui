@@ -382,20 +382,6 @@
 			href: '',
 			children: [
 				{
-					key: 'Add-on-1',
-					label: 'Add-on 1',
-					action: undefined,
-					to: '',
-					href: ''
-				},
-				{
-					key: 'Add-on-2',
-					label: 'Add-on 2',
-					action: undefined,
-					to: '',
-					href: ''
-				},
-				{
 					key: 'marketplace',
 					label: 'Marketplace',
 					action: undefined,

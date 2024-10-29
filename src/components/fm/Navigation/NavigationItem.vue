@@ -106,7 +106,9 @@
 	const isActive = computed(
 		() =>
 			(props.to && props.route?.path === props.to) ||
-			(props.href && props.route?.path?.includes(props.href)) ||
+			(props.href &&
+				props.route?.path?.includes(props.href) &&
+				props.route?.path?.slice(-2) === props.href?.slice(-2)) ||
 			(!!props.href && window.location?.href?.includes(props.href))
 	)
 	const isNestedActive = computed(() => {
