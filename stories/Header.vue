@@ -2,7 +2,7 @@
 	<header
 		class="flex w-full items-center max-h-20 h-20 py-3 px-[22px] gap-x-4 border-b-[1px] border-[var(--outline-variant)] border-solid"
 	>
-		<FmLogo :logo="logo" class="mr-12" />
+		<FmLogo :theme="isDark ? 'dark' : 'light'" :logo="logo" class="mr-12" />
 		<FmSearch
 			v-if="false"
 			class="max-w-[360px]"

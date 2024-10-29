@@ -23,7 +23,8 @@
       "require": "./dist/finmars-ui.umd.js",
       "import": "./dist/finmars-ui.es.js"
     },
-    "./dist/finmars-ui.css": "./dist/finmars-ui.css"
+    "./dist/finmars-ui.css": "./dist/finmars-ui.css",
+    "./dist/themes.css": "./dist/themes.css"
   },
   "keywords": [],
   "author": "Sergei Zhitenev",
