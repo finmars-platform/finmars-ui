@@ -769,14 +769,14 @@
 				},
 				{
 					key: 'Permission',
-					label: 'Permission',
+					label: 'Permissions',
 					action: undefined,
 					to: '',
 					href: '',
 					children: [
 						{
 							key: 'Member',
-							label: 'Member',
+							label: 'Members',
 							action: undefined,
 							href: '',
 							to: useGetNuxtLink(
@@ -786,7 +786,7 @@
 						},
 						{
 							key: 'Group',
-							label: 'Group',
+							label: 'Groups',
 							action: undefined,
 							href: '',
 							to: useGetNuxtLink(
@@ -796,7 +796,7 @@
 						},
 						{
 							key: 'Role',
-							label: 'Role',
+							label: 'Roles',
 							action: undefined,
 							href: '',
 							to: useGetNuxtLink(
