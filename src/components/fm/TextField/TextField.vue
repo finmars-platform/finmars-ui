@@ -173,6 +173,12 @@
 		position: relative;
 
 		:deep(.v-input__control) {
+			.v-field.v-field--focused {
+				.v-field__overlay {
+					opacity: 0;
+				}
+			}
+
 			.v-field__prepend-inner {
 				color: var(--on-surface-variant);
 			}
