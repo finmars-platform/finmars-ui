@@ -5,10 +5,11 @@
 		@click:prepend-inner="emits('click:prependInner', $event)"
 		@update:focused="emits('update:focused', $event)"
 		@update:menu="emits('update:menu', $event)"
+		@update:search="updateSearchText"
 		@update:model-value="emits('update:modelValue', $event)"
 	>
 		<template #clear>
-			<VIcon icon="mdi-close" @click.stop.prevent="emits('click:clear', $event)" />
+			<VIcon icon="mdi-close" @click.stop.prevent="onClearClick" />
 		</template>
 
 		<template v-if="slots.details" #details>
@@ -20,7 +21,13 @@
 		</template>
 
 		<template v-if="slots.item" #item="{ item, index, props }">
-			<slot name="item" :item="item" :index="index" :props="props" />
+			<v-list-item @click="props.onClick">
+				<slot name="item" :item="item" :index="index" :props="props" />
+			</v-list-item>
+		</template>
+
+		<template v-if="slots.chip" #item="{ item, index, props }">
+			<slot name="chip" :item="item" :index="index" :props="props" />
 		</template>
 
 		<template v-if="slots['no-data']" #no-data>
@@ -34,8 +41,8 @@
 </template>
 
 <script setup>
-	import { computed, ref, useSlots } from 'vue'
-	import { VAutocomplete, VIcon } from 'vuetify/components'
+	import { computed, ref, useSlots, watch } from 'vue'
+	import { VAutocomplete, VIcon, VListItem } from 'vuetify/components'
 
 	const props = defineProps({
 		id: {
@@ -133,6 +140,12 @@
 			type: Boolean,
 			default: false,
 		},
+		chips: {
+			type: Boolean,
+		},
+		closableChips: {
+			type: Boolean,
+		},
 		name: {
 			type: String,
 		},
@@ -147,6 +160,9 @@
 			type: Boolean,
 			default: false,
 		},
+		readonly: {
+			type: Boolean,
+		},
 		returnObject: {
 			type: Boolean,
 		},
@@ -156,7 +172,6 @@
 		},
 		search: {
 			type: String,
-			default: 'sh',
 		},
 		disabled: {
 			type: Boolean,
@@ -173,7 +188,8 @@
 	])
 
 	const slots = useSlots()
-	console.log('SLOTS: ', slots)
+
+	const searchText = ref(props.searchText)
 
 	const vAutocompleteProps = computed(() => ({
 		density: 'comfortable',
@@ -203,16 +219,39 @@
 		width: props.width,
 		maxWidth: props.maxWidth,
 		multiple: props.multiple,
+		chips: props.chips,
+		closableChips: props.closableChips,
 		name: props.name,
 		noDataText: props.noDataText,
 		noFilter: props.noFilter,
 		openOnClear: props.openOnClear,
+		readonly: props.readonly,
 		returnObject: props.returnObject,
 		rules: props.rules,
 		style: props.style,
-		search: props.search,
+		search: searchText.value,
 		disabled: props.disabled,
 	}))
+
+	function updateSearchText(val) {
+		searchText.value = val
+	}
+
+	function onClearClick(ev) {
+		searchText.value = ''
+		emits('click:clear', ev)
+		emits('update:search', '')
+		emits('update:modelValue', null)
+	}
+
+	watch(
+		() => props.searchText,
+		(val) => {
+			if (val !== searchText.value) {
+				searchText.value = val
+			}
+		},
+	)
 </script>
 
 <style>
