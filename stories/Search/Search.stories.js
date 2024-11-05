@@ -1,19 +1,12 @@
-import FmSearch from '@/components/fm/Search/Search.vue'
 import { ref, watch } from 'vue'
+import FmSearch from '@/components/fm/Search/Search.vue'
+import SearchDemo from './SearchDemo.vue'
 
 const meta = {
 	title: 'Components/FmSearch',
 	component: FmSearch,
-	argTypes: {
-		variant: {
-			control: 'select',
-			options: ['outlined', 'plain', 'underlined', 'filled', 'solo', 'solo-inverted', 'solo-filled']
-		}
-	},
-	args: {
-		rounded: true,
-		variant: 'solo'
-	}
+	argTypes: {},
+	args: {}
 }
 
 export default meta
@@ -37,5 +30,17 @@ export const Default = {
 		},
 		template: `
           <FmSearch v-bind="args" :key="key"/>`
+	})
+}
+
+export const AllVariants = {
+	render: (args) => ({
+		components: {
+			SearchDemo
+		},
+		setup() {
+			return { args }
+		},
+		template: `<SearchDemo />`,
 	})
 }
