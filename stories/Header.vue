@@ -10,134 +10,120 @@
 			:hideDetails="false"
 			variant="solo"
 		/>
-		<VSwitch
+
+		<FmIconButton
+			icon="mdi-bell-outline"
+			size="normal"
+			variant="text"
 			class="ml-auto"
-			:modelValue="isDark"
-			@update:modelValue="emit('setTheme', !isDark)"
-			hide-details
-			inset
-		></VSwitch>
-		<FmMenu>
-			<template v-slot:activator="{ props }">
-				<FmIconButton
-					v-bind="props"
-					icon="mdi-bell-outline"
-					size="normal"
-					variant="text"
-				/>
-			</template>
-
-			<VCard>
-				<VCardText>
-					<div class="mx-auto text-center flex flex-col">
-						<template v-if="notifications.length">
-							<div
-								class="fm_message_item"
-								v-for="(item, index) in notifications"
-								:key="index"
-							>
-								<div class="flex sb">
-									<div class="fm_message_item_date">
-										{{ formatDate(item.created) }}
-									</div>
-									<div class="fm_message_item_section">
-										{{ SECTIONS[item.section] }}
-									</div>
+		>
+			<FmMenu v-model="menus.notifications" activator="parent">
+				<div class="mx-auto text-center flex flex-col">
+					<template v-if="notifications?.length">
+						<div
+							class="fm_message_item"
+							v-for="(item, index) in notifications"
+							:key="index"
+						>
+							<div class="flex sb">
+								<div class="fm_message_item_date">
+									{{ formatDate(item.created) }}
 								</div>
-								<div class="fm_message_item_h">{{ item.title }}</div>
-								<div class="fm_message_item_t">
-									{{
-										item.description.length > 65
-											? item.description.slice(0, 65) + '...'
-											: item.description
-									}}
+								<div class="fm_message_item_section">
+									{{ SECTIONS[item.section] }}
 								</div>
 							</div>
-							<div class="tac p-8">
-								<FmBtn to="/home" type="action">Show ALL</FmBtn>
+							<div class="fm_message_item_h">{{ item.title }}</div>
+							<div class="fm_message_item_t">
+								{{
+									item.description.length > 65
+										? item.description.slice(0, 65) + '...'
+										: item.description
+								}}
 							</div>
-						</template>
-						<div class="p-16" v-else>No new messages</div>
-					</div>
-				</VCardText>
-			</VCard>
-		</FmMenu>
-		<FmMenu>
-			<template v-slot:activator="{ props }">
-				<FmIconButton
-					v-bind="props"
-					icon="mdi-help-circle-outline"
-					size="normal"
-					variant="text"
+						</div>
+						<div class="tac p-8">
+							<FmButton href="/home" type="secondary">Show ALL</FmButton>
+						</div>
+					</template>
+					<div class="p-16" v-else>No new messages</div>
+				</div>
+			</FmMenu>
+		</FmIconButton>
+		<FmIconButton icon="mdi-help-circle-outline" size="normal" variant="text">
+			<FmMenu v-model="menus.faq" activator="parent">
+				<a :href="documentationUrl">
+					<MenuItem itemSize="large" title="Documentation" />
+				</a>
+				<a :href="apiReferenceUrl">
+					<MenuItem itemSize="large" title="API Reference" />
+				</a>
+			</FmMenu>
+		</FmIconButton>
+		<FmButton
+			type="secondary"
+			append-icon="mdi-chevron-down"
+			v-if="currentWorkspaceName"
+		>
+			{{ currentWorkspaceName }}
+			<FmMenu v-model="menus.workspaces" activator="parent">
+				<MenuItem
+					v-for="(item, index) in workspaces"
+					:key="index"
+					itemSize="large"
+					:title="item.name"
+					@click="emit('setCurrent', item)"
 				/>
-			</template>
-
-			<VCard>
-				<VCardText>
-					<div class="mx-auto text-center flex flex-col">
-						<FmBtn
-							:href="documentationUrl"
-							@click="emit('documentation')"
-							variant="text"
-							rounded
-						>
-							Documentation
-						</FmBtn>
-						<FmBtn
-							:href="apiReferenceUrl"
-							@click="emit('apiReference')"
-							variant="text"
-							rounded
-						>
-							API Reference
-						</FmBtn>
-					</div>
-				</VCardText>
-			</VCard>
-		</FmMenu>
-
-		<FmMenu v-if="currentWorkspaceName">
-			<template v-slot:activator="{ props }">
-				<FmBtn v-bind="props" variant="text">
-					{{ currentWorkspaceName }}
-				</FmBtn>
-			</template>
-
-			<VCard>
-				<VCardText>
-					<div
-						v-for="(item, index) in workspaces"
-						:key="index"
-						@click="emit('setCurrent', item)"
+			</FmMenu>
+		</FmButton>
+		<FmButton style="height: 40px" :icon="true">
+			<FmAvatar :image="avatar">
+				<span class="text-h5">{{ letters }}</span>
+			</FmAvatar>
+			<FmMenu v-model="menus.profile" activator="parent">
+				<MenuItem itemSize="large" @click="emit('profile')" title="Profile" />
+				<MenuItem
+					itemSize="large"
+					@click="emit('security')"
+					title="Account Security"
+				/>
+				<VDivider opacity="1" class="border-[var(--outline-variant)] mb-2" />
+				<MenuItem
+					itemSize="large"
+					title="User interface"
+					appendIcon="mdi-menu-right"
+				>
+					<FmMenu
+						:openOnFocus="false"
+						:openOnHover="true"
+						:submenu="true"
+						v-model="menus.interface"
+						activator="parent"
 					>
-						{{ item.name }}
-					</div>
-				</VCardText>
-			</VCard>
-		</FmMenu>
-		<FmMenu>
-			<template v-slot:activator="{ props }">
-				<FmBtn icon v-bind="props">
-					<FmAvatar :image="avatar">
-						<span class="text-h5">{{ letters }}</span>
-					</FmAvatar>
-				</FmBtn>
-			</template>
-
-			<VCard>
-				<VCardText>
-					<div class="mx-auto text-center flex flex-col">
-						<FmBtn @click="emit('profile')" variant="text" rounded>
-							Profile
-						</FmBtn>
-						<FmBtn @click="emit('security')" variant="text" rounded>
-							Account Security
-						</FmBtn>
-						<FmBtn :href="logoutUrl" variant="text" rounded> Log Out</FmBtn>
-					</div>
-				</VCardText>
-			</VCard>
-		</FmMenu>
+						<MenuItem
+							itemSize="large"
+							v-on="!isDark ? {} : { click: () => emit('setTheme', false) }"
+							title="Light theme"
+							:prependIcon="!isDark ? 'mdi-check' : '_'"
+						/>
+						<MenuItem
+							itemSize="large"
+							v-on="isDark ? {} : { click: () => emit('setTheme', true) }"
+							title="Dark theme"
+							:prependIcon="isDark ? 'mdi-check' : '_'"
+						/>
+					</FmMenu>
+				</MenuItem>
+				<VDivider opacity="1" class="border-[var(--outline-variant)] mt-2" />
+				<a :href="logoutUrl">
+					<MenuItem
+						itemSize="large"
+						@click="emit('security')"
+						title="Log Out"
+					/>
+				</a>
+			</FmMenu>
+		</FmButton>
 	</header>
 </template>
 
@@ -145,12 +131,14 @@
 	import FmLogo from '@/components/fm/Logo/Logo.vue'
 	import FmSearch from '@/components/fm/Search/Search.vue'
 	import FmIconButton from '@/components/fm/IconButton/IconButton.vue'
+	import FmButton from '@/components/fm/Button/Button.vue'
 	import FmMenu from '@/components/fm/Menu/Menu.vue'
-	import FmBtn from '@/components/fm/Btn/Btn.vue'
 	import FmAvatar from '@/components/fm/Avatar/Avatar.vue'
-	import { VCard, VCardText } from 'vuetify/components'
+	import { VDivider } from 'vuetify/components'
 	import dayjs from 'dayjs'
 	import relativeTime from 'dayjs/plugin/relativeTime'
+	import MenuItem from '../src/components/fm/Menu/MenuItem.vue'
+	import { reactive } from 'vue'
 
 	dayjs.extend(relativeTime)
 
@@ -188,6 +176,14 @@
 	})
 
 	const emit = defineEmits(['profile', 'setTheme', 'security', 'setCurrent'])
+
+	const menus = reactive({
+		notifications: false,
+		faq: false,
+		workspaces: false,
+		profile: false,
+		interface: false
+	})
 
 	const SECTIONS = {
 		1: 'Events',

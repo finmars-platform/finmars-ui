@@ -73,6 +73,9 @@
 		disabled: {
 			type: Boolean,
 		},
+		icon: {
+			type: Boolean,
+		},
 	})
 
 	const vBtnProps = computed(() => {
@@ -88,6 +91,7 @@
 			...(props.type === 'secondary' && { variant: 'text' }),
 			...(props.type === 'tertiary' && { variant: 'outlined' }),
 			...(props.tag && { tag: props.tag }),
+			...(props.icon && { icon: props.icon }),
 			...(props.symbol && { symbol: props.symbol }),
 		}
 

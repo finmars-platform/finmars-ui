@@ -7,7 +7,10 @@
 		:color="fmIconBtnColor.btnColor"
 		:style="{ opacity: disabled ? '0.3' : '1' }"
 	>
-		<VIcon :icon="icon" :size="iconSize" :color="fmIconBtnColor.iconColor" />
+		<template #default>
+			<VIcon :icon="icon" :size="iconSize" :color="fmIconBtnColor.iconColor" />
+			<slot />
+		</template>
 	</VBtn>
 </template>
 
@@ -21,14 +24,14 @@
 			default: 'normal',
 			validator(value) {
 				return ['normal', 'small'].includes(value)
-			},
+			}
 		},
 		icon: {
 			type: String,
-			required: true,
+			required: true
 		},
 		disabled: {
-			type: Boolean,
+			type: Boolean
 		},
 		variant: {
 			type: String,
@@ -56,12 +59,10 @@
 	})
 
 	const fmIconBtnColor = computed(() => {
-		const btnColor = props.variant === 'text'
-			? 'var(--on-primary)'
-			: 'var(--primary)'
-		const iconColor = props.variant === 'flat'
-			? 'var(--on-primary)'
-			: 'var(--primary)'
+		const btnColor =
+			props.variant === 'text' ? 'var(--on-primary)' : 'var(--primary)'
+		const iconColor =
+			props.variant === 'flat' ? 'var(--on-primary)' : 'var(--primary)'
 
 		return {
 			btnColor,

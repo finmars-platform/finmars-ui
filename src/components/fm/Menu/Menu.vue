@@ -5,30 +5,34 @@
 		@update:model-value="emits('update:model-value', $event)"
 	>
 		<template #activator="{ isActive, props, targetRef }">
-			<slot name="activator" :props="props" :is-active="isActive" :target-ref="targetRef" />
+			<slot
+				name="activator"
+				:props="props"
+				:is-active="isActive"
+				:target-ref="targetRef"
+			/>
 		</template>
 
 		<template #default>
-			<div class="relative w-full rounded py-2 bg-[var(--surface-container)] shadow-[0_2px_6px_2px_rgba(0,0,0,0.15),0_1px_2px_0_rgba(0,0,0,0.3)]">
+			<div
+				class="relative w-full rounded py-2 bg-[var(--surface-container)] shadow-[0_2px_6px_2px_rgba(0,0,0,0.15),0_1px_2px_0_rgba(0,0,0,0.3)]"
+			>
 				<slot>
-					<div
+					<MenuItem
 						v-for="(item, index) in items"
 						:key="index"
-						class="relative w-full flex flex-row items-center justify-start px-[12px] hover:bg-[var(--surface-container-highest)]"
-						:class="{
-							'h-[56px]': itemSize === 'large',
-							'h-[48px]': itemSize === 'medium',
-							'h-[40px]': itemSize === 'small',
-							'cursor-pointer': !disabled && !item.disabled,
-							'cursor-default': disabled || item.disabled,
-							'pointer-events-none': disabled || item.disabled,
-						}"
-						v-on="disabled ? {} : { click: (ev) => onItemClick(ev, { item, index }) }"
-					>
-						<slot name="item" :item="item" :index="index">
-							<span class="text-[16px] text-[var(--on-surface)]">{{ item.title }}</span>
-						</slot>
-					</div>
+						:index="index"
+						:item="item"
+						:title="item.title"
+						:itemDisabled="item.disabled"
+						:itemSize="itemSize"
+						:disabled="disabled"
+						v-on="
+							disabled
+								? {}
+								: { click: (ev) => onItemClick(ev, { item, index }) }
+						"
+					/>
 				</slot>
 			</div>
 		</template>
@@ -38,57 +42,58 @@
 <script setup>
 	import { computed, ref, watch } from 'vue'
 	import { VMenu } from 'vuetify/components'
+	import MenuItem from './MenuItem.vue'
 
 	const props = defineProps({
 		modelValue: {
-			type: Boolean,
+			type: Boolean
 		},
 		items: {
 			type: Array, // { title: string; [key: string]: any }[]
-			default: () => [],
+			default: () => []
 		},
 		itemSize: {
 			type: String,
 			validator(value) {
 				return ['small', 'medium', 'large'].includes(value)
 			},
-			default: 'large',
+			default: 'large'
 		},
 		activator: {
-			type: [String, Object],
+			type: [String, Object]
 		},
 		attach: {
 			type: [String, Object, Boolean],
-			default: false,
+			default: false
 		},
 		closeOnBack: {
 			type: Boolean,
-			default: true,
+			default: true
 		},
 		closeOnContentClick: {
 			type: Boolean,
-			default: true,
+			default: true
 		},
 		height: {
-			type: [String, Number],
+			type: [String, Number]
 		},
 		minHeight: {
-			type: [String, Number],
+			type: [String, Number]
 		},
 		maxHeight: {
-			type: [String, Number],
+			type: [String, Number]
 		},
 		width: {
-			type: [String, Number],
+			type: [String, Number]
 		},
 		minWidth: {
-			type: [String, Number],
+			type: [String, Number]
 		},
 		maxWidth: {
-			type: [String, Number],
+			type: [String, Number]
 		},
 		offset: {
-			type: [String, Number, Array],
+			type: [String, Number, Array]
 		},
 		location: {
 			type: String,
@@ -113,9 +118,9 @@
 					'start bottom | center',
 					'end bottom | center',
 					'left bottom | center',
-					'right bottom | center',
+					'right bottom | center'
 				].includes(value)
-			},
+			}
 		},
 		locationStrategy: {
 			type: [String, Function],
@@ -126,22 +131,22 @@
 
 				return true
 			},
-			default: 'connected',
+			default: 'connected'
 		},
 		openDelay: {
 			type: [String, Number],
-			default: 300,
+			default: 300
 		},
 		openOnClick: {
 			type: Boolean,
-			default: true,
+			default: true
 		},
 		openOnFocus: {
-			type: Boolean,
+			type: Boolean
 		},
 		openOnHover: {
 			type: Boolean,
-			default: false,
+			default: false
 		},
 		origin: {
 			type: String,
@@ -168,14 +173,14 @@
 					'left bottom | center',
 					'right bottom | center',
 					'auto',
-					'overlap',
+					'overlap'
 				].includes(value)
 			},
-			default: 'auto',
+			default: 'auto'
 		},
 		persistent: {
 			type: Boolean,
-			default: false,
+			default: false
 		},
 		scrollStrategy: {
 			type: [String, Function],
@@ -186,21 +191,18 @@
 
 				return true
 			},
-			default: 'reposition',
+			default: 'reposition'
 		},
 		zIndex: {
 			type: [String, Number],
-			default: 2000,
+			default: 2000
 		},
 		disabled: {
-			type: Boolean,
-		},
+			type: Boolean
+		}
 	})
 
-	const emits = defineEmits([
-		'update:modelValue',
-		'click:item',
-	])
+	const emits = defineEmits(['update:modelValue', 'click:item'])
 
 	const innerValue = ref(props.modelValue)
 
@@ -226,7 +228,7 @@
 		openOnFocus: props.openOnFocus,
 		openOnHover: props.openOnHover,
 		persistent: props.persistent,
-		disabled: props.disabled,
+		disabled: props.disabled
 	}))
 
 	function onItemClick(ev, { item, index }) {
@@ -248,6 +250,6 @@
 				innerValue.value = val
 			}
 		},
-		{ immediate: true },
+		{ immediate: true }
 	)
 </script>
