@@ -97,7 +97,7 @@
 		error: {
 			type: Boolean,
 		},
-		errorMessage: {
+		errorMessages: {
 			type: [String, Array],
 		},
 		filterKeys: {
@@ -206,7 +206,7 @@
 		clearOnSelect: props.clearOnSelect,
 		prependInnerIcon: props.prependInnerIcon,
 		error: props.error,
-		errorMessage: props.errorMessage,
+		errorMessages: props.errorMessages,
 		filterKeys: props.filterKeys,
 		hideNoData: props.hideNoData,
 		hideSelected: props.hideSelected,

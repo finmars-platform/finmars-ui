@@ -25,6 +25,7 @@
     /* Linting */
     "types": [
       "vite/client",
+      "vuetify",
       "@types/lodash"
     ],
     "strict": true,
