@@ -103,6 +103,7 @@
 		totalItems: 0,
 		withInfo: true,
 		inscriptions: {
+			// @ts-ignore
 			of: 'of',
 			entities: 'entities',
 			page: 'Page',
