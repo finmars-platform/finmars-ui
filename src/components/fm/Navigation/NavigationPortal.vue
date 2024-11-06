@@ -229,13 +229,6 @@
 					action: undefined,
 					to: '',
 					href: getUrlToOldApp('/data/portfolio-register-record')
-				},
-				{
-					key: 'transactions-performance',
-					label: 'Performance',
-					action: undefined,
-					to: '',
-					href: ''
 				}
 			]
 		},
