@@ -14,11 +14,12 @@
 			class="text-[24px] w-[24px]"
 			:icon="icon"
 			:style="{ color: iconColorValue }"
+			:class="[offsetIcon]"
 		/>
 		<div
 			v-if="!isOnlyIcon"
-			class="pointer-events-none font-medium text-sm text-sidenavOption-color"
-			:class="level > 1 ? 'ml-[52px]' : 'ml-[16px]'"
+			class="pointer-events-none text-sm text-sidenavOption-color"
+			:class="[offsetLabel, isActive ? 'font-medium' : 'font-normal']"
 		>
 			<slot />
 		</div>
@@ -64,6 +65,26 @@
 			return 'var(--sidenavOption2LeftIcon-color)'
 		} else {
 			return 'var(--sidenavOption3LeftIcon-color)'
+		}
+	})
+
+	const offsetLabel = computed(() => {
+		if (props.level === 0) {
+			return 'ml-[12px]'
+		} else if (props.level === 1) {
+			return 'ml-[12px]'
+		} else {
+			return 'ml-[36px]'
+		}
+	})
+
+	const offsetIcon = computed(() => {
+		if (props.level === 0) {
+			return ''
+		} else if (props.level === 1) {
+			return 'ml-[12px]'
+		} else {
+			return ''
 		}
 	})
 

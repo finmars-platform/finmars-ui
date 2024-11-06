@@ -50,7 +50,8 @@
 			action: undefined,
 			to: '',
 			href: getUrlToOldApp('/dashboard', route.value.params),
-			style: {}
+			style: {},
+			classes: 'first-side-nav'
 		},
 		{
 			key: 'reports',
@@ -934,6 +935,10 @@
 </script>
 
 <style lang="postcss">
+	.first-side-nav {
+		@apply mt-[16px] block;
+	}
+
 	.separator-side-nav {
 		@apply mb-[8px];
 

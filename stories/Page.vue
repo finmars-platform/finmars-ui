@@ -65,31 +65,7 @@
 	</div>
 </template>
 
-<script>
+<script setup>
 	import NavigationPortal from '@/components/fm/Navigation/NavigationPortal.vue'
-	import Header from '~/stories/Header.vue'
-
-	export default {
-		name: 'my-page',
-
-		components: { Header, NavigationPortal },
-
-		data() {
-			return {
-				user: null
-			}
-		},
-
-		methods: {
-			onLogin() {
-				this.user = { name: 'Jane Doe' }
-			},
-			onLogout() {
-				this.user = null
-			},
-			onCreateAccount() {
-				this.user = { name: 'Jane Doe' }
-			}
-		}
-	}
+	import Header from './Header.vue'
 </script>
