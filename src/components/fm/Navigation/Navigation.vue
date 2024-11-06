@@ -1,6 +1,6 @@
 <template>
 	<aside
-		class="sidebar z-[62] flex-col h-[calc(100vh-80px)] p-[16px] border-r border-solid border-sidenav-borderColor bg-sidenav-backgroundColor"
+		class="sidebar z-[62] flex-col h-[calc(100vh-80px)] px-[16px] border-r border-solid border-sidenav-borderColor bg-sidenav-backgroundColor"
 		:class="[
 			{
 				hoverable: isOnlyIcon && !isFloat,
@@ -224,7 +224,7 @@
 	}
 
 	.slide-fade-enter-active {
-		transition: transform 0.1s;
+		transition: transform 0.3s;
 	}
 
 	.slide-fade-enter-from,

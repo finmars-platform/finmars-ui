@@ -130,7 +130,7 @@
 	const iconSecondLevel = computed(() => {
 		if (props.level !== 1) return props.icon
 
-		return isOpen.value ? 'mdi-chevron-down' : 'mdi-chevron-right'
+		return isOpen.value ? 'mdi-menu-down' : 'mdi-menu-right'
 	})
 
 	const linkTag = computed(() =>
