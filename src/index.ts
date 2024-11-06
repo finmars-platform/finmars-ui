@@ -19,6 +19,8 @@ import FmRadio from '@/components/fm/Radio/Radio.vue'
 import FmRadioGroup from '@/components/fm/Radio/RadioGroup.vue'
 import FmRangeSlider from '@/components/fm/RangeSlider/RangeSlider.vue'
 import FmSearch from '@/components/fm/Search/Search.vue'
+import FmSelect from '@/components/fm/Select/Select.vue'
+import type { FmSelectProps, FmSelectEmits, FmSelectSlots } from '@/components/fm/Select/types'
 import FmSlider from '@/components/fm/Slider/Slider.vue'
 import FmTextField from '@/components/fm/TextField/TextField.vue'
 import FmTooltip from '@/components/fm/Tooltip/Tooltip.vue'
@@ -50,12 +52,16 @@ export {
 	FmRadioGroup,
 	FmRangeSlider,
 	FmSearch,
+	FmSelect,
 	FmSlider,
 	FmTextField,
 	FmTooltip,
 
 	FmPaginationProps,
 	FmPaginationEmits,
+	FmSelectProps,
+	FmSelectEmits,
+	FmSelectSlots,
 }
 
 /**
@@ -101,6 +107,7 @@ export const uiComponentsPlugin = {
 		Vue.component(`${prefix}RadioGroup`, FmRadioGroup)
 		Vue.component(`${prefix}RangeSlider`, FmRangeSlider)
 		Vue.component(`${prefix}Search`, FmSearch)
+		Vue.component(`${prefix}FmSelect`, FmSelect)
 		Vue.component(`${prefix}Slider`, FmSlider)
 		Vue.component(`${prefix}TextField`, FmTextField)
 		Vue.component(`${prefix}Tooltip`, FmTooltip)
@@ -129,6 +136,7 @@ declare module 'vue' {
 		FmRadioGroup: typeof FmRadioGroup,
 		FmRangeSlider: typeof FmRangeSlider,
 		FmSearch: typeof FmSearch,
+		FmSelect: typeof FmSelect,
 		FmSlider: typeof FmSlider,
 		FmTextField: typeof FmTextField,
 		FmTooltip: typeof FmTooltip,
