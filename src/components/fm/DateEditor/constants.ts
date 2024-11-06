@@ -1,4 +1,4 @@
-export const datesInMonth = {
+export const datesInMonth: Record<string, [number, number]> = {
 	'01': [31, 31],
 	'02': [28, 29],
 	'03': [31, 31],

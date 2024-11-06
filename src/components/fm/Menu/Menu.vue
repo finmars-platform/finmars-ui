@@ -74,6 +74,12 @@
 			type: Boolean,
 			default: true
 		},
+		contentClass: {
+			type: String,
+		},
+		contentClass: {
+			type: String,
+		},
 		height: {
 			type: [String, Number]
 		},
@@ -209,6 +215,7 @@
 	const vMenuProps = computed(() => ({
 		activator: props.activator,
 		attach: props.attach,
+		contentClass: props.contentClass,
 		height: props.height,
 		minHeight: props.minHeight,
 		maxHeight: props.maxHeight,
@@ -253,3 +260,13 @@
 		{ immediate: true }
 	)
 </script>
+
+<!--<style>-->
+<!--	.v-overlay-container {-->
+<!--		.v-overlay.v-menu {-->
+<!--			.v-overlay__content {-->
+<!--				overflow-y: hidden;-->
+<!--			}-->
+<!--		}-->
+<!--	}-->
+<!--</style>-->

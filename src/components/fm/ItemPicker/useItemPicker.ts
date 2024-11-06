@@ -5,7 +5,7 @@ import isEmpty from 'lodash/isEmpty'
 import set from 'lodash/set'
 import keyBy from 'lodash/keyBy'
 
-export default function useItemPicker(props, emits) {
+export default function useItemPicker(props: any, emits: any) {
 	const searchText = ref('')
 
 	const initialSelectedItems = ref(cloneDeep(props.modelValue))
@@ -26,8 +26,8 @@ export default function useItemPicker(props, emits) {
 		return `${props.height}px`
 	})
 
-	const initialSelectedItemsIds = computed(() => initialSelectedItems.value.map(i => i.id))
-	const selectedItemsIds = computed(() => selectedItems.value.map(i => i.id))
+	const initialSelectedItemsIds = computed(() => initialSelectedItems.value.map((i: any) => i.id))
+	const selectedItemsIds = computed(() => selectedItems.value.map((i: any) => i.id))
 
 	const addBtnDisabled = computed(() => {
 		return JSON.stringify(initialSelectedItemsIds.value.sort()) === JSON.stringify(selectedItemsIds.value.sort())
@@ -50,7 +50,7 @@ export default function useItemPicker(props, emits) {
 	}))
 
 	const dataRestoredFromFlattenedData = computed(() => {
-		const val = []
+		const val = [] as any[]
 
 		if (isEmpty(allDataFlattenedFiltered.value)) {
 			return val
@@ -94,10 +94,10 @@ export default function useItemPicker(props, emits) {
 		return dataRestoredFromFlattenedData.value.find(c => c.id === focusedItems.value[0])
 	})
 
-	function prepareFlatData(categories) {
-		const value = []
+	function prepareFlatData(categories: any[]) {
+		const value = [] as any[]
 
-		const transformCategoryItems = (parentId, items) => {
+		const transformCategoryItems = (parentId: string, items: any[]) => {
 			items.forEach(item => {
 				const { id, label, children, tooltip } = item
 				if (children) {
@@ -135,13 +135,13 @@ export default function useItemPicker(props, emits) {
 		return value
 	}
 
-	function mergeCategoryData(v1, v2) {
+	function mergeCategoryData(v1: any, v2: any) {
 		const mergedData = cloneDeep(v1)
 
-		const foo = (data, children) => {
-			children.forEach((item) => {
+		const foo = (data: any, children: any) => {
+			children.forEach((item: any) => {
 				const { id } = item
-				const possibleIndex = data.children.findIndex(i => i.id === id)
+				const possibleIndex = data.children.findIndex((i: any) => i.id === id)
 				if (possibleIndex === -1) {
 					data.children.push(item)
 				} else {
@@ -157,26 +157,13 @@ export default function useItemPicker(props, emits) {
 		}
 
 		return foo(mergedData, v2.children)
-		//
-		// v1.children.forEach(item => {
-		// 	const { id } = item
-		// 	const possibleIndex = mergedData.children.findIndex(i => i.id === id)
-		// 	if (possibleIndex === -1) {
-		// 		mergedData.children.push(item)
-		// 	} else {
-		//
-		// 	}
-		// })
-		//
-		//
-		// return mergedData
 	}
 
-	function restoreFromFlatData(data) {
-		const categoryIds = []
-		const value = []
+	function restoreFromFlatData(data: any) {
+		const categoryIds = [] as any[]
+		const value = [] as any[]
 
-		const restoreCategoryBranch = (ids, val) => {
+		const restoreCategoryBranch = (ids: string[], val: any): any => {
 			const itemId = ids[0]
 			const { label, tooltip } = allDataFlattenedById.value[itemId]
 
@@ -197,7 +184,7 @@ export default function useItemPicker(props, emits) {
 			return ids.length === 1 ? restoredItem : restoreCategoryBranch(ids.slice(1), restoredItem)
 		}
 
-		data.forEach((item) => {
+		data.forEach((item: any) => {
 			const { compositeId } = item
 			const extractedIds = compositeId.split('.')
 
@@ -223,7 +210,7 @@ export default function useItemPicker(props, emits) {
 		return value
 	}
 
-	function select(itemId) {
+	function select(itemId: string) {
 		const item = cloneDeep(allDataFlattenedById.value[itemId])
 		delete item.compositeId
 
@@ -235,7 +222,7 @@ export default function useItemPicker(props, emits) {
 			return
 		}
 
-		const itemIndex = selectedItems.value.findIndex(i => i.id === itemId)
+		const itemIndex = selectedItems.value.findIndex((i: any) => i.id === itemId)
 		if (itemIndex === -1) {
 			selectedItems.value.push(item)
 		} else {

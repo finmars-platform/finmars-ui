@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any*/
 import { nextTick, ref } from 'vue'
 import dayjs from 'dayjs'
 import customParseFormat from 'dayjs/plugin/customParseFormat'
@@ -5,7 +6,7 @@ import isoWeek from 'dayjs/plugin/isoWeek'
 import { displayingDateFormat } from '@/components/fm/DateEditor/constants'
 import { processedDate } from '@/components/fm/DateEditor/utils'
 
-export default function useDateEditor(props, emits) {
+export default function useDateEditor(props: any, emits: any) {
 	dayjs.extend(customParseFormat)
 	dayjs.extend(isoWeek)
 
@@ -17,7 +18,7 @@ export default function useDateEditor(props, emits) {
 
 	const textFieldInput = ref(props.modelValue ? dayjs(props.modelValue).format(displayingDateFormat) : null)
 
-	function allowedDates(val) {
+	function allowedDates(val: any) {
 		const date = dayjs(val)
 		const dayOfWeek = date.isoWeekday();
 
@@ -25,10 +26,10 @@ export default function useDateEditor(props, emits) {
 			return false
 		}
 
-		return !(props.nonWorkingDays || []).some(d => dayjs(d).isSame(date, 'day'))
+		return !(props.nonWorkingDays || []).some((d: any) => dayjs(d).isSame(date, 'day'))
 	}
 
-	function selectMenuItem(item) {
+	function selectMenuItem(item: any) {
 		currentMenuItem.value = item
 		if (item === 'today') {
 			innerValue.value = dayjs().format(displayingDateFormat)
@@ -52,7 +53,7 @@ export default function useDateEditor(props, emits) {
 		}
 	}
 
-	function onUpdate(val) {
+	function onUpdate(val: any) {
 		innerValue.value = val
 		textFieldInput.value = dayjs(val).format(displayingDateFormat)
 		if (currentMenuItem.value !== 'custom') {
@@ -60,7 +61,7 @@ export default function useDateEditor(props, emits) {
 		}
 	}
 
-	function onUpdateByKeyboard(val) {
+	function onUpdateByKeyboard(val: any) {
 		textFieldInput.value = val
 		const processedVal = processedDate(val)
 
@@ -73,7 +74,7 @@ export default function useDateEditor(props, emits) {
 		textFieldInput.value = innerValue.value
 	}
 
-	function onChange(key) {
+	function onChange(key: any) {
 		const isDateValid = dayjs(textFieldInput.value, displayingDateFormat, true).isValid()
 		if (!isDateValid && key === 'tab') {
 			textFieldInput.value = innerValue.value
@@ -84,6 +85,7 @@ export default function useDateEditor(props, emits) {
 
 	function cancelDateSelection() {
 		innerValue.value = initialValue
+		// @ts-ignore
 		textFieldInput.value = initialValue
 	}
 

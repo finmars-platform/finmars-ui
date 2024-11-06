@@ -17,12 +17,14 @@
     "README.md",
     "package.json"
   ],
+  "type": "module",
   "main": "dist/finmars-ui.umd.js",
   "module": "dist/finmars-ui.es.js",
   "exports": {
     ".": {
       "require": "./dist/finmars-ui.umd.js",
-      "import": "./dist/finmars-ui.es.js"
+      "import": "./dist/finmars-ui.es.js",
+      "types": "./dist/finmars-ui.es.d.ts"
     },
     "./dist/finmars-ui.css": "./dist/finmars-ui.css",
     "./dist/themes.css": "./dist/themes.css"
@@ -42,6 +44,8 @@
     "@storybook/theming": "^8.3.6",
     "@storybook/vue3": "^8.3.6",
     "@storybook/vue3-vite": "^8.3.6",
+    "@types/lodash": "^4.17.13",
+    "@vuedx/typescript-plugin-vue": "^0.7.6",
     "autoprefixer": "^10.4.19",
     "eslint": "^8.24.0",
     "eslint-config-prettier": "^9.1.0",
@@ -56,7 +60,10 @@
     "sass-embedded": "^1.80.4",
     "storybook": "^8.3.6",
     "tailwindcss": "^3.4.11",
-    "vite": "^5.4.10"
+    "typescript": "^5.6.3",
+    "vite": "^5.4.10",
+    "vite-plugin-dts": "^4.3.0",
+    "vue-tsc": "^2.1.10"
   },
   "dependencies": {
     "@mdi/font": "^7.4.47",

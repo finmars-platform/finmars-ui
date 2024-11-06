@@ -5,7 +5,7 @@ import { datesInMonth } from './constants'
  * @param {string} year
  * @return {string}
  */
-function processedYear(date, year) {
+function processedYear(date: string, year: string): string {
 	if (!year) {
 		return date
 	}
@@ -26,7 +26,7 @@ function processedYear(date, year) {
  * @param {string} month
  * @return {string}
  */
-function processedMonth(date, month) {
+function processedMonth(date: string, month: string): string {
 	if (!month) {
 		return date
 	}
@@ -49,7 +49,7 @@ function processedMonth(date, month) {
  * @param {string} day
  * @return {string}
  */
-function processedDay(date, year, month, day) {
+function processedDay(date: string, year: string, month: string, day: string): string {
 	if (!day) {
 		return date
 	}
@@ -76,7 +76,7 @@ function processedDay(date, year, month, day) {
  * @param {string} date
  * @return {string}
  */
-export function processedDate(date) {
+export function processedDate(date: string): string {
 	const [year, month, day] = date.split('-')
 
 	let processedValue = processedYear(date, year)
