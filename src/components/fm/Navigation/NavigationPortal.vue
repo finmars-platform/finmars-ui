@@ -88,13 +88,6 @@
 					action: undefined,
 					to: useGetNuxtLink('/reports/performance', route.value.params),
 					href: ''
-				},
-				{
-					key: 'events',
-					label: 'Events',
-					action: undefined,
-					to: '',
-					href: getUrlToOldApp('/report/check-for-events')
 				}
 			]
 		},
@@ -175,29 +168,15 @@
 							action: undefined,
 							to: '',
 							href: getUrlToOldApp('/data/strategy/2')
+						},
+						{
+							key: 'strategies-3',
+							label: 'Strategies 3',
+							action: undefined,
+							to: '',
+							href: getUrlToOldApp('/data/strategy/3')
 						}
 					]
-				},
-				{
-					key: 'events',
-					label: 'Events',
-					action: undefined,
-					to: '',
-					href: getUrlToOldApp('data/generated-event')
-				},
-				{
-					key: 'stats',
-					label: 'Stats',
-					action: undefined,
-					to: '',
-					href: getUrlToOldApp('/data-stats')
-				},
-				{
-					key: 'calendar',
-					label: 'Calendar',
-					action: undefined,
-					to: '',
-					href: getUrlToOldApp('/calendar')
 				}
 			]
 		},
@@ -248,13 +227,6 @@
 					href: getUrlToOldApp('/data/price-history')
 				},
 				{
-					key: 'prices-journal',
-					label: 'Prices journal',
-					action: undefined,
-					to: '',
-					href: getUrlToOldApp('/data/pricing-errors')
-				},
-				{
 					key: 'FX-Rates',
 					label: 'FX rates',
 					action: undefined,
@@ -262,25 +234,11 @@
 					href: getUrlToOldApp('/data/currency-history')
 				},
 				{
-					key: 'FX-Rates-Journal',
-					label: 'FX rates Journal',
-					action: undefined,
-					to: '',
-					href: getUrlToOldApp('/data/currencies-errors')
-				},
-				{
 					key: 'Run-Pricing',
 					label: 'Run Pricing',
 					action: undefined,
 					to: '',
-					href: getUrlToOldApp('/run-pricing-procedures')
-				},
-				{
-					key: 'Procedures-status',
-					label: 'Procedures status',
-					action: undefined,
-					to: '',
-					href: getUrlToOldApp('/pricing-parent-procedures')
+					href: getUrlToOldApp('/pricing-manage')
 				},
 				{
 					key: 'Portfolio-History',
@@ -312,34 +270,6 @@
 					action: undefined,
 					to: '',
 					href: getUrlToOldApp('/import/transaction-import')
-				},
-				{
-					key: 'Data-and-Transactions-from-file',
-					label: 'Import data and transactions',
-					action: undefined,
-					to: '',
-					href: getUrlToOldApp('/import/complex-import')
-				},
-				{
-					key: 'Instrument-from-provider',
-					label: 'Import instrument from provider',
-					action: undefined,
-					to: '',
-					href: getUrlToOldApp('/import/instrument-import')
-				},
-				{
-					key: 'Instrument-from-Finmars-Database',
-					label: 'Import instrument from database',
-					action: undefined,
-					to: '',
-					href: getUrlToOldApp('/import/instrument-import-cbonds')
-				},
-				{
-					key: 'Import-From-Bank',
-					label: 'Import from bank',
-					action: undefined,
-					to: '',
-					href: getUrlToOldApp('/run-data-procedures')
 				}
 			]
 		},
@@ -456,34 +386,6 @@
 							action: undefined,
 							to: '',
 							href: getUrlToOldApp('/context-menu-layout')
-						},
-						{
-							key: 'Manual-Sorting',
-							label: 'Manual Sorting',
-							action: undefined,
-							to: '',
-							href: getUrlToOldApp('/manual-sorting-layout')
-						},
-						{
-							key: 'Mobile',
-							label: 'Mobile',
-							action: undefined,
-							to: useGetNuxtLink('/dashboard/mobile', route.value.params),
-							href: ''
-						},
-						{
-							key: 'Notifications',
-							label: 'Notifications',
-							action: undefined,
-							to: '',
-							href: getUrlToOldApp('/settings/notification')
-						},
-						{
-							key: 'Interface-Complexity',
-							label: 'Interface Complexity',
-							action: undefined,
-							to: '',
-							href: getUrlToOldApp('/settings/interface')
 						}
 					]
 				},
@@ -567,49 +469,19 @@
 					]
 				},
 				{
-					key: 'Pricing',
-					label: 'Pricing',
+					key: 'Pricing-Policies',
+					label: 'Pricing policies',
 					action: undefined,
 					to: '',
-					href: '',
-					children: [
-						{
-							key: 'Schemes',
-							label: 'Schemes',
-							action: undefined,
-							to: '',
-							href: getUrlToOldApp('/pricing-schemes')
-						},
-						{
-							key: 'Policies',
-							label: 'Policies',
-							action: undefined,
-							to: '',
-							href: getUrlToOldApp('/pricing-policy')
-						},
-						{
-							key: 'Manage',
-							label: 'Manage',
-							action: undefined,
-							to: '',
-							href: getUrlToOldApp('/pricing-manage')
-						}
-					]
+					href: getUrlToOldApp('/pricing-policy')
 				},
 				{
-					key: 'Import-settings',
-					label: 'Import settings',
+					key: 'Import-schemes',
+					label: 'Import schemes',
 					action: undefined,
 					to: '',
 					href: '',
 					children: [
-						{
-							key: 'Instrument-Schemes',
-							label: 'Instrument Schemes',
-							action: undefined,
-							to: '',
-							href: getUrlToOldApp('/settings/instrument-import')
-						},
 						{
 							key: 'Data-Import',
 							label: 'Data Import',
@@ -623,43 +495,6 @@
 							action: undefined,
 							to: '',
 							href: getUrlToOldApp('/settings/transaction-import')
-						}
-					]
-				},
-				{
-					key: 'procedures',
-					label: 'Procedures',
-					action: undefined,
-					to: '',
-					href: '',
-					children: [
-						{
-							key: 'Pricing-Procedures',
-							label: 'Pricing Procedures',
-							action: undefined,
-							to: '',
-							href: getUrlToOldApp('/pricing-procedure')
-						},
-						{
-							key: 'Data-Procedures',
-							label: 'Data Procedures',
-							action: undefined,
-							to: '',
-							href: getUrlToOldApp('/data-procedure')
-						},
-						{
-							key: 'Expression-Procedures',
-							label: 'Expression Procedures',
-							action: undefined,
-							to: '',
-							href: getUrlToOldApp('/expression-procedure')
-						},
-						{
-							key: 'Schedules',
-							label: 'Schedules',
-							action: undefined,
-							to: '',
-							href: getUrlToOldApp('/schedule')
 						}
 					]
 				},
@@ -692,11 +527,11 @@
 							href: getUrlToOldApp('/settings/palette')
 						},
 						{
-							key: 'Reports',
-							label: 'Reports',
+							key: 'code-editor',
+							label: 'Code editor',
 							action: undefined,
 							to: '',
-							href: getUrlToOldApp('/settings/cross-entity-attribute-extension')
+							href: getUrlToOldApp('/editor')
 						}
 					]
 				},
@@ -713,20 +548,6 @@
 							action: undefined,
 							to: '',
 							href: getUrlToOldApp('/settings/import-configuration')
-						},
-						{
-							key: 'Export-Deprecated',
-							label: 'Export (Deprecated)',
-							action: undefined,
-							to: '',
-							href: getUrlToOldApp('/settings/export-configuration')
-						},
-						{
-							key: 'Update',
-							label: 'Update',
-							action: undefined,
-							to: '',
-							href: getUrlToOldApp('/update-configuration')
 						},
 						{
 							key: 'Manage',
@@ -747,13 +568,6 @@
 			to: '',
 			href: '',
 			children: [
-				{
-					key: 'Data-providers',
-					label: 'Data providers',
-					action: undefined,
-					to: '',
-					href: getUrlToOldApp('/settings/data-providers')
-				},
 				{
 					key: 'New-User-Setups',
 					label: 'New User Setups',
@@ -807,6 +621,16 @@
 								'/settings/permission/access-policy',
 								route.value.params
 							)
+						},
+						{
+							key: 'resource-groups',
+							label: 'Resource Groups',
+							action: undefined,
+							to: useGetNuxtLink(
+								'/settings/iam/resource-group',
+								route.value.params
+							),
+							href: ''
 						}
 					]
 				},
@@ -832,18 +656,27 @@
 					href: getUrlToOldApp('/system-dashboard')
 				},
 				{
-					key: 'Balance-Report-Instance',
-					label: 'Balance Report Instance',
+					key: 'Cache',
+					label: 'Cache',
 					action: undefined,
 					to: '',
-					href: getUrlToOldApp('/balance-report-instance')
-				},
-				{
-					key: 'PL-Report-Instance',
-					label: 'PL Report Instance',
-					action: undefined,
-					to: '',
-					href: getUrlToOldApp('/pl-report-instance')
+					href: '',
+					children: [
+						{
+							key: 'Balance-Report-Instance',
+							label: 'Balance Report Instance',
+							action: undefined,
+							to: '',
+							href: getUrlToOldApp('/balance-report-instance')
+						},
+						{
+							key: 'P&L-Report-Instance',
+							label: 'P&L Report Instance',
+							action: undefined,
+							to: '',
+							href: getUrlToOldApp('/pl-report-instance')
+						}
+					]
 				},
 				{
 					key: 'Vault',
@@ -873,16 +706,6 @@
 					label: 'White Label',
 					action: undefined,
 					to: useGetNuxtLink('/system/settings/general/', route.value.params),
-					href: ''
-				},
-				{
-					key: 'resource-groups',
-					label: 'Resource Groups',
-					action: undefined,
-					to: useGetNuxtLink(
-						'/settings/iam/resource-group',
-						route.value.params
-					),
 					href: ''
 				},
 				{
