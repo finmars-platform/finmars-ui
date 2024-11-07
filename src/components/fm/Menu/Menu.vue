@@ -75,10 +75,10 @@
 			default: true
 		},
 		contentClass: {
-			type: String,
+			type: String
 		},
 		contentClass: {
-			type: String,
+			type: String
 		},
 		height: {
 			type: [String, Number]
@@ -260,13 +260,3 @@
 		{ immediate: true }
 	)
 </script>
-
-<!--<style>-->
-<!--	.v-overlay-container {-->
-<!--		.v-overlay.v-menu {-->
-<!--			.v-overlay__content {-->
-<!--				overflow-y: hidden;-->
-<!--			}-->
-<!--		}-->
-<!--	}-->
-<!--</style>-->

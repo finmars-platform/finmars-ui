@@ -3,10 +3,7 @@
 		ref="vtf"
 		v-bind="vTextFieldProps"
 		v-maska="props.mask"
-		:class="[
-			'fm-text-field',
-			{ 'fm-text-field--placeholder': placeholder },
-		]"
+		:class="['fm-text-field', { 'fm-text-field--placeholder': placeholder }]"
 		@click:clear="emits('click:clear', $event)"
 		@click:control="onClickControl"
 		@click:prepend-inner="emits('click:prependInner', $event)"
@@ -16,7 +13,12 @@
 		@update:model-value="onUpdate"
 	>
 		<template #append-inner>
-			<VIcon v-if="showErrorIcon" icon="mdi-alert-circle" size="20" color="var(--error)" />
+			<VIcon
+				v-if="showErrorIcon"
+				icon="mdi-alert-circle"
+				size="20"
+				color="var(--error)"
+			/>
 		</template>
 	</VTextField>
 </template>
@@ -28,60 +30,63 @@
 
 	const props = defineProps({
 		modelValue: {
-			type: String,
+			type: String
 		},
 		type: {
 			type: String,
-			default: 'text',
+			default: 'text'
 		},
 		name: {
-			type: [String, undefined],
+			type: [String, undefined]
 		},
 		width: {
-			type: [String, Number, undefined],
+			type: [String, Number, undefined]
 		},
 		label: {
-			type: [String, undefined],
+			type: [String, undefined]
 		},
 		placeholder: {
-			type: [String, undefined],
+			type: [String, undefined]
 		},
 		hint: {
-			type: [String, undefined],
+			type: [String, undefined]
 		},
 		prependIcon: {
-			type: [String, undefined],
+			type: [String, undefined]
 		},
 		outlined: {
-			type: Boolean,
+			type: Boolean
 		},
 		hideDetails: {
-			type: Boolean,
+			type: Boolean
 		},
 		mask: {
-			type: [String, Object, undefined],
+			type: [String, Object, undefined]
 		},
 		messages: {
 			type: [String, Array],
-			default: () => [],
+			default: () => []
 		},
 		rules: {
 			type: Array,
-			default: () => [],
+			default: () => []
 		},
 		error: {
-			type: Boolean,
+			type: Boolean
 		},
 		errorMessages: {
 			type: [String, Array],
-			default: () => [],
+			default: () => []
 		},
 		clearable: {
-			type: Boolean,
+			type: Boolean
+		},
+		readonly: {
+			type: Boolean
 		},
 		disabled: {
-			type: Boolean,
-		},
+			type: Boolean
+		}
 	})
 
 	const emits = defineEmits([
@@ -91,7 +96,7 @@
 		'mousedown:control',
 		'update:focused',
 		'update:modelValue',
-		'change',
+		'change'
 	])
 
 	const vtf = ref()
@@ -118,7 +123,8 @@
 		error: !!props.error,
 		errorMessages: props.errorMessages,
 		clearable: !!props.clearable,
-		disabled: !!props.disabled,
+		readonly: props.readonly,
+		disabled: !!props.disabled
 	}))
 
 	const showErrorIcon = computed(() => dirty.value && !vtf.value?.isValid)
@@ -150,7 +156,7 @@
 		isValid: vtf.value?.isValid,
 		reset: vtf.value?.reset,
 		resetValidation: vtf.value?.resetValidation,
-		validate: vtf.value?.validate,
+		validate: vtf.value?.validate
 	})
 
 	watch(
@@ -160,7 +166,7 @@
 				innerValue.value = val
 			}
 		},
-		{ immediate: true },
+		{ immediate: true }
 	)
 </script>
 
