@@ -6,6 +6,8 @@ import FmCheckbox from '@/components/fm/Checkbox/Checkbox.vue'
 import FmChip from '@/components/fm/Chip/Chip.vue'
 import FmDateEditor from '@/components/fm/DateEditor/DateEditor.vue'
 import FmDatePicker from '@/components/fm/DatePicker/DatePicker.vue'
+import FmIcon from '@/components/fm/Icon/Icon.vue'
+import type { FmIconProps, FmIconSlots } from '@/components/fm/Icon/types'
 import FmIconButton from '@/components/fm/IconButton/IconButton.vue'
 import FmItemPicker from '@/components/fm/ItemPicker/ItemPicker.vue'
 import FmLogo from '@/components/fm/Logo/Logo.vue'
@@ -41,6 +43,7 @@ export {
 	FmChip,
 	FmDateEditor,
 	FmDatePicker,
+	FmIcon,
 	FmIconButton,
 	FmItemPicker,
 	FmLogo,
@@ -57,6 +60,8 @@ export {
 	FmTextField,
 	FmTooltip,
 
+	FmIconProps,
+	FmIconSlots,
 	FmPaginationProps,
 	FmPaginationEmits,
 	FmSelectProps,
@@ -125,6 +130,7 @@ declare module 'vue' {
 		FmChip: typeof FmChip,
 		FmDateEditor: typeof FmDateEditor,
 		FmDatePicker: typeof FmDatePicker,
+		FmIcon: typeof FmIcon,
 		FmIconButton: typeof FmIconButton,
 		FmItemPicker: typeof FmItemPicker,
 		FmLogo: typeof FmLogo,
