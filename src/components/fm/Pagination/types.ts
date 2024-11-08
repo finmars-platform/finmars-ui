@@ -2,7 +2,7 @@ export interface FmPaginationProps {
 	modelValue: number;
 	itemsPerPage: number;
 	totalItems: number;
-	inscriptions: {
+	locals: {
 		of?: string;
 		entities?: string;
 		page?: string;

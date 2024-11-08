@@ -30,7 +30,7 @@
 			</FmButton>
 
 			<span class="text-[14px] text-[var(--color-fmPagination)] font-medium">
-				{{ inscriptions?.page }}
+				{{ locals?.page }}
 			</span>
 
 			<FmButton
@@ -66,7 +66,7 @@
 			</FmButton>
 
 			<span class="text-[14px] text-[var(--color-fmPagination)] font-medium">
-				{{ inscriptions?.of }}&nbsp;{{ totalPages }}
+				{{ locals?.of }}&nbsp;{{ totalPages }}
 			</span>
 
 			<FmButton
@@ -102,7 +102,7 @@
 		itemsPerPage: 10,
 		totalItems: 0,
 		withInfo: true,
-		inscriptions: {
+		locals: {
 			// @ts-ignore
 			of: 'of',
 			entities: 'entities',
@@ -134,7 +134,7 @@
 		const from = (currentPage.value - 1) * props.itemsPerPage + 1
 		const to = currentPage.value * props.itemsPerPage
 
-		return `${from}-${to <= props.totalItems ? to : props.totalItems} ${props.inscriptions?.of} ${props.totalItems ?? 0} ${props.inscriptions?.entities}`
+		return `${from}-${to <= props.totalItems ? to : props.totalItems} ${props.locals?.of} ${props.totalItems ?? 0} ${props.locals?.entities}`
 	})
 
 	function changePage(val: number) {

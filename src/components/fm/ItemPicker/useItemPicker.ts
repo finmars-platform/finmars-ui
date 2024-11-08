@@ -59,21 +59,21 @@ export default function useItemPicker(props: any, emits: any) {
 		if (!searchText.value) {
 			props.suggested && !isEmpty(props.suggested) && val.push({
 				id: 'suggested',
-				label: props.fieldsTitles.suggestedLabel,
+				label: props.locals.suggestedLabel,
 				children: props.suggested
 			})
 
 			props.multiple && val.push({
 				id: 'selected',
 				label: isEmpty(selectedItemsIds.value)
-					? props.fieldsTitles.selectedLabel
-					: `${props.fieldsTitles.selectedLabel} (${selectedItemsIds.value.length})`,
+					? props.locals.selectedLabel
+					: `${props.locals.selectedLabel} (${selectedItemsIds.value.length})`,
 				children: selectedItems.value
 			})
 		} else {
 			val.push({
 				id: 'search-result',
-				label: props.fieldsTitles.allCategoriesLabel,
+				label: props.locals.allCategoriesLabel,
 				children: allDataFlattenedFiltered.value
 			})
 		}
