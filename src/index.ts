@@ -13,6 +13,7 @@ import FmItemPicker from '@/components/fm/ItemPicker/ItemPicker.vue'
 import FmLogo from '@/components/fm/Logo/Logo.vue'
 import FmMenu from '@/components/fm/Menu/Menu.vue'
 import FmNavigationPortal from '@/components/fm/Navigation/NavigationPortal.vue'
+import FmNavigation from '@/components/fm/Navigation/Navigation.vue'
 import FmPagination from '@/components/fm/Pagination/Pagination.vue'
 import type { FmPaginationProps, FmPaginationEmits } from '@/components/fm/Pagination/types'
 import FmProgressCircular from '@/components/fm/ProgressCircular/ProgressCircular.vue'
@@ -35,6 +36,7 @@ import '@mdi/font/css/materialdesignicons.css'
 export {
 	FmHeader,
 	FmNavigationPortal,
+	FmNavigation,
 
 	FmAvatar,
 	FmBadge,
@@ -93,6 +95,7 @@ export const uiComponentsPlugin = {
 		Vue.use(vuetify)
 
 		Vue.component(`${prefix}NavigationPortal`, FmNavigationPortal)
+		Vue.component(`${prefix}Navigation`, FmNavigation)
 		Vue.component(`${prefix}Header`, FmHeader)
 		Vue.component(`${prefix}Avatar`, FmAvatar)
 		Vue.component(`${prefix}Badge`, FmBadge)
@@ -123,6 +126,7 @@ export const uiComponentsPlugin = {
 declare module 'vue' {
 	interface GlobalComponents {
 		FmNavigationPortal: typeof FmNavigationPortal,
+		FmNavigation: typeof FmNavigation,
 		FmHeader: typeof FmHeader,
 		FmAvatar: typeof FmAvatar,
 		FmBadge: typeof FmBadge,
