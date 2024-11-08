@@ -101,6 +101,7 @@ export const uiComponentsPlugin = {
 		Vue.component(`${prefix}Chip`, FmChip)
 		Vue.component(`${prefix}DateEditor`, FmDateEditor)
 		Vue.component(`${prefix}DatePicker`, FmDatePicker)
+		Vue.component(`${prefix}Icon`, FmIcon)
 		Vue.component(`${prefix}IconButton`, FmIconButton)
 		Vue.component(`${prefix}ItemPicker`, FmItemPicker)
 		Vue.component(`${prefix}Logo`, FmLogo)
