@@ -72,6 +72,7 @@
 
 	const props = withDefaults(defineProps<FmSelectProps<T>>(), {
 		density: 'comfortable',
+		baseColor: 'var(--on-surface-variant)',
 		bgColor: 'var(--surface-container)',
 		color: 'var(--on-surface-variant)',
 		clearable: true,
@@ -95,10 +96,10 @@
 <style>
 	.v-overlay-container {
 		.v-overlay__content.v-select__content {
-			background-color: var(--surface-container);
+			background-color: var(--surface-container) !important;
 
 			.v-list {
-				color: var(--on-surface-variant);
+				color: var(--on-surface-variant) !important;
 				background-color: var(--surface-container) !important;
 			}
 		}

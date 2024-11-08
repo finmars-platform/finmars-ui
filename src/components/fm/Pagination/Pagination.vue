@@ -169,23 +169,33 @@
 	}
 
 	watch(
-		[() => props.totalItems, () => props.itemsPerPage],
-		() => {
-			if (currentPage.value !== 1) {
+		[() => props.totalItems, () => props.itemsPerPage, () => props.modelValue],
+		([totalItems, itemsPerPage, modelValue], [totalItemsOld, itemsPerPageOld, modelValueOld]) => {
+			const isTotalValueChanged = totalItemsOld !== totalItems
+			const isPerPageValueChanged = itemsPerPageOld !== itemsPerPage
+			const isValueChanged = modelValueOld !== modelValue
+
+			if (
+				(
+					(isTotalValueChanged && totalItemsOld !== 0) ||
+					(isPerPageValueChanged && itemsPerPageOld !== 0)
+				) &&
+				!isValueChanged &&
+				currentPage.value !== 1
+		 	) {
 				currentPage.value = 1
 				emits('update:modelValue', 1)
 			}
-		},
-		{ immediate: true }
-	)
 
-	watch(
-		() => props.modelValue,
-		(val) => {
-			if (val !== currentPage.value) {
-				currentPage.value = val
+			if (
+				isValueChanged &&
+				currentPage.value !== modelValue &&
+				modelValue > 0 &&
+				modelValue <= totalPages.value
+			) {
+				currentPage.value = modelValue
 			}
-		}
+		},
 	)
 </script>
 
