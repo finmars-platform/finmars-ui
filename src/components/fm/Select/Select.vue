@@ -16,7 +16,12 @@
 		</template>
 
 		<template v-if="slots.chip" #chip="{ item, index, props }">
-			<slot name="chip" :item="item" :index="index" :props="props" />
+			<slot
+				name="chip"
+				:item="item"
+				:index="index"
+				:props="props"
+			/>
 		</template>
 
 		<template
@@ -60,7 +65,12 @@
 		</template>
 
 		<template v-if="slots.selection" #selection="{ item, index }">
-			<slot name="selection" :item="item" :index="index" />
+			<div
+				class="fm-select__selection"
+				@click.stop.prevent="emits('click:selection', $event)"
+			>
+				<slot name="selection" :item="item" :index="index" />
+			</div>
 		</template>
 	</VSelect>
 </template>
@@ -112,6 +122,12 @@
 			.v-field--variant-solo {
 				box-shadow: none;
 			}
+		}
+
+		&__selection {
+			position: relative;
+			width: max-content;
+			max-width: 100%;
 		}
 	}
 </style>

@@ -63,6 +63,7 @@ export interface FmSelectEmits<T> {
 	(event: 'click:clear', value: MouseEvent): void;
 	(event: 'click:prepend', value: MouseEvent): void;
 	(event: 'click:prependInner', value: MouseEvent): void;
+	(event: 'click:selection', value: MouseEvent): void;
 	(event: 'update:focused', value: boolean): void;
 	(event: 'update:modelValue', value: T | T[keyof T] | unknown): void;
 }

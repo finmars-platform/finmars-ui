@@ -3,10 +3,7 @@
 		ref="vtf"
 		v-bind="vTextFieldProps"
 		v-maska="props.mask"
-		:class="[
-			'fm-text-field',
-			{ 'fm-text-field--placeholder': placeholder },
-		]"
+		class="fm-text-field"
 		@click:clear="emits('click:clear', $event)"
 		@click:control="onClickControl"
 		@click:prepend-inner="emits('click:prependInner', $event)"
@@ -15,14 +12,39 @@
 		@update:focused="onFocused"
 		@update:model-value="onUpdate"
 	>
-		<template #append-inner>
-			<VIcon v-if="showErrorIcon" icon="mdi-alert-circle" size="20" color="var(--error)" />
+		<template v-if="slots['append-inner']" #append-inner>
+			<VIcon
+				v-if="showErrorIcon"
+				icon="mdi-alert-circle"
+				size="20"
+				color="var(--error)"
+			/>
+		</template>
+
+		<template
+			v-if="slots['label']"
+			#label="{ isActive, isFocused, controlRef }"
+		>
+			<slot
+				name="label"
+				:is-active="isActive"
+				:is-focused="isFocused"
+				:control-ref="controlRef"
+			/>
+		</template>
+
+		<template v-if="slots['message']" #message="{ message }">
+			<slot name="message" :message="message" />
+		</template>
+
+		<template #default>
+			<slot />
 		</template>
 	</VTextField>
 </template>
 
 <script setup>
-	import { computed, ref, watch } from 'vue'
+	import { computed, ref, watch, useSlots } from 'vue'
 	import { vMaska } from 'maska/vue'
 	import { VIcon, VTextField } from 'vuetify/components'
 
@@ -33,6 +55,18 @@
 		type: {
 			type: String,
 			default: 'text'
+		},
+		autofocus: {
+			type: Boolean
+		},
+		bgColor: {
+			type: String
+		},
+		color: {
+			type: String
+		},
+		id: {
+			type: String
 		},
 		name: {
 			type: [String, undefined]
@@ -45,6 +79,9 @@
 		},
 		placeholder: {
 			type: [String, undefined]
+		},
+		persistentPlaceholder: {
+			type: Boolean
 		},
 		hint: {
 			type: [String, undefined]
@@ -60,6 +97,9 @@
 		},
 		mask: {
 			type: [String, Object, undefined]
+		},
+		suffix: {
+			type: String
 		},
 		messages: {
 			type: [String, Array],
@@ -80,7 +120,7 @@
 			type: Boolean
 		},
 		readonly: {
-			type: Boolean,
+			type: Boolean
 		},
 		disabled: {
 			type: Boolean
@@ -97,26 +137,35 @@
 		'change'
 	])
 
+	const slots = useSlots()
+
 	const vtf = ref()
 	const dirty = ref(false)
 	const innerValue = ref(props.modelValue)
 
 	const vTextFieldProps = computed(() => ({
-		color: 'var(--color-fmTextField)',
-		bgColor: props.outlined
-			? 'var(--backgroundColor-fmTextField-outlined)'
-			: 'var(--backgroundColor-fmTextField)',
+		color: props.colot || 'var(--color-fmTextField)',
+		bgColor:
+			props.bgColor || props.outlined
+				? 'var(--backgroundColor-fmTextField-outlined)'
+				: 'var(--backgroundColor-fmTextField)',
 		modelValue: innerValue.value,
+		autofocus: props.autofocus,
 		type: props.type,
 		...(props.label && { label: props.label }),
 		...(props.placeholder && { placeholder: props.placeholder }),
 		...(props.hint && { hint: props.hint, persistentHint: true }),
 		...(props.prependIcon && { prependInnerIcon: props.prependIcon }),
 		...(props.clearable && { clearable: true, persistentClear: true }),
+		persistentPlaceholder:
+			props.persistentPlaceholder || (props.placeholder && props.outlined),
 		width: props.width,
 		variant: props.outlined ? 'outlined' : 'filled',
 		hideDetails: props.hideDetails,
 		messages: props.messages,
+		id: props.id,
+		name: props.name,
+		suffix: props.suffix,
 		rules: props.rules,
 		error: !!props.error,
 		errorMessages: props.errorMessages,
@@ -150,6 +199,7 @@
 	}
 
 	defineExpose({
+		controlRef: vtf.value?.controlRef,
 		errorMessages: vtf.value?.errorMessages,
 		isValid: vtf.value?.isValid,
 		reset: vtf.value?.reset,
@@ -210,34 +260,34 @@
 			}
 		}
 
-		&.fm-text-field--placeholder {
-			:deep(.v-input__control) {
-				.v-field__field {
-					.v-label.v-field-label--floating {
-						visibility: visible;
-					}
+		// &.fm-text-field--placeholder {
+		// 	:deep(.v-input__control) {
+		// 		.v-field__field {
+		// 			.v-label.v-field-label--floating {
+		// 				visibility: visible;
+		// 			}
 
-					.v-label:not(.v-field-label--floating) {
-						display: none;
-					}
+		// 			.v-label:not(.v-field-label--floating) {
+		// 				display: none;
+		// 			}
 
-					.v-field__input {
-						opacity: 1;
-					}
-				}
+		// 			.v-field__input {
+		// 				opacity: 1;
+		// 			}
+		// 		}
 
-				.v-field__outline {
-					.v-field__outline__notch {
-						&:before {
-							opacity: 0;
-						}
+		// 		.v-field__outline {
+		// 			.v-field__outline__notch {
+		// 				&:before {
+		// 					opacity: 0;
+		// 				}
 
-						.v-label {
-							visibility: visible;
-						}
-					}
-				}
-			}
-		}
+		// 				.v-label {
+		// 					visibility: visible;
+		// 				}
+		// 			}
+		// 		}
+		// 	}
+		// }
 	}
 </style>
