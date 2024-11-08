@@ -10,7 +10,7 @@
 		<div class="toolbar">
 			<FmTextField
 				v-model="searchText"
-				:placeholder="fieldsTitles.searchPlaceholder"
+				:placeholder="locals.searchPlaceholder"
 				prepend-icon="mdi-magnify"
 				hide-details
 				clearable
@@ -65,7 +65,7 @@
 						v-if="!currentCategory?.children || !currentCategory?.children.length"
 						class="empty"
 					>
-						{{ fieldsTitles.noResultText }}
+						{{ locals.noResultText }}
 					</div>
 
 					<template v-else>
@@ -103,7 +103,7 @@
 				rounded
 				@click="emits('close')"
 			>
-				{{ fieldsTitles.cancelBtn }}
+				{{ locals.cancelBtn }}
 			</FmButton>
 
 			<FmButton
@@ -111,7 +111,7 @@
 				:disabled="addBtnDisabled"
 				@click="updateValue"
 			>
-				{{ mode === 'add' ? fieldsTitles.addBtn : fieldsTitles.updateBtn }}
+				{{ mode === 'add' ? locals.addBtn : locals.updateBtn }}
 			</FmButton>
 		</div>
 	</div>
@@ -172,7 +172,7 @@
 			type: [String, Number],
 			default: 380
 		},
-		fieldsTitles: {
+		locals: {
 			type: Object,
 			default: () => ({
 				searchPlaceholder: 'Search',

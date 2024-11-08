@@ -75,10 +75,7 @@
 			default: true
 		},
 		contentClass: {
-			type: String
-		},
-		contentClass: {
-			type: String
+			type: String,
 		},
 		height: {
 			type: [String, Number]

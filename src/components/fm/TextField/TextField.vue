@@ -3,7 +3,10 @@
 		ref="vtf"
 		v-bind="vTextFieldProps"
 		v-maska="props.mask"
-		:class="['fm-text-field', { 'fm-text-field--placeholder': placeholder }]"
+		:class="[
+			'fm-text-field',
+			{ 'fm-text-field--placeholder': placeholder },
+		]"
 		@click:clear="emits('click:clear', $event)"
 		@click:control="onClickControl"
 		@click:prepend-inner="emits('click:prependInner', $event)"
@@ -13,12 +16,7 @@
 		@update:model-value="onUpdate"
 	>
 		<template #append-inner>
-			<VIcon
-				v-if="showErrorIcon"
-				icon="mdi-alert-circle"
-				size="20"
-				color="var(--error)"
-			/>
+			<VIcon v-if="showErrorIcon" icon="mdi-alert-circle" size="20" color="var(--error)" />
 		</template>
 	</VTextField>
 </template>
@@ -82,7 +80,7 @@
 			type: Boolean
 		},
 		readonly: {
-			type: Boolean
+			type: Boolean,
 		},
 		disabled: {
 			type: Boolean

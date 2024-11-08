@@ -8,7 +8,7 @@
 					{ 'fm-date-editor__menu-item--selected': currentMenuItem === 'custom' }
 				]"
 			>
-				{{ labelTexts.menuItemCustom }}
+				{{ locals.menuItemCustom }}
 			</div>
 
 			<div class="fm-date-editor__menu--delimiter" />
@@ -20,7 +20,7 @@
 				]"
 				@click="selectMenuItem('today')"
 			>
-				{{ labelTexts.menuPresetToday }}
+				{{ locals.menuPresetToday }}
 			</div>
 
 			<div
@@ -30,15 +30,15 @@
 				]"
 				@click="selectMenuItem('previous')"
 			>
-				{{ labelTexts.menuPresetPrevious }}
+				{{ locals.menuPresetPrevious }}
 			</div>
 		</div>
 
 		<div class="fm-date-editor__body">
 			<FmTextField
 				:model-value="textFieldInput"
-				:label="labelTexts.enteringFieldLabel"
-				:placeholder="labelTexts.enteringFieldPlaceholder"
+				:label="locals.enteringFieldLabel"
+				:placeholder="locals.enteringFieldPlaceholder"
 				outlined
 				hide-details
 				mask="####-##-##"
@@ -68,7 +68,7 @@
 					:disabled="innerValue === initialValue"
 					@click="cancelDateSelection"
 				>
-					{{ labelTexts.cancelButtonText }}
+					{{ locals.cancelButtonText }}
 				</FmButton>
 
 				<FmButton
@@ -76,7 +76,7 @@
 					:disabled="innerValue === initialValue"
 					@click="confirmDateSelection"
 				>
-					{{ labelTexts.confirmButtonText }}
+					{{ locals.confirmButtonText }}
 				</FmButton>
 			</div>
 		</div>
@@ -91,7 +91,7 @@
 	import FmDatePicker from '@/components/fm/DatePicker/DatePicker.vue'
 
 	const props = defineProps({
-		labelTexts: {
+		locals: {
 			type: Object,
 			default() {
 				return {
