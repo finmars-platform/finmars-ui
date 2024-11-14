@@ -1,4 +1,3 @@
-import { ref, watch } from 'vue'
 import FmSelect from '@/components/fm/Select/Select.vue'
 import SelectDemo from './SelectDemo.vue'
 
@@ -11,28 +10,7 @@ const meta = {
 
 export default meta
 
-export const Default = {
-	render: (args) => ({
-		components: {
-			FmSelect
-		},
-		setup() {
-			const key = ref(1)
-
-			watch(args, () => {
-				key.value = new Date().getTime()
-			})
-
-			return {
-				args,
-				key
-			}
-		},
-		template: `<FmSelect v-bind="args" :key="key"/>`
-	})
-}
-
-export const AllVariants = {
+export const Demo = {
 	render: (args) => ({
 		components: {
 			SelectDemo

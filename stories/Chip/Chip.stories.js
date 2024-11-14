@@ -6,7 +6,9 @@ const meta = {
 	title: 'Components/FmChip',
 	component: FmChip,
 	argTypes: {},
-	args: {},
+	args: {
+		value: 'Label'
+	},
 }
 
 export default meta
@@ -36,7 +38,7 @@ export const General = {
 	})
 }
 
-export const AllVariants = {
+export const Demo = {
 	render: (args) => ({
 		components: {
 			ChipDemo
