@@ -10,13 +10,25 @@ const meta = {
 			control: 'select',
 			options: ['thin', 'bold']
 		},
-		type: {
+		variant: {
 			control: 'select',
 			options: ['normal', 'large']
 		},
-		dot: {
+		icon: {
 			control: 'select',
-			options: ['row', 'column']
+			options: undefined
+		},
+		size: {
+			control: 'select',
+			options: ['normal', 'small']
+		},
+		appendIcon: {
+			control: 'select',
+			options: false
+		},
+		prependIcon: {
+			control: 'select',
+			options: false
 		}
 	},
 	args: {
@@ -24,6 +36,10 @@ const meta = {
 		type: 'normal',
 		dot: '',
 		defaultTab: 0,
+		icon: undefined,
+		size: 'normal',
+		appendIcon: false,
+		prependIcon: false,
 		disabled: false
 	}
 }

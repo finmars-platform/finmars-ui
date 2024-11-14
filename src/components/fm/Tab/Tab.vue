@@ -1,21 +1,26 @@
 <template>
-	<VTabs show-arrows v-model="activeTab" :class="`${type}`" class="general-tab">
+	<VTabs v-model="activeTab" class="general-tab" :class="`${variant}`">
 		<VTab
 			v-for="(tab, index) in tabs"
 			:key="index"
-			:class="`${filteredUnderline}`"
+			:class="`${lineClasses}`"
 			:disabled="disabled"
 			@click="handleTabClick(index)"
-			@mousedown="handleMouseDown"
-			@mouseup="removeBackgroundEffect"
-			@mouseleave="removeBackgroundEffect"
 		>
-			<div>
-				<div :class="dot ? dot : ''">
-					<span v-if="dot" class="circle" />
-					<span>{{ tab.label }}</span>
-				</div>
-			</div>
+			<template #default>
+				<slot>
+					<div
+						class="tab-wrapper"
+						:class="{
+							row: appendIcon,
+							column: prependIcon
+						}"
+					>
+						<VIcon v-if="icon" :icon="icon" :size="iconSize" />
+						<span>{{ tab.label }}</span>
+					</div>
+				</slot>
+			</template>
 		</VTab>
 	</VTabs>
 </template>
@@ -36,18 +41,30 @@
 				return ['thin', 'bold'].includes(value)
 			}
 		},
-		type: {
+		variant: {
 			type: String,
 			default: 'normal',
 			validator(value) {
 				return ['normal', 'large'].includes(value)
 			}
 		},
-		dot: {
+		icon: {
 			type: String,
-			default: '',
+			default: undefined
+		},
+		appendIcon: {
+			type: Boolean,
+			default: false
+		},
+		prependIcon: {
+			type: Boolean,
+			default: false
+		},
+		size: {
+			type: String,
+			default: 'normal',
 			validator(value) {
-				return ['row', 'column'].includes(value)
+				return ['normal', 'small'].includes(value)
 			}
 		},
 		defaultTab: {
@@ -63,27 +80,22 @@
 	const activeTab = ref(props.defaultTab)
 	const emits = defineEmits(['changeTab'])
 
-	const filteredUnderline = computed(() => {
-		if (props.dot.length && props.dot === 'column') {
+	const lineClasses = computed(() => {
+		if (props.icon === 'column') {
 			return 'bold'
-		} else {
-			if (props.underline !== 'thin' && props.underline !== 'bold') {
-				return 'thin'
-			} else {
-				return props.underline
-			}
 		}
+		return props.underline === 'thin' || props.underline === 'bold'
+			? props.underline
+			: 'thin'
 	})
 
-	const handleMouseDown = (event) => {
-		const tab = event.currentTarget
-		tab.classList.add('ripple-effect')
-	}
-
-	const removeBackgroundEffect = (event) => {
-		const tab = event.currentTarget
-		tab.classList.remove('ripple-effect')
-	}
+	const iconSize = computed(() => {
+		if (props.size === 'small') {
+			return '12'
+		} else {
+			return '18'
+		}
+	})
 
 	const handleTabClick = (index) => {
 		activeTab.value = index
@@ -107,57 +119,34 @@
 			padding: 0 var(--spacing-32);
 		}
 
-		:deep(.v-ripple__container) {
-			display: none;
-		}
+		.tab-wrapper {
+			display: flex;
+			align-items: center;
+			gap: var(--spacing-8);
 
-		.circle {
-			width: var(--spacing-12);
-			height: var(--spacing-12);
-			border-radius: 100%;
-			background: var(--on-surface-variant);
-		}
+			&.row {
+				flex-direction: row;
+				flex-wrap: nowrap;
+			}
 
-		:deep(.v-tab__slider) {
-			left: unset;
-			color: var(--primary);
-		}
-
-		.ripple-effect {
-			position: relative;
-			overflow: hidden;
-		}
-
-		.ripple-effect::before {
-			content: '';
-			position: absolute;
-			top: 0;
-			right: 0;
-			width: 51%;
-			height: 100%;
-			background: var(--on-active-primary);
-			border-radius: 45% 0 0 45%;
-			transform: scale(1.8);
-			transition: background 0.3s ease;
+			&.column {
+				flex-direction: column;
+			}
 		}
 
 		.v-tab--selected {
-			.circle {
-				background: var(--primary);
+			:deep(.v-tab__slider) {
+				left: unset;
 			}
 
 			&.bold {
 				color: var(--primary);
 
-				&.ripple-effect::before {
-					background: var(--on-active-secondary);
-				}
-
 				:deep(.v-tab__slider) {
 					height: var(--spacing-4);
 					border-top-left-radius: var(--spacing-4);
 					border-top-right-radius: var(--spacing-4);
-					width: 40%;
+					width: 50%;
 				}
 			}
 
@@ -168,25 +157,6 @@
 					height: 3px;
 				}
 			}
-		}
-
-		.row {
-			display: flex;
-			flex-direction: row;
-			flex-wrap: nowrap;
-			align-items: center;
-
-			.circle {
-				margin-right: var(--spacing-16);
-			}
-		}
-
-		.column {
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-			gap: 10px;
-			margin-bottom: 10px;
 		}
 	}
 </style>
