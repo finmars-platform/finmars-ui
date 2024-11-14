@@ -121,6 +121,9 @@
     --nv-95: #ffede8;
     --nv-99: #fffbfc;
     --nv-100: #fff;
+
+    --v-theme-overlay-multiplier: 1;
+  
     --go-0: #1d1b201f;
     --go-10: #6750a41f;
     --go-20: #D0BCFF1F;

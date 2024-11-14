@@ -44,7 +44,6 @@ import FmTab from '@/components/fm/Tab/Tab.vue'
 import FmHeader from '../stories/Header.vue'
 import { createVuetify } from 'vuetify'
 import '@/assets/css/tailwind.css'
-import 'vuetify/styles'
 import '@mdi/font/css/materialdesignicons.css'
 
 export * from '@/types'

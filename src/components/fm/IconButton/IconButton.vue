@@ -1,9 +1,9 @@
 <template>
 	<VBtn
-		rounded="xl"
 		:variant="variant"
 		:disabled="disabled"
 		:size="buttonSize"
+		:icon="icon"
 		:color="fmIconBtnColor.btnColor"
 		:style="{ opacity: disabled ? '0.3' : '1' }"
 	>
