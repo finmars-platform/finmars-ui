@@ -1,5 +1,6 @@
 <template>
 	<div
+		:id="id"
 		class="relative w-full flex flex-row items-center justify-start px-[12px] hover:bg-[var(--surface-container-highest)]"
 		:class="{
 			'h-[56px]': itemSize === 'large',
@@ -7,7 +8,9 @@
 			'h-[40px]': itemSize === 'small',
 			'cursor-pointer': !disabled && !itemDisabled,
 			'cursor-default': disabled || itemDisabled,
-			'pointer-events-none': disabled || itemDisabled
+			'pointer-events-none': disabled || itemDisabled,
+			'bg-[var(--secondary-container)]': itemSelected,
+			'bg-[var(--surface-container-highest)]': itemActive
 		}"
 	>
 		<slot />
@@ -27,7 +30,10 @@
 <script setup>
 	import { VIcon } from 'vuetify/components'
 
-	defineProps({
+	const props = defineProps({
+		id: {
+			type: String
+		},
 		item: {
 			type: Object
 		},
@@ -38,7 +44,13 @@
 			type: String
 		},
 		itemDisabled: {
-			type: String
+			type: Boolean
+		},
+		itemSelected: {
+			type: Boolean
+		},
+		itemActive: {
+			type: Boolean
 		},
 		disabled: {
 			type: Boolean

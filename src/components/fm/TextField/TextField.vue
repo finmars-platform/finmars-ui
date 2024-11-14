@@ -7,9 +7,10 @@
 		@click:clear="emits('click:clear', $event)"
 		@click:control="onClickControl"
 		@click:prepend-inner="emits('click:prependInner', $event)"
+		@focusin="emits('focus', $event)"
+		@focusout="emits('blur', $event)"
 		@mousedown:control="emits('mousedown:control', $event)"
 		@keydown.enter="onKeydownEnter"
-		@update:focused="onFocused"
 		@update:model-value="onUpdate"
 	>
 		<template v-if="slots['append-inner']" #append-inner>
@@ -47,6 +48,7 @@
 	import { computed, ref, watch, useSlots } from 'vue'
 	import { vMaska } from 'maska/vue'
 	import { VIcon, VTextField } from 'vuetify/components'
+	import { ClickOutside } from 'vuetify/directives'
 
 	const props = defineProps({
 		modelValue: {
@@ -86,6 +88,12 @@
 		hint: {
 			type: [String, undefined]
 		},
+		appendIcon: {
+			type: [String, undefined]
+		},
+		appendInnerIcon: {
+			type: [String, undefined]
+		},
 		prependIcon: {
 			type: [String, undefined]
 		},
@@ -116,6 +124,9 @@
 			type: [String, Array],
 			default: () => []
 		},
+		focused: {
+			type: Boolean
+		},
 		clearable: {
 			type: Boolean
 		},
@@ -132,7 +143,8 @@
 		'click:control',
 		'click:prependInner',
 		'mousedown:control',
-		'update:focused',
+		'focus',
+		'blur',
 		'update:modelValue',
 		'change'
 	])
@@ -159,6 +171,8 @@
 		...(props.clearable && { clearable: true, persistentClear: true }),
 		persistentPlaceholder:
 			props.persistentPlaceholder || (props.placeholder && props.outlined),
+		appendIcon: props.appendIcon,
+		appendInnerIcon: props.appendInnerIcon,
 		width: props.width,
 		variant: props.outlined ? 'outlined' : 'filled',
 		hideDetails: props.hideDetails,
@@ -169,6 +183,7 @@
 		rules: props.rules,
 		error: !!props.error,
 		errorMessages: props.errorMessages,
+		focused: props.focused,
 		clearable: !!props.clearable,
 		readonly: props.readonly,
 		disabled: !!props.disabled

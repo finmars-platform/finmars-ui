@@ -1,103 +1,79 @@
-import type { ComputedRef, Ref, VNode } from 'vue'
+import { VNode } from 'vue'
 
-interface ListItem<T = any> {
-	title: string;
-	props: {
-		[key: string]: any;
-		title: string;
-		value: any;
-	}
-	children?: ListItem<T>[];
+export interface FmSelectOption {
+	title?: string;
+	value: string;
 }
 
-export interface FmSelectProps<T> {
-	appendIcon?: string;
-	bgColor?: string;
-	color?: string;
-	density: 'default' | 'comfortable' | 'compact';
-	chips?: boolean;
-	clearable?: boolean;
-	closableChips?: boolean;
-	disabled?: boolean;
-	error?: boolean;
-	errorMessages?: string | string[];
-	focused?: boolean;
-	hideDetails?: boolean;
-	hideNoData?: boolean;
-	hideSelected?: boolean;
-	hint?: string;
-	itemProps?: string | boolean;
-	items: T[];
-	itemTitle?: keyof T | string | any;
-	itemValue?: keyof T | string | any;
-	loading?: boolean;
-	menu?: boolean;
-	menuProps?: any;
-	messages?: string | string[];
-	maxWidth?: number | string;
-	minWidth?: number | string;
-	width?: number | string;
-	modelValue?: T | T[keyof T] | any;
-	multiple?: boolean;
-	name?: string;
-	noDataText?: string;
-	openOnClear?: boolean;
+export interface FmSelectActivatorProps {
+	value: string;
+	isDropdownOpened?: boolean;
+	variant: 'standard' | 'outlined';
+	label?: string;
 	placeholder?: string;
-	prependIcon?: string | any;
-	prependInnerIcon?: string | any;
-	readonly?: boolean;
-	returnObject?: boolean;
-	rounded?: string | number | boolean;
-	singleLine?: boolean;
-	tile?: boolean;
-	variant?: 'outlined'
-		| 'plain'
-		| 'underlined'
-		| 'filled'
-		| 'solo'
-		| 'solo-inverted'
-		| 'solo-filled';
+	persistentPlaceholder?: boolean;
+	prependIcon?: string;
+	clearIcon?: string;
+	clearable?: boolean;
+	chip?: boolean;
+	width?: number | string;
+	error?: boolean;
+	loading?: boolean;
+	disabled?: boolean;
 }
 
-export interface FmSelectEmits<T> {
+export interface FmSelectActivatorSlots {
+	default: () => VNode;
+}
+
+export interface FmSelectActivatorEmits {
+	(event: 'init', value: HTMLDivElement): void;
+	(event: 'focus', value: FocusEvent): void;
+	(event: 'blur', value: FocusEvent): void;
 	(event: 'click:clear', value: MouseEvent): void;
-	(event: 'click:prepend', value: MouseEvent): void;
-	(event: 'click:prependInner', value: MouseEvent): void;
-	(event: 'click:selection', value: MouseEvent): void;
-	(event: 'update:focused', value: boolean): void;
-	(event: 'update:modelValue', value: T | T[keyof T] | unknown): void;
+	(event: 'click:prependIcon', value: MouseEvent): void;
+	(event: 'keydown', value: { event: KeyboardEvent, key: 'down' | 'up' | 'esc' | 'enter' | 'space' | 'tab' }): void;
 }
 
-export interface FmSelectSlots<T> {
-	'append-inner': (props: {
-		isActive: Ref<boolean>;
-		isFocused: Ref<boolean>;
-		controlRef: Ref<HTMLElement | undefined>
-	}) => VNode;
-	chip: (props: { item: ListItem<T>; index: number; props: Record<string, any> }) => VNode;
-	clear: (props: {
-		isActive: Ref<boolean>;
-		isFocused: Ref<boolean>;
-		controlRef: Ref<HTMLElement | undefined>
-	}) => VNode;
-	details: (props: {
-		id: ComputedRef<string>;
-		messagesId: ComputedRef<string>;
-		isDirty: ComputedRef<boolean>;
-		isDisabled: ComputedRef<boolean>;
-		isReadonly: ComputedRef<boolean>;
-		isPristine: Ref<boolean>;
-		isValid: ComputedRef<boolean | null>;
-		isValidating: Ref<boolean>;
-	}) => VNode;
-	item: (props: { item: ListItem<T>; index: number; props: Record<string, any> }) => VNode;
-	loader: (props: { color?: string; isActive: boolean }) => VNode;
-	message: (props: { message: string }) => VNode;
+export interface FmSelectProps<T extends FmSelectOption, K extends string & keyof T> {
+	modelValue: T[K] | Array<T[K]> | T | T[];
+	options: T[];
+	itemSize?: 'small' | 'medium' | 'large';
+	variant?: 'standard' | 'outlined';
+	label?: string;
+	placeholder?: string;
+	persistentPlaceholder?: boolean;
+	prependIcon?: string;
+	clearIcon?: string;
+	multiple?: boolean;
+	returnObject?: boolean;
+	chip?: boolean;
+	clearable?: boolean;
+	error?: boolean;
+	width?: number | string;
+	titleKey?: K | string;
+	valueKey?: K | string;
+	rules?: Array<(value: T) => boolean | string>
+	loading?: boolean;
+	noDataText?: string;
+	disabled?: boolean;
+}
+
+export interface FmSelectEmits<T extends FmSelectOption, K extends string & keyof T> {
+	(event: 'click:prependIcon', value: MouseEvent): void;
+	(event: 'click:clear', value: MouseEvent): void;
+	(event: 'focus', value: FocusEvent): void;
+	(event: 'blur', value: FocusEvent): void;
+	(event: 'update:menu', value: boolean): void;
+	(event: 'change', value: T[K] | Array<T[K]> | T | T[] | null): void;
+	(event: 'update:modelValue', value: T[K] | Array<T[K]> | T | T[] | null): void;
+}
+
+export interface FmSelectSlots<T extends FmSelectOption> {
+	'prepend-icon': () => VNode;
+	'clear-icon': () => VNode;
+	item: (props: { item: T; index: number }) => VNode;
+	loader: () => VNode;
 	'no-data': () => VNode;
-	'prepend-inner': (props: {
-		isActive: Ref<boolean>;
-		isFocused: Ref<boolean>;
-		controlRef: Ref<HTMLElement | undefined>
-	}) => VNode;
-	selection: (props: { item: ListItem<T>; index: number }) => VNode;
+	selection: (props: { value: T[] }) => VNode;
 }
