@@ -121,6 +121,8 @@
   --nv-95: #ffede8;
   --nv-99: #fffbfc;
   --nv-100: #fff;
+
+  --v-theme-overlay-multiplier: 1;
 }
 
 .light-theme {
