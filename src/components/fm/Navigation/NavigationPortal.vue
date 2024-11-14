@@ -335,8 +335,8 @@
 					key: 'tasks',
 					label: 'Tasks',
 					action: undefined,
-					to: '',
-					href: getUrlToOldApp('/task')
+					to: useGetNuxtLink('/system/task/', route.value.params),
+					href: ''
 				},
 				{
 					key: 'workers',
