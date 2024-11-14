@@ -4,9 +4,10 @@ import vuetify from 'vite-plugin-vuetify'
 import dts from 'vite-plugin-dts'
 import svgLoader from 'vite-svg-loader'
 import { resolve } from 'node:path'
+import vueDevTools from 'vite-plugin-vue-devtools';
 
 export default defineConfig({
-	plugins: [vue(), vuetify(), svgLoader(), dts({ insertTypesEntry: true })],
+	plugins: [vue(), vuetify(), svgLoader(), vueDevTools(), dts({ insertTypesEntry: true })],
 	resolve: {
 		alias: {
 			'@': resolve(__dirname, 'src'),

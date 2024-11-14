@@ -2,190 +2,163 @@
 	<div class="grid grid-cols-2 gap-y-10">
 		<!-- default  -->
 		<FmChip
-			v-model="val1"
 			v-on="eventHandlers"
-		>
-			Label
-		</FmChip>
+			value="Label"
+		/>
 
 		<FmChip
-			v-model="val1"
-			selected
+			type="outlined"
+			value="download_instrument_from_finmars_database"
 			v-on="eventHandlers"
-		>
-			Label
-		</FmChip>
+		/>
 
 		<!-- default (disabled) -->
 		<FmChip
-			v-model="val1"
 			disabled
 			v-on="eventHandlers"
-		>
-			Label
-		</FmChip>
+			value="Label"
+		/>
 
 		<FmChip
-			v-model="val1"
+			value="Label"
+			type="outlined"
 			disabled
-			selected
 			v-on="eventHandlers"
-		>
-			Label
-		</FmChip>
+		/>
 
 		<!-- default and elevation  -->
 		<FmChip
-			v-model="val1"
-			elevation
+			value="Label"
+			elevated
 			v-on="eventHandlers"
-		>
-			Label
-		</FmChip>
+		/>
 
 		<FmChip
-			v-model="val1"
-			elevation
-			selected
+			value="Label"
+			elevated
+			type="outlined"
 			v-on="eventHandlers"
-		>
-			Label
-		</FmChip>
+		/>
 
 		<!-- closable -->
 		<FmChip
+			value="Label"
 			closable
 			v-on="eventHandlers"
-		>
-			Label
-		</FmChip>
+		/>
 
 		<FmChip
+			value="download_instrument_from_finmars_database"
 			closable
-			selected
+			type="outlined"
 			v-on="eventHandlers"
-		>
-			Label
-		</FmChip>
+		/>
 
 		<!-- with prepend icon (default) -->
 		<FmChip
+			value="download_instrument_from_finmars_database"
 			prepend-icon="mdi-atlassian"
 			closable
 			v-on="eventHandlers"
-		>
-			Label
-		</FmChip>
+		/>
 
 		<FmChip
+			value="label"
 			prepend-icon="mdi-atlassian"
 			closable
-			selected
+			type="outlined"
 			v-on="eventHandlers"
-		>
-			Label
-		</FmChip>
+		/>
 
 		<!-- with prepend icon (color) -->
 		<FmChip
+			value="label"
 			:prepend-icon="{ icon: 'mdi-atlassian', color: 'orange' }"
 			closable
 			v-on="eventHandlers"
-		>
-			Label
-		</FmChip>
+		/>
 
 		<FmChip
+			value="label"
 			:prepend-icon="{ icon: 'mdi-atlassian', color: 'orange' }"
 			closable
-			selected
+			type="outlined"
 			v-on="eventHandlers"
-		>
-			Label
-		</FmChip>
+		/>
 
 		<!-- with prepend and append icon and closable (default) -->
 		<FmChip
+			value="label"
 			prepend-icon="mdi-atlassian"
 			append-icon="mdi-autorenew"
 			closable
 			v-on="eventHandlers"
-		>
-			Label
-		</FmChip>
+		/>
 
 		<FmChip
+			value="download_instrument_from_finmars_database"
 			prepend-icon="mdi-atlassian"
 			append-icon="mdi-autorenew"
 			closable
-			selected
+			type="outlined"
 			v-on="eventHandlers"
-		>
-			Label
-		</FmChip>
+		/>
 
 		<!-- with prepend and append icon and closable (color) -->
 		<FmChip
+			value="download_instrument_from_finmars_database"
 			prepend-icon="mdi-atlassian"
 			:append-icon="{ icon: 'mdi-autorenew', color: 'red' }"
 			closable
 			v-on="eventHandlers"
-		>
-			Label
-		</FmChip>
+		/>
 
 		<FmChip
+			value="label"
 			prepend-icon="mdi-atlassian"
 			:append-icon="{ icon: 'mdi-autorenew', color: 'red' }"
 			closable
-			selected
+			type="outlined"
 			v-on="eventHandlers"
-		>
-			Label
-		</FmChip>
+		/>
 
 		<!-- with prepend and rounded (default) -->
 		<FmChip
+			value="label"
 			rounded
 			:prepend-icon="{ icon: 'mdi-account-circle-outline', size: 24 }"
 			v-on="eventHandlers"
-		>
-			Label
-		</FmChip>
+		/>
 
 		<FmChip
+			value="download_instrument_from_finmars_database"
 			rounded
-			selected
+			type="outlined"
 			:prepend-icon="{ icon: 'mdi-account-circle-outline', size: 24 }"
 			v-on="eventHandlers"
-		>
-			Label
-		</FmChip>
+		/>
 
 		<!-- with prepend and rounded and closable (default) -->
 		<FmChip
+			value="label"
 			closable
 			rounded
 			:prepend-icon="{ icon: 'mdi-account-circle-outline', size: 24 }"
 			v-on="eventHandlers"
-		>
-			Label
-		</FmChip>
+		/>
 
 		<FmChip
+			value="download_instrument_from_finmars_database"
 			closable
 			rounded
-			selected
+			type="outlined"
 			:prepend-icon="{ icon: 'mdi-account-circle-outline', size: 24 }"
 			v-on="eventHandlers"
-		>
-			Label
-		</FmChip>
+		/>
 	</div>
 </template>
 
 <script setup>
-	import { ref } from 'vue'
 	import FmChip from '@/components/fm/Chip/Chip.vue'
 
 	const eventHandlers = {
@@ -193,8 +166,6 @@
 		'click:close': (ev) => console.log(`Event 'click:close' :`, ev),
 		'click:prepend': (ev) => console.log(`Event 'click:prepend' :`, ev),
 		'click:append': (ev) => console.log(`Event 'click:append' :`, ev),
-		'update:modelValue': (ev) => console.log(`Event 'update:modelValue' :`, ev)
+		'keydown': (ev) => console.log(`Event 'keydown' :`, ev)
 	}
-
-	const val1 = ref(true)
 </script>

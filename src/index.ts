@@ -4,6 +4,7 @@ import FmBadge from '@/components/fm/Badge/Badge.vue'
 import FmButton from '@/components/fm/Button/Button.vue'
 import FmCheckbox from '@/components/fm/Checkbox/Checkbox.vue'
 import FmChip from '@/components/fm/Chip/Chip.vue'
+import type { FmChipProps, FmChipEmits, FmChipSlots } from '@/components/fm/Chip/types'
 import FmDateEditor from '@/components/fm/DateEditor/DateEditor.vue'
 import FmDatePicker from '@/components/fm/DatePicker/DatePicker.vue'
 import FmIcon from '@/components/fm/Icon/Icon.vue'
@@ -11,6 +12,7 @@ import type { FmIconProps, FmIconSlots } from '@/components/fm/Icon/types'
 import FmIconButton from '@/components/fm/IconButton/IconButton.vue'
 import FmItemPicker from '@/components/fm/ItemPicker/ItemPicker.vue'
 import FmLogo from '@/components/fm/Logo/Logo.vue'
+import FmMenuItem from '@/components/fm/Menu/MenuItem.vue'
 import FmMenu from '@/components/fm/Menu/Menu.vue'
 import FmNavigationPortal from '@/components/fm/Navigation/NavigationPortal.vue'
 import FmNavigation from '@/components/fm/Navigation/Navigation.vue'
@@ -22,8 +24,19 @@ import FmRadio from '@/components/fm/Radio/Radio.vue'
 import FmRadioGroup from '@/components/fm/Radio/RadioGroup.vue'
 import FmRangeSlider from '@/components/fm/RangeSlider/RangeSlider.vue'
 import FmSearch from '@/components/fm/Search/Search.vue'
+import FmVSelect from '@/components/fm/VSelect/VSelect.vue'
+import type { FmVSelectProps, FmVSelectEmits, FmVSelectSlots } from '@/components/fm/VSelect/types'
 import FmSelect from '@/components/fm/Select/Select.vue'
-import type { FmSelectProps, FmSelectEmits, FmSelectSlots } from '@/components/fm/Select/types'
+import FmSelectActivator from '@/components/fm/Select/SelectActivator.vue'
+import type {
+	FmSelectOption,
+	FmSelectActivatorProps,
+	FmSelectActivatorEmits,
+	FmSelectActivatorSlots,
+	FmSelectProps,
+	FmSelectEmits,
+	FmSelectSlots
+} from '@/components/fm/Select/types'
 import FmSlider from '@/components/fm/Slider/Slider.vue'
 import FmTextField from '@/components/fm/TextField/TextField.vue'
 import FmTooltip from '@/components/fm/Tooltip/Tooltip.vue'
@@ -32,6 +45,8 @@ import { createVuetify } from 'vuetify'
 import '@/assets/css/tailwind.css'
 import 'vuetify/styles'
 import '@mdi/font/css/materialdesignicons.css'
+
+export * from '@/types'
 
 export {
 	FmHeader,
@@ -49,6 +64,7 @@ export {
 	FmIconButton,
 	FmItemPicker,
 	FmLogo,
+	FmMenuItem,
 	FmMenu,
 	FmPagination,
 	FmProgressCircular,
@@ -58,17 +74,29 @@ export {
 	FmRangeSlider,
 	FmSearch,
 	FmSelect,
+	FmSelectActivator,
 	FmSlider,
 	FmTextField,
 	FmTooltip,
+	FmVSelect,
 
+	FmChipProps,
+	FmChipEmits,
+	FmChipSlots,
 	FmIconProps,
 	FmIconSlots,
 	FmPaginationProps,
 	FmPaginationEmits,
+	FmSelectOption,
+	FmSelectActivatorProps,
+	FmSelectActivatorEmits,
+	FmSelectActivatorSlots,
 	FmSelectProps,
 	FmSelectEmits,
 	FmSelectSlots,
+	FmVSelectProps,
+	FmVSelectEmits,
+	FmVSelectSlots
 }
 
 /**
@@ -108,6 +136,7 @@ export const uiComponentsPlugin = {
 		Vue.component(`${prefix}IconButton`, FmIconButton)
 		Vue.component(`${prefix}ItemPicker`, FmItemPicker)
 		Vue.component(`${prefix}Logo`, FmLogo)
+		Vue.component(`${prefix}MenuItem`, FmMenuItem)
 		Vue.component(`${prefix}Menu`, FmMenu)
 		Vue.component(`${prefix}FmPagination`, FmPagination)
 		Vue.component(`${prefix}ProgressCircular`, FmProgressCircular)
@@ -116,10 +145,12 @@ export const uiComponentsPlugin = {
 		Vue.component(`${prefix}RadioGroup`, FmRadioGroup)
 		Vue.component(`${prefix}RangeSlider`, FmRangeSlider)
 		Vue.component(`${prefix}Search`, FmSearch)
-		Vue.component(`${prefix}FmSelect`, FmSelect)
+		Vue.component(`${prefix}Select`, FmSelect)
+		Vue.component(`${prefix}SelectActivator`, FmSelectActivator)
 		Vue.component(`${prefix}Slider`, FmSlider)
 		Vue.component(`${prefix}TextField`, FmTextField)
 		Vue.component(`${prefix}Tooltip`, FmTooltip)
+		Vue.component(`${prefix}VSelect`, FmVSelect)
 	}
 }
 
@@ -139,6 +170,7 @@ declare module 'vue' {
 		FmIconButton: typeof FmIconButton,
 		FmItemPicker: typeof FmItemPicker,
 		FmLogo: typeof FmLogo,
+		FmMenuItem: typeof FmMenuItem,
 		FmMenu: typeof FmMenu,
 		FmPagination: typeof FmPagination,
 		FmProgressCircular: typeof FmProgressCircular,
@@ -148,8 +180,10 @@ declare module 'vue' {
 		FmRangeSlider: typeof FmRangeSlider,
 		FmSearch: typeof FmSearch,
 		FmSelect: typeof FmSelect,
+		FmSelectActivator: typeof FmSelectActivator,
 		FmSlider: typeof FmSlider,
 		FmTextField: typeof FmTextField,
 		FmTooltip: typeof FmTooltip,
+		FmVSelect: typeof FmVSelect
 	}
 }

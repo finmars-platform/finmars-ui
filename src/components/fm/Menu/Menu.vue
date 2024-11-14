@@ -15,25 +15,53 @@
 
 		<template #default>
 			<div
-				class="relative w-full rounded py-2 bg-[var(--surface-container)] shadow-[0_2px_6px_2px_rgba(0,0,0,0.15),0_1px_2px_0_rgba(0,0,0,0.3)]"
+				tabindex="0"
+				:id="`${vMenuProps.id}-content`"
+				class="relative w-full rounded py-2 !bg-[var(--surface-container)] shadow-[0_2px_6px_2px_rgba(0,0,0,0.15),0_1px_2px_0_rgba(0,0,0,0.3)] overflow-y-auto focus-visible:outline-none"
+				:style="menuContentStyles"
+				@keydown.down="onKeydown($event, 'down')"
+				@keydown.up="onKeydown($event, 'up')"
+				@keydown.esc="onKeydown($event, 'esc')"
+				@keydown.enter="onKeydown($event, 'enter')"
+				@keydown.space="onKeydown($event, 'space')"
+				@keydown.tab="onKeydown($event, 'tab')"
 			>
 				<slot>
-					<MenuItem
+					<FmMenuItem
 						v-for="(item, index) in items"
 						:key="index"
+						:id="`${vMenuProps.id}-${index}`"
 						:index="index"
 						:item="item"
 						:title="item.title"
-						:itemDisabled="item.disabled"
-						:itemSize="itemSize"
+						:item-disabled="item.disabled"
+						:item-selected="item.isSelected"
+						:item-active="item.isActive"
+						:item-size="itemSize"
 						:disabled="disabled"
 						v-on="
 							disabled
 								? {}
 								: { click: (ev) => onItemClick(ev, { item, index }) }
 						"
-					/>
+					>
+						<template #item>
+							<slot name="item" :item="item" :index="index" />
+						</template>
+
+						<template #prepend>
+							<slot name="item-prepend" :item="item" :index="index" />
+						</template>
+
+						<template #append>
+							<slot name="item-append" :item="item" :index="index" />
+						</template>
+					</FmMenuItem>
 				</slot>
+
+				<div v-if="loading" class="absolute inset flex justify-center items-center bg-[rgba(0, 0, 0, 0.3)]">
+					<FmProgressCircular indeterminate />
+				</div>
 			</div>
 		</template>
 	</VMenu>
@@ -42,11 +70,16 @@
 <script setup>
 	import { computed, ref, watch } from 'vue'
 	import { VMenu } from 'vuetify/components'
-	import MenuItem from './MenuItem.vue'
+	import { getRandomString } from '@/utils'
+	import FmMenuItem from './MenuItem.vue'
+	import FmProgressCircular from '../ProgressCircular/ProgressCircular.vue'
 
 	const props = defineProps({
 		modelValue: {
 			type: Boolean
+		},
+		id: {
+			type: String
 		},
 		items: {
 			type: Array, // { title: string; [key: string]: any }[]
@@ -97,6 +130,9 @@
 		},
 		offset: {
 			type: [String, Number, Array]
+		},
+		loading: {
+			type: Boolean
 		},
 		location: {
 			type: String,
@@ -205,11 +241,12 @@
 		}
 	})
 
-	const emits = defineEmits(['update:modelValue', 'click:item'])
+	const emits = defineEmits(['update:modelValue', 'click:item', 'menu:keydown'])
 
 	const innerValue = ref(props.modelValue)
 
 	const vMenuProps = computed(() => ({
+		id: props.id || getRandomString(4),
 		activator: props.activator,
 		attach: props.attach,
 		contentClass: props.contentClass,
@@ -235,6 +272,12 @@
 		disabled: props.disabled
 	}))
 
+	const menuContentStyles = computed(() => ({
+		...(props.height && { height: props.height === 'auto' ? props.height : `${props.height}px` }),
+		...(props.maxHeight && { maxHeight: `${props.maxHeight}px` }),
+		...(props.minHeight && { minHeight: `${props.minHeight}px` }),
+	}))
+
 	function onItemClick(ev, { item, index }) {
 		ev.stopPropagation()
 		ev.preventDefault()
@@ -245,6 +288,12 @@
 			innerValue.value = false
 			emits('update:modelValue', false)
 		}
+	}
+
+	function onKeydown(event, key) {
+		event.preventDefault()
+		event.stopImmediatePropagation()
+		emits('menu:keydown', { event, key })
 	}
 
 	watch(

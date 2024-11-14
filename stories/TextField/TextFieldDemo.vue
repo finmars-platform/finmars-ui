@@ -146,8 +146,10 @@
 		'click:control': (ev) => handleEvents('click:control', ev),
 		'click:prependInner': (ev) => handleEvents('click:prependInner', ev),
 		'mousedown:control': (ev) => handleEvents('mousedown:control', ev),
-		'update:focused': (ev) => handleEvents('update:focused', ev),
+		'focus': (ev) => handleEvents('focus', ev),
+		'blur': (ev) => handleEvents('blur', ev),
 		'update:modelValue': (ev) => handleEvents('update:model-value', ev),
+		'change': (ev) => handleEvents('change', ev),
 	}
 
 	function handleEvents(eventName, event) {
