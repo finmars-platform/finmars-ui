@@ -40,6 +40,7 @@ import type {
 import FmSlider from '@/components/fm/Slider/Slider.vue'
 import FmTextField from '@/components/fm/TextField/TextField.vue'
 import FmTooltip from '@/components/fm/Tooltip/Tooltip.vue'
+import FmTab from '@/components/fm/Tab/Tab.vue'
 import FmHeader from '../stories/Header.vue'
 import { createVuetify } from 'vuetify'
 import '@/assets/css/tailwind.css'
@@ -82,6 +83,7 @@ export {
 	FmChipProps,
 	FmChipEmits,
 	FmChipSlots,
+	FmTab,
 	FmIconProps,
 	FmIconSlots,
 	FmPaginationProps,
@@ -150,6 +152,7 @@ export const uiComponentsPlugin = {
 		Vue.component(`${prefix}TextField`, FmTextField)
 		Vue.component(`${prefix}Tooltip`, FmTooltip)
 		Vue.component(`${prefix}VSelect`, FmVSelect)
+		Vue.component(`${prefix}Tab`, FmTab)
 	}
 }
 
@@ -183,6 +186,7 @@ declare module 'vue' {
 		FmSlider: typeof FmSlider,
 		FmTextField: typeof FmTextField,
 		FmTooltip: typeof FmTooltip,
-		FmVSelect: typeof FmVSelect
+		FmVSelect: typeof FmVSelect,
+        FmTab: typeof FmTab
 	}
 }
