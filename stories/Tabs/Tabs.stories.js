@@ -1,10 +1,10 @@
 import { ref, watch } from 'vue'
-import FmTab from '@/components/fm/Tab/Tab.vue'
-import TabDemo from './TabDemo.vue'
+import FmTabs from '@/components/fm/Tabs/Tabs.vue'
+import TabsDemo from './TabsDemo.vue'
 
 const meta = {
-	title: 'Components/FmTab',
-	component: FmTab,
+	title: 'Components/FmTabs',
+	component: FmTabs,
 	argTypes: {
 		underline: {
 			control: 'select',
@@ -49,7 +49,7 @@ export default meta
 export const General = {
 	render: (args) => ({
 		components: {
-			FmTab
+			FmTabs
 		},
 		setup() {
 			const key = ref(1)
@@ -64,7 +64,7 @@ export const General = {
 			}
 		},
 		template: `
-        <FmTab v-bind="args" :key="key"/>
+        <FmTabs v-bind="args" :key="key"/>
     `
 	})
 }
@@ -72,12 +72,12 @@ export const General = {
 export const AllVariants = {
 	render: (args) => ({
 		components: {
-			TabDemo
+			TabsDemo
 		},
 		setup() {
 			return { args }
 		},
 		template: `
-        <TabDemo/>`
+        <TabsDemo/>`
 	})
 }

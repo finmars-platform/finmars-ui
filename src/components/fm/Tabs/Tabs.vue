@@ -1,5 +1,5 @@
 <template>
-	<VTabs v-model="activeTab" class="general-tab" :class="`${variant}`">
+	<VTabs v-model="activeTab" class="general-tabs" :class="`${variant}`">
 		<VTab
 			v-for="(tab, index) in tabs"
 			:key="index"
@@ -104,7 +104,7 @@
 </script>
 
 <style scoped lang="scss">
-	.general-tab {
+	.general-tabs {
 		min-height: 60px;
 		border-bottom: 1px solid var(--outline-variant);
 

@@ -1,46 +1,46 @@
 <template>
 	<div class="grid grid-cols-2 gap-8">
-		<FmTab :tabs="data" @change-tab="handleTabChange" underline="thin" />
-		<FmTab :tabs="data" @change-tab="handleTabChange" underline="bold" />
-		<FmTab
+		<FmTabs :tabs="data" @change-tab="handleTabChange" underline="thin" />
+		<FmTabs :tabs="data" @change-tab="handleTabChange" underline="bold" />
+		<FmTabs
 			:tabs="data"
 			@change-tab="handleTabChange"
 			underline="thin"
 			variant="large"
 		/>
-		<FmTab
+		<FmTabs
 			:tabs="data"
 			@change-tab="handleTabChange"
 			underline="bold"
 			variant="large"
 		/>
-		<FmTab
+		<FmTabs
 			:tabs="data"
 			@change-tab="handleTabChange"
 			underline="thin"
 			icon="mdi-home-account"
 		/>
-		<FmTab
+		<FmTabs
 			:tabs="data"
 			@change-tab="handleTabChange"
 			underline="bold"
 			icon="mdi-home-account"
 		/>
-		<FmTab
+		<FmTabs
 			prependIcon
 			:tabs="data"
 			@change-tab="handleTabChange"
 			underline="bold"
 			icon="mdi-home-account"
 		/>
-		<FmTab
+		<FmTabs
 			prependIcon
 			:tabs="data"
 			@change-tab="handleTabChange"
 			underline="thin"
 			icon="mdi-home-account"
 		/>
-		<FmTab
+		<FmTabs
 			appendIcon
 			:tabs="data"
 			@change-tab="handleTabChange"
@@ -48,7 +48,7 @@
 			icon="mdi-home-account"
 			variant="large"
 		/>
-		<FmTab
+		<FmTabs
 			prependIcon
 			:tabs="data"
 			@change-tab="handleTabChange"
@@ -62,7 +62,7 @@
 
 <script setup>
 	import { ref } from 'vue'
-	import FmTab from '@/components/fm/Tab/Tab.vue'
+	import FmTabs from '@/components/fm/Tabs/Tabs.vue'
 
 	const data = ref([{ label: 'Tab 1' }, { label: 'Tab 2' }, { label: 'Tab 3' }])
 
