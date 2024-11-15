@@ -18,34 +18,34 @@
 			:tabs="data"
 			@change-tab="handleTabChange"
 			underline="thin"
-			icon="mdi-delete"
+			icon="mdi-home-account"
 		/>
 		<FmTab
 			:tabs="data"
 			@change-tab="handleTabChange"
 			underline="bold"
-			icon="mdi-delete"
+			icon="mdi-home-account"
 		/>
 		<FmTab
-			appendIcon
+			prependIcon
 			:tabs="data"
 			@change-tab="handleTabChange"
-			underline="thin"
-			icon="mdi-delete"
+			underline="bold"
+			icon="mdi-home-account"
 		/>
 		<FmTab
 			prependIcon
 			:tabs="data"
 			@change-tab="handleTabChange"
 			underline="thin"
-			icon="mdi-delete"
+			icon="mdi-home-account"
 		/>
 		<FmTab
 			appendIcon
 			:tabs="data"
 			@change-tab="handleTabChange"
 			underline="thin"
-			icon="mdi-delete"
+			icon="mdi-home-account"
 			variant="large"
 		/>
 		<FmTab
@@ -53,7 +53,8 @@
 			:tabs="data"
 			@change-tab="handleTabChange"
 			underline="thin"
-			icon="mdi-delete"
+			icon="mdi-home-account"
+			size="small"
 			variant="large"
 		/>
 	</div>

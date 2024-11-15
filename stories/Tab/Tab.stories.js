@@ -16,7 +16,7 @@ const meta = {
 		},
 		icon: {
 			control: 'select',
-			options: undefined
+			options: 'mdi-home-account'
 		},
 		size: {
 			control: 'select',
@@ -36,7 +36,7 @@ const meta = {
 		type: 'normal',
 		dot: '',
 		defaultTab: 0,
-		icon: undefined,
+		icon: 'mdi-home-account',
 		size: 'normal',
 		appendIcon: false,
 		prependIcon: false,

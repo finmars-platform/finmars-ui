@@ -91,9 +91,9 @@
 
 	const iconSize = computed(() => {
 		if (props.size === 'small') {
-			return '12'
+			return '16'
 		} else {
-			return '18'
+			return '22'
 		}
 	})
 
