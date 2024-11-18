@@ -1,6 +1,6 @@
 {
   "name": "@finmars/ui",
-  "version": "1.0.41",
+  "version": "1.0.141",
   "description": "",
   "scripts": {
     "dev": "vite dev --config vite.config.dev.js",
@@ -18,12 +18,10 @@
     "package.json"
   ],
   "type": "module",
-  "main": "dist/finmars-ui.umd.js",
   "module": "dist/finmars-ui.es.js",
   "types": "./dist/finmars-ui.es.d.ts",
   "exports": {
     ".": {
-      "require": "./dist/finmars-ui.umd.js",
       "import": "./dist/finmars-ui.es.js",
       "types": "./dist/finmars-ui.es.d.ts"
     },
