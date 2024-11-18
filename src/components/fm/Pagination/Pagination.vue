@@ -1,6 +1,6 @@
 <template>
 	<div
-		class="fm-pagination w-full h-[var(--height-fmPagination)] px-4 flex justify-space-between align-center bg-[--backgroundColor-fmPagination]">
+		class="fm-pagination w-full h-[var(--height-fmPagination)] px-4 flex justify-between items-center bg-[--backgroundColor-fmPagination]">
 		<div class="w-max">
 			<span
 				v-if="withInfo"
@@ -10,7 +10,7 @@
 			</span>
 		</div>
 
-		<div class="w-max flex justify-center align-center">
+		<div class="w-max flex justify-center items-center">
 			<FmButton
 				type="secondary"
 				class="btn mr-1"
@@ -52,7 +52,7 @@
 						<div
 							v-for="item in pages"
 							:key="item"
-							class="relative w-full h-[32px] text-[14px] flex justify-center align-center cursor-pointer hover:bg-[var(--itemColorHover-fmPagination)]"
+							class="relative w-full h-[32px] text-[14px] flex justify-center items-center cursor-pointer hover:bg-[var(--itemColorHover-fmPagination)]"
 							@click="changePage(item)"
 						>
 							{{ item }}

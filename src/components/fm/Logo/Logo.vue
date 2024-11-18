@@ -31,11 +31,3 @@
 		}
 	})
 </script>
-
-<style>
-	:root {
-	}
-
-	body.dark-mode {
-	}
-</style>

@@ -23,11 +23,3 @@
 		maxWidth: String
 	})
 </script>
-
-<style>
-	:root {
-	}
-
-	body.dark-mode {
-	}
-</style>

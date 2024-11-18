@@ -17,6 +17,7 @@
 
 	const props = defineProps({
 		modelValue: Boolean,
+		indeterminate: Boolean,
 		disabled: Boolean,
 		error: Boolean,
 		value: {
