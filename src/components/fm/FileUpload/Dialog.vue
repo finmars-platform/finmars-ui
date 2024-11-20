@@ -1,5 +1,5 @@
 <template>
-	<div class="flex align-center justify-center">
+	<div class="dialog-container">
 		<VDialog max-width="25%">
 			<template #activator="{ props: activatorProps }">
 				<FmIconButton
@@ -11,7 +11,7 @@
 			</template>
 
 			<template #default="{ isActive }">
-				<VCard :title="title" class="modal-content p-2">
+				<VCard :title="title" class="card-container">
 					<template #text>
 						<span class="text-sm" style="color: var(--on-surface)">
 							{{ content }}
@@ -19,7 +19,7 @@
 					</template>
 
 					<VCardActions>
-						<div class="flex justify-end gap-1">
+						<div class="">
 							<FmButton
 								type="secondary"
 								rounded
@@ -52,17 +52,29 @@
 	</div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 	import { VCard, VCardActions, VDialog } from 'vuetify/components'
 	import FmIconButton from '@/components/fm/IconButton/IconButton.vue'
 	import FmButton from '@/components/fm/Button/Button.vue'
 
-	defineProps({ title: { type: String }, content: { type: String } })
+	defineProps({
+		title: { type: String },
+		content: { type: String }
+	})
 </script>
 
 <style scoped lang="scss">
-	.modal-content {
+	.dialog-container {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.card-container {
+		display: flex;
+		justify-content: flex-end;
+		gap: 4var (--spacing-4);
 		background-color: var(--surface-container);
-		border-radius: var(--spacing-32) !important;
+		border-radius: var(--spacing-24) !important;
 	}
 </style>

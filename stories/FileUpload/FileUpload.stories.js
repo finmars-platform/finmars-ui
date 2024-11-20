@@ -1,19 +1,19 @@
 import { ref, watch } from 'vue'
-import FmFileUpload from '@/components/fm/FmFileUpload/FmFileUpload.vue'
+import FmFileUpload from '@/components/fm/FileUpload/FileUpload.vue'
 import FileUploadDemo from './FileUploadDemo.vue'
 
 const meta = {
-	title: 'Components/FmTabs',
+	title: 'Components/FmFileUpload',
 	component: FmFileUpload,
 	icon: {
 		control: 'select',
 		options: 'mdi-file-upload-outline'
 	},
-	variant: {
+	label: {
 		control: 'select',
 		options: 'Upload file'
 	},
-	label: {
+	variant: {
 		control: 'select',
 		options: ['normal', 'small']
 	},
@@ -25,9 +25,22 @@ const meta = {
 		control: 'select',
 		options: 'Are you sure that you want to cancel uploading files?'
 	},
+	multiple: {
+		control: 'select',
+		options: true
+	},
 	indeterminate: {
 		control: 'select',
 		options: false
+	},
+	args: {
+		icon: 'mdi-file-upload-outline',
+		label: 'Upload file',
+		variant: 'normal',
+		modalTitle: 'Cancel uploading',
+		modalContent: 'Are you sure that you want to cancel uploading files?',
+		multiple: true,
+		indeterminate: false
 	}
 }
 
@@ -51,7 +64,7 @@ export const General = {
 			}
 		},
 		template: `
-        <FileUploadDemo :key="key"/>
+        <FileUploadDemo v-bind="args" :key="key"/>
     `
 	})
 }

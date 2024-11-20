@@ -3,17 +3,27 @@
 		<FmFileUpload
 			icon="mdi-file-upload-outline"
 			variant="normal"
-			label="Upload file"
-			title="Cancel uploading"
-			content="Are you sure that you want to cancel uploading files?"
+			label="Upload file(single)"
+			dialogTitle="Cancel uploading"
+			dialogContent="Are you sure that you want to cancel uploading files?"
+			:multiple="false"
+			:indeterminate="false"
+		/>
+		<FmFileUpload
+			icon="mdi-file-upload-outline"
+			variant="normal"
+			label="Upload files(multiple)"
+			dialogTitle="Cancel uploading"
+			dialogContent="Are you sure that you want to cancel uploading files?"
+			:multiple="true"
 			:indeterminate="false"
 		/>
 		<FmFileUpload
 			icon="mdi-upload"
 			variant="large"
-			label="Shoose files"
-			title="Cancel process"
-			content="Are you sure that you want to cancel?"
+			label="Upload files(indeterminate)"
+			dialogTitle="Cancel process"
+			dialogContent="Are you sure that you want to cancel?"
 			:indeterminate="true"
 		/>
 	</div>

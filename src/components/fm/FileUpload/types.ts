@@ -5,13 +5,14 @@ export interface FmUploadFile {
 }
 
 export interface FmDialogOptions {
-	title?: string
-	content?: string
+	dialogTitle?: string
+	dialogContent?: string
 }
 
 export interface FmFileUploadProps extends FmDialogOptions {
 	icon?: string
 	variant?: 'normal' | 'large'
 	label?: string
+	multiple: boolean
 	indeterminate: boolean
 }

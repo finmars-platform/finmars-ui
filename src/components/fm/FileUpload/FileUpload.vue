@@ -1,28 +1,21 @@
 <template>
 	<div class="upload-container">
-		<div
-			class="flex flex-row align-center flex-nowrap justify-start"
-			@click="browseFile"
-			style="cursor: pointer"
-		>
+		<div class="upload-button-wrap" @click="browseFile">
 			<FmIconButton :icon="icon" :variant="variant">
 				<input
 					type="file"
 					ref="fileInputRef"
 					@change="handleFileChange($event)"
-					multiple
+					:multiple="multiple"
 					hidden
 				/>
 			</FmIconButton>
-			<span style="color: var(--on-surface)">{{ label }}</span>
+			<span class="upload-button-label">{{ label }}</span>
 		</div>
 		<Teleport to="body">
-			<div
-				class="flex-column justify-between align-center upload-process-panel"
-				v-if="files.length"
-			>
-				<div class="header w-full mb-4">
-					<span class="text-lg" style="color: var(--on-surface)">
+			<div class="upload-process-panel" v-if="files.length">
+				<div class="header">
+					<span class="header-title">
 						Uploading {{ files.length }}
 						{{ files.length === 1 ? 'item' : 'items' }}
 					</span>
@@ -31,11 +24,15 @@
 							@click="toggleUploadPanel"
 							:icon="isUploadPanelOpen ? 'mdi-chevron-down' : 'mdi-chevron-up'"
 						/>
-						<FmDialog @is-confirm="confirm" :title="title" :content="content" />
+						<FmDialog
+							@is-confirm="confirm"
+							:title="dialogTitle"
+							:content="dialogContent"
+						/>
 					</div>
 				</div>
 				<transition name="slide">
-					<div class="body w-full scroll-variant-thin" v-if="isUploadPanelOpen">
+					<div class="body scroll-variant-thin" v-if="isUploadPanelOpen">
 						<FmFileUploadProcessing
 							v-for="file in files"
 							:key="file.id"
@@ -52,6 +49,7 @@
 
 <script setup lang="ts">
 	import { reactive, ref } from 'vue'
+	import { getRandomString } from '@/utils'
 	import FmIconButton from '@/components/fm/IconButton/IconButton.vue'
 	import FmFileUploadProcessing from '@/components/fm/FileUpload/FileUploadProcessing.vue'
 	import FmIcon from '@/components/fm/Icon/Icon.vue'
@@ -62,13 +60,14 @@
 		icon: 'mdi-file-upload-outline',
 		variant: 'normal',
 		label: 'Upload file',
-		title: 'Cancel uploading',
-		content: 'Are you sure that you want to cancel uploading files?',
+		dialogTitle: 'Cancel uploading',
+		dialogContent: 'Are you sure that you want to cancel uploading files?',
+		multiple: true,
 		indeterminate: false
 	})
 
 	const isUploadPanelOpen = ref(true)
-	const fileInputRef = ref(null)
+	const fileInputRef = ref(HTMLInputElement | null)
 	const files = ref<FmUploadFile[]>([])
 	const totalSize = ref(0)
 	let fileDataList = reactive<FmUploadFile[]>([])
@@ -96,7 +95,7 @@
 		const input = event.target as HTMLInputElement
 		if (input?.files) {
 			Array.from(input.files).forEach((file) => {
-				const uniqueId = `${file.name}-${file.lastModified}` // Create a unique ID using file properties
+				const uniqueId = getRandomString(6)
 				if (!files.value.some((f) => f.id === uniqueId)) {
 					const item = {
 						id: uniqueId,
@@ -146,36 +145,57 @@
 <style scoped lang="scss">
 	.upload-container {
 		min-width: 560px;
+	}
 
-		.file-upload-row {
-			gap: var(--spacing-4);
-		}
+	.upload-button-wrap {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: flex-start;
+		flex-wrap: nowrap;
+		cursor: pointer;
+	}
+
+	.upload-button-label {
+		color: var(--on-surface);
 	}
 
 	.body {
 		max-height: 360px;
 		overflow-y: auto;
+		width: 100%;
 	}
 
 	.upload-process-panel {
-		color: var(--on-surface);
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		align-items: center;
 		position: fixed;
 		bottom: 0;
 		right: 20px;
 		width: 20%;
 		min-width: 420px;
+		color: var(--on-surface);
 		border-top-left-radius: var(--spacing-24);
 		border-top-right-radius: var(--spacing-24);
 		background-color: var(--surface-container-high);
 		padding: var(--spacing-24) var(--spacing-16) 0 var(--spacing-16);
 
 		.header {
+			width: 100%;
+			margin-bottom: var(--spacing-16);
 			display: flex;
 			flex-direction: row;
 			flex-wrap: nowrap;
 			justify-content: space-between;
 			align-items: center;
 			gap: var(--spacing-16);
+
+			.header-title {
+				color: var(--on-surface);
+				font-size: var(--spacing-16);
+			}
 
 			.header-actions {
 				display: flex;
