@@ -61,12 +61,13 @@
 
 	const formatFileSize = (size: number) => {
 		const units = ['B', 'KB', 'MB', 'GB']
+		let formatedSize = size
 		let unitIndex = 0
-		while (size >= 1024 && unitIndex < units.length - 1) {
-			size /= 1024
+		while (formatedSize >= 1024 && unitIndex < units.length - 1) {
+			formatedSize = formatedSize / 1024
 			unitIndex++
 		}
-		return `${size.toFixed(1)} ${units[unitIndex]}`
+		return `${formatedSize.toFixed(1)} ${units[unitIndex]}`
 	}
 </script>
 
