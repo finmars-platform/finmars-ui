@@ -4,8 +4,13 @@ import FmBadge from '@/components/fm/Badge/Badge.vue'
 import FmButton from '@/components/fm/Button/Button.vue'
 import FmCheckbox from '@/components/fm/Checkbox/Checkbox.vue'
 import FmChip from '@/components/fm/Chip/Chip.vue'
-import type { FmChipProps, FmChipEmits, FmChipSlots } from '@/components/fm/Chip/types'
+import type {
+	FmChipProps,
+	FmChipEmits,
+	FmChipSlots
+} from '@/components/fm/Chip/types'
 import FmDateEditor from '@/components/fm/DateEditor/DateEditor.vue'
+import type { FmDateEditorProps, FmDateEditorEmits } from '@/components/fm/DateEditor/types'
 import FmDatePicker from '@/components/fm/DatePicker/DatePicker.vue'
 import FmIcon from '@/components/fm/Icon/Icon.vue'
 import type { FmIconProps, FmIconSlots } from '@/components/fm/Icon/types'
@@ -17,7 +22,10 @@ import FmMenu from '@/components/fm/Menu/Menu.vue'
 import FmNavigationPortal from '@/components/fm/Navigation/NavigationPortal.vue'
 import FmNavigation from '@/components/fm/Navigation/Navigation.vue'
 import FmPagination from '@/components/fm/Pagination/Pagination.vue'
-import type { FmPaginationProps, FmPaginationEmits } from '@/components/fm/Pagination/types'
+import type {
+	FmPaginationProps,
+	FmPaginationEmits
+} from '@/components/fm/Pagination/types'
 import FmProgressCircular from '@/components/fm/ProgressCircular/ProgressCircular.vue'
 import FmProgressLinear from '@/components/fm/ProgressLinear/ProgressLinear.vue'
 import FmRadio from '@/components/fm/Radio/Radio.vue'
@@ -25,7 +33,11 @@ import FmRadioGroup from '@/components/fm/Radio/RadioGroup.vue'
 import FmRangeSlider from '@/components/fm/RangeSlider/RangeSlider.vue'
 import FmSearch from '@/components/fm/Search/Search.vue'
 import FmVSelect from '@/components/fm/VSelect/VSelect.vue'
-import type { FmVSelectProps, FmVSelectEmits, FmVSelectSlots } from '@/components/fm/VSelect/types'
+import type {
+	FmVSelectProps,
+	FmVSelectEmits,
+	FmVSelectSlots
+} from '@/components/fm/VSelect/types'
 import FmSelect from '@/components/fm/Select/Select.vue'
 import FmSelectActivator from '@/components/fm/Select/SelectActivator.vue'
 import type {
@@ -47,18 +59,20 @@ import '@/assets/css/tailwind.css'
 import '@mdi/font/css/materialdesignicons.css'
 
 export * from '@/types'
+export * from '@/utils'
 
 export {
 	FmHeader,
 	FmNavigationPortal,
 	FmNavigation,
-
 	FmAvatar,
 	FmBadge,
 	FmButton,
 	FmCheckbox,
 	FmChip,
 	FmDateEditor,
+	FmDateEditorProps,
+	FmDateEditorEmits,
 	FmDatePicker,
 	FmIcon,
 	FmIconButton,
@@ -79,7 +93,6 @@ export {
 	FmTextField,
 	FmTooltip,
 	FmVSelect,
-
 	FmChipProps,
 	FmChipEmits,
 	FmChipSlots,
@@ -158,35 +171,35 @@ export const uiComponentsPlugin = {
 
 declare module 'vue' {
 	interface GlobalComponents {
-		FmNavigationPortal: typeof FmNavigationPortal,
-		FmNavigation: typeof FmNavigation,
-		FmHeader: typeof FmHeader,
-		FmAvatar: typeof FmAvatar,
-		FmBadge: typeof FmBadge,
-		FmButton: typeof FmButton,
-		FmCheckbox: typeof FmCheckbox,
-		FmChip: typeof FmChip,
-		FmDateEditor: typeof FmDateEditor,
-		FmDatePicker: typeof FmDatePicker,
-		FmIcon: typeof FmIcon,
-		FmIconButton: typeof FmIconButton,
-		FmItemPicker: typeof FmItemPicker,
-		FmLogo: typeof FmLogo,
-		FmMenuItem: typeof FmMenuItem,
-		FmMenu: typeof FmMenu,
-		FmPagination: typeof FmPagination,
-		FmProgressCircular: typeof FmProgressCircular,
-		FmProgressLinear: typeof FmProgressLinear,
-		FmRadio: typeof FmRadio,
-		FmRadioGroup: typeof FmRadioGroup,
-		FmRangeSlider: typeof FmRangeSlider,
-		FmSearch: typeof FmSearch,
-		FmSelect: typeof FmSelect,
-		FmSelectActivator: typeof FmSelectActivator,
-		FmSlider: typeof FmSlider,
-		FmTextField: typeof FmTextField,
-		FmTooltip: typeof FmTooltip,
-		FmVSelect: typeof FmVSelect,
-        FmTabs: typeof FmTabs
+		FmNavigationPortal: typeof FmNavigationPortal
+		FmNavigation: typeof FmNavigation
+		FmHeader: typeof FmHeader
+		FmAvatar: typeof FmAvatar
+		FmBadge: typeof FmBadge
+		FmButton: typeof FmButton
+		FmCheckbox: typeof FmCheckbox
+		FmChip: typeof FmChip
+		FmDateEditor: typeof FmDateEditor
+		FmDatePicker: typeof FmDatePicker
+		FmIcon: typeof FmIcon
+		FmIconButton: typeof FmIconButton
+		FmItemPicker: typeof FmItemPicker
+		FmLogo: typeof FmLogo
+		FmMenuItem: typeof FmMenuItem
+		FmMenu: typeof FmMenu
+		FmPagination: typeof FmPagination
+		FmProgressCircular: typeof FmProgressCircular
+		FmProgressLinear: typeof FmProgressLinear
+		FmRadio: typeof FmRadio
+		FmRadioGroup: typeof FmRadioGroup
+		FmRangeSlider: typeof FmRangeSlider
+		FmSearch: typeof FmSearch
+		FmSelect: typeof FmSelect
+		FmSelectActivator: typeof FmSelectActivator
+		FmSlider: typeof FmSlider
+		FmTextField: typeof FmTextField
+		FmTooltip: typeof FmTooltip
+		FmVSelect: typeof FmVSelect
+		FmTabs: typeof FmTabs
 	}
 }

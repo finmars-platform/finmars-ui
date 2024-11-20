@@ -5,7 +5,9 @@
 				:class="[
 					'fm-date-editor__menu-item',
 					'fm-date-editor__menu-item--custom',
-					{ 'fm-date-editor__menu-item--selected': currentMenuItem === 'custom' }
+					{
+						'fm-date-editor__menu-item--selected': currentMenuItem === 'custom'
+					}
 				]"
 			>
 				{{ locals.menuItemCustom }}
@@ -18,6 +20,7 @@
 					'fm-date-editor__menu-item',
 					{ 'fm-date-editor__menu-item--selected': currentMenuItem === 'today' }
 				]"
+				v-ripple.center
 				@click="selectMenuItem('today')"
 			>
 				{{ locals.menuPresetToday }}
@@ -26,8 +29,12 @@
 			<div
 				:class="[
 					'fm-date-editor__menu-item',
-					{ 'fm-date-editor__menu-item--selected': currentMenuItem === 'previous' }
+					{
+						'fm-date-editor__menu-item--selected':
+							currentMenuItem === 'previous'
+					}
 				]"
+				v-ripple.center
 				@click="selectMenuItem('previous')"
 			>
 				{{ locals.menuPresetPrevious }}
@@ -83,55 +90,31 @@
 	</div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 	import { watch } from 'vue'
+	import { Ripple } from 'vuetify/directives'
 	import useDateEditor from './useDateEditor'
 	import FmButton from '@/components/fm/Button/Button.vue'
 	import FmTextField from '@/components/fm/TextField/TextField.vue'
 	import FmDatePicker from '@/components/fm/DatePicker/DatePicker.vue'
+	import type { FmDateEditorProps, FmDateEditorEmits } from './types'
 
-	const props = defineProps({
+	const vRipple = Ripple
+
+	const props = withDefaults(defineProps<FmDateEditorProps>(), {
 		locals: {
-			type: Object,
-			default() {
-				return {
-					enteringFieldLabel: 'Date',
-					enteringFieldPlaceholder: 'Enter date',
-					cancelButtonText: 'Cancel',
-					confirmButtonText: 'OK',
-					menuItemCustom: 'Custom',
-					menuPresetToday: 'Today',
-					menuPresetPrevious: 'Previous business day',
-				}
-			},
-		},
-		modelValue: {
-			type: String,
-		},
-		min: {
-			type: String, // date/month ISO 8601 format
-		},
-		max: {
-			type: String, // date/month ISO 8601 format
-		},
-		nonWorkingDays: {
-			type: Array,
-		},
-		showWeek: {
-			type: Boolean,
-		},
-		showAdjacentMonths: {
-			type: Boolean,
-		},
-		disabled: {
-			type: Boolean,
-		},
+			// @ts-ignore
+			enteringFieldLabel: 'Date',
+			enteringFieldPlaceholder: 'Enter date',
+			cancelButtonText: 'Cancel',
+			confirmButtonText: 'OK',
+			menuItemCustom: 'Custom',
+			menuPresetToday: 'Today',
+			menuPresetPrevious: 'Previous business day'
+		}
 	})
 
-	const emits = defineEmits([
-		'update:modelValue',
-		'click:dateIcon',
-	])
+	const emits = defineEmits<FmDateEditorEmits>()
 
 	const {
 		allowedDates,
@@ -145,9 +128,8 @@
 		onKeydownEsc,
 		onChange,
 		cancelDateSelection,
-		confirmDateSelection,
+		confirmDateSelection
 	} = useDateEditor(props, emits)
-
 
 	watch(
 		() => props.modelValue,
@@ -156,7 +138,7 @@
 				innerValue.value = val
 			}
 		},
-		{ immediate: true },
+		{ immediate: true }
 	)
 </script>
 
@@ -174,7 +156,9 @@
 		justify-content: flex-start;
 		align-items: stretch;
 		overflow: hidden;
-		box-shadow: 0 2px 6px 2px rgba(0, 0, 0, 0.15),  0 1px 2px 0 rgba(0, 0, 0, 0.30);
+		box-shadow:
+			0 2px 6px 2px rgba(0, 0, 0, 0.15),
+			0 1px 2px 0 rgba(0, 0, 0, 0.3);
 
 		&__menu {
 			position: relative;
@@ -192,6 +176,7 @@
 				padding: 0 12px;
 				font-size: 16px;
 				color: var(--on-surface);
+				user-select: none;
 
 				&:not(.fm-date-editor__menu-item--custom) {
 					cursor: pointer;
@@ -225,10 +210,13 @@
 
 		&__body {
 			position: relative;
-			padding: var(--spacing-24) calc(var(--spacing-24) / 2)  calc(var(--spacing-24) / 2) var(--spacing-24);
+			padding: var(--spacing-24) calc(var(--spacing-24) / 2)
+				calc(var(--spacing-24) / 2) var(--spacing-24);
 
 			:deep(.fm-text-field) {
-				--backgroundColor-fmTextField-outlined: var(--backgroundColor-fmDateEditor);
+				--backgroundColor-fmTextField-outlined: var(
+					--backgroundColor-fmDateEditor
+				);
 
 				width: calc(100% - calc(var(--spacing-24) / 2));
 				margin-right: calc(var(--spacing-24) / 2);

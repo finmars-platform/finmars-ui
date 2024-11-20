@@ -49,7 +49,12 @@ function processedMonth(date: string, month: string): string {
  * @param {string} day
  * @return {string}
  */
-function processedDay(date: string, year: string, month: string, day: string): string {
+function processedDay(
+	date: string,
+	year: string,
+	month: string,
+	day: string
+): string {
 	if (!day) {
 		return date
 	}
@@ -62,8 +67,12 @@ function processedDay(date: string, year: string, month: string, day: string): s
 		return date.slice(0, -1)
 	}
 
-	const isYearLeap = (Number(year) % 4 === 0 && Number(year) % 100 !== 0) || Number(year) % 400 === 0
-	const dayInCurrentMonth = isYearLeap ? datesInMonth[month][1] : datesInMonth[month][0]
+	const isYearLeap =
+		(Number(year) % 4 === 0 && Number(year) % 100 !== 0) ||
+		Number(year) % 400 === 0
+	const dayInCurrentMonth = isYearLeap
+		? datesInMonth[month][1]
+		: datesInMonth[month][0]
 
 	if (day.length === 2 && Number(day) > dayInCurrentMonth) {
 		return date.slice(0, -1)
