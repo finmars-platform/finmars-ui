@@ -19,7 +19,7 @@
 					</template>
 
 					<VCardActions>
-						<div class="">
+						<div>
 							<FmButton
 								type="secondary"
 								rounded
