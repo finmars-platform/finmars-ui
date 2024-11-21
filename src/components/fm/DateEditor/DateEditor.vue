@@ -62,7 +62,7 @@
 				:model-value="innerValue"
 				:min="min"
 				:max="max"
-				:allowed-dates="allowedDates"
+				:allowed-dates="checkIfDateAllowed"
 				:show-week="showWeek"
 				:show-adjacent-months="showAdjacentMonths"
 				:disabled="disabled"
@@ -93,6 +93,7 @@
 <script setup lang="ts">
 	import { watch } from 'vue'
 	import { Ripple } from 'vuetify/directives'
+	import { Dayjs } from 'dayjs'
 	import useDateEditor from './useDateEditor'
 	import FmButton from '@/components/fm/Button/Button.vue'
 	import FmTextField from '@/components/fm/TextField/TextField.vue'
@@ -115,6 +116,10 @@
 	})
 
 	const emits = defineEmits<FmDateEditorEmits>()
+
+	function checkIfDateAllowed(val: Dayjs | string) {
+		return allowedDates(val)
+	}
 
 	const {
 		allowedDates,

@@ -3,8 +3,10 @@ export interface FmDateEditorProps {
 	min?: string // data in ISO 8601 format (YYYY-MM-DD)
 	max?: string // data in ISO 8601 format (YYYY-MM-DD)
 	nonWorkingDays?: string[]
+	allowWeekendSelection?: boolean
 	showWeek?: boolean
 	showAdjacentMonths?: boolean
+	calculatePreviousDayFromToday?: boolean
 	disabled?: boolean
 	locals?: {
 		enteringFieldLabel: string
