@@ -47,12 +47,12 @@ export interface FmSelectProps<T extends FmSelectOption, K extends string & keyo
 	clearIcon?: string;
 	multiple?: boolean;
 	returnObject?: boolean;
+	titleKey?: K | string;
+	valueKey?: K | string;
 	chip?: boolean;
 	clearable?: boolean;
 	error?: boolean;
 	width?: number | string;
-	titleKey?: K | string;
-	valueKey?: K | string;
 	rules?: Array<(value: T) => boolean | string>
 	loading?: boolean;
 	noDataText?: string;
