@@ -5,11 +5,12 @@ import FmButton from '@/components/fm/Button/Button.vue'
 import FmCheckbox from '@/components/fm/Checkbox/Checkbox.vue'
 import FmChip from '@/components/fm/Chip/Chip.vue'
 import type {
-	FmChipEmits,
 	FmChipProps,
+	FmChipEmits,
 	FmChipSlots
 } from '@/components/fm/Chip/types'
 import FmDateEditor from '@/components/fm/DateEditor/DateEditor.vue'
+import type { FmDateEditorProps, FmDateEditorEmits } from '@/components/fm/DateEditor/types'
 import FmDatePicker from '@/components/fm/DatePicker/DatePicker.vue'
 import FmIcon from '@/components/fm/Icon/Icon.vue'
 import type { FmIconProps, FmIconSlots } from '@/components/fm/Icon/types'
@@ -22,8 +23,8 @@ import FmNavigationPortal from '@/components/fm/Navigation/NavigationPortal.vue'
 import FmNavigation from '@/components/fm/Navigation/Navigation.vue'
 import FmPagination from '@/components/fm/Pagination/Pagination.vue'
 import type {
-	FmPaginationEmits,
-	FmPaginationProps
+	FmPaginationProps,
+	FmPaginationEmits
 } from '@/components/fm/Pagination/types'
 import FmProgressCircular from '@/components/fm/ProgressCircular/ProgressCircular.vue'
 import FmProgressLinear from '@/components/fm/ProgressLinear/ProgressLinear.vue'
@@ -33,19 +34,19 @@ import FmRangeSlider from '@/components/fm/RangeSlider/RangeSlider.vue'
 import FmSearch from '@/components/fm/Search/Search.vue'
 import FmVSelect from '@/components/fm/VSelect/VSelect.vue'
 import type {
-	FmVSelectEmits,
 	FmVSelectProps,
+	FmVSelectEmits,
 	FmVSelectSlots
 } from '@/components/fm/VSelect/types'
 import FmSelect from '@/components/fm/Select/Select.vue'
 import FmSelectActivator from '@/components/fm/Select/SelectActivator.vue'
 import type {
-	FmSelectActivatorEmits,
-	FmSelectActivatorProps,
-	FmSelectActivatorSlots,
-	FmSelectEmits,
 	FmSelectOption,
+	FmSelectActivatorProps,
+	FmSelectActivatorEmits,
+	FmSelectActivatorSlots,
 	FmSelectProps,
+	FmSelectEmits,
 	FmSelectSlots
 } from '@/components/fm/Select/types'
 import FmSlider from '@/components/fm/Slider/Slider.vue'
@@ -66,6 +67,7 @@ import '@/assets/css/tailwind.css'
 import '@mdi/font/css/materialdesignicons.css'
 
 export * from '@/types'
+export * from '@/utils'
 
 export {
 	FmHeader,
@@ -77,6 +79,8 @@ export {
 	FmCheckbox,
 	FmChip,
 	FmDateEditor,
+	FmDateEditorProps,
+	FmDateEditorEmits,
 	FmDatePicker,
 	FmIcon,
 	FmIconButton,

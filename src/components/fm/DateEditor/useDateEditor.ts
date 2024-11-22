@@ -1,12 +1,18 @@
-/* eslint-disable @typescript-eslint/no-explicit-any*/
 import { nextTick, ref } from 'vue'
-import dayjs from 'dayjs'
+import dayjs, { Dayjs } from 'dayjs'
 import customParseFormat from 'dayjs/plugin/customParseFormat'
 import isoWeek from 'dayjs/plugin/isoWeek'
 import { displayingDateFormat } from '@/components/fm/DateEditor/constants'
 import { processedDate } from '@/components/fm/DateEditor/utils'
+import type {
+	FmDateEditorEmits,
+	FmDateEditorProps
+} from '@/components/fm/DateEditor/types'
 
-export default function useDateEditor(props: any, emits: any) {
+export default function useDateEditor(
+	props: FmDateEditorProps,
+	emits: FmDateEditorEmits
+) {
 	dayjs.extend(customParseFormat)
 	dayjs.extend(isoWeek)
 
@@ -16,20 +22,26 @@ export default function useDateEditor(props: any, emits: any) {
 
 	const innerValue = ref(props.modelValue)
 
-	const textFieldInput = ref(props.modelValue ? dayjs(props.modelValue).format(displayingDateFormat) : null)
+	const textFieldInput = ref(
+		props.modelValue
+			? dayjs(props.modelValue).format(displayingDateFormat)
+			: null
+	)
 
-	function allowedDates(val: any) {
+	function allowedDates(val: Dayjs | string) {
 		const date = dayjs(val)
-		const dayOfWeek = date.isoWeekday();
+		const dayOfWeek = date.isoWeekday()
 
 		if ([6, 7].includes(dayOfWeek)) {
 			return false
 		}
 
-		return !(props.nonWorkingDays || []).some((d: any) => dayjs(d).isSame(date, 'day'))
+		return !(props.nonWorkingDays || []).some((d) =>
+			dayjs(d).isSame(date, 'day')
+		)
 	}
 
-	function selectMenuItem(item: any) {
+	function selectMenuItem(item: 'today' | 'previous') {
 		currentMenuItem.value = item
 		if (item === 'today') {
 			innerValue.value = dayjs().format(displayingDateFormat)
@@ -42,7 +54,7 @@ export default function useDateEditor(props: any, emits: any) {
 			let selectedDay = innerValue.value
 			let isDayAvailable = false
 			while (!isDayAvailable && count < 90) {
-				selectedDay = dayjs(selectedDay).add(-1, 'day')
+				selectedDay = dayjs(selectedDay).add(-1, 'day').format(displayingDateFormat)
 				isDayAvailable = allowedDates(selectedDay)
 				count++
 			}
@@ -53,7 +65,7 @@ export default function useDateEditor(props: any, emits: any) {
 		}
 	}
 
-	function onUpdate(val: any) {
+	function onUpdate(val: string) {
 		innerValue.value = val
 		textFieldInput.value = dayjs(val).format(displayingDateFormat)
 		if (currentMenuItem.value !== 'custom') {
@@ -61,7 +73,7 @@ export default function useDateEditor(props: any, emits: any) {
 		}
 	}
 
-	function onUpdateByKeyboard(val: any) {
+	function onUpdateByKeyboard(val: string) {
 		textFieldInput.value = val
 		const processedVal = processedDate(val)
 
@@ -74,19 +86,23 @@ export default function useDateEditor(props: any, emits: any) {
 		textFieldInput.value = innerValue.value
 	}
 
-	function onChange(key: any) {
-		const isDateValid = dayjs(textFieldInput.value, displayingDateFormat, true).isValid()
+	function onChange(key: 'tab' | 'enter') {
+		const isDateValid = dayjs(
+			textFieldInput.value,
+			displayingDateFormat,
+			true
+		).isValid()
 		if (!isDateValid && key === 'tab') {
 			textFieldInput.value = innerValue.value
 		} else if (isDateValid) {
-			innerValue.value = textFieldInput.value
+			innerValue.value = textFieldInput.value ?? ''
+			emits('update:modelValue', innerValue.value)
 		}
 	}
 
 	function cancelDateSelection() {
-		innerValue.value = initialValue
-		// @ts-ignore
-		textFieldInput.value = initialValue
+		innerValue.value = initialValue.value
+		textFieldInput.value = initialValue.value
 	}
 
 	function confirmDateSelection() {
@@ -105,6 +121,6 @@ export default function useDateEditor(props: any, emits: any) {
 		onKeydownEsc,
 		onChange,
 		cancelDateSelection,
-		confirmDateSelection,
+		confirmDateSelection
 	}
 }
