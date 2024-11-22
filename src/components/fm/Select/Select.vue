@@ -59,14 +59,18 @@
 		</template>
 
 		<template #item="{ item, index }">
-			<slot name="item" :item-="item" :index="index">
+			<slot name="item" :item="item as T" :index="index">
 				<span>{{ (item as T)[titleKey as K] }}</span>
 			</slot>
 		</template>
 	</FmMenu>
 </template>
 
-<script lang="ts" setup generic="T extends FmSelectOption, K extends string & keyof T">
+<script
+	lang="ts"
+	setup
+	generic="T extends FmSelectOption, K extends string & keyof T"
+>
 	import { computed, onBeforeMount, ref, type Ref, watch } from 'vue'
 	import cloneDeep from 'lodash/cloneDeep'
 	import get from 'lodash/get'
@@ -77,7 +81,12 @@
 	import FmSelectActivator from './SelectActivator.vue'
 	import FmChip from '../Chip/Chip.vue'
 	import FmCheckbox from '../Checkbox/Checkbox.vue'
-	import type { FmSelectOption, FmSelectProps, FmSelectEmits, FmSelectSlots } from './types'
+	import type {
+		FmSelectOption,
+		FmSelectProps,
+		FmSelectEmits,
+		FmSelectSlots
+	} from './types'
 
 	type SelOption = T & { isSelected: boolean; isActive: boolean }
 
@@ -109,18 +118,28 @@
 		}
 
 		if (props.multiple) {
-			const value = selectedAsArray.value.map((item) => item[props.titleKey as K]) as string[]
+			const value = selectedAsArray.value.map(
+				(item) => item[props.titleKey as K]
+			) as string[]
 			return props.chip ? value : value.join(', ')
 		}
 
-		const value = get(selectedAsArray.value, [0, props.titleKey], JSON.stringify(selectedAsArray.value[0])) as string
+		const value = get(
+			selectedAsArray.value,
+			[0, props.titleKey],
+			JSON.stringify(selectedAsArray.value[0])
+		) as string
 		return props.chip ? [value] : value
 	})
 
+	function toggleDropdown(val: boolean) {
+		isMenuOpen.value = val
+	}
+
 	function checkAndAddOneItem(item: T | T[K]) {
 		const desiredValue = props.returnObject
-			? (item as T)[props.valueKey as K] as T[K]
-			: item as T
+			? ((item as T)[props.valueKey as K] as T[K])
+			: (item as T)
 
 		processedOptions.value.forEach((i) => {
 			const v = i[props.valueKey as K]
@@ -136,9 +155,11 @@
 		}
 
 		if (props.multiple) {
-			(props.modelValue as T[] | Array<T[K]> || []).forEach((item: T | T[K]) => {
-				checkAndAddOneItem(item)
-			})
+			;((props.modelValue as T[] | Array<T[K]>) || []).forEach(
+				(item: T | T[K]) => {
+					checkAndAddOneItem(item)
+				}
+			)
 			return
 		}
 
@@ -171,7 +192,7 @@
 		return omit(item, ['isSelected', 'isActive'])
 	}
 
-	function onItemClick({ item, index }: { item: SelOption, index: number }) {
+	function onItemClick({ item, index }: { item: SelOption; index: number }) {
 		if (props.multiple) {
 			if (selected.value.has(item)) {
 				selected.value.delete(item)
@@ -180,7 +201,10 @@
 			}
 			isDirty.value = true
 			const value = selectedAsArray.value.map((i) => transformData(i))
-			emits('update:modelValue', props.returnObject ? value : value.map((i) => i[props.valueKey as K]))
+			emits(
+				'update:modelValue',
+				props.returnObject ? value : value.map((i) => i[props.valueKey as K])
+			)
 		} else {
 			if (selected.value.has(item)) {
 				return
@@ -191,7 +215,10 @@
 			isDirty.value = true
 			isMenuOpen.value = false
 			const value = transformData(selectedAsArray.value[0])
-			emits('update:modelValue', props.returnObject ? value : value[props.valueKey as K])
+			emits(
+				'update:modelValue',
+				props.returnObject ? value : value[props.valueKey as K]
+			)
 		}
 
 		activeOptionIndex.value = index
@@ -201,13 +228,23 @@
 	function onChipClick(index: number) {
 		const currentItem = selectedAsArray.value[index]
 		selected.value.forEach((item) => {
-			const isEqual = Object.keys(currentItem).every((field) => JSON.stringify(currentItem[field as K]) === JSON.stringify(item[field as K]))
+			const isEqual = Object.keys(currentItem).every(
+				(field) =>
+					JSON.stringify(currentItem[field as K]) ===
+					JSON.stringify(item[field as K])
+			)
 			if (isEqual) {
 				selected.value.delete(item)
 				isDirty.value = true
 				const value = selectedAsArray.value.map((i) => transformData(i))
-				emits('update:modelValue', props.returnObject ? value : value.map((i) => i[props.valueKey as K]))
-				emits('change', props.returnObject ? value : value.map((i) => i[props.valueKey as K]))
+				emits(
+					'update:modelValue',
+					props.returnObject ? value : value.map((i) => i[props.valueKey as K])
+				)
+				emits(
+					'change',
+					props.returnObject ? value : value.map((i) => i[props.valueKey as K])
+				)
 			}
 		})
 
@@ -222,7 +259,13 @@
 		emits('blur', ev)
 	}
 
-	function onKeydown({ event, key }: { event: KeyboardEvent, key: 'down' | 'up' | 'esc' | 'enter' | 'space' | 'tab' }) {
+	function onKeydown({
+		event,
+		key
+	}: {
+		event: KeyboardEvent
+		key: 'down' | 'up' | 'esc' | 'enter' | 'space' | 'tab'
+	}) {
 		event.preventDefault()
 		event.stopPropagation()
 
@@ -238,7 +281,7 @@
 					menuContentEl && menuContentEl.focus()
 				} else if (
 					activeOptionIndex.value >= 0 &&
-					activeOptionIndex.value < (processedOptions.value.length - 1)
+					activeOptionIndex.value < processedOptions.value.length - 1
 				) {
 					activeOptionIndex.value += 1
 				}
@@ -259,7 +302,12 @@
 			case 'tab':
 				if (props.multiple && isDirty.value) {
 					const value = selectedAsArray.value.map((i) => transformData(i))
-					emits('change', props.returnObject ? value : value.map((i) => i[props.valueKey as K]))
+					emits(
+						'change',
+						props.returnObject
+							? value
+							: value.map((i) => i[props.valueKey as K])
+					)
 				}
 				activeOptionIndex.value = null
 				isMenuOpen.value = false
@@ -279,9 +327,31 @@
 		markSelectedItems()
 	}
 
+	defineExpose({
+		toggleDropdown
+	})
+
 	onBeforeMount(() => {
 		initialOptions()
 	})
+
+	watch(
+		() => props.modelValue,
+		() => {
+			const val = Array.isArray(props.modelValue)
+				? props.modelValue
+				: [props.modelValue as T | T[K]]
+
+			const processedVal = val.map((i) => ({
+				...i,
+				isSelected: true,
+				isActive: false
+			}))
+
+			selected.value = new Set(processedVal) as Set<SelOption>
+		},
+		{ immediate: true }
+	)
 
 	watch(
 		() => isMenuOpen.value,
@@ -301,8 +371,12 @@
 				emits(
 					'change',
 					props.multiple
-						? props.returnObject ? value as T[] : (value as T[]).map((i) => i[props.valueKey as K])
-						: props.returnObject ? value as T : (value as T)[props.valueKey as K]
+						? props.returnObject
+							? (value as T[])
+							: (value as T[]).map((i) => i[props.valueKey as K])
+						: props.returnObject
+							? (value as T)
+							: (value as T)[props.valueKey as K]
 				)
 				isDirty.value = false
 				activeOptionIndex.value = null
