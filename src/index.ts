@@ -53,6 +53,14 @@ import FmSlider from '@/components/fm/Slider/Slider.vue'
 import FmTextField from '@/components/fm/TextField/TextField.vue'
 import FmTooltip from '@/components/fm/Tooltip/Tooltip.vue'
 import FmTabs from '@/components/fm/Tabs/Tabs.vue'
+import type {
+	FmDialogOptions,
+	FmFileUploadProps,
+	FmUploadFile
+} from '@/components/fm/FileUpload/types'
+import FmFileUpload from '@/components/fm/FileUpload/FileUpload.vue'
+import FmFileUploadProcessing from '@/components/fm/FileUpload/FileUploadProcessing.vue'
+import FmDialog from '@/components/fm/FileUpload/Dialog.vue'
 import FmHeader from '../stories/Header.vue'
 import { createVuetify } from 'vuetify'
 import '@/assets/css/tailwind.css'
@@ -93,6 +101,12 @@ export {
 	FmTextField,
 	FmTooltip,
 	FmVSelect,
+	FmUploadFile,
+	FmDialogOptions,
+	FmFileUploadProps,
+	FmFileUpload,
+	FmFileUploadProcessing,
+	FmDialog,
 	FmChipProps,
 	FmChipEmits,
 	FmChipSlots,
@@ -166,6 +180,9 @@ export const uiComponentsPlugin = {
 		Vue.component(`${prefix}Tooltip`, FmTooltip)
 		Vue.component(`${prefix}VSelect`, FmVSelect)
 		Vue.component(`${prefix}Tabs`, FmTabs)
+		Vue.component(`${prefix}FileUpload`, FmFileUpload)
+		Vue.component(`${prefix}FileUploadProcessing`, FmFileUploadProcessing)
+		Vue.component(`${prefix}Dialog`, FmDialog)
 	}
 }
 
@@ -201,5 +218,8 @@ declare module 'vue' {
 		FmTooltip: typeof FmTooltip
 		FmVSelect: typeof FmVSelect
 		FmTabs: typeof FmTabs
+		FmFileUpload: typeof FmFileUpload
+		FmFileUploadProcessing: typeof FmFileUploadProcessing
+		FmDialog: typeof FmDialog
 	}
 }
