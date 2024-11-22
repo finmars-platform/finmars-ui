@@ -472,8 +472,11 @@
 					key: 'Pricing-Policies',
 					label: 'Pricing policies',
 					action: undefined,
-					to: '',
-					href: getUrlToOldApp('/pricing-policy')
+					to: useGetNuxtLink(
+              '/data/pricing-policy',
+              route.value.params
+          ),
+					href: ''
 				},
 				{
 					key: 'Import-schemes',
