@@ -27,8 +27,17 @@
 			/>
 		</slot>
 
-		<div class="fm-chip__content" :title="value">
+		<div class="fm-chip__content">
 			{{ value }}
+
+			<FmTooltip
+				type="secondary"
+				activator="parent"
+				:location="tooltipProps.location"
+				:disabled="!tooltip"
+			>
+				{{ tooltipProps.tooltip }}
+			</FmTooltip>
 		</div>
 
 		<slot name="prepend-icon">
@@ -53,6 +62,7 @@
 	import { computed } from 'vue'
 	import { Ripple } from 'vuetify/directives'
 	import FmIcon from '../Icon/Icon.vue'
+	import FmTooltip from '../Tooltip/Tooltip.vue'
 	import type { FmComponentIcon } from '@/types'
 	import type { FmChipProps, FmChipEmits, FmChipSlots } from './types'
 
@@ -86,7 +96,21 @@
 		return res
 	})
 
-	function getIconProps(data?: FmComponentIcon | string): FmComponentIcon | false {
+	const tooltipProps = computed(() => {
+		return typeof props.tooltip === 'string'
+			? {
+					tooltip: props.tooltip,
+					location: 'top'
+				}
+			: {
+					tooltip: props.tooltip?.value,
+					location: props.tooltip?.location || 'top'
+				}
+	})
+
+	function getIconProps(
+		data?: FmComponentIcon | string
+	): FmComponentIcon | false {
 		if (!data) {
 			return false
 		}
@@ -95,7 +119,10 @@
 			return {
 				icon: data,
 				size: 16,
-				color: props.type === 'standard' ? 'var(--fmChip-standard-color)' : 'var(--fmChip-outlined-color)'
+				color:
+					props.type === 'standard'
+						? 'var(--fmChip-standard-color)'
+						: 'var(--fmChip-outlined-color)'
 			}
 		}
 
@@ -106,7 +133,11 @@
 		return {
 			icon: data.icon,
 			size: data.size || 16,
-			color: data.color || (props.type === 'standard' ? 'var(--fmChip-standard-color)' : 'var(--fmChip-outlined-color)')
+			color:
+				data.color ||
+				(props.type === 'standard'
+					? 'var(--fmChip-standard-color)'
+					: 'var(--fmChip-outlined-color)')
 		}
 	}
 
@@ -159,14 +190,24 @@
 		--fmChip-column-gap: v-bind(columnGapValue);
 		--fmChip-outlined-borderColor: var(--outline);
 		--fmChip-outlined-bgColor: var(--surface);
-		--fmChip-outlined-bgColor-hovered: hsl(from var(--on-surface-variant) h s l / 10%);
-		--fmChip-outlined-bgColor-focused: hsl(from var(--on-surface-variant) h s l / 15%);
+		--fmChip-outlined-bgColor-hovered: hsl(
+			from var(--on-surface-variant) h s l / 10%
+		);
+		--fmChip-outlined-bgColor-focused: hsl(
+			from var(--on-surface-variant) h s l / 15%
+		);
 		--fmChip-outlined-bgColor-dragged: hsl(from var(--on-surface) h s l / 20%);
 		--fmChip-outlined-color: var(--on-surface-variant);
 		--fmChip-standard-bgColor: var(--secondary-container);
-		--fmChip-standard-bgColor-hovered: hsl(from var(--on-secondary-container) h s l / 30%);
-		--fmChip-standard-bgColor-focused: hsl(from var(--on-secondary-container) h s l / 35%);
-		--fmChip-standard-bgColor-dragged: hsl(from var(--on-secondary-container) h s l / 40%);
+		--fmChip-standard-bgColor-hovered: hsl(
+			from var(--on-secondary-container) h s l / 30%
+		);
+		--fmChip-standard-bgColor-focused: hsl(
+			from var(--on-secondary-container) h s l / 35%
+		);
+		--fmChip-standard-bgColor-dragged: hsl(
+			from var(--on-secondary-container) h s l / 40%
+		);
 		--fmChip-standard-color: var(--on-secondary-container);
 		--fmChip-content-width-gap: v-bind(contentWidthGap);
 
@@ -247,7 +288,9 @@
 		}
 
 		&.fm-chip--elevated {
-			box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.15), 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+			box-shadow:
+				0 1px 3px 1px rgba(0, 0, 0, 0.15),
+				0 1px 2px 0 rgba(0, 0, 0, 0.3);
 		}
 
 		&.fm-chip--readonly {

@@ -48,7 +48,6 @@
 	import { computed, ref, watch, useSlots } from 'vue'
 	import { vMaska } from 'maska/vue'
 	import { VIcon, VTextField } from 'vuetify/components'
-	import { ClickOutside } from 'vuetify/directives'
 
 	const props = defineProps({
 		modelValue: {
@@ -72,6 +71,9 @@
 		},
 		name: {
 			type: [String, undefined]
+		},
+		compact: {
+			type: Boolean
 		},
 		width: {
 			type: [String, Number, undefined]
@@ -161,6 +163,7 @@
 			props.bgColor || props.outlined
 				? 'var(--backgroundColor-fmTextField-outlined)'
 				: 'var(--backgroundColor-fmTextField)',
+		density: props.compact ? 'compact' : 'default',
 		modelValue: innerValue.value,
 		autofocus: props.autofocus,
 		type: props.type,

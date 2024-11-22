@@ -1,210 +1,210 @@
 <template>
 	<div class="grid grid-cols-2 gap-16">
-<!--		<div>-->
-<!--			<h3 class="text-[16px] mb-2">Standard, single, Label</h3>-->
+		<div>
+			<h3 class="text-[16px] mb-2">Standard, single, Label</h3>
 
-<!--			<FmSelect-->
-<!--				v-model="v1"-->
-<!--				v-on="eventHandlers"-->
-<!--				:options="options1"-->
-<!--				label="Label1"-->
-<!--			/>-->
-<!--		</div>-->
+			<FmSelect
+				v-model="v1"
+				v-on="eventHandlers"
+				:options="options1"
+				label="Label1"
+			/>
+		</div>
 
-<!--		<div>-->
-<!--			<h3 class="text-[16px] mb-2">Outlined, single, Label</h3>-->
+		<div>
+			<h3 class="text-[16px] mb-2">Outlined, single, Label</h3>
 
-<!--			<FmSelect-->
-<!--				v-model="v2"-->
-<!--				v-on="eventHandlers"-->
-<!--				variant="outlined"-->
-<!--				:options="options2"-->
-<!--				label="Label2"-->
-<!--			/>-->
-<!--		</div>-->
+			<FmSelect
+				v-model="v2"
+				v-on="eventHandlers"
+				variant="outlined"
+				:options="options2"
+				label="Label2"
+			/>
+		</div>
 
-<!--		<div>-->
-<!--			<h3 class="text-[16px] mb-2">Standard, single, Label, placeholder</h3>-->
+		<div>
+			<h3 class="text-[16px] mb-2">Standard, single, Label, placeholder</h3>
 
-<!--			<FmSelect-->
-<!--				v-model="v3"-->
-<!--				v-on="eventHandlers"-->
-<!--				:options="options1"-->
-<!--				label="Label1"-->
-<!--				placeholder="Select option"-->
-<!--			/>-->
-<!--		</div>-->
+			<FmSelect
+				v-model="v3"
+				v-on="eventHandlers"
+				:options="options1"
+				label="Label1"
+				placeholder="Select option"
+			/>
+		</div>
 
-<!--		<div>-->
-<!--			<h3 class="text-[16px] mb-2">Outlined, single, Label, placeholder</h3>-->
+		<div>
+			<h3 class="text-[16px] mb-2">Outlined, single, Label, placeholder</h3>
 
-<!--			<FmSelect-->
-<!--				v-model="v4"-->
-<!--				v-on="eventHandlers"-->
-<!--				variant="outlined"-->
-<!--				:options="options2"-->
-<!--				label="Label2"-->
-<!--				placeholder="Select option"-->
-<!--			/>-->
-<!--		</div>-->
+			<FmSelect
+				v-model="v4"
+				v-on="eventHandlers"
+				variant="outlined"
+				:options="options2"
+				label="Label2"
+				placeholder="Select option"
+			/>
+		</div>
 
-<!--		<div>-->
-<!--			<h3 class="text-[16px] mb-2">-->
-<!--				Standard, single, Label, persistent placeholder-->
-<!--			</h3>-->
+		<div>
+			<h3 class="text-[16px] mb-2">
+				Standard, single, Label, persistent placeholder
+			</h3>
 
-<!--			<FmSelect-->
-<!--				v-model="v5"-->
-<!--				v-on="eventHandlers"-->
-<!--				:options="options1"-->
-<!--				label="Label1"-->
-<!--				placeholder="Select option"-->
-<!--				persistent-placeholder-->
-<!--			/>-->
-<!--		</div>-->
+			<FmSelect
+				v-model="v5"
+				v-on="eventHandlers"
+				:options="options1"
+				label="Label1"
+				placeholder="Select option"
+				persistent-placeholder
+			/>
+		</div>
 
-<!--		<div>-->
-<!--			<h3 class="text-[16px] mb-2">-->
-<!--				Outlined, single, Label, persistent placeholder-->
-<!--			</h3>-->
+		<div>
+			<h3 class="text-[16px] mb-2">
+				Outlined, single, Label, persistent placeholder
+			</h3>
 
-<!--			<FmSelect-->
-<!--				v-model="v6"-->
-<!--				v-on="eventHandlers"-->
-<!--				variant="outlined"-->
-<!--				:options="options2"-->
-<!--				label="Label2"-->
-<!--				placeholder="Select option"-->
-<!--				persistent-placeholder-->
-<!--			/>-->
-<!--		</div>-->
+			<FmSelect
+				v-model="v6"
+				v-on="eventHandlers"
+				variant="outlined"
+				:options="options2"
+				label="Label2"
+				placeholder="Select option"
+				persistent-placeholder
+			/>
+		</div>
 
-<!--		<div>-->
-<!--			<h3 class="text-[16px] mb-2">-->
-<!--				Standard, single, Label, persistent placeholder, clearable-->
-<!--			</h3>-->
+		<div>
+			<h3 class="text-[16px] mb-2">
+				Standard, single, Label, persistent placeholder, clearable
+			</h3>
 
-<!--			<FmSelect-->
-<!--				v-model="v7"-->
-<!--				v-on="eventHandlers"-->
-<!--				:options="options1"-->
-<!--				label="Label1"-->
-<!--				placeholder="Select option"-->
-<!--				persistent-placeholder-->
-<!--				clearable-->
-<!--			/>-->
-<!--		</div>-->
+			<FmSelect
+				v-model="v7"
+				v-on="eventHandlers"
+				:options="options1"
+				label="Label1"
+				placeholder="Select option"
+				persistent-placeholder
+				clearable
+			/>
+		</div>
 
-<!--		<div>-->
-<!--			<h3 class="text-[16px] mb-2">-->
-<!--				Outlined, single, Label, persistent placeholder, clearable-->
-<!--			</h3>-->
+		<div>
+			<h3 class="text-[16px] mb-2">
+				Outlined, single, Label, persistent placeholder, clearable
+			</h3>
 
-<!--			<FmSelect-->
-<!--				v-model="v8"-->
-<!--				v-on="eventHandlers"-->
-<!--				variant="outlined"-->
-<!--				:options="options2"-->
-<!--				label="Label2"-->
-<!--				placeholder="Select option"-->
-<!--				persistent-placeholder-->
-<!--				clearable-->
-<!--			/>-->
-<!--		</div>-->
+			<FmSelect
+				v-model="v8"
+				v-on="eventHandlers"
+				variant="outlined"
+				:options="options2"
+				label="Label2"
+				placeholder="Select option"
+				persistent-placeholder
+				clearable
+			/>
+		</div>
 
-<!--		<div>-->
-<!--			<h3 class="text-[16px] mb-2">-->
-<!--				Standard, single, Label, persistent placeholder, clearable, error-->
-<!--			</h3>-->
+		<div>
+			<h3 class="text-[16px] mb-2">
+				Standard, single, Label, persistent placeholder, clearable, error
+			</h3>
 
-<!--			<FmSelect-->
-<!--				v-model="v9"-->
-<!--				v-on="eventHandlers"-->
-<!--				:options="options1"-->
-<!--				label="Label1"-->
-<!--				placeholder="Select option"-->
-<!--				persistent-placeholder-->
-<!--				clearable-->
-<!--				error-->
-<!--			/>-->
-<!--		</div>-->
+			<FmSelect
+				v-model="v9"
+				v-on="eventHandlers"
+				:options="options1"
+				label="Label1"
+				placeholder="Select option"
+				persistent-placeholder
+				clearable
+				error
+			/>
+		</div>
 
-<!--		<div>-->
-<!--			<h3 class="text-[16px] mb-2">-->
-<!--				Outlined, single, Label, persistent placeholder, clearable, error-->
-<!--			</h3>-->
+		<div>
+			<h3 class="text-[16px] mb-2">
+				Outlined, single, Label, persistent placeholder, clearable, error
+			</h3>
 
-<!--			<FmSelect-->
-<!--				v-model="v10"-->
-<!--				v-on="eventHandlers"-->
-<!--				variant="outlined"-->
-<!--				:options="options2"-->
-<!--				label="Label2"-->
-<!--				placeholder="Select option"-->
-<!--				persistent-placeholder-->
-<!--				clearable-->
-<!--				error-->
-<!--			/>-->
-<!--		</div>-->
+			<FmSelect
+				v-model="v10"
+				v-on="eventHandlers"
+				variant="outlined"
+				:options="options2"
+				label="Label2"
+				placeholder="Select option"
+				persistent-placeholder
+				clearable
+				error
+			/>
+		</div>
 
-<!--		<div>-->
-<!--			<h3 class="text-[16px] mb-2">Standard, single, Label, disabled</h3>-->
+		<div>
+			<h3 class="text-[16px] mb-2">Standard, single, Label, disabled</h3>
 
-<!--			<FmSelect-->
-<!--				v-model="v11"-->
-<!--				v-on="eventHandlers"-->
-<!--				:options="options1"-->
-<!--				label="Label1"-->
-<!--				disabled-->
-<!--			/>-->
-<!--		</div>-->
+			<FmSelect
+				v-model="v11"
+				v-on="eventHandlers"
+				:options="options1"
+				label="Label1"
+				disabled
+			/>
+		</div>
 
-<!--		<div>-->
-<!--			<h3 class="text-[16px] mb-2">Outlined, single, Label, disabled</h3>-->
+		<div>
+			<h3 class="text-[16px] mb-2">Outlined, single, Label, disabled</h3>
 
-<!--			<FmSelect-->
-<!--				v-model="v12"-->
-<!--				v-on="eventHandlers"-->
-<!--				variant="outlined"-->
-<!--				:options="options2"-->
-<!--				label="Label2"-->
-<!--				disabled-->
-<!--			/>-->
-<!--		</div>-->
+			<FmSelect
+				v-model="v12"
+				v-on="eventHandlers"
+				variant="outlined"
+				:options="options2"
+				label="Label2"
+				disabled
+			/>
+		</div>
 
-<!--		<div>-->
-<!--			<h3 class="text-[16px] mb-2">-->
-<!--				Standard, multiple, label, placeholder, clearable, prepend icon-->
-<!--			</h3>-->
+		<div>
+			<h3 class="text-[16px] mb-2">
+				Standard, multiple, label, placeholder, clearable, prepend icon
+			</h3>
 
-<!--			<FmSelect-->
-<!--				v-model="v13"-->
-<!--				v-on="eventHandlers"-->
-<!--				:options="options1"-->
-<!--				label="Label1"-->
-<!--				placeholder="Select option"-->
-<!--				clearable-->
-<!--				prepend-icon="mdi-magnify"-->
-<!--				multiple-->
-<!--			/>-->
-<!--		</div>-->
+			<FmSelect
+				v-model="v13"
+				v-on="eventHandlers"
+				:options="options1"
+				label="Label1"
+				placeholder="Select option"
+				clearable
+				prepend-icon="mdi-magnify"
+				multiple
+			/>
+		</div>
 
-<!--		<div>-->
-<!--			<h3 class="text-[16px] mb-2">-->
-<!--				Outlined, multiple, label, placeholder, clearable-->
-<!--			</h3>-->
+		<div>
+			<h3 class="text-[16px] mb-2">
+				Outlined, multiple, label, placeholder, clearable
+			</h3>
 
-<!--			<FmSelect-->
-<!--				v-model="v14"-->
-<!--				v-on="eventHandlers"-->
-<!--				variant="outlined"-->
-<!--				:options="options2"-->
-<!--				label="Label2"-->
-<!--				placeholder="Select option"-->
-<!--				clearable-->
-<!--				multiple-->
-<!--			/>-->
-<!--		</div>-->
+			<FmSelect
+				v-model="v14"
+				v-on="eventHandlers"
+				variant="outlined"
+				:options="options2"
+				label="Label2"
+				placeholder="Select option"
+				clearable
+				multiple
+			/>
+		</div>
 
 		<div>
 			<h3 class="text-[16px] mb-2">
@@ -252,10 +252,9 @@
 	const eventHandlers = {
 		'click:prependIcon': (ev) => console.log(`EVENT 'click:prependIcon' :`, ev),
 		'click:clear': (ev) => console.log(`EVENT 'click:clear' :`, ev),
-		focus: (ev) => console.log(`EVENT 'focus' :`, ev),
-		blur: (ev) => console.log(`EVENT 'blur' :`, ev),
+		focus: () => console.log(`EVENT 'focus'`),
+		blur: () => console.log(`EVENT 'blur'`),
 		'update:menu': (ev) => console.log(`EVENT 'update:menu' :`, ev),
-		change: (ev) => console.log(`EVENT 'change' :`, ev),
 		'update:modelValue': (ev) => console.log(`EVENT 'update:modelValue' :`, ev)
 	}
 
@@ -398,6 +397,6 @@
 	const v12 = ref()
 	const v13 = ref()
 	const v14 = ref()
-	const v15 = ref([clonedOptions1[0], clonedOptions1[1]])
+	const v15 = ref([clonedOptions1[0].value, clonedOptions1[1].value])
 	const v16 = ref()
 </script>

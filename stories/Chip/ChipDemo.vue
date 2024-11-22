@@ -1,10 +1,7 @@
 <template>
 	<div class="grid grid-cols-2 gap-y-10">
 		<!-- default  -->
-		<FmChip
-			v-on="eventHandlers"
-			value="Label"
-		/>
+		<FmChip v-on="eventHandlers" value="Label" />
 
 		<FmChip
 			type="outlined"
@@ -13,39 +10,17 @@
 		/>
 
 		<!-- default (disabled) -->
-		<FmChip
-			disabled
-			v-on="eventHandlers"
-			value="Label"
-		/>
+		<FmChip disabled v-on="eventHandlers" value="Label" />
 
-		<FmChip
-			value="Label"
-			type="outlined"
-			disabled
-			v-on="eventHandlers"
-		/>
+		<FmChip value="Label" type="outlined" disabled v-on="eventHandlers" />
 
 		<!-- default and elevation  -->
-		<FmChip
-			value="Label"
-			elevated
-			v-on="eventHandlers"
-		/>
+		<FmChip value="Label" elevated v-on="eventHandlers" />
 
-		<FmChip
-			value="Label"
-			elevated
-			type="outlined"
-			v-on="eventHandlers"
-		/>
+		<FmChip value="Label" elevated type="outlined" v-on="eventHandlers" />
 
 		<!-- closable -->
-		<FmChip
-			value="Label"
-			closable
-			v-on="eventHandlers"
-		/>
+		<FmChip value="Label" closable v-on="eventHandlers" />
 
 		<FmChip
 			value="download_instrument_from_finmars_database"
@@ -141,6 +116,7 @@
 		<!-- with prepend and rounded and closable (default) -->
 		<FmChip
 			value="label"
+			tooltip="The tooltip text"
 			closable
 			rounded
 			:prepend-icon="{ icon: 'mdi-account-circle-outline', size: 24 }"
@@ -166,6 +142,6 @@
 		'click:close': (ev) => console.log(`Event 'click:close' :`, ev),
 		'click:prepend': (ev) => console.log(`Event 'click:prepend' :`, ev),
 		'click:append': (ev) => console.log(`Event 'click:append' :`, ev),
-		'keydown': (ev) => console.log(`Event 'keydown' :`, ev)
+		keydown: (ev) => console.log(`Event 'keydown' :`, ev)
 	}
 </script>
