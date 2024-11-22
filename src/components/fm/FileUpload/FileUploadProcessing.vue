@@ -122,7 +122,7 @@
 			align-items: center;
 			justify-content: space-between;
 			gap: var(--spacing-16);
-			padding-bottom: var(--spacing-8);
+			padding-bottom: var(--spacing-16);
 
 			.progress-end-dot {
 				position: absolute;

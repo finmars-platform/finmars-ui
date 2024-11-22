@@ -66,10 +66,10 @@
 		indeterminate: false
 	})
 
-	const isUploadPanelOpen = ref(true)
-	const fileInputRef = ref(HTMLInputElement | null)
+	const isUploadPanelOpen = ref<boolean>(true)
+	const fileInputRef = ref<HTMLInputElement | null>(null)
 	const files = ref<FmUploadFile[]>([])
-	const totalSize = ref(0)
+	const totalSize = ref<number>(0)
 	let fileDataList = reactive<FmUploadFile[]>([])
 
 	const addListeners = (reader: FileReader, uniqueId: string) => {
