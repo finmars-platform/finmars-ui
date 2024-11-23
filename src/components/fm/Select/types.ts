@@ -71,6 +71,7 @@ export interface FmSelectProps<
 	rules?: Array<(value: T) => boolean | string>
 	focused?: boolean
 	loading?: boolean
+	scrollStrategy?: 'close' | 'block' | 'none' | 'reposition'
 	noDataText?: string
 	disabled?: boolean
 }
@@ -80,10 +81,15 @@ export interface FmSelectEmits<
 	K extends string & keyof T
 > {
 	(event: 'click:prependIcon', value: MouseEvent): void
+
 	(event: 'click:clear', value: MouseEvent): void
+
 	(event: 'focus'): void
+
 	(event: 'blur'): void
+
 	(event: 'update:menu', value: boolean): void
+
 	// (event: 'change', value: T[K] | Array<T[K]> | T | T[] | null): void
 	(event: 'update:modelValue', value: T[K] | Array<T[K]> | T | T[] | null): void
 }

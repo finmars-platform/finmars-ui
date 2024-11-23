@@ -7,7 +7,7 @@
 		:height="200"
 		offset="6"
 		:item-size="itemSize"
-		scroll-strategy="none"
+		:scroll-strategy="scrollStrategy"
 		:disabled="disabled"
 		@click:item="onItemClick"
 		@menu:keydown="onKeydown"
@@ -88,7 +88,8 @@
 		itemSize: 'medium',
 		variant: 'standard',
 		titleKey: 'title',
-		valueKey: 'value'
+		valueKey: 'value',
+		scrollStrategy: 'block'
 	})
 	const emits = defineEmits<FmSelectEmits<T, K>>()
 	defineSlots<FmSelectSlots<T>>()
