@@ -472,10 +472,7 @@
 					key: 'Pricing-Policies',
 					label: 'Pricing policies',
 					action: undefined,
-					to: useGetNuxtLink(
-              '/data/pricing-policy',
-              route.value.params
-          ),
+					to: useGetNuxtLink('/data/pricing-policy', route.value.params),
 					href: ''
 				},
 				{
@@ -703,6 +700,13 @@
 							href: ''
 						}
 					]
+				},
+				{
+					key: 'Client-Entity',
+					label: 'Client Entity',
+					action: undefined,
+					to: useGetNuxtLink('/settings/client-entity/', route.value.params),
+					href: ''
 				},
 				{
 					key: 'White-Label',
