@@ -21,10 +21,7 @@
 		</div>
 		<div class="progress-linear-content">
 			<div>
-				<VProgressLinear
-					v-model="file.progress"
-					v-bind="vProgressLinearProps"
-				/>
+				<FmProgressLinear :model-value="file.progress" />
 				<span class="progress-end-dot"></span>
 			</div>
 			<span class="progress-percent">{{ file.progress }}%</span>
@@ -33,41 +30,16 @@
 </template>
 
 <script setup lang="ts">
-	import { computed } from 'vue'
-	import { VProgressLinear } from 'vuetify/components'
+	import { formatFileSize } from '@/utils'
 	import FmIcon from '@/components/fm/Icon/Icon.vue'
+	import FmProgressLinear from '@/components/fm/ProgressLinear/ProgressLinear.vue'
 	import { FmUploadFile } from './types'
 
 	const props = defineProps<{ file: FmUploadFile; indeterminate: boolean }>()
 	const emits = defineEmits(['removeFile'])
 
-	const vProgressLinearProps = computed(() => {
-		const { indeterminate, file } = props
-
-		return {
-			rounded: true,
-			roundedBar: true,
-			color: 'var(--primary)',
-			bgColor: 'var(--primary-container)',
-			bufferColor: 'var(--primary-container)',
-			bgOpacity: 1,
-			indeterminate: indeterminate && file.progress !== 100
-		}
-	})
-
 	const removeFile = () => {
 		emits('removeFile', props.file.id)
-	}
-
-	const formatFileSize = (size: number) => {
-		const units = ['B', 'KB', 'MB', 'GB']
-		let formatedSize = size
-		let unitIndex = 0
-		while (formatedSize >= 1024 && unitIndex < units.length - 1) {
-			formatedSize = formatedSize / 1024
-			unitIndex++
-		}
-		return `${formatedSize.toFixed(1)} ${units[unitIndex]}`
 	}
 </script>
 

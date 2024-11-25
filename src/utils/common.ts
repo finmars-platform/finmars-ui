@@ -3,7 +3,8 @@ export function getRandomString(numOfChars: number): string {
 		throw new Error(`number of chars is less than one`)
 	}
 
-	const possibleCharacters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+	const possibleCharacters =
+		'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
 	const array = new Uint8Array(numOfChars * 2)
 	crypto.getRandomValues(array)
 	let result = ''
@@ -22,10 +23,22 @@ export function getRandomString(numOfChars: number): string {
  */
 export function round(num: number, precision: number): number {
 	// Сдвиг разрядов
-	let tmpNum = (num.toString().split('e')) as any
-	tmpNum = Math.round(+(tmpNum[0] + 'e' + (tmpNum[1] ? (+tmpNum[1] - precision) : -precision)))
+	let tmpNum = num.toString().split('e') as any
+	tmpNum = Math.round(
+		+(tmpNum[0] + 'e' + (tmpNum[1] ? +tmpNum[1] - precision : -precision))
+	)
 	// Обратный сдвиг
 	tmpNum = tmpNum.toString().split('e')
-	return +(tmpNum[0] + 'e' + (tmpNum[1] ? (+tmpNum[1] -
-		+precision) : precision))
+	return +(tmpNum[0] + 'e' + (tmpNum[1] ? +tmpNum[1] - +precision : precision))
+}
+
+export function formatFileSize(size: number) {
+	const units = ['B', 'KB', 'MB', 'GB']
+	let formatedSize = size
+	let unitIndex = 0
+	while (formatedSize >= 1024 && unitIndex < units.length - 1) {
+		formatedSize = formatedSize / 1024
+		unitIndex++
+	}
+	return `${formatedSize.toFixed(1)} ${units[unitIndex]}`
 }
