@@ -472,10 +472,7 @@
 					key: 'Pricing-Policies',
 					label: 'Pricing policies',
 					action: undefined,
-					to: useGetNuxtLink(
-              '/data/pricing-policy',
-              route.value.params
-          ),
+					to: useGetNuxtLink('/data/pricing-policy', route.value.params),
 					href: ''
 				},
 				{
@@ -556,8 +553,11 @@
 							key: 'Manage',
 							label: 'Manage',
 							action: undefined,
-							to: '',
-							href: getUrlToOldApp('/manage-configuration')
+							to: useGetNuxtLink(
+								'/configuration/manage-configuration',
+								route.value.params
+							),
+							href: ''
 						}
 					]
 				}
