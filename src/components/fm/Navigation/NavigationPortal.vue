@@ -705,6 +705,13 @@
 					]
 				},
 				{
+					key: 'Client-Entity',
+					label: 'Client Entity',
+					action: undefined,
+					to: useGetNuxtLink('/settings/client-entity/', route.value.params),
+					href: ''
+				},
+				{
 					key: 'White-Label',
 					label: 'White Label',
 					action: undefined,
