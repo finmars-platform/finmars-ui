@@ -28,11 +28,11 @@ export default function useDateEditor(
 			: null
 	)
 
-	function allowedDates(val: Dayjs | string) {
+	function allowedDates(val: Dayjs | string, ignoreWeekends?: boolean) {
 		const date = dayjs(val)
 		const dayOfWeek = date.isoWeekday()
 
-		if ([6, 7].includes(dayOfWeek)) {
+		if ((!props.allowWeekendSelection || ignoreWeekends) && [6, 7].includes(dayOfWeek)) {
 			return false
 		}
 
@@ -51,11 +51,11 @@ export default function useDateEditor(
 
 		if (item === 'previous') {
 			let count = 0
-			let selectedDay = innerValue.value
+			let selectedDay = props.calculatePreviousDayFromToday ? dayjs() : innerValue.value
 			let isDayAvailable = false
 			while (!isDayAvailable && count < 90) {
 				selectedDay = dayjs(selectedDay).add(-1, 'day').format(displayingDateFormat)
-				isDayAvailable = allowedDates(selectedDay)
+				isDayAvailable = allowedDates(selectedDay, true)
 				count++
 			}
 			if (isDayAvailable) {

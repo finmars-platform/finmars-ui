@@ -7,7 +7,7 @@
 			{
 				'fm-select-activator--standard': variant === 'standard',
 				'fm-select-activator--outlined': variant === 'outlined',
-				'fm-select-activator--focused': isFocused,
+				'fm-select-activator--focused': isFocused || focused,
 				'fm-select-activator--errored': error,
 				'fm-select-activator--disabled': disabled
 			}

@@ -49,7 +49,9 @@
 		</div>
 
 		<div>
-			<h3 class="text-[16px] mb-2">Standard, single, Label, persistent placeholder</h3>
+			<h3 class="text-[16px] mb-2">
+				Standard, single, Label, persistent placeholder
+			</h3>
 
 			<FmSelect
 				v-model="v5"
@@ -62,7 +64,9 @@
 		</div>
 
 		<div>
-			<h3 class="text-[16px] mb-2">Outlined, single, Label, persistent placeholder</h3>
+			<h3 class="text-[16px] mb-2">
+				Outlined, single, Label, persistent placeholder
+			</h3>
 
 			<FmSelect
 				v-model="v6"
@@ -76,7 +80,9 @@
 		</div>
 
 		<div>
-			<h3 class="text-[16px] mb-2">Standard, single, Label, persistent placeholder, clearable</h3>
+			<h3 class="text-[16px] mb-2">
+				Standard, single, Label, persistent placeholder, clearable
+			</h3>
 
 			<FmSelect
 				v-model="v7"
@@ -90,7 +96,9 @@
 		</div>
 
 		<div>
-			<h3 class="text-[16px] mb-2">Outlined, single, Label, persistent placeholder, clearable</h3>
+			<h3 class="text-[16px] mb-2">
+				Outlined, single, Label, persistent placeholder, clearable
+			</h3>
 
 			<FmSelect
 				v-model="v8"
@@ -105,7 +113,9 @@
 		</div>
 
 		<div>
-			<h3 class="text-[16px] mb-2">Standard, single, Label, persistent placeholder, clearable, error</h3>
+			<h3 class="text-[16px] mb-2">
+				Standard, single, Label, persistent placeholder, clearable, error
+			</h3>
 
 			<FmSelect
 				v-model="v9"
@@ -120,7 +130,9 @@
 		</div>
 
 		<div>
-			<h3 class="text-[16px] mb-2">Outlined, single, Label, persistent placeholder, clearable, error</h3>
+			<h3 class="text-[16px] mb-2">
+				Outlined, single, Label, persistent placeholder, clearable, error
+			</h3>
 
 			<FmSelect
 				v-model="v10"
@@ -161,7 +173,9 @@
 		</div>
 
 		<div>
-			<h3 class="text-[16px] mb-2">Standard, multiple, label, placeholder, clearable, prepend icon</h3>
+			<h3 class="text-[16px] mb-2">
+				Standard, multiple, label, placeholder, clearable, prepend icon
+			</h3>
 
 			<FmSelect
 				v-model="v13"
@@ -176,7 +190,9 @@
 		</div>
 
 		<div>
-			<h3 class="text-[16px] mb-2">Outlined, multiple, label, placeholder, clearable</h3>
+			<h3 class="text-[16px] mb-2">
+				Outlined, multiple, label, placeholder, clearable
+			</h3>
 
 			<FmSelect
 				v-model="v14"
@@ -191,7 +207,9 @@
 		</div>
 
 		<div>
-			<h3 class="text-[16px] mb-2">Standard, multiple, label, placeholder, clearable, prepend icon, chip</h3>
+			<h3 class="text-[16px] mb-2">
+				Standard, multiple, label, placeholder, clearable, prepend icon, chip
+			</h3>
 
 			<FmSelect
 				v-model="v15"
@@ -207,7 +225,9 @@
 		</div>
 
 		<div>
-			<h3 class="text-[16px] mb-2">Outlined, multiple, label, placeholder, clearable, chip</h3>
+			<h3 class="text-[16px] mb-2">
+				Outlined, multiple, label, placeholder, clearable, chip
+			</h3>
 
 			<FmSelect
 				v-model="v16"
@@ -226,15 +246,15 @@
 
 <script setup>
 	import { ref } from 'vue'
+	import cloneDeep from 'lodash/cloneDeep'
 	import FmSelect from '@/components/fm/Select/Select.vue'
 
 	const eventHandlers = {
 		'click:prependIcon': (ev) => console.log(`EVENT 'click:prependIcon' :`, ev),
 		'click:clear': (ev) => console.log(`EVENT 'click:clear' :`, ev),
-		'focus': (ev) => console.log(`EVENT 'focus' :`, ev),
-		'blur': (ev) => console.log(`EVENT 'blur' :`, ev),
+		focus: () => console.log(`EVENT 'focus'`),
+		blur: () => console.log(`EVENT 'blur'`),
 		'update:menu': (ev) => console.log(`EVENT 'update:menu' :`, ev),
-		'change': (ev) => console.log(`EVENT 'change' :`, ev),
 		'update:modelValue': (ev) => console.log(`EVENT 'update:modelValue' :`, ev)
 	}
 
@@ -359,7 +379,9 @@
 			value: 'validate_transaction_import',
 			title: 'validate_transaction_import'
 		}
-	];
+	]
+
+	const clonedOptions1 = cloneDeep(options1)
 
 	const v1 = ref()
 	const v2 = ref()
@@ -375,6 +397,6 @@
 	const v12 = ref()
 	const v13 = ref()
 	const v14 = ref()
-	const v15 = ref()
+	const v15 = ref([clonedOptions1[0].value, clonedOptions1[1].value])
 	const v16 = ref()
 </script>

@@ -16,63 +16,63 @@
 
 	const props = defineProps({
 		modelValue: {
-			type: String,
+			type: String
 		},
 		title: {
-			type: String,
+			type: String
 		},
 		header: {
-			type: String,
+			type: String
 		},
 		min: {
-			type: String, // date/month ISO 8601 format
+			type: String // date/month ISO 8601 format
 		},
 		max: {
-			type: String, // date/month ISO 8601 format
+			type: String // date/month ISO 8601 format
 		},
 		allowedDates: {
-			type: [Array, Function],
+			type: [Array, Function]
 		},
 		showHeader: {
-			type: Boolean,
+			type: Boolean
 		},
 		showWeek: {
-			type: Boolean,
+			type: Boolean
 		},
 		showAdjacentMonths: {
-			type: Boolean,
+			type: Boolean
 		},
 		border: {
-			type: Boolean,
+			type: Boolean
 		},
 		minWidth: {
-			type: [String, Number],
+			type: [String, Number]
 		},
 		width: {
-			type: [String, Number],
+			type: [String, Number]
 		},
 		maxWidth: {
-			type: [String, Number],
+			type: [String, Number]
 		},
 		minHeight: {
-			type: [String, Number],
+			type: [String, Number]
 		},
 		height: {
-			type: [String, Number],
+			type: [String, Number]
 		},
 		maxHeight: {
-			type: [String, Number],
+			type: [String, Number]
 		},
 		disabled: {
-			type: Boolean,
-		},
+			type: Boolean
+		}
 	})
 
 	const emits = defineEmits([
 		'update:modelValue',
 		'update:month',
 		'update:year',
-		'update:viewMode',
+		'update:viewMode'
 	])
 
 	const innerValue = ref(props.modelValue ? isoToDate(props.modelValue) : null)
@@ -95,10 +95,10 @@
 		minHeight: props.minHeight,
 		height: props.height,
 		maxHeight: props.maxHeight,
-		disabled: props.disabled,
+		disabled: props.disabled
 	}))
 
-	const borderRadiusValue = computed(() => props.border ? '24px' : '0')
+	const borderRadiusValue = computed(() => (props.border ? '24px' : '0'))
 
 	function isoToDate(val) {
 		return val ? new Date(val) : new Date()
@@ -116,10 +116,10 @@
 		() => props.modelValue,
 		(val, oVal) => {
 			if (val !== oVal) {
-				innerValue.value = val ? isoToDate(val) : null;
+				innerValue.value = val ? isoToDate(val) : null
 			}
 		},
-		{ immediate: true },
+		{ immediate: true }
 	)
 </script>
 

@@ -2,10 +2,12 @@
 	<div class="grid grid-cols-2">
 		<FmDateEditor
 			v-model="date1"
+			show-adjacent-months
+			allow-weekend-selection
+			calculate-previous-day-from-today
 			@click:date-icon="() => console.log('ICON IS CLICKED')"
 			@update:model-value="(ev) => console.log('NEW DATE: ', ev)"
 		/>
-
 	</div>
 </template>
 
