@@ -62,6 +62,7 @@ import type {
 	FmUploadFile
 } from '@/components/fm/FileUpload/types'
 import FmFileUpload from '@/components/fm/FileUpload/FileUpload.vue'
+import FmSwitch from '@/components/fm/Switch/Switch.vue'
 import FmHeader from '../stories/Header.vue'
 import { createVuetify } from 'vuetify'
 import '@/assets/css/tailwind.css'
@@ -123,7 +124,8 @@ export {
 	FmSelectSlots,
 	FmVSelectProps,
 	FmVSelectEmits,
-	FmVSelectSlots
+	FmVSelectSlots,
+	FmSwitch
 }
 
 /**
@@ -180,6 +182,7 @@ export const uiComponentsPlugin = {
 		Vue.component(`${prefix}VSelect`, FmVSelect)
 		Vue.component(`${prefix}Tabs`, FmTabs)
 		Vue.component(`${prefix}FileUpload`, FmFileUpload)
+		Vue.component(`${prefix}Switch`, FmSwitch)
 	}
 }
 
@@ -216,5 +219,6 @@ declare module 'vue' {
 		FmVSelect: typeof FmVSelect
 		FmTabs: typeof FmTabs
 		FmFileUpload: typeof FmFileUpload
+		FmSwitch: typeof FmSwitch
 	}
 }

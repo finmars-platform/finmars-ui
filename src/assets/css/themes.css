@@ -123,11 +123,16 @@
     --nv-100: #fff;
 
     --v-theme-overlay-multiplier: 1;
-  
+
     --go-0: #1d1b201f;
     --go-10: #6750a41f;
     --go-20: #D0BCFF1F;
     --go-30: #E6E0E91F;
+    --d-10: #AD3400;
+    --d-20: #F1DFDA;
+    --d-30: #FFB59D;
+    --d-40: #3D322F;
+    --d-50: #390B00;
 }
 
 .light-theme {
@@ -164,6 +169,9 @@
     --outline-variant: var(--nv-80);
     --on-active-primary: var(--go-0);
     --on-active-secondary: var(--go-10);
+    --enable: var(--d-10);
+    --enable-dark: var(--d-50);
+    --disable: var(--d-20);
     --scrim: var(--n-0);
     --shadow: var(--n-0);
     --dataviz1: var(--p-80);
@@ -210,6 +218,9 @@
     --outline-variant: var(--nv-30);
     --on-active-primary: var(--go-30);
     --on-active-secondary: var(--go-20);
+    --enable: var(--d-30);
+    --enable-dark: var(--d-30);
+    --disable: var(--d-40);
     --scrim: var(--n-0);
     --shadow: var(--n-0);
     --dataviz1: var(--p-20);
