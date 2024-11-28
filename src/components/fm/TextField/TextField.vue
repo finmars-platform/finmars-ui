@@ -45,7 +45,6 @@
 </template>
 
 <script setup>
-	F
 	import { computed, ref, useSlots, watch } from 'vue'
 	import { vMaska } from 'maska/vue'
 	import { VIcon, VTextField } from 'vuetify/components'
