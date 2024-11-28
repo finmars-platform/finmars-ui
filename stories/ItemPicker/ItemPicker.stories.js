@@ -1,12 +1,12 @@
 import { ref, watch } from 'vue'
-import FmItemPicker from '@/components/fm/ItemPicker/ItemPicker.vue'
+import FmItemPicker from '@/components/fm/ItemPicker/ItemPicker/ItemPicker.vue'
 import ItemPickerDemo from './ItemPickerDemo.vue'
 
 const meta = {
 	title: 'Components/FmItemPicker',
 	component: FmItemPicker,
 	argTypes: {},
-	args: {},
+	args: {}
 }
 
 export default meta
@@ -30,7 +30,7 @@ export const General = {
 		},
 		template: `
 			<FmItemPicker v-bind="args" :key="key" />
-		`,
+		`
 	})
 }
 
@@ -42,6 +42,7 @@ export const AllVariants = {
 		setup() {
 			return { args }
 		},
-		template: `<ItemPickerDemo />`,
+		template: `
+			<ItemPickerDemo />`
 	})
 }

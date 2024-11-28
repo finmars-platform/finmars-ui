@@ -1,15 +1,9 @@
 <template>
 	<div class="grid grid-cols-4 gap-16">
 		<!-- row -->
-		<FmMenu
-			v-model="v1"
-			v-on="eventHandlers"
-			:items="items1"
-		>
+		<FmMenu v-model="v1" v-on="eventHandlers" :items="items1">
 			<template #activator="{ props }">
-				<FmButton v-bind="props">
-					Activator slot
-				</FmButton>
+				<FmButton v-bind="props"> Activator slot </FmButton>
 			</template>
 		</FmMenu>
 
@@ -24,9 +18,7 @@
 			/>
 		</FmButton>
 
-		<FmButton id="menuActivator">
-			Sibling activator
-		</FmButton>
+		<FmButton id="menuActivator"> Sibling activator </FmButton>
 		<FmMenu
 			v-model="v3"
 			activator="#menuActivator"
@@ -34,13 +26,9 @@
 			:items="items1"
 		/>
 
-		<FmMenu
-			v-on="eventHandlers"
-			:items="items1"
-			width="200"
-		>
+		<FmMenu v-on="eventHandlers" :items="items1" width="200">
 			<template #activator="{ props }">
-				<FmIconButton v-bind="props" icon="mdi-cog"/>
+				<FmIconButton v-bind="props" icon="mdi-cog" />
 			</template>
 		</FmMenu>
 
@@ -53,9 +41,7 @@
 			width="200"
 		>
 			<template #activator="{ props }">
-				<FmButton v-bind="props">
-					Hover me
-				</FmButton>
+				<FmButton v-bind="props"> Hover me </FmButton>
 			</template>
 		</FmMenu>
 
@@ -84,7 +70,7 @@
 
 	const eventHandlers = {
 		'update:modelValue': (ev) => console.log(`Event 'update:modelValue' :`, ev),
-		'click:item': (ev) => console.log(`Event 'click:item' :`, ev),
+		'click:item': (ev) => console.log(`Event 'click:item' :`, ev)
 	}
 
 	const items1 = [
@@ -92,7 +78,7 @@
 		{ title: 'Item 2' },
 		{ title: 'Item 3' },
 		{ title: 'Item 4' },
-		{ title: 'Item 5' },
+		{ title: 'Item 5' }
 	]
 
 	const v1 = ref(false)

@@ -44,11 +44,15 @@ export default function useSelect<
 	) as ComputedRef<Array<T[K]>>
 
 	const displaySelection = computed(() => {
-		if (isEmpty(props.modelValue)) {
+		if (isEmpty(props.modelValue) && typeof props.modelValue !== 'boolean') {
 			return ''
 		}
 
 		const currentModel = getSelectedOptions()
+		if (isEmpty(currentModel)) {
+			return ''
+		}
+
 		if (props.multiple) {
 			const value = currentModel.map((o) => o[props.titleKey as K]) as string[]
 			return props.chip ? value : value.join(', ')
@@ -77,8 +81,9 @@ export default function useSelect<
 		}
 
 		const data = Array.isArray(props.modelValue ?? [])
-			? ((props.modelValue || []) as Array<T[K]>)
-			: ([props.modelValue] as Array<T[K]>)
+			? (props.modelValue || []) as Array<T[K]>
+			: [(props.modelValue)] as Array<T[K]>
+
 		return data.reduce((res: T[], val: T[K]) => {
 			const option = props.options.find((o) => o[props.valueKey as K] === val)
 			option && res.push(option)
@@ -116,7 +121,8 @@ export default function useSelect<
 		const clickedOptionIndex = selectedOptionsValues.value.findIndex(
 			(v) => v === item[props.valueKey as K]
 		)
-		if (clickedOptionIndex !== -1) {
+
+		if (clickedOptionIndex !== -1 && !props.anyUpdateEmits) {
 			return
 		}
 
@@ -261,7 +267,7 @@ export default function useSelect<
 	})
 
 	watch(
-		() => props.modelValue,
+		[() => props.modelValue, () => props.options],
 		() => {
 			selectedOptions.value = getSelectedOptions()
 			initialSelectedOptions.value = cloneDeep(selectedOptions.value)

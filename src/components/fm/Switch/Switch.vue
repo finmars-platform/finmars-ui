@@ -10,11 +10,11 @@
 			]"
 		>
 			<span class="icon" v-if="icon">
-				<VIcon
+				<FmIcon
 					:icon="isChecked ? defaultIcons.tick : defaultIcons.cross"
 					:color="fmIconColor"
 					:size="15"
-				></VIcon>
+				></FmIcon>
 			</span>
 		</div>
 	</div>
@@ -22,7 +22,7 @@
 
 <script setup>
 	import { computed, defineEmits, defineProps, ref } from 'vue'
-	import { VIcon } from 'vuetify/components'
+	import FmIcon from '@/components/fm/Icon/Icon.vue'
 
 	const props = defineProps({
 		modelValue: {
@@ -48,7 +48,9 @@
 	}
 
 	const fmIconColor = computed(() => {
-		return isChecked.value ? 'var(--enable-dark)' : 'var(--disable)'
+		return isChecked.value
+			? 'var(--on-secondary-container)'
+			: 'var(--surface-container-highest)'
 	})
 
 	const toggle = () => {
@@ -65,7 +67,7 @@
 		height: 30px;
 		border-radius: 15px;
 		border: 2px solid var(--outline);
-		background: var(--disable);
+		background: var(--surface-container-highest);
 		cursor: pointer;
 		transition: background-color 0.3s ease-in-out;
 
@@ -80,7 +82,7 @@
 		}
 
 		&.checked {
-			background: var(--enable);
+			background: var(--primary);
 			border: none;
 		}
 

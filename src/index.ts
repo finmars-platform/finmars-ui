@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any, @typescript-eslint/ban-ts-comment */
 import './assets/css/main.css'
 import FmAvatar from '@/components/fm/Avatar/Avatar.vue'
 import FmBadge from '@/components/fm/Badge/Badge.vue'
@@ -18,7 +19,11 @@ import FmDatePicker from '@/components/fm/DatePicker/DatePicker.vue'
 import FmIcon from '@/components/fm/Icon/Icon.vue'
 import type { FmIconProps, FmIconSlots } from '@/components/fm/Icon/types'
 import FmIconButton from '@/components/fm/IconButton/IconButton.vue'
-import FmItemPicker from '@/components/fm/ItemPicker/ItemPicker.vue'
+import FmItemPicker from '@/components/fm/ItemPicker/ItemPicker/ItemPicker.vue'
+import type {
+	FmItemPickerProps,
+	FmItemPickerEmits
+} from '@/components/fm/ItemPicker/ItemPicker/types'
 import FmLogo from '@/components/fm/Logo/Logo.vue'
 import FmMenuItem from '@/components/fm/Menu/MenuItem.vue'
 import FmMenu from '@/components/fm/Menu/Menu.vue'
@@ -62,8 +67,31 @@ import type {
 	FmUploadFile
 } from '@/components/fm/FileUpload/types'
 import FmFileUpload from '@/components/fm/FileUpload/FileUpload.vue'
+import FmTransferList from '@/components/fm/TransferList/TransferList.vue'
+import type {
+	FmTransferListProps,
+	FmTransferListEmits
+} from '@/components/fm/TransferList/types'
+import FmInputDate from '@/components/fm/InputDate/InputDate.vue'
+import type {
+	FmInputDateProps,
+	FmInputDateEmits
+} from '@/components/fm/InputDate/types'
+import FmFilterEditor from '@/components/fm/Filters/FilterEditor/FilterEditor.vue'
+import type {
+	FmFilterEditorProps,
+	FmFilterEditorEmits
+} from '@/components/fm/Filters/FilterEditor/types'
+import FmFilterToolbar from '@/components/fm/Filters/FilterToolbar/FilterToolbar.vue'
+import type {
+	FmFilterAttribute,
+	FmFilterAttributes,
+	FmtFilterToolbarProps,
+	FmtFilterToolbarEmits
+} from '@/components/fm/Filters/FilterToolbar/types'
 import FmSwitch from '@/components/fm/Switch/Switch.vue'
 import FmHeader from '../stories/Header.vue'
+
 import { createVuetify } from 'vuetify'
 import '@/assets/css/tailwind.css'
 import '@mdi/font/css/materialdesignicons.css'
@@ -87,6 +115,8 @@ export {
 	FmIcon,
 	FmIconButton,
 	FmItemPicker,
+	FmItemPickerProps,
+	FmItemPickerEmits,
 	FmLogo,
 	FmMenuItem,
 	FmMenu,
@@ -125,6 +155,20 @@ export {
 	FmVSelectProps,
 	FmVSelectEmits,
 	FmVSelectSlots,
+	FmTransferList,
+	FmTransferListProps,
+	FmTransferListEmits,
+	FmInputDate,
+	FmInputDateProps,
+	FmInputDateEmits,
+	FmFilterEditor,
+	FmFilterEditorProps,
+	FmFilterEditorEmits,
+	FmFilterToolbar,
+	FmFilterAttribute,
+	FmFilterAttributes,
+	FmtFilterToolbarProps,
+	FmtFilterToolbarEmits,
 	FmSwitch
 }
 
@@ -135,7 +179,7 @@ export {
  */
 export const uiComponentsPlugin = {
 	// @ts-ignore
-	install(Vue, args = {} as sny) {
+	install(Vue, args = {} as any) {
 		let prefix = ''
 
 		if (
@@ -182,6 +226,10 @@ export const uiComponentsPlugin = {
 		Vue.component(`${prefix}VSelect`, FmVSelect)
 		Vue.component(`${prefix}Tabs`, FmTabs)
 		Vue.component(`${prefix}FileUpload`, FmFileUpload)
+		Vue.component(`${prefix}TransferList`, FmTransferList)
+		Vue.component(`${prefix}InputDate`, FmInputDate)
+		Vue.component(`${prefix}FilterEditor`, FmFilterEditor)
+		Vue.component(`${prefix}FilterToolbar`, FmFilterToolbar)
 		Vue.component(`${prefix}Switch`, FmSwitch)
 	}
 }
@@ -200,7 +248,10 @@ declare module 'vue' {
 		FmDatePicker: typeof FmDatePicker
 		FmIcon: typeof FmIcon
 		FmIconButton: typeof FmIconButton
+		FmInputDate: typeof FmInputDate
 		FmItemPicker: typeof FmItemPicker
+		FmFilterEditor: typeof FmFilterEditor
+		FmFilterToolbar: typeof FmFilterToolbar
 		FmLogo: typeof FmLogo
 		FmMenuItem: typeof FmMenuItem
 		FmMenu: typeof FmMenu
@@ -219,6 +270,7 @@ declare module 'vue' {
 		FmVSelect: typeof FmVSelect
 		FmTabs: typeof FmTabs
 		FmFileUpload: typeof FmFileUpload
+		FmTransferListProps: typeof FmTransferList
 		FmSwitch: typeof FmSwitch
 	}
 }

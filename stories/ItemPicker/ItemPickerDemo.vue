@@ -5,7 +5,8 @@
 		<FmItemPicker
 			class="mb-10"
 			v-model="val1"
-			:categories="categories"
+			:attributes="attributes"
+			:suggested="[]"
 			v-on="eventHandlers"
 		/>
 
@@ -15,7 +16,8 @@
 			class="mb-10"
 			v-model="val2"
 			multiple
-			:categories="categories"
+			:attributes="attributes"
+			:suggested="[]"
 			v-on="eventHandlers"
 		/>
 
@@ -25,7 +27,8 @@
 			v-model="val3"
 			multiple
 			mode="update"
-			:categories="categories"
+			:attributes="attributes"
+			:suggested="[]"
 			v-on="eventHandlers"
 		/>
 	</div>
@@ -34,15 +37,18 @@
 <script setup>
 	import { ref } from 'vue'
 	import cloneDeep from 'lodash/cloneDeep'
-	import FmItemPicker from '@/components/fm/ItemPicker/ItemPicker.vue'
-	import { categories, singleSelect, multipleSelect } from './data'
+	import FmItemPicker from '@/components/fm/ItemPicker/ItemPicker/ItemPicker.vue'
+	import { presetFilters, mockData } from '../_Data/filters-mock-data.js'
 
 	const eventHandlers = {
-		close: () => console.log('\'close\' event'),
-		'update:modelValue': (ev) => console.log('\'update:modelValue\' event:', ev),
+		close: () => console.log("'close' event"),
+		'update:modelValue': (ev) => console.log("'update:modelValue' event:", ev),
+		'update:suggested': (ev) => console.log("'update:suggested' event:", ev)
 	}
 
-	const val1 = ref(cloneDeep(singleSelect))
-	const val2 = ref(cloneDeep(multipleSelect))
-	const val3 = ref(cloneDeep(multipleSelect))
+	const attributes = cloneDeep(mockData.attributes)
+
+	const val1 = ref(cloneDeep(presetFilters.slice(0, 1).map((i) => i.key)))
+	const val2 = ref(cloneDeep(presetFilters.map((i) => i.key)))
+	const val3 = ref(cloneDeep(presetFilters.map((i) => i.key)))
 </script>
