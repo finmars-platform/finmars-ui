@@ -101,6 +101,7 @@
 	const isFocused = ref(false)
 
 	const widthValue = computed(() => props.width ? `${props.width}px` : '100%')
+	const heightValue = computed(() => props.compact ? '40px' : '56px')
 	const isLabelShifted = computed(() => isFocused.value || props.persistentPlaceholder || props.value)
 	const showPlaceholder = computed(() => (props.placeholder && !props.value && isFocused.value) || (props.persistentPlaceholder && !props.value))
 
@@ -135,7 +136,7 @@
 
 <style lang="scss" scoped>
 	.fm-select-activator {
-		--height-fmSelectActivator: 56px;
+		--height-fmSelectActivator: v-bind(heightValue);
 		--backgroundColor-standard-fmSelectActivator: var(--surface-container-highest);
 		--backgroundColor-outlined-fmSelectActivator: var(--surface);
 		--color-fmSelectActivator: var(--on-surface-variant);
@@ -190,7 +191,7 @@
 		&--outlined {
 			background-color: var(--backgroundColor-outlined-fmSelectActivator);
 			border-radius: 4px;
-			outline: 1px solid var(--color-fmSelectActivator);
+			outline: 1px solid color-mix(in srgb, var(--color-fmSelectActivator) 38%, transparent);
 
 			.fm-select-activator__label--shifted {
 				position: absolute;

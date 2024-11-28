@@ -1,12 +1,12 @@
 import { ref, watch } from 'vue'
-import FmItemPicker from '@/components/fm/ItemPicker/ItemPicker/ItemPicker.vue'
-import ItemPickerDemo from './ItemPickerDemo.vue'
+import FmTransferList from '@/components/fm/TransferList/TransferList.vue'
+import TransferListDemo from './TransferListDemo.vue'
 
 const meta = {
-	title: 'Components/FmItemPicker',
-	component: FmItemPicker,
+	title: 'Components/FmTransferList',
+	component: FmTransferList,
 	argTypes: {},
-	args: {}
+	arg: {}
 }
 
 export default meta
@@ -14,7 +14,7 @@ export default meta
 export const General = {
 	render: (args) => ({
 		components: {
-			FmItemPicker
+			FmTransferList
 		},
 		setup() {
 			const key = ref(1)
@@ -29,20 +29,19 @@ export const General = {
 			}
 		},
 		template: `
-			<FmItemPicker v-bind="args" :key="key" />
-		`
+			<FmTransferList v-bind="args" :key="key" />
+		`,
 	})
 }
 
-export const AllVariants = {
+export const Demo = {
 	render: (args) => ({
 		components: {
-			ItemPickerDemo
+			TransferListDemo
 		},
 		setup() {
 			return { args }
 		},
-		template: `
-			<ItemPickerDemo />`
+		template: `<TransferListDemo />`,
 	})
 }

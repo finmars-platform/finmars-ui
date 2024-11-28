@@ -75,6 +75,8 @@
 	const emits = defineEmits<FmChipEmits>()
 	defineSlots<FmChipSlots>()
 
+	const heightValue = computed(() => props.compact ? '24px' : '32px')
+
 	const columnGapValue = computed(() => `${columnGap}px`)
 
 	const prependIconValue = computed(() => getIconProps(props.prependIcon))
@@ -186,7 +188,7 @@
 
 <style lang="scss" scoped>
 	.fm-chip {
-		--fmChip-heigh: 32px;
+		--fmChip-height: v-bind(heightValue);
 		--fmChip-column-gap: v-bind(columnGapValue);
 		--fmChip-outlined-borderColor: var(--outline);
 		--fmChip-outlined-bgColor: var(--surface);
@@ -219,7 +221,7 @@
 		padding: 0 12px;
 		font-size: 14px;
 		font-weight: 400;
-		height: var(--fmChip-heigh);
+		height: var(--fmChip-height);
 		max-width: 100%;
 		width: min-content;
 		transition: all 0.2s ease;
@@ -271,7 +273,7 @@
 		}
 
 		&.fm-chip--rounded {
-			border-radius: 30px;
+			border-radius: var(--fmChip-height);
 		}
 
 		&.fm-chip--closable,

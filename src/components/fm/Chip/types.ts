@@ -5,6 +5,7 @@ export interface FmChipProps {
 	value?: string
 	tooltip?: string | { value: string; location: PlaceLocation }
 	type?: 'standard' | 'outlined'
+	compact?: boolean
 	prependIcon?: FmComponentIcon | string
 	appendIcon?: FmComponentIcon | string
 	closable?: boolean

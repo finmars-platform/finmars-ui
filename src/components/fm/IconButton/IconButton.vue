@@ -6,6 +6,7 @@
 		:icon="icon"
 		:color="fmIconBtnColor.btnColor"
 		:style="{ opacity: disabled ? '0.3' : '1' }"
+		v-ripple.center.circle
 	>
 		<template #default>
 			<VIcon :icon="icon" :size="iconSize" :color="fmIconBtnColor.iconColor" />
@@ -15,8 +16,11 @@
 </template>
 
 <script setup>
-	import { VBtn, VIcon } from 'vuetify/components'
 	import { computed } from 'vue'
+	import { VBtn, VIcon } from 'vuetify/components'
+	import { Ripple } from 'vuetify/directives'
+
+	const vRipple = Ripple
 
 	const props = defineProps({
 		size: {
