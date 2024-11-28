@@ -17,7 +17,7 @@
 			<div
 				tabindex="0"
 				:id="`${vMenuProps.id}-content`"
-				class="relative w-full rounded py-2 !bg-[var(--surface-container)] shadow-[0_2px_6px_2px_rgba(0,0,0,0.15),0_1px_2px_0_rgba(0,0,0,0.3)] overflow-y-auto focus-visible:outline-none"
+				class="relative w-full rounded py-2 !bg-[var(--surface-container)] shadow-[0_2px_6px_2px_rgba(0,0,0,0.15),0_1px_2px_0_rgba(0,0,0,0.3)] overflow-y-auto focus-visible:outline-none scroll-variant-thin"
 				:style="menuContentStyles"
 				@keydown.down="onKeydown($event, 'down')"
 				@keydown.up="onKeydown($event, 'up')"
@@ -59,7 +59,10 @@
 					</FmMenuItem>
 				</slot>
 
-				<div v-if="loading" class="absolute inset flex justify-center items-center bg-[rgba(0, 0, 0, 0.3)]">
+				<div
+					v-if="loading"
+					class="absolute inset flex justify-center items-center bg-[rgba(0, 0, 0, 0.3)]"
+				>
 					<FmProgressCircular indeterminate />
 				</div>
 			</div>
@@ -101,14 +104,13 @@
 		},
 		closeOnBack: {
 			type: Boolean,
-			default: true
 		},
 		closeOnContentClick: {
 			type: Boolean,
 			default: true
 		},
 		contentClass: {
-			type: String,
+			type: String
 		},
 		height: {
 			type: [String, Number]
@@ -273,9 +275,11 @@
 	}))
 
 	const menuContentStyles = computed(() => ({
-		...(props.height && { height: props.height === 'auto' ? props.height : `${props.height}px` }),
+		...(props.height && {
+			height: props.height === 'auto' ? props.height : `${props.height}px`
+		}),
 		...(props.maxHeight && { maxHeight: `${props.maxHeight}px` }),
-		...(props.minHeight && { minHeight: `${props.minHeight}px` }),
+		...(props.minHeight && { minHeight: `${props.minHeight}px` })
 	}))
 
 	function onItemClick(ev, { item, index }) {
