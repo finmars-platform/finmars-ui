@@ -163,7 +163,7 @@
 	const innerValue = ref(props.modelValue)
 
 	const vTextFieldProps = computed(() => ({
-		color: props.colot || 'var(--color-fmTextField)',
+		color: props.color || 'var(--color-fmTextField)',
 		bgColor:
 			props.bgColor || props.outlined
 				? 'var(--backgroundColor-fmTextField-outlined)'
@@ -209,13 +209,6 @@
 	function onClickControl(ev) {
 		dirty.value = true
 		emits('click:control', ev)
-	}
-
-	function onFocused(val) {
-		emits('update:focused', val)
-		if (!val) {
-			emits('change', innerValue.value)
-		}
 	}
 
 	function onKeydownEnter() {
