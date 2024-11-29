@@ -45,7 +45,7 @@
 </template>
 
 <script setup>
-	import { computed, ref, useSlots, watch } from 'vue'
+	import { computed, onMounted, ref, watch, useSlots } from 'vue'
 	import { vMaska } from 'maska/vue'
 	import { VIcon, VTextField } from 'vuetify/components'
 
@@ -56,6 +56,9 @@
 		type: {
 			type: String,
 			default: 'text'
+		},
+		active: {
+			type: Boolean
 		},
 		autofocus: {
 			type: Boolean
@@ -148,12 +151,14 @@
 		'focus',
 		'blur',
 		'update:modelValue',
-		'change'
+		'change',
+		'init'
 	])
 
 	const slots = useSlots()
 
 	const vtf = ref()
+	const inputElement = ref()
 	const dirty = ref(false)
 	const innerValue = ref(props.modelValue)
 
@@ -165,6 +170,7 @@
 				: 'var(--backgroundColor-fmTextField)',
 		density: props.compact ? 'compact' : 'default',
 		modelValue: innerValue.value,
+		active: props.active,
 		autofocus: props.autofocus,
 		type: props.type,
 		...(props.label && { label: props.label }),
@@ -216,13 +222,9 @@
 		emits('change', innerValue.value)
 	}
 
-	defineExpose({
-		controlRef: vtf.value?.controlRef,
-		errorMessages: vtf.value?.errorMessages,
-		isValid: vtf.value?.isValid,
-		reset: vtf.value?.reset,
-		resetValidation: vtf.value?.resetValidation,
-		validate: vtf.value?.validate
+	onMounted(() => {
+		inputElement.value = vtf.value.$el.querySelector('input')
+		emits('init', { component: vtf.value, input: inputElement.value })
 	})
 
 	watch(
@@ -277,35 +279,5 @@
 				}
 			}
 		}
-
-		// &.fm-text-field--placeholder {
-		// 	:deep(.v-input__control) {
-		// 		.v-field__field {
-		// 			.v-label.v-field-label--floating {
-		// 				visibility: visible;
-		// 			}
-
-		// 			.v-label:not(.v-field-label--floating) {
-		// 				display: none;
-		// 			}
-
-		// 			.v-field__input {
-		// 				opacity: 1;
-		// 			}
-		// 		}
-
-		// 		.v-field__outline {
-		// 			.v-field__outline__notch {
-		// 				&:before {
-		// 					opacity: 0;
-		// 				}
-
-		// 				.v-label {
-		// 					visibility: visible;
-		// 				}
-		// 			}
-		// 		}
-		// 	}
-		// }
 	}
 </style>
