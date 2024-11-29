@@ -89,6 +89,7 @@ import type {
 	FmtFilterToolbarProps,
 	FmtFilterToolbarEmits
 } from '@/components/fm/Filters/FilterToolbar/types'
+import FmSwitch from '@/components/fm/Switch/Switch.vue'
 import FmHeader from '../stories/Header.vue'
 
 import { createVuetify } from 'vuetify'
@@ -167,7 +168,8 @@ export {
 	FmFilterAttribute,
 	FmFilterAttributes,
 	FmtFilterToolbarProps,
-	FmtFilterToolbarEmits
+	FmtFilterToolbarEmits,
+	FmSwitch
 }
 
 /**
@@ -228,6 +230,7 @@ export const uiComponentsPlugin = {
 		Vue.component(`${prefix}InputDate`, FmInputDate)
 		Vue.component(`${prefix}FilterEditor`, FmFilterEditor)
 		Vue.component(`${prefix}FilterToolbar`, FmFilterToolbar)
+		Vue.component(`${prefix}Switch`, FmSwitch)
 	}
 }
 
@@ -268,5 +271,6 @@ declare module 'vue' {
 		FmTabs: typeof FmTabs
 		FmFileUpload: typeof FmFileUpload
 		FmTransferListProps: typeof FmTransferList
+		FmSwitch: typeof FmSwitch
 	}
 }
