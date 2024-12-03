@@ -579,65 +579,6 @@
 					href: getUrlToOldApp('/settings/init-configuration')
 				},
 				{
-					key: 'Permission',
-					label: 'Permissions',
-					action: undefined,
-					to: '',
-					href: '',
-					children: [
-						{
-							key: 'Member',
-							label: 'Members',
-							action: undefined,
-							href: '',
-							to: useGetNuxtLink(
-								'/settings/permission/member',
-								route.value.params
-							)
-						},
-						{
-							key: 'Group',
-							label: 'Groups',
-							action: undefined,
-							href: '',
-							to: useGetNuxtLink(
-								'/settings/permission/group',
-								route.value.params
-							)
-						},
-						{
-							key: 'Role',
-							label: 'Roles',
-							action: undefined,
-							href: '',
-							to: useGetNuxtLink(
-								'/settings/permission/role',
-								route.value.params
-							)
-						},
-						{
-							key: 'Access-policy',
-							label: 'Access Policy',
-							action: undefined,
-							href: '',
-							to: useGetNuxtLink(
-								'/settings/permission/access-policy',
-								route.value.params
-							)
-						},
-						{
-							key: 'resource-groups',
-							label: 'Resource Groups',
-							action: undefined,
-							to: useGetNuxtLink(
-								'/settings/iam/resource-group',
-								route.value.params
-							),
-							href: ''
-						}
-					]
-				},
-				{
 					key: 'Default-settings',
 					label: 'Default settings',
 					action: undefined,
@@ -708,7 +649,7 @@
 					key: 'Client-Entity',
 					label: 'Client Entity',
 					action: undefined,
-					to: useGetNuxtLink('/settings/client-entity/', route.value.params),
+					to: useGetNuxtLink('/settings/client-entity', route.value.params),
 					href: ''
 				},
 				{
@@ -724,6 +665,66 @@
 					action: undefined,
 					to: '',
 					href: getUrlToOldApp('/journal')
+				}
+			]
+		},
+		{
+			key: 'System',
+			label: 'System',
+			icon: 'mdi-cog-box',
+			action: undefined,
+			to: '',
+			href: '',
+			children: [
+				{
+					key: 'Iam',
+					label: 'Iam',
+					action: undefined,
+					to: '',
+					href: '',
+					children: [
+						{
+							key: 'Member',
+							label: 'Members',
+							action: undefined,
+							href: '',
+							to: useGetNuxtLink('/system/iam/member', route.value.params)
+						},
+						{
+							key: 'Group',
+							label: 'Groups',
+							action: undefined,
+							href: '',
+							to: useGetNuxtLink('/system/iam/group', route.value.params)
+						},
+						{
+							key: 'Role',
+							label: 'Roles',
+							action: undefined,
+							href: '',
+							to: useGetNuxtLink('/system/iam/role', route.value.params)
+						},
+						{
+							key: 'Access-policy',
+							label: 'Access Policy',
+							action: undefined,
+							href: '',
+							to: useGetNuxtLink(
+								'/system/iam/access-policy',
+								route.value.params
+							)
+						},
+						{
+							key: 'resource-groups',
+							label: 'Resource Groups',
+							action: undefined,
+							href: '',
+							to: useGetNuxtLink(
+								'/system/iam/resource-group',
+								route.value.params
+							)
+						}
+					]
 				}
 			]
 		}
