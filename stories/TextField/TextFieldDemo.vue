@@ -112,7 +112,11 @@
 			label="Label"
 			placeholder="Enter text"
 			v-on="events"
-		/>
+		>
+			<template #append-inner>
+				<span @click.stop.prevent="() => console.log('CLICK ON APPEND')">(!)</span>
+			</template>
+		</FmTextField>
 		<FmTextField
 			v-model="val2"
 			outlined

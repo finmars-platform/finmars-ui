@@ -6,19 +6,27 @@
 		class="fm-text-field"
 		@click:clear="emits('click:clear', $event)"
 		@click:control="onClickControl"
-		@click:prepend-inner="emits('click:prependInner', $event)"
+		@click:prepend-inner="onPrependClick"
 		@focusin="emits('focus', $event)"
 		@focusout="emits('blur', $event)"
 		@mousedown:control="emits('mousedown:control', $event)"
 		@keydown.enter="onKeydownEnter"
 		@update:model-value="onUpdate"
 	>
-		<template v-if="slots['append-inner']" #append-inner>
+		<template v-if="slots['append-inner']" #append-inner="{ isActive, isFocused, controlRef }">
 			<VIcon
 				v-if="showErrorIcon"
 				icon="mdi-alert-circle"
 				size="20"
 				color="var(--error)"
+			/>
+
+			<slot
+				v-else
+				name="append-inner"
+				:is-active="isActive"
+				:is-focused="isFocused"
+				:control-ref="controlRef"
 			/>
 		</template>
 
@@ -204,6 +212,12 @@
 		dirty.value = true
 		innerValue.value = val
 		emits('update:modelValue', val)
+	}
+
+	function onPrependClick(ev) {
+		ev.preventDefault()
+		ev.stopImmediatePropagation()
+		emits('click:prependInner', ev)
 	}
 
 	function onClickControl(ev) {
