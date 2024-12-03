@@ -11,7 +11,7 @@
 		{ title: 'Electronics', path: 'electronics' },
 		{ title: 'Laptops', path: 'laptops' },
 		{ title: 'Gaming Laptop', path: 'gaming laptop' },
-		{ title: 'New Models', path: 'new model' },
+		{ title: 'New Models', path: 'new models' },
 		{ title: 'Model X', path: 'model-x' }
 	]
 	const handleCrumbs = (newCrumbs, newPath) => {
