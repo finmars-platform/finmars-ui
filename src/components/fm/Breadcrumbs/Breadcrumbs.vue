@@ -42,7 +42,7 @@
 		{ immediate: true }
 	)
 
-	const handleBreadcrumbClick = (clickedIndex) => {
+	const handleBreadcrumbClick = (clickedIndex: number) => {
 		let newCrumbs: FmBreadcrumbItem[]
 		let newPath: string = ''
 
