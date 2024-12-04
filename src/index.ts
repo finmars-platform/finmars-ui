@@ -5,35 +5,22 @@ import FmBadge from '@/components/fm/Badge/Badge.vue'
 import FmButton from '@/components/fm/Button/Button.vue'
 import FmCheckbox from '@/components/fm/Checkbox/Checkbox.vue'
 import FmChip from '@/components/fm/Chip/Chip.vue'
-import type {
-	FmChipEmits,
-	FmChipProps,
-	FmChipSlots
-} from '@/components/fm/Chip/types'
+import type {FmChipEmits, FmChipProps, FmChipSlots} from '@/components/fm/Chip/types'
 import FmDateEditor from '@/components/fm/DateEditor/DateEditor.vue'
-import type {
-	FmDateEditorEmits,
-	FmDateEditorProps
-} from '@/components/fm/DateEditor/types'
+import type {FmDateEditorEmits, FmDateEditorProps} from '@/components/fm/DateEditor/types'
 import FmDatePicker from '@/components/fm/DatePicker/DatePicker.vue'
 import FmIcon from '@/components/fm/Icon/Icon.vue'
-import type { FmIconProps, FmIconSlots } from '@/components/fm/Icon/types'
+import type {FmIconProps, FmIconSlots} from '@/components/fm/Icon/types'
 import FmIconButton from '@/components/fm/IconButton/IconButton.vue'
 import FmItemPicker from '@/components/fm/ItemPicker/ItemPicker/ItemPicker.vue'
-import type {
-	FmItemPickerProps,
-	FmItemPickerEmits
-} from '@/components/fm/ItemPicker/ItemPicker/types'
+import type {FmItemPickerEmits, FmItemPickerProps} from '@/components/fm/ItemPicker/ItemPicker/types'
 import FmLogo from '@/components/fm/Logo/Logo.vue'
 import FmMenuItem from '@/components/fm/Menu/MenuItem.vue'
 import FmMenu from '@/components/fm/Menu/Menu.vue'
 import FmNavigationPortal from '@/components/fm/Navigation/NavigationPortal.vue'
 import FmNavigation from '@/components/fm/Navigation/Navigation.vue'
 import FmPagination from '@/components/fm/Pagination/Pagination.vue'
-import type {
-	FmPaginationEmits,
-	FmPaginationProps
-} from '@/components/fm/Pagination/types'
+import type {FmPaginationEmits, FmPaginationProps} from '@/components/fm/Pagination/types'
 import FmProgressCircular from '@/components/fm/ProgressCircular/ProgressCircular.vue'
 import FmProgressLinear from '@/components/fm/ProgressLinear/ProgressLinear.vue'
 import FmRadio from '@/components/fm/Radio/Radio.vue'
@@ -41,11 +28,7 @@ import FmRadioGroup from '@/components/fm/Radio/RadioGroup.vue'
 import FmRangeSlider from '@/components/fm/RangeSlider/RangeSlider.vue'
 import FmSearch from '@/components/fm/Search/Search.vue'
 import FmVSelect from '@/components/fm/VSelect/VSelect.vue'
-import type {
-	FmVSelectEmits,
-	FmVSelectProps,
-	FmVSelectSlots
-} from '@/components/fm/VSelect/types'
+import type {FmVSelectEmits, FmVSelectProps, FmVSelectSlots} from '@/components/fm/VSelect/types'
 import FmSelect from '@/components/fm/Select/Select.vue'
 import FmSelectActivator from '@/components/fm/Select/SelectActivator.vue'
 import type {
@@ -61,38 +44,27 @@ import FmSlider from '@/components/fm/Slider/Slider.vue'
 import FmTextField from '@/components/fm/TextField/TextField.vue'
 import FmTooltip from '@/components/fm/Tooltip/Tooltip.vue'
 import FmTabs from '@/components/fm/Tabs/Tabs.vue'
-import type {
-	FmDialogOptions,
-	FmFileUploadProps,
-	FmUploadFile
-} from '@/components/fm/FileUpload/types'
+import type {FmDialogOptions, FmFileUploadProps, FmUploadFile} from '@/components/fm/FileUpload/types'
 import FmFileUpload from '@/components/fm/FileUpload/FileUpload.vue'
 import FmTransferList from '@/components/fm/TransferList/TransferList.vue'
-import type {
-	FmTransferListProps,
-	FmTransferListEmits
-} from '@/components/fm/TransferList/types'
+import type {FmTransferListEmits, FmTransferListProps} from '@/components/fm/TransferList/types'
 import FmInputDate from '@/components/fm/InputDate/InputDate.vue'
-import type {
-	FmInputDateProps,
-	FmInputDateEmits
-} from '@/components/fm/InputDate/types'
+import type {FmInputDateEmits, FmInputDateProps} from '@/components/fm/InputDate/types'
 import FmFilterEditor from '@/components/fm/Filters/FilterEditor/FilterEditor.vue'
-import type {
-	FmFilterEditorProps,
-	FmFilterEditorEmits
-} from '@/components/fm/Filters/FilterEditor/types'
+import type {FmFilterEditorEmits, FmFilterEditorProps} from '@/components/fm/Filters/FilterEditor/types'
 import FmFilterToolbar from '@/components/fm/Filters/FilterToolbar/FilterToolbar.vue'
 import type {
 	FmFilterAttribute,
 	FmFilterAttributes,
-	FmtFilterToolbarProps,
-	FmtFilterToolbarEmits
+	FmtFilterToolbarEmits,
+	FmtFilterToolbarProps
 } from '@/components/fm/Filters/FilterToolbar/types'
 import FmSwitch from '@/components/fm/Switch/Switch.vue'
+import FmBreadcrumbs from '@/components/fm/Breadcrumbs/Breadcrumbs.vue'
+import type {FmBreadcrumbItem, FmBreadcrumbProps} from '@/components/fm/Breadcrumbs/types'
 import FmHeader from '../stories/Header.vue'
 
-import { createVuetify } from 'vuetify'
+import {createVuetify} from 'vuetify'
 import '@/assets/css/tailwind.css'
 import '@mdi/font/css/materialdesignicons.css'
 
@@ -169,7 +141,10 @@ export {
 	FmFilterAttributes,
 	FmtFilterToolbarProps,
 	FmtFilterToolbarEmits,
-	FmSwitch
+	FmSwitch,
+	FmBreadcrumbs,
+	FmBreadcrumbProps,
+	FmBreadcrumbItem
 }
 
 /**
@@ -231,6 +206,7 @@ export const uiComponentsPlugin = {
 		Vue.component(`${prefix}FilterEditor`, FmFilterEditor)
 		Vue.component(`${prefix}FilterToolbar`, FmFilterToolbar)
 		Vue.component(`${prefix}Switch`, FmSwitch)
+		Vue.component(`${prefix}Breadcrumbs`, FmBreadcrumbs)
 	}
 }
 
@@ -272,5 +248,6 @@ declare module 'vue' {
 		FmFileUpload: typeof FmFileUpload
 		FmTransferListProps: typeof FmTransferList
 		FmSwitch: typeof FmSwitch
+		FmBreadcrumbs: typeof FmBreadcrumbs
 	}
 }
