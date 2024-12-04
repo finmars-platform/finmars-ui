@@ -590,30 +590,21 @@
 							label: 'Members',
 							action: undefined,
 							href: '',
-							to: useGetNuxtLink(
-								'/settings/permission/member',
-								route.value.params
-							)
+							to: useGetNuxtLink('/system/iam/member', route.value.params)
 						},
 						{
 							key: 'Group',
 							label: 'Groups',
 							action: undefined,
 							href: '',
-							to: useGetNuxtLink(
-								'/settings/permission/group',
-								route.value.params
-							)
+							to: useGetNuxtLink('/system/iam/group', route.value.params)
 						},
 						{
 							key: 'Role',
 							label: 'Roles',
 							action: undefined,
 							href: '',
-							to: useGetNuxtLink(
-								'/settings/permission/role',
-								route.value.params
-							)
+							to: useGetNuxtLink('/system/iam/role', route.value.params)
 						},
 						{
 							key: 'Access-policy',
@@ -621,7 +612,7 @@
 							action: undefined,
 							href: '',
 							to: useGetNuxtLink(
-								'/settings/permission/access-policy',
+								'/system/iam/access-policy',
 								route.value.params
 							)
 						},
@@ -629,11 +620,11 @@
 							key: 'resource-groups',
 							label: 'Resource Groups',
 							action: undefined,
+							href: '',
 							to: useGetNuxtLink(
-								'/settings/iam/resource-group',
+								'/system/iam/resource-group',
 								route.value.params
-							),
-							href: ''
+							)
 						}
 					]
 				},
@@ -708,7 +699,7 @@
 					key: 'Client-Entity',
 					label: 'Client Entity',
 					action: undefined,
-					to: useGetNuxtLink('/settings/client-entity/', route.value.params),
+					to: useGetNuxtLink('/settings/client-entity', route.value.params),
 					href: ''
 				},
 				{
