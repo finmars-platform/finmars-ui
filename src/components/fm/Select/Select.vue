@@ -73,7 +73,6 @@
 	lang="ts"
 	generic="T extends any & FmSelectOption, K extends string & keyof T"
 >
-	import { defineExpose } from 'vue'
 	import FmMenu from '@/components/fm/Menu/Menu.vue'
 	import FmCheckbox from '@/components/fm/Checkbox/Checkbox.vue'
 	import FmChip from '@/components/fm/Chip/Chip.vue'

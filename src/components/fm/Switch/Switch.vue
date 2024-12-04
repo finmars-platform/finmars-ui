@@ -21,7 +21,7 @@
 </template>
 
 <script setup>
-	import { computed, defineEmits, defineProps, ref } from 'vue'
+	import { computed, ref } from 'vue'
 	import FmIcon from '@/components/fm/Icon/Icon.vue'
 
 	const props = defineProps({
