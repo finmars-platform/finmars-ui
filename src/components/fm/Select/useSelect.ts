@@ -44,7 +44,11 @@ export default function useSelect<
 	) as ComputedRef<Array<T[K]>>
 
 	const displaySelection = computed(() => {
-		if (isEmpty(props.modelValue) && typeof props.modelValue !== 'boolean') {
+		if (
+			isEmpty(props.modelValue) &&
+			typeof props.modelValue !== 'boolean' &&
+			typeof props.modelValue !== 'number'
+		) {
 			return ''
 		}
 
@@ -81,8 +85,8 @@ export default function useSelect<
 		}
 
 		const data = Array.isArray(props.modelValue ?? [])
-			? (props.modelValue || []) as Array<T[K]>
-			: [(props.modelValue)] as Array<T[K]>
+			? ((props.modelValue || []) as Array<T[K]>)
+			: ([props.modelValue] as Array<T[K]>)
 
 		return data.reduce((res: T[], val: T[K]) => {
 			const option = props.options.find((o) => o[props.valueKey as K] === val)
