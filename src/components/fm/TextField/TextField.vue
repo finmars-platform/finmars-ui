@@ -8,7 +8,7 @@
 		@click:control="onClickControl"
 		@click:prepend-inner="onPrependClick"
 		@focusin="emits('focus', $event)"
-		@focusout="emits('blur', $event)"
+		@focusout="onBlur"
 		@mousedown:control="emits('mousedown:control', $event)"
 		@keydown.enter="onKeydownEnter"
 		@update:model-value="onUpdate"
@@ -227,6 +227,11 @@
 
 	function onKeydownEnter() {
 		emits('change', innerValue.value)
+	}
+
+	function onBlur(ev) {
+		emits('change', innerValue.value)
+		emits('blur', ev);
 	}
 
 	onMounted(() => {
