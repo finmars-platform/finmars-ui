@@ -148,10 +148,6 @@
 </script>
 
 <style scoped lang="scss">
-	.upload-container {
-		min-width: 560px;
-	}
-
 	.upload-button-wrap {
 		display: flex;
 		flex-direction: row;
