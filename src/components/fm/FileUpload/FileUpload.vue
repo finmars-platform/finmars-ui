@@ -72,6 +72,8 @@
 	const totalSize = ref<number>(0)
 	let fileDataList = reactive<FmUploadFile[]>([])
 
+	const emit = defineEmits(['updateFiles'])
+
 	const addListeners = (reader: FileReader, uniqueId: string) => {
 		const file = fileDataList.find((item) => item.id === uniqueId)
 		if (file) {
@@ -109,6 +111,7 @@
 					files.value.push(item) // Add the file to the list
 				}
 			})
+			emit('updateFiles', files.value)
 		}
 	}
 
@@ -121,6 +124,7 @@
 	const clearAllFiles = () => {
 		files.value = []
 		fileDataList.splice(0, fileDataList.length)
+		emit('updateFiles', files.value)
 	}
 
 	const removeFile = (fileId: string) => {
@@ -129,6 +133,7 @@
 		if (index !== -1) {
 			fileDataList.splice(index, 1) // Remove the fileData reactively
 		}
+		emit('updateFiles', files.value)
 	}
 
 	const toggleUploadPanel = () => {
