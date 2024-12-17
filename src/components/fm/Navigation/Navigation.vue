@@ -53,7 +53,7 @@
 				:isFloat="true"
 				:alternativeLink="alternativeLink"
 				:route="route"
-				class="absolute top-0 left-0 hidden h-full float"
+				class="absolute z-[62] top-0 left-0 hidden h-full float"
 			/>
 		</transition>
 	</aside>
