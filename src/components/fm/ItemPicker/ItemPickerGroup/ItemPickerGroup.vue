@@ -89,9 +89,7 @@
 		align-items: center;
 		column-gap: var(--spacing-8);
 		padding: 0 var(--spacing-8) 0 var(--spacing-12);
-		font-size: 14px;
-		font-weight: 400;
-		line-height: 20px;
+		font: var(--number-medium-font);
 		color: var(--fmItemPickerGroup-color);
 		cursor: pointer;
 

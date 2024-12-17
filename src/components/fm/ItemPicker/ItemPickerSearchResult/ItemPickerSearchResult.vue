@@ -23,7 +23,7 @@
 
 			<span
 				class="fm-item-picker-search-result__item-text"
-				v-html="getItemName(item)"
+				v-fm-html="getItemName(item)"
 			/>
 		</div>
 	</div>
@@ -31,11 +31,14 @@
 
 <script lang="ts" setup generic="T extends FmAttribute">
 	import FmCheckbox from '../../Checkbox/Checkbox.vue'
+	import FmHtml from '@/directives/fm/Html'
 	import type { FmAttribute } from '@/types'
 	import type {
 		FmItemPickerSearchResultProps,
 		FmItemPickerSearchResultEmits
 	} from './types'
+
+	const vFmHtml = FmHtml
 
 	const props = withDefaults(defineProps<FmItemPickerSearchResultProps<T>>(), {
 		searchText: '',
@@ -66,7 +69,7 @@
 		for (const p of processedName.slice(0, -1)) {
 			result += `&nbsp;&rarr;&nbsp;${p}`
 		}
-		return `${result}&nbsp;&rarr;&nbsp;${part1}<b>${part2}</b>${part3}`
+		return `${result}&nbsp;&rarr;&nbsp;${part1}<span class="fm-item-picker-search-result__item-text--highlight">${part2}</span>${part3}`
 	}
 </script>
 
@@ -110,6 +113,11 @@
 
 			&-text {
 				flex-grow: 1;
+
+				:deep(.fm-item-picker-search-result__item-text--highlight) {
+					font-weight: 700;
+					color: var(--primary);
+				}
 			}
 
 			&--disabled {
@@ -118,6 +126,13 @@
 					var(--fmItemPickerSearchResilt-item-color) 38%,
 					transparent
 				);
+
+				.fm-item-picker-search-result__item-text {
+					:deep(.fm-item-picker-search-result__item-text--highlight) {
+						font-weight: 700;
+						color: color-mix(in srgb, var(--primary) 38%, transparent);
+					}
+				}
 			}
 
 			&--selected {

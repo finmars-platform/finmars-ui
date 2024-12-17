@@ -54,8 +54,7 @@
 			justify-content: space-between;
 			align-items: center;
 			column-gap: var(--spacing-8);
-			font-size: 14px;
-			font-weight: 400;
+			font: var(--body-medium-font);
 			color: var(--on-surface);
 
 			&--selected {

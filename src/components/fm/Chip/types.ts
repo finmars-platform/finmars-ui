@@ -2,6 +2,7 @@ import type { VNode } from 'vue'
 import type { FmComponentIcon, PlaceLocation } from '@/types'
 
 export interface FmChipProps {
+	id?: string | number
 	value?: string
 	tooltip?: string | { value: string; location: PlaceLocation }
 	type?: 'standard' | 'outlined'
@@ -17,7 +18,7 @@ export interface FmChipProps {
 }
 
 export interface FmChipEmits {
-	(event: 'click', value: MouseEvent): void
+	(event: 'click', value: { event: MouseEvent, element: HTMLDivElement }): void
 	(event: 'click:prepend', value: MouseEvent): void
 	(event: 'click:append', value: MouseEvent): void
 	(event: 'click:close', value: MouseEvent): void

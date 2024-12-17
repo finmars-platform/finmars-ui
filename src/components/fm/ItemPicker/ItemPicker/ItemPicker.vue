@@ -105,7 +105,7 @@
 	const props = withDefaults(defineProps<FmItemPickerProps>(), {
 		mode: 'add',
 		width: 700,
-		height: 380,
+		height: 420,
 		locals: {
 			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 			// @ts-ignore
@@ -123,7 +123,7 @@
 
 	const searchText = ref('')
 
-	const initialSelectedItems = ref(cloneDeep(props.modelValue))
+	const initialSelectedItems = ref(cloneDeep(props.modelValue) || [])
 	const selectedItems = ref(cloneDeep(props.modelValue))
 
 	const widthValue = computed(() => {
@@ -257,8 +257,8 @@
 			)
 			selectedCategory.value =
 				currentCategoryIndex !== -1
-					? categories.value[currentCategoryIndex] as string
-					: categories.value[0] as string
+					? (categories.value[currentCategoryIndex] as string)
+					: (categories.value[0] as string)
 		},
 		{ immediate: true }
 	)
@@ -280,10 +280,12 @@
 		background-color: var(--fmItemPicker-background-color);
 		color: var(--fmItemPicker-color);
 		overflow: hidden;
+		box-shadow:
+			0 1px 3px 0 rgba(0, 0, 0, 0.3),
+			0 4px 8px 3px rgba(0, 0, 0, 0.15);
 
 		&__header {
 			position: relative;
-			padding-top: 4px;
 
 			:deep(.fm-text-field) {
 				--backgroundColor-fmTextField: var(--surface-container-high);
@@ -300,7 +302,7 @@
 			padding-bottom: var(--spacing-8);
 
 			&.fm-item-picker--multiple {
-				height: calc(100% - 60px - var(--fmItemPicker-actions-heigh));
+				height: calc(100% - 56px - var(--fmItemPicker-actions-heigh));
 			}
 
 			&.fm-item-picker--no-result {
