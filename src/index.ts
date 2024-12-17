@@ -106,6 +106,8 @@ import type {
 } from '@/components/fm/Breadcrumbs/types'
 import FmHeader from '../stories/Header.vue'
 
+import FmHtml from '@/directives/fm/Html'
+
 import { createVuetify } from 'vuetify'
 import '@/assets/css/tailwind.css'
 import '@mdi/font/css/materialdesignicons.css'
@@ -193,7 +195,9 @@ export {
 	FmSwitch,
 	FmBreadcrumbs,
 	FmBreadcrumbProps,
-	FmBreadcrumbItem
+	FmBreadcrumbItem,
+
+	FmHtml
 }
 
 /**
@@ -256,6 +260,8 @@ export const uiComponentsPlugin = {
 		Vue.component(`${prefix}FilterToolbar`, FmFilterToolbar)
 		Vue.component(`${prefix}Switch`, FmSwitch)
 		Vue.component(`${prefix}Breadcrumbs`, FmBreadcrumbs)
+
+		Vue.directive('FmHtml', FmHtml)
 		Vue.directive('Ripple', Ripple)
 		Vue.directive('ClickOutside', ClickOutside)
 		Vue.directive('Mutate', Mutate)
@@ -308,6 +314,7 @@ declare module '@vue/runtime-core' {
 	}
 
 	interface GlobalDirectives {
+		FmHtml: typeof FmHtml
 		Ripple: typeof Ripple
 		ClickOutside: typeof ClickOutside
 		Mutate: typeof Mutate

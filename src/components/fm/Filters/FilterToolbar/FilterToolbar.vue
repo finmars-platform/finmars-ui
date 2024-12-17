@@ -22,6 +22,7 @@
 				<FmChip
 					v-for="linkedFilter in linkedFilters"
 					:key="linkedFilter.key"
+					:id="linkedFilter.key"
 					prepend-icon="mdi-link"
 					closable
 					:type="linkedFilter.options.enabled ? 'standard' : 'outlined'"
@@ -35,6 +36,7 @@
 				<FmChip
 					v-for="filter in notLinkedFilters"
 					:key="filter.key"
+					:id="filter.key"
 					closable
 					:type="filter.options.enabled ? 'standard' : 'outlined'"
 					:value="filter.name"
@@ -56,7 +58,6 @@
 						:model-value="selectedAttrs"
 						:attributes="attributes"
 						:suggested="suggestedAttrs"
-						multiple
 						@close="isAddFilterModalOpen = false"
 						@update:model-value="updateFilter"
 						@update:suggested="updateSuggestedAttrs"
@@ -112,7 +113,7 @@
 </template>
 
 <script lang="ts" setup>
-	import { computed, onMounted, ref, watch } from 'vue'
+	import { computed, nextTick, onMounted, ref, watch } from 'vue'
 	import get from 'lodash/get'
 	import isEmpty from 'lodash/isEmpty'
 	import cloneDeep from 'lodash/cloneDeep'
@@ -197,6 +198,16 @@
 			}
 		}
 		emits('update:modelValue', [...props.value, ...newFilters])
+
+		nextTick(() => {
+			if (!isEmpty(props.value)) {
+				const newFilter = props.value[props.value.length - 1]
+				const newFilterChipEl = document.getElementById(`${newFilter.key}`)
+				if (newFilterChipEl) {
+					editFilter({ element: newFilterChipEl }, newFilter)
+				}
+			}
+		})
 	}
 
 	function updateSuggestedAttrs(attrs: string) {
@@ -246,12 +257,16 @@
 		300
 	)
 
-	function editFilter(ev: MouseEvent, filter: FmFilter) {
+	function editFilter(
+		{ event, element }: { event: MouseEvent; element: HTMLDivElement },
+		filter: FmFilter
+	) {
+		const chipElRect = element.getBoundingClientRect();
 		selectedFilter.value = cloneDeep(filter)
 		filterEditModalSettings.value = {
 			open: true,
-			x: ev.x,
-			y: ev.y + 8
+			x: chipElRect.x,
+			y: chipElRect.y + chipElRect.height + 2,
 		}
 	}
 
@@ -266,7 +281,9 @@
 
 	function onFilterUpdate(updatedFilter: FmFilter) {
 		const updatedValue = cloneDeep(props.value)
-		const updatedFilterIndex = updatedValue.findIndex((f) => f.key === updatedFilter.key)
+		const updatedFilterIndex = updatedValue.findIndex(
+			(f) => f.key === updatedFilter.key
+		)
 		if (updatedFilterIndex > -1) {
 			updatedValue[updatedFilterIndex] = updatedFilter
 			emits('update:modelValue', updatedValue)
@@ -293,13 +310,12 @@
 	.v-overlay-container {
 		.v-overlay.v-menu {
 			.v-overlay__content {
+				border-radius: 28px;
+
 				& > div {
 					padding: 0 !important;
 					margin-top: 4px;
-
-					.fm-item-picker {
-						border-radius: 0;
-					}
+					border-radius: 28px !important;
 				}
 			}
 		}
