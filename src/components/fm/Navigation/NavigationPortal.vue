@@ -339,6 +339,13 @@
 					href: ''
 				},
 				{
+					key: 'initial-member-configuration',
+					label: 'Initial Member',
+					action: undefined,
+					to: useGetNuxtLink('/configuration/initial', route.value.params),
+					href: ''
+				},
+				{
 					key: 'workers',
 					label: 'Workers',
 					action: undefined,
@@ -639,8 +646,8 @@
 					key: 'Recycle-Bin',
 					label: 'Recycle Bin',
 					action: undefined,
-					to: '',
-					href: getUrlToOldApp('/recycle-bin')
+          to: useGetNuxtLink('/system/recycle-bin', route.value.params),
+					href: ''
 				},
 				{
 					key: 'System',
