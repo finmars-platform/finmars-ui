@@ -646,15 +646,15 @@
 					key: 'Recycle-Bin',
 					label: 'Recycle Bin',
 					action: undefined,
-          to: useGetNuxtLink('/system/recycle-bin', route.value.params),
+					to: useGetNuxtLink('/system/recycle-bin', route.value.params),
 					href: ''
 				},
 				{
 					key: 'System',
 					label: 'System',
 					action: undefined,
-					to: '',
-					href: getUrlToOldApp('/system-dashboard')
+					to: useGetNuxtLink('/system/dashboard', route.value.params),
+					href: ''
 				},
 				{
 					key: 'Cache',
