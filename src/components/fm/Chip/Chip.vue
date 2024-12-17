@@ -1,6 +1,8 @@
 <template>
 	<div
 		:tabindex="disabled ? -1 : 0"
+		ref="chipEl"
+		:id="id"
 		:class="[
 			'fm-chip',
 			{
@@ -23,6 +25,7 @@
 				v-if="prependIconValue"
 				v-bind="prependIconValue"
 				v-ripple.center.circle
+				tabindex="-1"
 				v-on="disabled || readonly ? {} : { click: onPrependClick }"
 			/>
 		</slot>
@@ -45,6 +48,7 @@
 				v-if="appendIconValue"
 				v-bind="appendIconValue"
 				v-ripple.center.circle
+				tabindex="-1"
 				v-on="disabled || readonly ? {} : { click: onAppendClick }"
 			/>
 		</slot>
@@ -53,13 +57,14 @@
 			v-if="closable"
 			v-bind="getIconProps('mdi-close')"
 			v-ripple.center.circle
+			tabindex="-1"
 			v-on="disabled || readonly ? {} : { click: onCloseClick }"
 		/>
 	</div>
 </template>
 
 <script lang="ts" setup>
-	import { computed } from 'vue'
+	import { computed, ref } from 'vue'
 	import { Ripple } from 'vuetify/directives'
 	import FmIcon from '../Icon/Icon.vue'
 	import FmTooltip from '../Tooltip/Tooltip.vue'
@@ -74,6 +79,8 @@
 	})
 	const emits = defineEmits<FmChipEmits>()
 	defineSlots<FmChipSlots>()
+
+	const chipEl = ref<HTMLDivElement | null>(null)
 
 	const heightValue = computed(() => props.compact ? '24px' : '32px')
 
@@ -146,11 +153,11 @@
 	function onClick(ev: MouseEvent) {
 		ev.preventDefault()
 		ev.stopImmediatePropagation()
-		emits('click', ev)
+		emits('click', { event: ev, element: chipEl.value! })
 	}
 
 	function onKeyDown(ev: KeyboardEvent) {
-		ev.preventDefault()
+		// ev.preventDefault()
 		ev.stopImmediatePropagation()
 		emits('keydown', ev)
 	}
@@ -192,24 +199,9 @@
 		--fmChip-column-gap: v-bind(columnGapValue);
 		--fmChip-outlined-borderColor: var(--outline);
 		--fmChip-outlined-bgColor: var(--surface);
-		--fmChip-outlined-bgColor-hovered: hsl(
-			from var(--on-surface-variant) h s l / 10%
-		);
-		--fmChip-outlined-bgColor-focused: hsl(
-			from var(--on-surface-variant) h s l / 15%
-		);
-		--fmChip-outlined-bgColor-dragged: hsl(from var(--on-surface) h s l / 20%);
 		--fmChip-outlined-color: var(--on-surface-variant);
 		--fmChip-standard-bgColor: var(--secondary-container);
-		--fmChip-standard-bgColor-hovered: hsl(
-			from var(--on-secondary-container) h s l / 30%
-		);
-		--fmChip-standard-bgColor-focused: hsl(
-			from var(--on-secondary-container) h s l / 35%
-		);
-		--fmChip-standard-bgColor-dragged: hsl(
-			from var(--on-secondary-container) h s l / 40%
-		);
+		--fmChip-standard-bgColor-dragged: rgba(29, 25, 43, 0.12);
 		--fmChip-standard-color: var(--on-secondary-container);
 		--fmChip-content-width-gap: v-bind(contentWidthGap);
 
@@ -239,17 +231,17 @@
 			color: var(--fmChip-standard-color);
 			background-color: var(--fmChip-standard-bgColor);
 
-			&:hover {
-				background-color: var(--fmChip-standard-bgColor-hovered);
-			}
-
 			&:focus-visible {
-				background-color: var(--fmChip-standard-bgColor-focused);
+				background-color: color-mix(in srgb, var(--fmChip-standard-bgColor), var(--on-surface) 20%);
 				outline: none;
 			}
 
 			&.fm-chip--dragged {
 				background-color: var(--fmChip-standard-bgColor-dragged);
+			}
+
+			&:hover {
+				background-color: color-mix(in srgb, var(--fmChip-standard-bgColor), var(--on-surface) 10%);
 			}
 		}
 
@@ -259,11 +251,11 @@
 			border: 1px solid var(--fmChip-outlined-borderColor);
 
 			&:hover {
-				background-color: var(--fmChip-outlined-bgColor-hovered);
+				background-color: color-mix(in srgb, var(--fmChip-outlined-bgColor), var(--on-surface) 10%);
 			}
 
 			&:focus-visible {
-				background-color: var(--fmChip-outlined-bgColor-focused);
+				background-color: color-mix(in srgb, var(--fmChip-outlined-bgColor), var(--on-surface) 20%);
 				outline: none;
 			}
 
