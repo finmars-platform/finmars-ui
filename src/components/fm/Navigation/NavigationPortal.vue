@@ -575,8 +575,8 @@
 					key: 'New-User-Setups',
 					label: 'New User Setups',
 					action: undefined,
-					to: '',
-					href: getUrlToOldApp('/settings/init-configuration')
+					href: '',
+					to: useGetNuxtLink('/configuration/initial-setup', route.value.params)
 				},
 				{
 					key: 'Permission',
