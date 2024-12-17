@@ -2,7 +2,7 @@ import type { VNode } from 'vue'
 import type { FmComponentIcon, PlaceLocation } from '@/types'
 
 export interface FmChipProps {
-	id?: string | number
+	id?: string
 	value?: string
 	tooltip?: string | { value: string; location: PlaceLocation }
 	type?: 'standard' | 'outlined'

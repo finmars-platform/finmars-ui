@@ -258,7 +258,7 @@
 	)
 
 	function editFilter(
-		{ event, element }: { event: MouseEvent; element: HTMLDivElement },
+		{ element }: { event?: MouseEvent; element: HTMLElement },
 		filter: FmFilter
 	) {
 		const chipElRect = element.getBoundingClientRect();
