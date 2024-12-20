@@ -391,8 +391,11 @@
 							key: 'Context-Menu-Layouts',
 							label: 'Context Menu Layouts',
 							action: undefined,
-							to: '',
-							href: getUrlToOldApp('/context-menu-layout')
+							href: '',
+							to: useGetNuxtLink(
+								'/configuration/context-menu-layouts',
+								route.value.params
+							)
 						}
 					]
 				},
