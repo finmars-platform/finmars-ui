@@ -1,6 +1,6 @@
-import { ref, watch } from 'vue'
-import FmSwitch from '@/components/fm/Switch/Switch.vue'
-import SwitchDemo from './SwitchDemo.vue'
+import { ref, watch } from 'vue';
+import FmSwitch from '@/components/fm/Switch/Switch.vue';
+import SwitchDemo from './SwitchDemo.vue';
 
 const meta = {
 	title: 'Components/FmSwitch',
@@ -19,9 +19,9 @@ const meta = {
 		icon: false,
 		disable: false
 	}
-}
+};
 
-export default meta
+export default meta;
 
 export const General = {
 	render: (args) => ({
@@ -29,22 +29,22 @@ export const General = {
 			FmSwitch
 		},
 		setup() {
-			const key = ref(1)
+			const key = ref(1);
 
 			watch(args, () => {
-				key.value = new Date().getTime()
-			})
+				key.value = new Date().getTime();
+			});
 
 			return {
 				args,
 				key
-			}
+			};
 		},
 		template: `
-        <FmSwitch v-bind="args" :key="key"/>
-    `
+			<FmSwitch v-bind="args" :key="key" />
+		`
 	})
-}
+};
 
 export const AllVariants = {
 	render: (args) => ({
@@ -52,9 +52,9 @@ export const AllVariants = {
 			SwitchDemo
 		},
 		setup() {
-			return { args }
+			return { args };
 		},
 		template: `
-        <SwitchDemo/>`
+			<SwitchDemo />`
 	})
-}
+};

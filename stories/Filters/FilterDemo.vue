@@ -35,27 +35,27 @@
 </template>
 
 <script setup>
-	import { ref } from 'vue'
-	import cloneDeep from 'lodash/cloneDeep'
+	import { ref } from 'vue';
+	import cloneDeep from 'lodash/cloneDeep';
 	import {
 		getFilterMockOptions,
 		mockData,
 		presetFilters,
 		getSourceLinkedMockGroups,
 		getSourceLinkedMockGroupAttributes
-	} from '../_Data/filters-mock-data'
-	import FilterToolbar from '@/components/fm/Filters/FilterToolbar/FilterToolbar.vue'
+	} from '../_Data/filters-mock-data';
+	import FilterToolbar from '@/components/fm/Filters/FilterToolbar/FilterToolbar.vue';
 
-	const attributes = ref(cloneDeep(mockData.attributes))
-	const suggestedAttrs = ref(cloneDeep(mockData.favoriteAttributes))
-	const value = ref(cloneDeep(presetFilters))
+	const attributes = ref(cloneDeep(mockData.attributes));
+	const suggestedAttrs = ref(cloneDeep(mockData.favoriteAttributes));
+	const value = ref(cloneDeep(presetFilters));
 
 	function updateSuggested(attr) {
-		const attrIndex = suggestedAttrs.value.findIndex((a) => a === attr)
+		const attrIndex = suggestedAttrs.value.findIndex((a) => a === attr);
 		if (attrIndex === -1) {
-			suggestedAttrs.value.push(attr)
+			suggestedAttrs.value.push(attr);
 		} else {
-			suggestedAttrs.value.splice(attrIndex, 1)
+			suggestedAttrs.value.splice(attrIndex, 1);
 		}
 	}
 </script>

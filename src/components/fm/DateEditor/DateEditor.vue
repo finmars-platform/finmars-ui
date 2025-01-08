@@ -1,6 +1,6 @@
 <template>
 	<div class="fm-date-editor">
-		<div class="fm-date-editor__menu">
+		<div v-if="!simple" class="fm-date-editor__menu">
 			<div
 				:class="[
 					'fm-date-editor__menu-item',
@@ -30,8 +30,7 @@
 				:class="[
 					'fm-date-editor__menu-item',
 					{
-						'fm-date-editor__menu-item--selected':
-							currentMenuItem === 'previous'
+						'fm-date-editor__menu-item--selected': currentMenuItem === 'previous'
 					}
 				]"
 				v-ripple.center
@@ -62,25 +61,28 @@
 				:model-value="innerValue"
 				:min="min"
 				:max="max"
-				:allowed-dates="checkIfDateAllowed"
-				:show-week="showWeek"
+				:non-selectable-dates="nonWorkingDays"
+				:erroneous-dates="erroneousDates"
 				:show-adjacent-months="showAdjacentMonths"
+				:can-weekends-be-selected="allowWeekendSelection"
 				:disabled="disabled"
 				@update:model-value="onUpdate"
 			/>
 
+			<div v-if="includeTime" class="fm-date-editor__time">
+				<span>Time</span>
+				<FmInputTime v-model="innerTime" />
+			</div>
+
 			<div class="fm-date-editor__actions">
-				<FmButton
-					type="secondary"
-					:disabled="innerValue === initialValue"
-					@click="cancelDateSelection"
-				>
+				<FmButton type="secondary" rounded @click="cancelDateSelection">
 					{{ locals.cancelButtonText }}
 				</FmButton>
 
 				<FmButton
 					type="secondary"
-					:disabled="innerValue === initialValue"
+					rounded
+					:disabled="innerValue === initialValue && innerTime === initialTime"
 					@click="confirmDateSelection"
 				>
 					{{ locals.confirmButtonText }}
@@ -91,18 +93,22 @@
 </template>
 
 <script setup lang="ts">
-	import { watch } from 'vue'
-	import { Ripple } from 'vuetify/directives'
-	import { Dayjs } from 'dayjs'
-	import useDateEditor from './useDateEditor'
-	import FmButton from '@/components/fm/Button/Button.vue'
-	import FmTextField from '@/components/fm/TextField/TextField.vue'
-	import FmDatePicker from '@/components/fm/DatePicker/DatePicker.vue'
-	import type { FmDateEditorProps, FmDateEditorEmits } from './types'
+	import { watch } from 'vue';
+	import { Ripple } from 'vuetify/directives';
+	import useDateEditor from './useDateEditor';
+	import FmButton from '@/components/fm/Button/Button.vue';
+	import FmTextField from '@/components/fm/TextField/TextField.vue';
+	import FmDatePicker from '@/components/fm/DatePicker/DatePicker.vue';
+	import FmInputTime from '@/components/fm/InputTime/InputTime.vue';
+	import type { FmDateEditorProps, FmDateEditorEmits } from './types';
+	import dayjs from 'dayjs';
 
-	const vRipple = Ripple
+	const vRipple = Ripple;
 
 	const props = withDefaults(defineProps<FmDateEditorProps>(), {
+		erroneousDates: () => [],
+		nonWorkingDays: () => [],
+		time: '00:00',
 		locals: {
 			// @ts-ignore
 			enteringFieldLabel: 'Date',
@@ -113,19 +119,18 @@
 			menuPresetToday: 'Today',
 			menuPresetPrevious: 'Previous business day'
 		}
-	})
+	});
 
-	const emits = defineEmits<FmDateEditorEmits>()
-
-	function checkIfDateAllowed(val: Dayjs | string) {
-		return allowedDates(val)
-	}
+	const emits = defineEmits<FmDateEditorEmits>();
 
 	const {
-		allowedDates,
+		DATE_FORMAT,
+		TIME_FORMAT,
 		currentMenuItem,
 		initialValue,
 		innerValue,
+		initialTime,
+		innerTime,
 		textFieldInput,
 		selectMenuItem,
 		onUpdate,
@@ -134,17 +139,18 @@
 		onChange,
 		cancelDateSelection,
 		confirmDateSelection
-	} = useDateEditor(props, emits)
+	} = useDateEditor(props, emits);
 
 	watch(
 		() => props.modelValue,
 		(val, oVal) => {
 			if (val !== oVal) {
-				innerValue.value = val
+				initialValue.value = innerValue.value = val ? dayjs(val).format(DATE_FORMAT) : '';
+				initialTime.value = innerTime.value = val ? dayjs(val).format(TIME_FORMAT) : '00:00';
 			}
 		},
 		{ immediate: true }
-	)
+	);
 </script>
 
 <style scoped lang="scss">
@@ -215,16 +221,44 @@
 
 		&__body {
 			position: relative;
-			padding: var(--spacing-24) calc(var(--spacing-24) / 2)
-				calc(var(--spacing-24) / 2) var(--spacing-24);
+			padding: var(--spacing-24) calc(var(--spacing-24) / 2) calc(var(--spacing-24) / 2)
+				var(--spacing-24);
 
 			:deep(.fm-text-field) {
-				--backgroundColor-fmTextField-outlined: var(
-					--backgroundColor-fmDateEditor
-				);
+				--backgroundColor-fmTextField-outlined: var(--backgroundColor-fmDateEditor);
 
 				width: calc(100% - calc(var(--spacing-24) / 2));
 				margin-right: calc(var(--spacing-24) / 2);
+			}
+		}
+
+		&__time {
+			display: flex;
+			width: 100%;
+			height: 48px;
+			justify-content: space-between;
+			align-items: center;
+			padding: 0 16px;
+			font: var(--label-large-font);
+			color: var(--on-surface);
+
+			:deep(.fm-input-time__button) {
+				margin-right: 0;
+				width: 48px !important;
+				max-width: 48px !important;
+
+				.v-field__input {
+					height: 24px;
+					font: var(--label-large-font);
+					color: var(--primary);
+					padding: 2px 4px;
+				}
+
+				.v-field__outline {
+					div {
+						border: none;
+					}
+				}
 			}
 		}
 
@@ -236,6 +270,10 @@
 			justify-content: flex-end;
 			align-items: center;
 			column-gap: var(--spacing-8);
+
+			button {
+				text-transform: none;
+			}
 		}
 	}
 </style>

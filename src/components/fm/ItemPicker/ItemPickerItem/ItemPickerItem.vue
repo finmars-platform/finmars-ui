@@ -9,11 +9,7 @@
 		]"
 		v-on="disabled ? {} : { click: onItemClick }"
 	>
-		<FmCheckbox
-			v-if="multiple"
-			:model-value="isSelected"
-			:disabled="disabled"
-		/>
+		<FmCheckbox v-if="multiple" :model-value="isSelected" :disabled="disabled" />
 
 		<span class="fm-item-picker-item__text" v-html="name" />
 
@@ -25,21 +21,14 @@
 			v-on="disabled ? {} : { click: onIconClick }"
 		/>
 
-		<FmTooltip
-			v-if="item.description"
-			type="secondary"
-			location="top"
-			:disabled="disabled"
-		>
+		<FmTooltip v-if="item.description" type="secondary" location="top" :disabled="disabled">
 			<template #activator="{ props }">
 				<VIcon
 					v-bind="props"
 					icon="mdi-information-outline"
 					size="20"
 					:color="
-						isSelected && !multiple
-							? 'var(--on-secondary)'
-							: 'var(--color-item-fmItemPicker)'
+						isSelected && !multiple ? 'var(--on-secondary)' : 'var(--color-item-fmItemPicker)'
 					"
 				/>
 			</template>
@@ -50,39 +39,39 @@
 </template>
 
 <script lang="ts" setup generic="T extends FmAttribute">
-	import { computed } from 'vue'
-	import type { FmAttribute } from '@/types'
-	import type { FmItemPickerItemProps, FmItemPickerItemEmits } from './types'
-	import FmIconButton from '../../IconButton/IconButton.vue'
-	import FmCheckbox from '../../Checkbox/Checkbox.vue'
-	import FmTooltip from '../../Tooltip/Tooltip.vue'
-	import { VIcon } from 'vuetify/components'
+	import { computed } from 'vue';
+	import type { FmAttribute } from '@/types';
+	import type { FmItemPickerItemProps, FmItemPickerItemEmits } from './types';
+	import FmIconButton from '../../IconButton/IconButton.vue';
+	import FmCheckbox from '../../Checkbox/Checkbox.vue';
+	import FmTooltip from '../../Tooltip/Tooltip.vue';
+	import { VIcon } from 'vuetify/components';
 
 	const props = withDefaults(defineProps<FmItemPickerItemProps<T>>(), {
 		selected: () => [],
 		suggested: () => []
-	})
-	const emits = defineEmits<FmItemPickerItemEmits>()
+	});
+	const emits = defineEmits<FmItemPickerItemEmits>();
 
 	const name = computed(() => {
-		const processedName = props.item.name.split('. ')
-		return processedName.slice(-1)[0]
-	})
+		const processedName = props.item.name.split('. ');
+		return processedName.slice(-1)[0];
+	});
 
-	const isSelected = computed(() => props.selected.includes(props.item.key))
+	const isSelected = computed(() => props.selected.includes(props.item.key));
 
-	const isSuggested = computed(() => props.suggested.includes(props.item.key))
+	const isSuggested = computed(() => props.suggested.includes(props.item.key));
 
 	function onItemClick(ev: MouseEvent) {
-		ev.preventDefault()
-		ev.stopImmediatePropagation()
-		emits('update:modelValue', props.item.key)
+		ev.preventDefault();
+		ev.stopImmediatePropagation();
+		emits('update:modelValue', props.item.key);
 	}
 
 	function onIconClick(ev: MouseEvent) {
-		ev.preventDefault()
-		ev.stopImmediatePropagation()
-		emits('update:suggested', props.item.key)
+		ev.preventDefault();
+		ev.stopImmediatePropagation();
+		emits('update:suggested', props.item.key);
 	}
 </script>
 
@@ -122,23 +111,11 @@
 		}
 
 		&--disabled {
-			color: color-mix(
-				in srgb,
-				var(--color-item-fmItemPicker) 38%,
-				transparent
-			);
+			color: color-mix(in srgb, var(--color-item-fmItemPicker) 38%, transparent);
 
 			i.v-icon {
-				color: color-mix(
-					in srgb,
-					var(--color-item-fmItemPicker) 38%,
-					transparent
-				) !important;
-				caret-color: color-mix(
-					in srgb,
-					var(--color-item-fmItemPicker) 38%,
-					transparent
-				) !important;
+				color: color-mix(in srgb, var(--color-item-fmItemPicker) 38%, transparent) !important;
+				caret-color: color-mix(in srgb, var(--color-item-fmItemPicker) 38%, transparent) !important;
 			}
 		}
 

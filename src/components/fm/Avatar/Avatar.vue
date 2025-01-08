@@ -7,11 +7,11 @@
 </template>
 
 <script setup>
-	import { VAvatar } from 'vuetify/components'
+	import { VAvatar } from 'vuetify/components';
 
 	defineProps({
 		size: Number | String,
 		icon: String,
 		image: String
-	})
+	});
 </script>

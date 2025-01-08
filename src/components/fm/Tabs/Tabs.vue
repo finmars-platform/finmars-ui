@@ -26,8 +26,8 @@
 </template>
 
 <script setup>
-	import { computed, defineEmits, ref } from 'vue'
-	import { VTab, VTabs } from 'vuetify/components'
+	import { computed, defineEmits, ref } from 'vue';
+	import { VTab, VTabs } from 'vuetify/components';
 
 	const props = defineProps({
 		tabs: {
@@ -38,14 +38,14 @@
 			type: String,
 			default: 'thin',
 			validator(value) {
-				return ['thin', 'bold'].includes(value)
+				return ['thin', 'bold'].includes(value);
 			}
 		},
 		variant: {
 			type: String,
 			default: 'normal',
 			validator(value) {
-				return ['normal', 'large'].includes(value)
+				return ['normal', 'large'].includes(value);
 			}
 		},
 		icon: {
@@ -64,7 +64,7 @@
 			type: String,
 			default: 'normal',
 			validator(value) {
-				return ['normal', 'small'].includes(value)
+				return ['normal', 'small'].includes(value);
 			}
 		},
 		defaultTab: {
@@ -75,32 +75,30 @@
 			type: Boolean,
 			default: false
 		}
-	})
+	});
 
-	const activeTab = ref(props.defaultTab)
-	const emits = defineEmits(['changeTab'])
+	const activeTab = ref(props.defaultTab);
+	const emits = defineEmits(['changeTab']);
 
 	const lineClasses = computed(() => {
 		if (props.icon === 'column') {
-			return 'bold'
+			return 'bold';
 		}
-		return props.underline === 'thin' || props.underline === 'bold'
-			? props.underline
-			: 'thin'
-	})
+		return props.underline === 'thin' || props.underline === 'bold' ? props.underline : 'thin';
+	});
 
 	const iconSize = computed(() => {
 		if (props.size === 'small') {
-			return '16'
+			return '16';
 		} else {
-			return '22'
+			return '22';
 		}
-	})
+	});
 
 	const handleTabClick = (index) => {
-		activeTab.value = index
-		emits('changeTab', activeTab.value)
-	}
+		activeTab.value = index;
+		emits('changeTab', activeTab.value);
+	};
 </script>
 
 <style scoped lang="scss">

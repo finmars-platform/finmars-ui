@@ -1,14 +1,14 @@
-import FmSelect from '@/components/fm/Select/Select.vue'
-import SelectDemo from './SelectDemo.vue'
+import FmSelect from '@/components/fm/Select/Select.vue';
+import SelectDemo from './SelectDemo.vue';
 
 const meta = {
 	title: 'Components/FmSelect',
 	component: FmSelect,
 	argTypes: {},
 	args: {}
-}
+};
 
-export default meta
+export default meta;
 
 export const Demo = {
 	render: (args) => ({
@@ -16,8 +16,9 @@ export const Demo = {
 			SelectDemo
 		},
 		setup() {
-			return { args }
+			return { args };
 		},
-		template: `<SelectDemo />`,
+		template: `
+			<SelectDemo />`
 	})
-}
+};

@@ -6,11 +6,11 @@
 </template>
 
 <script lang="ts" setup>
-	import type { FmFilterProps, FmFilterEmits, FmFilterSlots } from '../../types'
+	import type { FmFilterProps, FmFilterEmits, FmFilterSlots } from '../../types';
 
-	defineProps<FmFilterProps>()
-	defineEmits<FmFilterEmits>()
-	defineSlots<FmFilterSlots>()
+	defineProps<FmFilterProps>();
+	defineEmits<FmFilterEmits>();
+	defineSlots<FmFilterSlots>();
 </script>
 
 <style lang="scss" scoped>

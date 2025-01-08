@@ -3,12 +3,7 @@
 		<div>
 			<h3 class="text-[16px] mb-2">Standard, single, Label</h3>
 
-			<FmSelect
-				v-model="v1"
-				v-on="eventHandlers"
-				:options="options1"
-				label="Label1"
-			/>
+			<FmSelect v-model="v1" v-on="eventHandlers" :options="options1" label="Label1" />
 		</div>
 
 		<div>
@@ -49,9 +44,7 @@
 		</div>
 
 		<div>
-			<h3 class="text-[16px] mb-2">
-				Standard, single, Label, persistent placeholder
-			</h3>
+			<h3 class="text-[16px] mb-2">Standard, single, Label, persistent placeholder</h3>
 
 			<FmSelect
 				v-model="v5"
@@ -64,9 +57,7 @@
 		</div>
 
 		<div>
-			<h3 class="text-[16px] mb-2">
-				Outlined, single, Label, persistent placeholder
-			</h3>
+			<h3 class="text-[16px] mb-2">Outlined, single, Label, persistent placeholder</h3>
 
 			<FmSelect
 				v-model="v6"
@@ -80,9 +71,7 @@
 		</div>
 
 		<div>
-			<h3 class="text-[16px] mb-2">
-				Standard, single, Label, persistent placeholder, clearable
-			</h3>
+			<h3 class="text-[16px] mb-2">Standard, single, Label, persistent placeholder, clearable</h3>
 
 			<FmSelect
 				v-model="v7"
@@ -96,9 +85,7 @@
 		</div>
 
 		<div>
-			<h3 class="text-[16px] mb-2">
-				Outlined, single, Label, persistent placeholder, clearable
-			</h3>
+			<h3 class="text-[16px] mb-2">Outlined, single, Label, persistent placeholder, clearable</h3>
 
 			<FmSelect
 				v-model="v8"
@@ -150,13 +137,7 @@
 		<div>
 			<h3 class="text-[16px] mb-2">Standard, single, Label, disabled</h3>
 
-			<FmSelect
-				v-model="v11"
-				v-on="eventHandlers"
-				:options="options1"
-				label="Label1"
-				disabled
-			/>
+			<FmSelect v-model="v11" v-on="eventHandlers" :options="options1" label="Label1" disabled />
 		</div>
 
 		<div>
@@ -190,9 +171,7 @@
 		</div>
 
 		<div>
-			<h3 class="text-[16px] mb-2">
-				Outlined, multiple, label, placeholder, clearable
-			</h3>
+			<h3 class="text-[16px] mb-2">Outlined, multiple, label, placeholder, clearable</h3>
 
 			<FmSelect
 				v-model="v14"
@@ -225,9 +204,7 @@
 		</div>
 
 		<div>
-			<h3 class="text-[16px] mb-2">
-				Outlined, multiple, label, placeholder, clearable, chip
-			</h3>
+			<h3 class="text-[16px] mb-2">Outlined, multiple, label, placeholder, clearable, chip</h3>
 
 			<FmSelect
 				v-model="v16"
@@ -245,9 +222,9 @@
 </template>
 
 <script setup>
-	import { ref } from 'vue'
-	import cloneDeep from 'lodash/cloneDeep'
-	import FmSelect from '@/components/fm/Select/Select.vue'
+	import { ref } from 'vue';
+	import cloneDeep from 'lodash/cloneDeep';
+	import FmSelect from '@/components/fm/Select/Select.vue';
 
 	const eventHandlers = {
 		'click:prependIcon': (ev) => console.log(`EVENT 'click:prependIcon' :`, ev),
@@ -256,7 +233,7 @@
 		blur: () => console.log(`EVENT 'blur'`),
 		'update:menu': (ev) => console.log(`EVENT 'update:menu' :`, ev),
 		'update:modelValue': (ev) => console.log(`EVENT 'update:modelValue' :`, ev)
-	}
+	};
 
 	const options1 = [
 		{ title: 'Option 1', value: 'o1' },
@@ -264,7 +241,7 @@
 		{ title: 'Option 3', value: 'o3' },
 		{ title: 'Option 4', value: 'o4' },
 		{ title: 'Option 5', value: 'o5' }
-	]
+	];
 
 	const options2 = [
 		{
@@ -379,24 +356,24 @@
 			value: 'validate_transaction_import',
 			title: 'validate_transaction_import'
 		}
-	]
+	];
 
-	const clonedOptions1 = cloneDeep(options1)
+	const clonedOptions1 = cloneDeep(options1);
 
-	const v1 = ref()
-	const v2 = ref()
-	const v3 = ref()
-	const v4 = ref()
-	const v5 = ref()
-	const v6 = ref()
-	const v7 = ref()
-	const v8 = ref()
-	const v9 = ref()
-	const v10 = ref()
-	const v11 = ref()
-	const v12 = ref()
-	const v13 = ref()
-	const v14 = ref()
-	const v15 = ref([clonedOptions1[0].value, clonedOptions1[1].value])
-	const v16 = ref()
+	const v1 = ref();
+	const v2 = ref();
+	const v3 = ref();
+	const v4 = ref();
+	const v5 = ref();
+	const v6 = ref();
+	const v7 = ref();
+	const v8 = ref();
+	const v9 = ref();
+	const v10 = ref();
+	const v11 = ref();
+	const v12 = ref();
+	const v13 = ref();
+	const v14 = ref();
+	const v15 = ref([clonedOptions1[0].value, clonedOptions1[1].value]);
+	const v16 = ref();
 </script>

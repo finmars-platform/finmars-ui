@@ -133,7 +133,7 @@
 }
 
 .light-theme {
-  --primary: var(--p-40);
+  --primary: var(--p-30);
   --secondary: var(--s-40);
   --tertiary: var(--t-40);
   --error: var(--e-40);
@@ -158,7 +158,7 @@
   --on-primary-fixed: var(--p-10);
   --on-secondary-fixed: var(--s-10);
   --on-tertiary-fixed: var(--t-10);
-  --on-primary-fixed-variant: var(--p-30);
+  --on-primary-fixed-variant: var(--p-20);
   --on-secondary-fixed-variant: var(--s-30);
   --on-tertiary-fixed-variant: var(--t-30);
   --surface-dim: var(--n-98);

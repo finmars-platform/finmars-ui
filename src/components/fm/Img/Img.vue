@@ -11,7 +11,7 @@
 </template>
 
 <script setup>
-	import { VImg } from 'vuetify/components'
+	import { VImg } from 'vuetify/components';
 
 	defineProps({
 		aspectRatio: String,
@@ -21,5 +21,5 @@
 		src: String,
 		maxHeight: String,
 		maxWidth: String
-	})
+	});
 </script>

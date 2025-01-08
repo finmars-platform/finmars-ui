@@ -1,8 +1,8 @@
-import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
-import vuetify from 'vite-plugin-vuetify'
-import { fileURLToPath, URL } from 'node:url'
-import svgLoader from 'vite-svg-loader'
+import { defineConfig } from 'vite';
+import vue from '@vitejs/plugin-vue';
+import vuetify from 'vite-plugin-vuetify';
+import { fileURLToPath, URL } from 'node:url';
+import svgLoader from 'vite-svg-loader';
 
 export default defineConfig({
 	plugins: [vue(), vuetify(), svgLoader()],
@@ -19,4 +19,4 @@ export default defineConfig({
 			'~': fileURLToPath(new URL('./', import.meta.url))
 		}
 	}
-})
+});

@@ -1,4 +1,4 @@
-import cloneDeep from 'lodash/cloneDeep'
+import cloneDeep from 'lodash/cloneDeep';
 
 export const presetFilters = [
 	{
@@ -52,14 +52,10 @@ export const presetFilters = [
 		},
 		value_type: 10
 	}
-]
+];
 
 export const mockData = {
-	selectedAttributes: [
-		'portfolio.user_code',
-		'account.user_code',
-		'pricing_currency.user_code'
-	],
+	selectedAttributes: ['portfolio.user_code', 'account.user_code', 'pricing_currency.user_code'],
 	favoriteAttributes: [],
 	title: 'Add filters',
 	attributes: [
@@ -3325,7 +3321,7 @@ export const mockData = {
 			description: ''
 		}
 	]
-}
+};
 
 export const options = [
 	'-',
@@ -3342,37 +3338,62 @@ export const options = [
 	'Swiss Franc (CHF)',
 	'US Dollar (USD)',
 	'Yen (JPY)'
-]
+];
+
+export const dateTreeOptions = [
+	'2023-07-12',
+	'2024-11-01',
+	'2024-11-03',
+	'2024-12-12',
+	'2024-12-18'
+];
+
+export const dateTimeTreeOptions = [
+	'2023-07-12T13:12',
+	'2023-07-12T15:47',
+	'2024-11-01T16:15',
+	'2024-11-03T18:15',
+	'2024-12-12T19:01',
+	'2024-12-18T12:00'
+];
 
 export function getFilterMockOptions(filter) {
-	console.log('getFilterMockOptions: ', filter)
+	console.log('getFilterMockOptions: ', filter);
 
 	return new Promise((resolve) => {
 		setTimeout(() => {
-			const data = cloneDeep(options.slice(1))
-			resolve(data.map((i) => ({ title: i, value: i })))
-		}, 1000)
-	})
+			if (filter.value_type === 40) {
+				resolve(cloneDeep(dateTreeOptions));
+			}
+
+			if (filter.value_type === 80) {
+				resolve(cloneDeep(dateTimeTreeOptions));
+			}
+
+			const data = cloneDeep(options.slice(1));
+			resolve(data.map((i) => ({ title: i, value: i })));
+		}, 1000);
+	});
 }
 
 export function getSourceLinkedMockGroups(filter) {
-	console.log('getSourceLinkedMockGroups: ', filter)
+	console.log('getSourceLinkedMockGroups: ', filter);
 	return new Promise((resolve) => {
 		setTimeout(() => {
 			resolve([
-				{  title: 'Balance Report', value: 'balance-report' },
-				{  title: 'P&L Report', value: 'pl-report' },
-				{  title: 'Transaction Report', value: 'transaction-report' }
-			])
-		}, 500)
-	})
+				{ title: 'Balance Report', value: 'balance-report' },
+				{ title: 'P&L Report', value: 'pl-report' },
+				{ title: 'Transaction Report', value: 'transaction-report' }
+			]);
+		}, 500);
+	});
 }
 
 export function getSourceLinkedMockGroupAttributes(filter) {
-	console.log('getSourceLinkedMockGroupAttributes: ', filter)
+	console.log('getSourceLinkedMockGroupAttributes: ', filter);
 	return new Promise((resolve) => {
 		setTimeout(() => {
-			resolve(cloneDeep(mockData.attributes))
-		}, 500)
-	})
+			resolve(cloneDeep(mockData.attributes));
+		}, 500);
+	});
 }

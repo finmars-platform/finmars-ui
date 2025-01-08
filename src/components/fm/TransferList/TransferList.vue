@@ -26,8 +26,10 @@
 							:class="[
 								'fm-transfer-list__part-item',
 								{
-									'fm-transfer-list__part-item--highlighted':
-										isOptionsHighlighted('available', item)
+									'fm-transfer-list__part-item--highlighted': isOptionsHighlighted(
+										'available',
+										item
+									)
 								}
 							]"
 							@click.stop.prevent="onItemClick('available', item)"
@@ -88,8 +90,7 @@
 							:class="[
 								'fm-transfer-list__part-item',
 								{
-									'fm-transfer-list__part-item--highlighted':
-										isOptionsHighlighted('selected', item)
+									'fm-transfer-list__part-item--highlighted': isOptionsHighlighted('selected', item)
 								}
 							]"
 							@click.stop.prevent="onItemClick('selected', item)"
@@ -113,13 +114,13 @@
 </template>
 
 <script lang="ts" setup generic="T extends any, K extends string & keyof T">
-	import { computed, ref, type Ref, watch } from 'vue'
-	import cloneDeep from 'lodash/cloneDeep'
-	import isEmpty from 'lodash/isEmpty'
-	import FmButton from '../Button/Button.vue'
-	import FmIconButton from '../IconButton/IconButton.vue'
-	import FmTextField from '../TextField/TextField.vue'
-	import type { FmTransferListProps, FmTransferListEmits } from './types'
+	import { computed, ref, type Ref, watch } from 'vue';
+	import cloneDeep from 'lodash/cloneDeep';
+	import isEmpty from 'lodash/isEmpty';
+	import FmButton from '../Button/Button.vue';
+	import FmIconButton from '../IconButton/IconButton.vue';
+	import FmTextField from '../TextField/TextField.vue';
+	import type { FmTransferListProps, FmTransferListEmits } from './types';
 
 	const props = withDefaults(defineProps<FmTransferListProps<T, K>>(), {
 		width: '620',
@@ -134,166 +135,150 @@
 			cancelBtn: 'Close',
 			saveBtn: 'Save'
 		}
-	})
-	const emits = defineEmits<FmTransferListEmits<T>>()
+	});
+	const emits = defineEmits<FmTransferListEmits<T>>();
 
-	const isDirty = ref(false)
+	const isDirty = ref(false);
 
 	const searchText = ref({
 		available: '',
 		selected: ''
-	})
+	});
 
 	const highlightedOptions = ref({
 		available: [],
 		selected: []
 	}) as Ref<{
-		available: Array<T | T[K]>
-		selected: Array<T | T[K]>
-	}>
+		available: Array<T | T[K]>;
+		selected: Array<T | T[K]>;
+	}>;
 
-	const selectedOptions = ref([]) as Ref<T[]>
+	const selectedOptions = ref([]) as Ref<T[]>;
 	const selectedOptionsFiltered = computed(() =>
 		selectedOptions.value.filter((o) =>
-			getOptionTitle(o)
-				.toLowerCase()
-				.includes(searchText.value.selected.toLowerCase())
+			getOptionTitle(o).toLowerCase().includes(searchText.value.selected.toLowerCase())
 		)
-	)
-	const selectedOptionsValues = computed(() =>
-		selectedOptions.value.map((o) => getOptionValue(o))
-	)
+	);
+	const selectedOptionsValues = computed(() => selectedOptions.value.map((o) => getOptionValue(o)));
 
 	const availableOptions = computed(() =>
-		(props.options || []).filter(
-			(o) => !selectedOptionsValues.value.includes(getOptionValue(o))
-		)
-	)
+		(props.options || []).filter((o) => !selectedOptionsValues.value.includes(getOptionValue(o)))
+	);
 	const availableOptionsFiltered = computed(() =>
 		availableOptions.value.filter((o) =>
-			getOptionTitle(o)
-				.toLowerCase()
-				.includes(searchText.value.available.toLowerCase())
+			getOptionTitle(o).toLowerCase().includes(searchText.value.available.toLowerCase())
 		)
-	)
+	);
 
 	const widthValue = computed(() => {
 		if (typeof props.width === 'string') {
-			return ['auto', '100%'].includes(props.width)
-				? props.width
-				: `${props.width}px`
+			return ['auto', '100%'].includes(props.width) ? props.width : `${props.width}px`;
 		}
-		return `${props.width}px`
-	})
+		return `${props.width}px`;
+	});
 
 	const heightValue = computed(() => {
 		if (typeof props.height === 'string') {
-			return ['auto', '100%'].includes(props.height)
-				? props.height
-				: `${props.height}px`
+			return ['auto', '100%'].includes(props.height) ? props.height : `${props.height}px`;
 		}
-		return `${props.height}px`
-	})
+		return `${props.height}px`;
+	});
 
 	function getOptionTitle(item: T): string {
 		if (!props.optionAsObject && typeof item !== 'object') {
-			return item as string
+			return item as string;
 		}
 
-		return item[props.optionTitleKey as K] as string
+		return item[props.optionTitleKey as K] as string;
 	}
 
 	function getOptionValue(item: T) {
 		if (!props.optionAsObject && typeof item !== 'object') {
-			return item
+			return item;
 		}
 
-		return item[props.optionValueKey as K]
+		return item[props.optionValueKey as K];
 	}
 
 	function isOptionsHighlighted(part: 'available' | 'selected', item: T) {
-		const value = getOptionValue(item)
-		return highlightedOptions.value[part].includes(value)
+		const value = getOptionValue(item);
+		return highlightedOptions.value[part].includes(value);
 	}
 
 	function onItemClick(part: 'available' | 'selected', item: T) {
-		const value = getOptionValue(item)
-		const index = highlightedOptions.value[part].findIndex((v) => v === value)
+		const value = getOptionValue(item);
+		const index = highlightedOptions.value[part].findIndex((v) => v === value);
 		if (index === -1) {
-			highlightedOptions.value[part].push(value)
+			highlightedOptions.value[part].push(value);
 		} else {
-			highlightedOptions.value[part].splice(index, 1)
+			highlightedOptions.value[part].splice(index, 1);
 		}
 	}
 
 	function onBtnClick(btn: 'left' | 'doubleLeft' | 'right' | 'doubleRight') {
-		isDirty.value = true
+		isDirty.value = true;
 		switch (btn) {
 			case 'left':
-				highlightedOptions.value.available = []
+				highlightedOptions.value.available = [];
 				highlightedOptions.value.selected.forEach((val) => {
-					const index = selectedOptions.value.findIndex(
-						(o) => getOptionValue(o) === val
-					)
+					const index = selectedOptions.value.findIndex((o) => getOptionValue(o) === val);
 					if (index !== -1) {
-						selectedOptions.value.splice(index, 1)
+						selectedOptions.value.splice(index, 1);
 					}
-				})
-				highlightedOptions.value.selected = []
-				break
+				});
+				highlightedOptions.value.selected = [];
+				break;
 			case 'doubleLeft':
-				clear(false)
-				break
+				clear(false);
+				break;
 			case 'right':
-				highlightedOptions.value.selected = []
+				highlightedOptions.value.selected = [];
 				highlightedOptions.value.available.forEach((val) => {
 					if (!selectedOptionsValues.value.includes(val)) {
-						const option = availableOptions.value.find(
-							(o) => getOptionValue(o) === val
-						)
-						option && selectedOptions.value.push(option)
+						const option = availableOptions.value.find((o) => getOptionValue(o) === val);
+						option && selectedOptions.value.push(option);
 					}
-				})
-				highlightedOptions.value.available = []
-				break
+				});
+				highlightedOptions.value.available = [];
+				break;
 			case 'doubleRight':
-				selectedOptions.value = cloneDeep(props.options)
-				highlightedOptions.value.selected = []
-				highlightedOptions.value.available = []
-				break
+				selectedOptions.value = cloneDeep(props.options);
+				highlightedOptions.value.selected = [];
+				highlightedOptions.value.available = [];
+				break;
 		}
 	}
 
 	function clear(touchDirty = true) {
-		touchDirty && (isDirty.value = false)
+		touchDirty && (isDirty.value = false);
 		searchText.value = {
 			available: '',
 			selected: ''
-		}
-		selectedOptions.value = []
+		};
+		selectedOptions.value = [];
 		highlightedOptions.value = {
 			available: [],
 			selected: []
-		}
+		};
 	}
 
 	function end() {
-		emits('end')
-		clear()
+		emits('end');
+		clear();
 	}
 
 	function save() {
-		emits('change', selectedOptions.value)
-		end()
+		emits('change', selectedOptions.value);
+		end();
 	}
 
 	watch(
 		() => props.selected,
 		() => {
-			selectedOptions.value = cloneDeep(props.selected || [])
+			selectedOptions.value = cloneDeep(props.selected || []);
 		},
 		{ immediate: true }
-	)
+	);
 </script>
 
 <style lang="scss" scoped>

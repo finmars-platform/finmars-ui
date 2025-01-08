@@ -1,11 +1,6 @@
 <template>
 	<div class="grid grid-cols-4 gap-8">
-		<FmTextField
-			v-model="val1"
-			hint="Supporting text"
-			label="Label"
-			v-on="events"
-		/>
+		<FmTextField v-model="val1" hint="Supporting text" label="Label" v-on="events" />
 		<FmTextField
 			v-model="val1"
 			clearable
@@ -22,12 +17,7 @@
 			:rules="[requiredValidate]"
 			v-on="events"
 		/>
-		<FmTextField
-			v-model="val1"
-			hint="Supporting text"
-			label="Label"
-			disabled
-		/>
+		<FmTextField v-model="val1" hint="Supporting text" label="Label" disabled />
 
 		<FmTextField
 			v-model="val2"
@@ -62,13 +52,7 @@
 			disabled
 		/>
 
-		<FmTextField
-			v-model="val1"
-			outlined
-			hint="Supporting text"
-			label="Label"
-			v-on="events"
-		/>
+		<FmTextField v-model="val1" outlined hint="Supporting text" label="Label" v-on="events" />
 		<FmTextField
 			v-model="val1"
 			outlined
@@ -87,13 +71,7 @@
 			:rules="[requiredValidate]"
 			v-on="events"
 		/>
-		<FmTextField
-			v-model="val1"
-			outlined
-			hint="Supporting text"
-			label="Label"
-			disabled
-		/>
+		<FmTextField v-model="val1" outlined hint="Supporting text" label="Label" disabled />
 
 		<FmTextField
 			v-model="val2"
@@ -139,8 +117,8 @@
 </template>
 
 <script setup>
-	import { ref } from 'vue'
-	import FmTextField from '@/components/fm/TextField/TextField.vue'
+	import { ref } from 'vue';
+	import FmTextField from '@/components/fm/TextField/TextField.vue';
 
 	const val1 = ref('');
 	const val2 = ref('');
@@ -150,17 +128,17 @@
 		'click:control': (ev) => handleEvents('click:control', ev),
 		'click:prependInner': (ev) => handleEvents('click:prependInner', ev),
 		'mousedown:control': (ev) => handleEvents('mousedown:control', ev),
-		'focus': (ev) => handleEvents('focus', ev),
-		'blur': (ev) => handleEvents('blur', ev),
+		focus: (ev) => handleEvents('focus', ev),
+		blur: (ev) => handleEvents('blur', ev),
 		'update:modelValue': (ev) => handleEvents('update:model-value', ev),
-		'change': (ev) => handleEvents('change', ev),
-	}
+		change: (ev) => handleEvents('change', ev)
+	};
 
 	function handleEvents(eventName, event) {
-		console.log(eventName, event)
+		console.log(eventName, event);
 	}
 
 	function requiredValidate(val) {
-		return !!val || 'This is required field'
+		return !!val || 'This is required field';
 	}
 </script>

@@ -1,32 +1,32 @@
-import { ref, watch } from 'vue'
-import FmTextField from '@/components/fm/TextField/TextField.vue'
-import TextFieldDemo from './TextFieldDemo.vue'
+import { ref, watch } from 'vue';
+import FmTextField from '@/components/fm/TextField/TextField.vue';
+import TextFieldDemo from './TextFieldDemo.vue';
 
 const meta = {
 	title: 'Components/FmTextField',
 	component: FmTextField,
 	argTypes: {
 		name: {
-			control: 'text',
+			control: 'text'
 		},
 		label: {
-			control: 'text',
+			control: 'text'
 		},
 		placeholder: {
-			control: 'text',
+			control: 'text'
 		},
 		hint: {
-			control: 'text',
+			control: 'text'
 		},
-		prependIcon:  {
+		prependIcon: {
 			control: 'select',
-			options: [undefined, 'mdi-plus', 'mdi-magnify'],
-		},
+			options: [undefined, 'mdi-plus', 'mdi-magnify']
+		}
 	},
-	args: {},
-}
+	args: {}
+};
 
-export default meta
+export default meta;
 
 export const General = {
 	render: (args) => ({
@@ -34,22 +34,22 @@ export const General = {
 			FmTextField
 		},
 		setup() {
-			const key = ref(1)
+			const key = ref(1);
 
 			watch(args, () => {
-				key.value = new Date().getTime()
-			})
+				key.value = new Date().getTime();
+			});
 
 			return {
 				args,
 				key
-			}
+			};
 		},
 		template: `
 			<FmTextField v-bind="args" :key="key" />
-		`,
+		`
 	})
-}
+};
 
 export const AllVariants = {
 	render: (args) => ({
@@ -57,8 +57,9 @@ export const AllVariants = {
 			TextFieldDemo
 		},
 		setup() {
-			return { args }
+			return { args };
 		},
-		template: `<TextFieldDemo />`,
+		template: `
+			<TextFieldDemo />`
 	})
-}
+};

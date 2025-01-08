@@ -24,8 +24,8 @@
 </template>
 
 <script setup>
-	import { computed, ref, watch } from 'vue'
-	import { VSlider } from 'vuetify/components'
+	import { computed, ref, watch } from 'vue';
+	import { VSlider } from 'vuetify/components';
 
 	const props = defineProps({
 		modelValue: {
@@ -37,21 +37,21 @@
 			type: String,
 			default: 'continuous',
 			validator(value) {
-				return ['continuous', 'discrete', 'centered'].includes(value)
+				return ['continuous', 'discrete', 'centered'].includes(value);
 			}
 		},
 		min: {
 			type: [String, Number],
 			default: 0,
 			validator(value) {
-				return !isNaN(Number(value))
+				return !isNaN(Number(value));
 			}
 		},
 		max: {
 			type: [String, Number],
 			default: 100,
 			validator(value) {
-				return !isNaN(Number(value))
+				return !isNaN(Number(value));
 			}
 		},
 		prependIcon: {
@@ -64,23 +64,17 @@
 			type: [String, Number],
 			default: 10,
 			validator(value) {
-				return !isNaN(Number(value))
+				return !isNaN(Number(value));
 			}
 		},
 		disabled: {
 			type: Boolean
 		}
-	})
+	});
 
-	const emits = defineEmits([
-		'click:append',
-		'click:prepend',
-		'end',
-		'start',
-		'update:modelValue'
-	])
+	const emits = defineEmits(['click:append', 'click:prepend', 'end', 'start', 'update:modelValue']);
 
-	const innerValue = ref(Number(props.modelValue))
+	const innerValue = ref(Number(props.modelValue));
 
 	const vSliderProps = computed(() => ({
 		color: props.type === 'centered' ? 'var(--primary-container)' : 'var(--primary)',
@@ -100,25 +94,25 @@
 		...(props.type !== 'continuous' && props.step && { step: props.step }),
 		...(props.prependIcon && { prependIcon: props.prependIcon }),
 		...(props.appendIcon && { appendIcon: props.appendIcon })
-	}))
+	}));
 
 	function getThumbLabel(value) {
-		return Number(value).toFixed()
+		return Number(value).toFixed();
 	}
 
 	function onUpdate(value) {
-		innerValue.value = value
-		emits('update:modelValue', value)
+		innerValue.value = value;
+		emits('update:modelValue', value);
 	}
 
 	watch(
 		() => props.modelValue,
 		(val, oldValue) => {
 			if (val !== oldValue) {
-				innerValue.value = Number(props.modelValue)
+				innerValue.value = Number(props.modelValue);
 			}
 		}
-	)
+	);
 </script>
 
 <style lang="scss" scoped>

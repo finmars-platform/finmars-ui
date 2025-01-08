@@ -135,7 +135,7 @@
 </template>
 
 <script setup>
-	import FmChip from '@/components/fm/Chip/Chip.vue'
+	import FmChip from '@/components/fm/Chip/Chip.vue';
 
 	const eventHandlers = {
 		click: (ev) => console.log(`Event 'click' :`, ev),
@@ -143,5 +143,5 @@
 		'click:prepend': (ev) => console.log(`Event 'click:prepend' :`, ev),
 		'click:append': (ev) => console.log(`Event 'click:append' :`, ev),
 		keydown: (ev) => console.log(`Event 'keydown' :`, ev)
-	}
+	};
 </script>

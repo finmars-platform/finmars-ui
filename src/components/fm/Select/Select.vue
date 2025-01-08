@@ -68,22 +68,13 @@
 	</FmMenu>
 </template>
 
-<script
-	setup
-	lang="ts"
-	generic="T extends any & FmSelectOption, K extends string & keyof T"
->
-	import FmMenu from '@/components/fm/Menu/Menu.vue'
-	import FmCheckbox from '@/components/fm/Checkbox/Checkbox.vue'
-	import FmChip from '@/components/fm/Chip/Chip.vue'
-	import FmSelectActivator from '@/components/fm/Select/SelectActivator.vue'
-	import useSelect from '@/components/fm/Select/useSelect'
-	import type {
-		FmSelectOption,
-		FmSelectProps,
-		FmSelectEmits,
-		FmSelectSlots
-	} from './types'
+<script setup lang="ts" generic="T extends any & FmSelectOption, K extends string & keyof T">
+	import FmMenu from '@/components/fm/Menu/Menu.vue';
+	import FmCheckbox from '@/components/fm/Checkbox/Checkbox.vue';
+	import FmChip from '@/components/fm/Chip/Chip.vue';
+	import FmSelectActivator from '@/components/fm/Select/SelectActivator.vue';
+	import useSelect from '@/components/fm/Select/useSelect';
+	import type { FmSelectOption, FmSelectProps, FmSelectEmits, FmSelectSlots } from './types';
 
 	const props = withDefaults(defineProps<FmSelectProps<T, K>>(), {
 		itemSize: 'medium',
@@ -91,9 +82,9 @@
 		titleKey: 'title',
 		valueKey: 'value',
 		scrollStrategy: 'block'
-	})
-	const emits = defineEmits<FmSelectEmits<T, K>>()
-	defineSlots<FmSelectSlots<T>>()
+	});
+	const emits = defineEmits<FmSelectEmits<T, K>>();
+	defineSlots<FmSelectSlots<T>>();
 
 	const {
 		menuId,
@@ -111,9 +102,9 @@
 		clearSelected,
 		onChipClick,
 		isOptionSelected
-	} = useSelect(props, emits)
+	} = useSelect(props, emits);
 
 	defineExpose({
 		toggleDropdown
-	})
+	});
 </script>

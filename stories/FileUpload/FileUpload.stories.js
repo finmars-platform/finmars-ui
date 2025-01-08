@@ -1,6 +1,6 @@
-import { ref, watch } from 'vue'
-import FmFileUpload from '@/components/fm/FileUpload/FileUpload.vue'
-import FileUploadDemo from './FileUploadDemo.vue'
+import { ref, watch } from 'vue';
+import FmFileUpload from '@/components/fm/FileUpload/FileUpload.vue';
+import FileUploadDemo from './FileUploadDemo.vue';
 
 const meta = {
 	title: 'Components/FmFileUpload',
@@ -42,9 +42,9 @@ const meta = {
 		multiple: true,
 		indeterminate: false
 	}
-}
+};
 
-export default meta
+export default meta;
 
 export const General = {
 	render: (args) => ({
@@ -52,22 +52,22 @@ export const General = {
 			FmFileUpload
 		},
 		setup() {
-			const key = ref(1)
+			const key = ref(1);
 
 			watch(args, () => {
-				key.value = new Date().getTime()
-			})
+				key.value = new Date().getTime();
+			});
 
 			return {
 				args,
 				key
-			}
+			};
 		},
 		template: `
-        <FileUploadDemo v-bind="args" :key="key"/>
-    `
+			<FileUploadDemo v-bind="args" :key="key" />
+		`
 	})
-}
+};
 
 export const AllVariants = {
 	render: (args) => ({
@@ -75,9 +75,9 @@ export const AllVariants = {
 			FileUploadDemo
 		},
 		setup() {
-			return { args }
+			return { args };
 		},
 		template: `
-        <FileUploadDemo/>`
+			<FileUploadDemo />`
 	})
-}
+};

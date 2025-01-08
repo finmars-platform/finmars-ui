@@ -2,33 +2,20 @@ export default {
 	backgroundColor: {
 		'sidenav-backgroundColor': 'var(--sidenav-backgroundColor)',
 		'sidenavOption-backgroundColor': 'var(--sidenavOption-backgroundColor)',
-		'sidenavOption-hover-backgroundColor':
-			'var(--sidenavOption-hover-backgroundColor)',
-		'sidenavOption-focus-backgroundColor':
-			'var(--sidenavOption-focus-backgroundColor)',
-		'sidenavOption-active-backgroundColor':
-			'var(--sidenavOption-active-backgroundColor)',
-		'sidenavOption-activated-backgroundColor':
-			'var(--sidenavOption-activated-backgroundColor)',
-		'sidenavOption-disabled-backgroundColor':
-			'var(--sidenavOption-disabled-backgroundColor)',
-		'sidenavOption2-focus-backgroundColor':
-			'var(--sidenavOption2-focus-backgroundColor)',
-		'sidenavOption2-active-backgroundColor':
-			'var(--sidenavOption2-active-backgroundColor)',
-		'sidenavOption2-disabled-backgroundColor':
-			'var(--sidenavOption2-disabled-backgroundColor)',
-		'sidenavOption3-hover-backgroundColor':
-			'var(--sidenavOption3-hover-backgroundColor)',
-		'sidenavOption3-active-backgroundColor':
-			'var(--sidenavOption3-active-backgroundColor)',
-		'sidenavOption3-activated-backgroundColor':
-			'var(--sidenavOption3-activated-backgroundColor)',
-		'sidenavOption3-disabled-backgroundColor':
-			'var(--sidenavOption3-disabled-backgroundColor)',
+		'sidenavOption-hover-backgroundColor': 'var(--sidenavOption-hover-backgroundColor)',
+		'sidenavOption-focus-backgroundColor': 'var(--sidenavOption-focus-backgroundColor)',
+		'sidenavOption-active-backgroundColor': 'var(--sidenavOption-active-backgroundColor)',
+		'sidenavOption-activated-backgroundColor': 'var(--sidenavOption-activated-backgroundColor)',
+		'sidenavOption-disabled-backgroundColor': 'var(--sidenavOption-disabled-backgroundColor)',
+		'sidenavOption2-focus-backgroundColor': 'var(--sidenavOption2-focus-backgroundColor)',
+		'sidenavOption2-active-backgroundColor': 'var(--sidenavOption2-active-backgroundColor)',
+		'sidenavOption2-disabled-backgroundColor': 'var(--sidenavOption2-disabled-backgroundColor)',
+		'sidenavOption3-hover-backgroundColor': 'var(--sidenavOption3-hover-backgroundColor)',
+		'sidenavOption3-active-backgroundColor': 'var(--sidenavOption3-active-backgroundColor)',
+		'sidenavOption3-activated-backgroundColor': 'var(--sidenavOption3-activated-backgroundColor)',
+		'sidenavOption3-disabled-backgroundColor': 'var(--sidenavOption3-disabled-backgroundColor)',
 		'sidenavFooter-backgroundColor': 'var(--sidenavFooter-backgroundColor)',
-		'sidenavToggleButton-backgroundColor':
-			'var(--sidenavToggleButton-backgroundColor)'
+		'sidenavToggleButton-backgroundColor': 'var(--sidenavToggleButton-backgroundColor)'
 	},
 
 	colors: {
@@ -56,4 +43,4 @@ export default {
 		'sidenav-borderColor': 'var(--sidenav-borderColor)',
 		'sidenavFooter-borderColor': 'var(--sidenavFooter-borderColor)'
 	}
-}
+};

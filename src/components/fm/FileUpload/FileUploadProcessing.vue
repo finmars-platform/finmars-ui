@@ -5,6 +5,7 @@
 				<span class="file-name">{{ file.file.name }}</span>
 				<span class="file-size">{{ formatFileSize(file.file.size) }}</span>
 			</div>
+
 			<FmIcon
 				v-if="file.progress < 100"
 				@click="removeFile"
@@ -12,13 +13,10 @@
 				icon="mdi-close"
 				class="progress-close"
 			/>
-			<FmIcon
-				v-else
-				:size="16"
-				icon="mdi-check-circle-outline"
-				class="progress-done"
-			/>
+
+			<FmIcon v-else :size="16" icon="mdi-check-circle-outline" class="progress-done" />
 		</div>
+
 		<div class="progress-linear-content">
 			<div>
 				<FmProgressLinear :model-value="file.progress" />
@@ -30,17 +28,17 @@
 </template>
 
 <script setup lang="ts">
-	import { formatFileSize } from '@/utils'
-	import FmIcon from '@/components/fm/Icon/Icon.vue'
-	import FmProgressLinear from '@/components/fm/ProgressLinear/ProgressLinear.vue'
-	import { FmUploadFile } from './types'
+	import { formatFileSize } from '@/utils';
+	import FmIcon from '@/components/fm/Icon/Icon.vue';
+	import FmProgressLinear from '@/components/fm/ProgressLinear/ProgressLinear.vue';
+	import { FmUploadFile } from './types';
 
-	const props = defineProps<{ file: FmUploadFile; indeterminate: boolean }>()
-	const emits = defineEmits(['removeFile'])
+	const props = defineProps<{ file: FmUploadFile; indeterminate: boolean }>();
+	const emits = defineEmits(['removeFile']);
 
 	const removeFile = () => {
-		emits('removeFile', props.file.id)
-	}
+		emits('removeFile', props.file.id);
+	};
 </script>
 
 <style scoped lang="scss">

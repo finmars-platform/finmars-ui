@@ -1,4 +1,4 @@
-import type { ComputedRef, Ref, VNode } from 'vue'
+import type { ComputedRef, Ref, VNode } from 'vue';
 
 interface ListItem<T = any> {
 	title: string;
@@ -6,7 +6,7 @@ interface ListItem<T = any> {
 		[key: string]: any;
 		title: string;
 		value: any;
-	}
+	};
 	children?: ListItem<T>[];
 }
 
@@ -50,7 +50,8 @@ export interface FmVSelectProps<T> {
 	rounded?: string | number | boolean;
 	singleLine?: boolean;
 	tile?: boolean;
-	variant?: 'outlined'
+	variant?:
+		| 'outlined'
 		| 'plain'
 		| 'underlined'
 		| 'filled'
@@ -72,13 +73,13 @@ export interface FmVSelectSlots<T> {
 	'append-inner': (props: {
 		isActive: Ref<boolean>;
 		isFocused: Ref<boolean>;
-		controlRef: Ref<HTMLElement | undefined>
+		controlRef: Ref<HTMLElement | undefined>;
 	}) => VNode;
 	chip: (props: { item: ListItem<T>; index: number; props: Record<string, any> }) => VNode;
 	clear: (props: {
 		isActive: Ref<boolean>;
 		isFocused: Ref<boolean>;
-		controlRef: Ref<HTMLElement | undefined>
+		controlRef: Ref<HTMLElement | undefined>;
 	}) => VNode;
 	details: (props: {
 		id: ComputedRef<string>;
@@ -97,7 +98,7 @@ export interface FmVSelectSlots<T> {
 	'prepend-inner': (props: {
 		isActive: Ref<boolean>;
 		isFocused: Ref<boolean>;
-		controlRef: Ref<HTMLElement | undefined>
+		controlRef: Ref<HTMLElement | undefined>;
 	}) => VNode;
 	selection: (props: { item: ListItem<T>; index: number }) => VNode;
 }

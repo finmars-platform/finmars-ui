@@ -1,17 +1,17 @@
-import { ref, watch } from 'vue'
-import FmIcon from '@/components/fm/Icon/Icon.vue'
-import IconDemo from './IconDemo.vue'
+import { ref, watch } from 'vue';
+import FmIcon from '@/components/fm/Icon/Icon.vue';
+import IconDemo from './IconDemo.vue';
 
 const meta = {
 	title: 'Components/FmIcon',
 	component: FmIcon,
 	argTypes: {},
 	args: {
-		icon: 'mdi-star',
-	},
-}
+		icon: 'mdi-star'
+	}
+};
 
-export default meta
+export default meta;
 
 export const General = {
 	render: (args) => ({
@@ -19,20 +19,21 @@ export const General = {
 			FmIcon
 		},
 		setup() {
-			const key = ref(1)
+			const key = ref(1);
 
 			watch(args, () => {
-				key.value = new Date().getTime()
-			})
+				key.value = new Date().getTime();
+			});
 
 			return {
 				args,
 				key
-			}
+			};
 		},
-		template: `<FmIcon v-bind="args" :key="key" />`,
+		template: `
+			<FmIcon v-bind="args" :key="key" />`
 	})
-}
+};
 
 export const Demo = {
 	render: (args) => ({
@@ -40,8 +41,9 @@ export const Demo = {
 			IconDemo
 		},
 		setup() {
-			return { args }
+			return { args };
 		},
-		template: `<IconDemo />`,
+		template: `
+			<IconDemo />`
 	})
-}
+};

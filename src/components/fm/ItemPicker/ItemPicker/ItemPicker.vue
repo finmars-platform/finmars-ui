@@ -16,15 +16,11 @@
 				'fm-item-picker__body',
 				{
 					'fm-item-picker--multiple': multiple,
-					'fm-item-picker--no-result':
-						!isEmpty(searchText) && !filteredAttributes.length
+					'fm-item-picker--no-result': !isEmpty(searchText) && !filteredAttributes.length
 				}
 			]"
 		>
-			<div
-				v-if="!isEmpty(searchText) && !filteredAttributes.length"
-				class="fm-item-picker--empty"
-			>
+			<div v-if="!isEmpty(searchText) && !filteredAttributes.length" class="fm-item-picker--empty">
 				{{ locals.noResultText }}
 			</div>
 
@@ -42,8 +38,7 @@
 				<div class="fm-item-picker__content">
 					<FmItemPickerSearchResult
 						v-if="
-							selectedCategory === locals.searchResultCategoryLabel &&
-							filteredAttributes.length
+							selectedCategory === locals.searchResultCategoryLabel && filteredAttributes.length
 						"
 						:search-text="searchText ?? ''"
 						:items="filteredAttributes"
@@ -87,20 +82,20 @@
 </template>
 
 <script lang="ts" setup>
-	import { computed, ComputedRef, ref, watch } from 'vue'
-	import cloneDeep from 'lodash/cloneDeep'
-	import set from 'lodash/set'
-	import isEmpty from 'lodash/isEmpty'
-	import size from 'lodash/size'
-	import type { FmItemPickerProps, FmItemPickerEmits } from './types'
-	import { prepareSpecialGroup } from '../utils'
-	import FmTextField from '../../TextField/TextField.vue'
-	import FmButton from '../../Button/Button.vue'
-	import FmItemPickerList from '../ItemPickerList/ItemPickerList.vue'
-	import FmItemPickerSearchResult from '../ItemPickerSearchResult/ItemPickerSearchResult.vue'
-	import FmItemPickerContent from '../ItemPickerContent/ItemPickerContent.vue'
-	import type { FmAttribute } from '@/types'
-	import type { FmAttributeGroup } from '@/components/fm/ItemPicker/ItemPickerContent/types'
+	import { computed, ComputedRef, ref, watch } from 'vue';
+	import cloneDeep from 'lodash/cloneDeep';
+	import set from 'lodash/set';
+	import isEmpty from 'lodash/isEmpty';
+	import size from 'lodash/size';
+	import type { FmItemPickerProps, FmItemPickerEmits } from './types';
+	import { prepareSpecialGroup } from '../utils';
+	import FmTextField from '../../TextField/TextField.vue';
+	import FmButton from '../../Button/Button.vue';
+	import FmItemPickerList from '../ItemPickerList/ItemPickerList.vue';
+	import FmItemPickerSearchResult from '../ItemPickerSearchResult/ItemPickerSearchResult.vue';
+	import FmItemPickerContent from '../ItemPickerContent/ItemPickerContent.vue';
+	import type { FmAttribute } from '@/types';
+	import type { FmAttributeGroup } from '@/components/fm/ItemPicker/ItemPickerContent/types';
 
 	const props = withDefaults(defineProps<FmItemPickerProps>(), {
 		mode: 'add',
@@ -118,79 +113,77 @@
 			addBtn: 'Add',
 			updateBtn: 'Update'
 		}
-	})
-	const emits = defineEmits<FmItemPickerEmits>()
+	});
+	const emits = defineEmits<FmItemPickerEmits>();
 
-	const searchText = ref('')
+	const searchText = ref('');
 
-	const initialSelectedItems = ref(cloneDeep(props.modelValue) || [])
-	const selectedItems = ref(cloneDeep(props.modelValue))
+	const initialSelectedItems = ref(cloneDeep(props.modelValue) || []);
+	const selectedItems = ref(cloneDeep(props.modelValue));
 
 	const widthValue = computed(() => {
 		if (['auto', '100%'].includes(props.width as string)) {
-			return props.width
+			return props.width;
 		}
 
-		return `${props.width}px`
-	})
+		return `${props.width}px`;
+	});
 	const heightValue = computed(() => {
 		if (['auto', '100%'].includes(props.height as string)) {
-			return props.height
+			return props.height;
 		}
 
-		return `${props.height}px`
-	})
+		return `${props.height}px`;
+	});
 
 	const filteredAttributes = computed(() =>
 		(props.attributes || []).filter((a) => {
 			if (!searchText.value) {
-				return true
+				return true;
 			}
 
-			const processedName = a.name.split('. ')
-			const name = processedName.splice(-1)[0]
-			return name
-				.toLocaleLowerCase()
-				.includes(searchText.value.toLocaleLowerCase())
+			const processedName = a.name.split('. ');
+			const name = processedName.splice(-1)[0];
+			return name.toLocaleLowerCase().includes(searchText.value.toLocaleLowerCase());
 		})
-	)
+	);
 
 	const suggestedItemOnTree = computed(() =>
 		prepareSpecialGroup(props.suggested, props.attributes)
-	)
+	);
 
 	const selectedItemOnTree = computed(() =>
 		prepareSpecialGroup(selectedItems.value, props.attributes)
-	)
+	);
 
 	const otherItemsOnTree = computed(() =>
 		(filteredAttributes.value || []).reduce(
 			(acc, attr) => {
-				const { name, key } = attr
-				const processedName = name.split('. ')
-				set(acc, [...processedName.slice(0, -1), key], attr)
-				return acc
+				const { name, key } = attr;
+				const processedName = name.split('. ');
+				set(acc, [...processedName.slice(0, -1), key], attr);
+				return acc;
 			},
 			{} as Record<string, FmAttribute & { shortName?: string }>
 		)
-	)
+	);
 
 	const categories = computed(() => {
-		const value = []
+		const value = [];
 		if (!isEmpty(props.suggested) && !searchText.value) {
-			value.push(props.locals.suggestedLabel)
+			value.push(props.locals.suggestedLabel);
 		}
 
 		if (!isEmpty(selectedItems.value) && !searchText.value) {
-			value.push(props.locals.selectedLabel)
+			value.push(props.locals.selectedLabel);
 		}
 
 		if (searchText.value) {
-			value.push(props.locals.searchResultCategoryLabel)
+			value.push(props.locals.searchResultCategoryLabel);
 		}
 
-		return [...value, ...Object.keys(otherItemsOnTree.value)]
-	}) as ComputedRef<string[]>
+		return [...value, ...Object.keys(otherItemsOnTree.value)];
+	}) as ComputedRef<string[]>;
 
 	const itemTree = computed(() => ({
 		...(categories.value.includes(props.locals!.suggestedLabel!) && {
@@ -200,24 +193,24 @@
 			[props.locals!.selectedLabel!]: selectedItemOnTree.value
 		}),
 		...otherItemsOnTree.value
-	}))
+	}));
 
-	const selectedCategory = ref<string>('')
+	const selectedCategory = ref<string>('');
 
 	const currentCategoryAttrs = computed(() => {
 		if (!selectedCategory.value) {
-			return undefined
+			return undefined;
 		}
 
-		return itemTree.value[selectedCategory.value]
-	}) as ComputedRef<Record<string, FmAttributeGroup> | undefined>
+		return itemTree.value[selectedCategory.value];
+	}) as ComputedRef<Record<string, FmAttributeGroup> | undefined>;
 
-	const addBtnDisabled = computed(() => false)
+	const addBtnDisabled = computed(() => false);
 
 	function onKeydown(ev: KeyboardEvent) {
 		// ev.preventDefault()
-		ev.stopImmediatePropagation()
-		const { code } = ev
+		ev.stopImmediatePropagation();
+		const { code } = ev;
 		// @ts-ignore
 		const isDesiredKey = [
 			'ArrowDown',
@@ -226,42 +219,40 @@
 			'ArrowRight',
 			'Enter',
 			'Space'
-		].includes(code)
+		].includes(code);
 	}
 
 	function updateValue() {
-		emits('update:modelValue', selectedItems.value)
-		emits('close')
+		emits('update:modelValue', selectedItems.value);
+		emits('close');
 	}
 
 	function select(attrKey: string) {
 		if (!props.multiple) {
-			selectedItems.value = [attrKey]
-			updateValue()
-			return
+			selectedItems.value = [attrKey];
+			updateValue();
+			return;
 		}
 
-		const attrIndex = selectedItems.value.findIndex((key) => key === attrKey)
+		const attrIndex = selectedItems.value.findIndex((key) => key === attrKey);
 		if (attrIndex === -1) {
-			selectedItems.value.push(attrKey)
+			selectedItems.value.push(attrKey);
 		} else {
-			selectedItems.value.splice(attrIndex, 1)
+			selectedItems.value.splice(attrIndex, 1);
 		}
 	}
 
 	watch(
 		() => searchText.value,
 		() => {
-			const currentCategoryIndex = categories.value.indexOf(
-				selectedCategory.value
-			)
+			const currentCategoryIndex = categories.value.indexOf(selectedCategory.value);
 			selectedCategory.value =
 				currentCategoryIndex !== -1
 					? (categories.value[currentCategoryIndex] as string)
-					: (categories.value[0] as string)
+					: (categories.value[0] as string);
 		},
 		{ immediate: true }
-	)
+	);
 </script>
 
 <style lang="scss" scoped>

@@ -24,5 +24,5 @@
 </template>
 
 <script setup>
-	import FmAvatar from '@/components/fm/Avatar/Avatar.vue'
+	import FmAvatar from '@/components/fm/Avatar/Avatar.vue';
 </script>

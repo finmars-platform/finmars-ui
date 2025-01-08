@@ -3,8 +3,8 @@
 </template>
 
 <script setup>
-	import { computed } from 'vue'
-	import { VProgressLinear } from 'vuetify/components'
+	import { computed } from 'vue';
+	import { VProgressLinear } from 'vuetify/components';
 
 	const props = defineProps({
 		modelValue: {
@@ -14,7 +14,7 @@
 		indeterminate: {
 			type: [Boolean, undefined]
 		}
-	})
+	});
 
 	const vProgressLinearProps = computed(() => ({
 		modelValue: props.modelValue,
@@ -25,5 +25,5 @@
 		bufferColor: 'var(--primary-container)',
 		bgOpacity: 1,
 		indeterminate: !!props.indeterminate
-	}))
+	}));
 </script>

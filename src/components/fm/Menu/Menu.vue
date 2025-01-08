@@ -2,15 +2,10 @@
 	<VMenu
 		v-bind="vMenuProps"
 		v-model="innerValue"
-		@update:model-value="emits('update:model-value', $event)"
+		@update:model-value="emits('update:modelValue', $event)"
 	>
 		<template #activator="{ isActive, props, targetRef }">
-			<slot
-				name="activator"
-				:props="props"
-				:is-active="isActive"
-				:target-ref="targetRef"
-			/>
+			<slot name="activator" :props="props" :is-active="isActive" :target-ref="targetRef" />
 		</template>
 
 		<template #default>
@@ -39,11 +34,7 @@
 						:item-active="item.isActive"
 						:item-size="itemSize"
 						:disabled="disabled"
-						v-on="
-							disabled
-								? {}
-								: { click: (ev) => onItemClick(ev, { item, index }) }
-						"
+						v-on="disabled ? {} : { click: (ev) => onItemClick(ev, { item, index }) }"
 					>
 						<template #item>
 							<slot name="item" :item="item" :index="index" />
@@ -71,11 +62,11 @@
 </template>
 
 <script setup>
-	import { computed, ref, watch } from 'vue'
-	import { VMenu } from 'vuetify/components'
-	import { getRandomString } from '@/utils'
-	import FmMenuItem from './MenuItem.vue'
-	import FmProgressCircular from '../ProgressCircular/ProgressCircular.vue'
+	import { computed, ref, watch } from 'vue';
+	import { VMenu } from 'vuetify/components';
+	import { getRandomString } from '@/utils';
+	import FmMenuItem from './MenuItem.vue';
+	import FmProgressCircular from '../ProgressCircular/ProgressCircular.vue';
 
 	const props = defineProps({
 		modelValue: {
@@ -91,7 +82,7 @@
 		itemSize: {
 			type: String,
 			validator(value) {
-				return ['small', 'medium', 'large'].includes(value)
+				return ['small', 'medium', 'large'].includes(value);
 			},
 			default: 'large'
 		},
@@ -103,7 +94,7 @@
 			default: false
 		},
 		closeOnBack: {
-			type: Boolean,
+			type: Boolean
 		},
 		closeOnContentClick: {
 			type: Boolean,
@@ -160,17 +151,17 @@
 					'end bottom | center',
 					'left bottom | center',
 					'right bottom | center'
-				].includes(value)
+				].includes(value);
 			}
 		},
 		locationStrategy: {
 			type: [String, Function],
 			validator(value) {
 				if (typeof value === 'string') {
-					return ['static', 'connected'].includes(value)
+					return ['static', 'connected'].includes(value);
 				}
 
-				return true
+				return true;
 			},
 			default: 'connected'
 		},
@@ -215,7 +206,7 @@
 					'right bottom | center',
 					'auto',
 					'overlap'
-				].includes(value)
+				].includes(value);
 			},
 			default: 'auto'
 		},
@@ -227,10 +218,10 @@
 			type: [String, Function],
 			validator(value) {
 				if (typeof value === 'string') {
-					return ['close', 'block', 'none', 'reposition'].includes(value)
+					return ['close', 'block', 'none', 'reposition'].includes(value);
 				}
 
-				return true
+				return true;
 			},
 			default: 'reposition'
 		},
@@ -241,11 +232,11 @@
 		disabled: {
 			type: Boolean
 		}
-	})
+	});
 
-	const emits = defineEmits(['update:modelValue', 'click:item', 'menu:keydown'])
+	const emits = defineEmits(['update:modelValue', 'click:item', 'menu:keydown']);
 
-	const innerValue = ref(props.modelValue)
+	const innerValue = ref(props.modelValue);
 
 	const vMenuProps = computed(() => ({
 		id: props.id || getRandomString(4),
@@ -272,7 +263,7 @@
 		openOnHover: props.openOnHover,
 		persistent: props.persistent,
 		disabled: props.disabled
-	}))
+	}));
 
 	const menuContentStyles = computed(() => ({
 		...(props.height && {
@@ -280,33 +271,33 @@
 		}),
 		...(props.maxHeight && { maxHeight: `${props.maxHeight}px` }),
 		...(props.minHeight && { minHeight: `${props.minHeight}px` })
-	}))
+	}));
 
 	function onItemClick(ev, { item, index }) {
-		ev.stopPropagation()
-		ev.preventDefault()
+		ev.stopPropagation();
+		ev.preventDefault();
 
-		emits('click:item', { item, index })
+		emits('click:item', { item, index });
 
 		if (props.closeOnContentClick) {
-			innerValue.value = false
-			emits('update:modelValue', false)
+			innerValue.value = false;
+			emits('update:modelValue', false);
 		}
 	}
 
 	function onKeydown(event, key) {
-		event.preventDefault()
-		event.stopImmediatePropagation()
-		emits('menu:keydown', { event, key })
+		event.preventDefault();
+		event.stopImmediatePropagation();
+		emits('menu:keydown', { event, key });
 	}
 
 	watch(
 		() => props.modelValue,
 		(val) => {
 			if (val !== innerValue.value) {
-				innerValue.value = val
+				innerValue.value = val;
 			}
 		},
 		{ immediate: true }
-	)
+	);
 </script>

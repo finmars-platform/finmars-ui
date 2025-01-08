@@ -1,8 +1,6 @@
 <template>
 	<div>
-		<h3 class="text-xl font-semibold mb-8">
-			Determinate
-		</h3>
+		<h3 class="text-xl font-semibold mb-8">Determinate</h3>
 
 		<div class="grid grid-cols-4 gap-16">
 			<FmProgressCircular />
@@ -16,17 +14,14 @@
 			<FmProgressCircular show-value :model-value="100" />
 		</div>
 
-
-		<h3 class="text-xl font-semibold my-8">
-			Indeterminate
-		</h3>
+		<h3 class="text-xl font-semibold my-8">Indeterminate</h3>
 
 		<FmProgressCircular class="mb-8" indeterminate />
 	</div>
 </template>
 
 <script setup>
-	import FmProgressCircular from '@/components/fm/ProgressCircular/ProgressCircular.vue'
+	import FmProgressCircular from '@/components/fm/ProgressCircular/ProgressCircular.vue';
 </script>
 
 <style>

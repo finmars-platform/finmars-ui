@@ -9,37 +9,35 @@
 </template>
 
 <script setup>
-	import { computed } from 'vue'
-	import { VRadioGroup } from 'vuetify/components'
+	import { computed } from 'vue';
+	import { VRadioGroup } from 'vuetify/components';
 
 	const props = defineProps({
 		modelValue: {
-			type: [String, Number, Boolean],
+			type: [String, Number, Boolean]
 		},
 		name: {
-			type: String,
+			type: String
 		},
 		label: {
-			type: String,
+			type: String
 		},
 		direction: {
 			type: String,
 			default: 'horizontal',
 			validator(value) {
-				return ['horizontal', 'vertical'].includes(value)
-			},
+				return ['horizontal', 'vertical'].includes(value);
+			}
 		},
 		readonly: {
-			type: Boolean,
+			type: Boolean
 		},
 		disabled: {
-			type: Boolean,
-		},
-	})
+			type: Boolean
+		}
+	});
 
-	const emits = defineEmits([
-		'update:modelValue',
-	])
+	const emits = defineEmits(['update:modelValue']);
 
 	const vRadioGroupProps = computed(() => ({
 		color: 'var(--primary)',
@@ -49,8 +47,8 @@
 		readonly: props.readonly,
 		disabled: props.disabled,
 		hideDetails: true,
-		inline: props.direction === 'horizontal',
-	}))
+		inline: props.direction === 'horizontal'
+	}));
 </script>
 
 <style scoped>

@@ -15,7 +15,12 @@
 			class="fm-filter-option-list-block__search"
 		/>
 
-		<div :class="['fm-filter-option-list-block__option', { 'fm-filter-option-list-block__option--disabled': !multiple }]">
+		<div
+			:class="[
+				'fm-filter-option-list-block__option',
+				{ 'fm-filter-option-list-block__option--disabled': !multiple }
+			]"
+		>
 			<FmCheckbox
 				:model-value="selectedStatus === 'all'"
 				:indeterminate="selectedStatus === 'indeterminate'"
@@ -44,16 +49,13 @@
 </template>
 
 <script lang="ts" setup generic="T extends FmSelectOption">
-	import { computed, ref } from 'vue'
-	import size from 'lodash/size'
-	import FmCheckbox from '../../../Checkbox/Checkbox.vue'
-	import FmTextField from '../../../TextField/TextField.vue'
-	import type { FmSelectOption } from '@/components/fm/Select/types'
-	import type {
-		FmFilterOptionListBlockProps,
-		FmFilterOptionListBlockEmits
-	} from './types'
-	import cloneDeep from 'lodash/cloneDeep'
+	import { computed, ref } from 'vue';
+	import size from 'lodash/size';
+	import FmCheckbox from '../../../Checkbox/Checkbox.vue';
+	import FmTextField from '../../../TextField/TextField.vue';
+	import type { FmSelectOption } from '@/components/fm/Select/types';
+	import type { FmFilterOptionListBlockProps, FmFilterOptionListBlockEmits } from './types';
+	import cloneDeep from 'lodash/cloneDeep';
 
 	const props = withDefaults(defineProps<FmFilterOptionListBlockProps<T>>(), {
 		locals: {
@@ -62,55 +64,55 @@
 			search: 'Search',
 			selectAll: 'Select all'
 		}
-	})
-	const emits = defineEmits<FmFilterOptionListBlockEmits<T>>()
+	});
+	const emits = defineEmits<FmFilterOptionListBlockEmits<T>>();
 
-	const searchText = ref('')
+	const searchText = ref('');
 
 	const filteredOptions = computed(() =>
 		(props.options || []).filter((o) =>
 			o.title?.toLowerCase().includes(searchText.value.toLowerCase())
 		)
-	)
+	);
 
 	const selectedStatus = computed(() => {
 		if (size(props.options) === size(props.selected)) {
-			return 'all'
+			return 'all';
 		}
 
 		if (!size(props.selected)) {
-			return 'none'
+			return 'none';
 		}
 
-		return 'indeterminate'
-	})
+		return 'indeterminate';
+	});
 
 	function isOptionSelected(option: T): boolean {
-		return props.selected.some((o) => o.value === option.value)
+		return props.selected.some((o) => o.value === option.value);
 	}
 
 	function onOptionClick(option: T) {
 		if (props.multiple) {
-			const updatedSelectedOptions = cloneDeep(props.selected)
-			const optionIndex = updatedSelectedOptions.findIndex((o) => o.value === option.value)
+			const updatedSelectedOptions = cloneDeep(props.selected);
+			const optionIndex = updatedSelectedOptions.findIndex((o) => o.value === option.value);
 			if (optionIndex === -1) {
-				updatedSelectedOptions.push(option)
+				updatedSelectedOptions.push(option);
 			} else {
-				updatedSelectedOptions.splice(optionIndex, 1)
+				updatedSelectedOptions.splice(optionIndex, 1);
 			}
-			emits('update', updatedSelectedOptions)
-			return
+			emits('update', updatedSelectedOptions);
+			return;
 		}
 
-		emits('update', [option])
+		emits('update', [option]);
 	}
 
 	function onAllCheckClick() {
 		if (!props.multiple) {
-			return
+			return;
 		}
 
-		emits('update', selectedStatus.value === 'all' ? [] : cloneDeep(props.options))
+		emits('update', selectedStatus.value === 'all' ? [] : cloneDeep(props.options));
 	}
 </script>
 

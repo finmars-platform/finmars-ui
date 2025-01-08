@@ -1,6 +1,6 @@
-import { ref, watch } from 'vue'
-import FmProgressLinear from '@/components/fm/ProgressLinear/ProgressLinear.vue'
-import ProgressLinearDemo from './ProgressLinearDemo.vue'
+import { ref, watch } from 'vue';
+import FmProgressLinear from '@/components/fm/ProgressLinear/ProgressLinear.vue';
+import ProgressLinearDemo from './ProgressLinearDemo.vue';
 
 const meta = {
 	title: 'Components/FmProgressLinear',
@@ -9,13 +9,13 @@ const meta = {
 		modelValue: 0,
 		indeterminate: {
 			control: 'select',
-			options: [false, true],
+			options: [false, true]
 		}
 	},
-	args: {},
-}
+	args: {}
+};
 
-export default meta
+export default meta;
 
 export const General = {
 	render: (args) => ({
@@ -23,22 +23,22 @@ export const General = {
 			FmProgressLinear
 		},
 		setup() {
-			const key = ref(1)
+			const key = ref(1);
 
 			watch(args, () => {
-				key.value = new Date().getTime()
-			})
+				key.value = new Date().getTime();
+			});
 
 			return {
 				args,
 				key
-			}
+			};
 		},
 		template: `
 			<FmProgressLinear v-bind="args" :key="key" />
-		`,
+		`
 	})
-}
+};
 
 export const AllVariants = {
 	render: (args) => ({
@@ -46,8 +46,9 @@ export const AllVariants = {
 			ProgressLinearDemo
 		},
 		setup() {
-			return { args }
+			return { args };
 		},
-		template: `<ProgressLinearDemo />`,
+		template: `
+			<ProgressLinearDemo />`
 	})
-}
+};

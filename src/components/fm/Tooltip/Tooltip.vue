@@ -1,9 +1,6 @@
 <template>
-	<VTooltip
-		v-bind="$props"
-		:max-width="$props?.maxWidth || (type === 'primary' ? 320 : 200)"
-	>
-		<template #activator="{ isActive, props, targetRef}">
+	<VTooltip v-bind="$props" :max-width="$props?.maxWidth || (type === 'primary' ? 320 : 200)">
+		<template #activator="{ isActive, props, targetRef }">
 			<slot name="activator" :is-active="isActive" :props="props" :target-ref="targetRef" />
 		</template>
 
@@ -16,10 +13,10 @@
 </template>
 
 <script setup>
-	import { useAttrs } from 'vue'
-	import { VTooltip } from 'vuetify/components'
+	import { useAttrs } from 'vue';
+	import { VTooltip } from 'vuetify/components';
 
-	const { type = 'primary' } = useAttrs()
+	const { type = 'primary' } = useAttrs();
 </script>
 
 <style>
@@ -53,7 +50,9 @@
 		--borderRadius-fmTooltip: 12px;
 		--padding-fmTooltip: 12px var(--spacing-16);
 
-		box-shadow: 0 2px 6px 2px rgba(0, 0, 0, 0.15), 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+		box-shadow:
+			0 2px 6px 2px rgba(0, 0, 0, 0.15),
+			0 1px 2px 0 rgba(0, 0, 0, 0.3);
 	}
 
 	.secondary {
@@ -64,5 +63,3 @@
 		--padding-fmTooltip: var(--spacing-4) var(--spacing-8);
 	}
 </style>
-
-

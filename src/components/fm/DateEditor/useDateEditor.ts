@@ -1,120 +1,122 @@
-import { nextTick, ref } from 'vue'
-import dayjs, { Dayjs } from 'dayjs'
-import customParseFormat from 'dayjs/plugin/customParseFormat'
-import isoWeek from 'dayjs/plugin/isoWeek'
-import { displayingDateFormat } from '@/components/fm/DateEditor/constants'
-import { processedDate } from '@/components/fm/DateEditor/utils'
-import type {
-	FmDateEditorEmits,
-	FmDateEditorProps
-} from '@/components/fm/DateEditor/types'
+import { nextTick, ref } from 'vue';
+import dayjs, { Dayjs } from 'dayjs';
+import customParseFormat from 'dayjs/plugin/customParseFormat';
+import isoWeek from 'dayjs/plugin/isoWeek';
+import { processedDate } from '@/components/fm/DateEditor/utils';
+import type { FmDateEditorEmits, FmDateEditorProps } from '@/components/fm/DateEditor/types';
 
-export default function useDateEditor(
-	props: FmDateEditorProps,
-	emits: FmDateEditorEmits
-) {
-	dayjs.extend(customParseFormat)
-	dayjs.extend(isoWeek)
+export default function useDateEditor(props: FmDateEditorProps, emits: FmDateEditorEmits) {
+	dayjs.extend(customParseFormat);
+	dayjs.extend(isoWeek);
 
-	const currentMenuItem = ref('custom')
+	const currentMenuItem = ref('custom');
 
-	const initialValue = ref(props.modelValue)
+	const DATE_FORMAT = 'YYYY-MM-DD';
+	const TIME_FORMAT = 'HH:mm';
+	const VALUE_FORMAT = props.includeTime ? 'YYYY-MM-DD[T]HH:mm' : 'YYYY-MM-DD';
 
-	const innerValue = ref(props.modelValue)
+	const initialValue = ref(props.modelValue ? dayjs(props.modelValue).format(DATE_FORMAT) : '');
+	const initialTime = ref(props.modelValue ? dayjs(props.modelValue).format(TIME_FORMAT) : '00:00');
 
-	const textFieldInput = ref(
-		props.modelValue
-			? dayjs(props.modelValue).format(displayingDateFormat)
-			: null
-	)
+	const innerValue = ref(initialValue.value);
+	const innerTime = ref(initialTime.value);
+
+	const textFieldInput = ref(props.modelValue ? dayjs(props.modelValue).format(DATE_FORMAT) : null);
 
 	function allowedDates(val: Dayjs | string, ignoreWeekends?: boolean) {
-		const date = dayjs(val)
-		const dayOfWeek = date.isoWeekday()
+		const date = dayjs(val);
+		const dayOfWeek = date.isoWeekday();
 
 		if ((!props.allowWeekendSelection || ignoreWeekends) && [6, 7].includes(dayOfWeek)) {
-			return false
+			return false;
 		}
 
-		return !(props.nonWorkingDays || []).some((d) =>
-			dayjs(d).isSame(date, 'day')
-		)
+		return !(props.nonWorkingDays || []).some((d) => dayjs(d).isSame(date, 'day'));
 	}
 
 	function selectMenuItem(item: 'today' | 'previous') {
-		currentMenuItem.value = item
+		currentMenuItem.value = item;
 		if (item === 'today') {
-			innerValue.value = dayjs().format(displayingDateFormat)
-			textFieldInput.value = innerValue.value
-			return
+			innerValue.value = dayjs().format(DATE_FORMAT);
+			textFieldInput.value = innerValue.value;
+			return;
 		}
 
 		if (item === 'previous') {
-			let count = 0
-			let selectedDay = props.calculatePreviousDayFromToday ? dayjs() : innerValue.value
-			let isDayAvailable = false
+			let count = 0;
+			let selectedDay = props.calculatePreviousDayFromToday ? dayjs() : innerValue.value;
+			let isDayAvailable = false;
 			while (!isDayAvailable && count < 90) {
-				selectedDay = dayjs(selectedDay).add(-1, 'day').format(displayingDateFormat)
-				isDayAvailable = allowedDates(selectedDay, true)
-				count++
+				selectedDay = dayjs(selectedDay).add(-1, 'day').format(DATE_FORMAT);
+				isDayAvailable = allowedDates(selectedDay, true);
+				count++;
 			}
 			if (isDayAvailable) {
-				innerValue.value = dayjs(selectedDay).format(displayingDateFormat)
-				textFieldInput.value = innerValue.value
+				innerValue.value = dayjs(selectedDay).format(DATE_FORMAT);
+				textFieldInput.value = innerValue.value;
 			}
 		}
 	}
 
 	function onUpdate(val: string) {
-		innerValue.value = val
-		textFieldInput.value = dayjs(val).format(displayingDateFormat)
+		innerValue.value = val;
+		textFieldInput.value = dayjs(val).format(DATE_FORMAT);
 		if (currentMenuItem.value !== 'custom') {
-			currentMenuItem.value = 'custom'
+			currentMenuItem.value = 'custom';
 		}
 	}
 
 	function onUpdateByKeyboard(val: string) {
-		textFieldInput.value = val
-		const processedVal = processedDate(val)
+		textFieldInput.value = val;
+		const processedVal = processedDate(val);
 
 		nextTick(() => {
-			textFieldInput.value = processedVal
-		})
+			textFieldInput.value = processedVal;
+		});
 	}
 
 	function onKeydownEsc() {
-		textFieldInput.value = innerValue.value
+		textFieldInput.value = innerValue.value;
 	}
 
 	function onChange(key: 'tab' | 'enter') {
-		const isDateValid = dayjs(
-			textFieldInput.value,
-			displayingDateFormat,
-			true
-		).isValid()
+		const isDateValid = dayjs(textFieldInput.value, DATE_FORMAT, true).isValid();
 		if (!isDateValid && key === 'tab') {
-			textFieldInput.value = innerValue.value
+			textFieldInput.value = innerValue.value;
 		} else if (isDateValid) {
-			innerValue.value = textFieldInput.value ?? ''
-			emits('update:modelValue', innerValue.value)
+			innerValue.value = textFieldInput.value ?? '';
+			confirmDateSelection();
 		}
 	}
 
 	function cancelDateSelection() {
-		innerValue.value = initialValue.value
-		textFieldInput.value = initialValue.value
+		innerValue.value = initialValue.value;
+		textFieldInput.value = initialValue.value;
+		innerTime.value = initialTime.value;
+		emits('cancel');
 	}
 
 	function confirmDateSelection() {
-		emits('update:modelValue', innerValue.value)
+		const [hours, minutes] = innerTime.value.split(':');
+		const updatedValue = innerValue.value;
+		const value = props.includeTime
+			? dayjs(updatedValue)
+					.set('hour', Number(hours))
+					.set('minute', Number(minutes))
+					.format(VALUE_FORMAT)
+			: dayjs(updatedValue).format(DATE_FORMAT);
+		emits('update:modelValue', value);
 	}
 
 	return {
+		DATE_FORMAT,
+		TIME_FORMAT,
 		currentMenuItem,
 		initialValue,
 		innerValue,
+		initialTime,
+		innerTime,
 		textFieldInput,
-		allowedDates,
 		selectMenuItem,
 		onUpdate,
 		onUpdateByKeyboard,
@@ -122,5 +124,5 @@ export default function useDateEditor(
 		onChange,
 		cancelDateSelection,
 		confirmDateSelection
-	}
+	};
 }

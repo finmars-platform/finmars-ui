@@ -1,6 +1,6 @@
-import { ref, watch } from 'vue'
-import FmChip from '@/components/fm/Chip/Chip.vue'
-import ChipDemo from './ChipDemo.vue'
+import { ref, watch } from 'vue';
+import FmChip from '@/components/fm/Chip/Chip.vue';
+import ChipDemo from './ChipDemo.vue';
 
 const meta = {
 	title: 'Components/FmChip',
@@ -8,10 +8,10 @@ const meta = {
 	argTypes: {},
 	args: {
 		value: 'Label'
-	},
-}
+	}
+};
 
-export default meta
+export default meta;
 
 export const General = {
 	render: (args) => ({
@@ -19,24 +19,24 @@ export const General = {
 			FmChip
 		},
 		setup() {
-			const key = ref(1)
+			const key = ref(1);
 
 			watch(args, () => {
-				key.value = new Date().getTime()
-			})
+				key.value = new Date().getTime();
+			});
 
 			return {
 				args,
 				key
-			}
+			};
 		},
 		template: `
 			<FmChip v-bind="args" :key="key">
 				Label
 			</FmChip>
-		`,
+		`
 	})
-}
+};
 
 export const Demo = {
 	render: (args) => ({
@@ -44,8 +44,9 @@ export const Demo = {
 			ChipDemo
 		},
 		setup() {
-			return { args }
+			return { args };
 		},
-		template: `<ChipDemo />`,
+		template: `
+			<ChipDemo />`
 	})
-}
+};

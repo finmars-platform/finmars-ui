@@ -11,12 +11,7 @@
 			<FmRadio label="Label 2" :value="false" />
 		</FmRadioGroup>
 
-		<FmRadioGroup
-			v-model="val2"
-			v-on="eventHandlers"
-			direction="vertical"
-			class="mb-16"
-		>
+		<FmRadioGroup v-model="val2" v-on="eventHandlers" direction="vertical" class="mb-16">
 			<FmRadio label="Label 1" :value="true" />
 			<FmRadio label="Label 2" :value="false" />
 		</FmRadioGroup>
@@ -30,15 +25,15 @@
 </template>
 
 <script setup>
-	import { ref } from 'vue'
-	import FmRadio from '@/components/fm/Radio/Radio.vue'
-	import FmRadioGroup from '@/components/fm/Radio/RadioGroup.vue'
+	import { ref } from 'vue';
+	import FmRadio from '@/components/fm/Radio/Radio.vue';
+	import FmRadioGroup from '@/components/fm/Radio/RadioGroup.vue';
 
-	const val1 = ref(false)
-	const val2 = ref(true)
-	const val3 = ref('yes')
+	const val1 = ref(false);
+	const val2 = ref(true);
+	const val3 = ref('yes');
 
 	const eventHandlers = {
-		'update:modelValue': (ev) => console.log(`Event 'update:modelValue' :`, ev),
-	}
+		'update:modelValue': (ev) => console.log(`Event 'update:modelValue' :`, ev)
+	};
 </script>

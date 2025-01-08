@@ -1,8 +1,8 @@
 export interface FmBreadcrumbItem {
-	title: string
-	path?: string
+	title: string;
+	path?: string;
 }
 
 export interface FmBreadcrumbProps {
-	crumbs: FmBreadcrumbItem[]
+	crumbs: FmBreadcrumbItem[];
 }

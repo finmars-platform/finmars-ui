@@ -6,7 +6,7 @@
 				v-model="v1"
 				@update:modelValue="
 					(val) => {
-						console.log(`Switcher state: ${val}`)
+						console.log(`Switcher state: ${val}`);
 					}
 				"
 			/>
@@ -18,7 +18,7 @@
 				v-model="v1"
 				@update:modelValue="
 					(val) => {
-						console.log(`Switcher state: ${val}`)
+						console.log(`Switcher state: ${val}`);
 					}
 				"
 			/>
@@ -30,7 +30,7 @@
 				disable
 				@update:modelValue="
 					(val) => {
-						console.log(`Switcher state: ${val}`)
+						console.log(`Switcher state: ${val}`);
 					}
 				"
 			/>
@@ -43,7 +43,7 @@
 				disable
 				@update:modelValue="
 					(val) => {
-						console.log(`Switcher state: ${val}`)
+						console.log(`Switcher state: ${val}`);
 					}
 				"
 			/>
@@ -55,7 +55,7 @@
 				disable
 				@update:modelValue="
 					(val) => {
-						console.log(`Switcher state: ${val}`)
+						console.log(`Switcher state: ${val}`);
 					}
 				"
 			/>
@@ -68,7 +68,7 @@
 				disable
 				@update:modelValue="
 					(val) => {
-						console.log(`Switcher state: ${val}`)
+						console.log(`Switcher state: ${val}`);
 					}
 				"
 			/>
@@ -77,9 +77,9 @@
 </template>
 
 <script setup>
-	import { ref } from 'vue'
-	import FmSwitch from '@/components/fm/Switch/Switch.vue'
+	import { ref } from 'vue';
+	import FmSwitch from '@/components/fm/Switch/Switch.vue';
 
-	const v1 = ref(false)
-	const v2 = ref(true)
+	const v1 = ref(false);
+	const v2 = ref(true);
 </script>

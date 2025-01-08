@@ -13,9 +13,9 @@
 </template>
 
 <script setup lang="ts">
-	import { VIcon } from 'vuetify/components'
-	import type { FmIconProps, FmIconSlots } from './types'
+	import { VIcon } from 'vuetify/components';
+	import type { FmIconProps, FmIconSlots } from './types';
 
-	defineProps<FmIconProps>()
-	defineSlots<FmIconSlots>()
+	defineProps<FmIconProps>();
+	defineSlots<FmIconSlots>();
 </script>

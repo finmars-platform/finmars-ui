@@ -27,43 +27,91 @@
 		<FmButton>
 			Prepend slot
 			<template #prepend>
-				<div style="position: relative; width: 10px; height: 10px; border-radius: 50%; background-color: #66bf3c" />
+				<div
+					style="
+						position: relative;
+						width: 10px;
+						height: 10px;
+						border-radius: 50%;
+						background-color: #66bf3c;
+					"
+				/>
 			</template>
 		</FmButton>
 		<FmButton type="secondary">
 			Prepend slot
 			<template #prepend>
-				<div style="position: relative; width: 10px; height: 10px; border-radius: 50%; background-color: #66bf3c" />
+				<div
+					style="
+						position: relative;
+						width: 10px;
+						height: 10px;
+						border-radius: 50%;
+						background-color: #66bf3c;
+					"
+				/>
 			</template>
 		</FmButton>
 		<FmButton type="tertiary">
 			Prepend slot
 			<template #prepend>
-				<div style="position: relative; width: 10px; height: 10px; border-radius: 50%; background-color: #66bf3c" />
+				<div
+					style="
+						position: relative;
+						width: 10px;
+						height: 10px;
+						border-radius: 50%;
+						background-color: #66bf3c;
+					"
+				/>
 			</template>
 		</FmButton>
 
 		<FmButton>
 			Append slot
 			<template #append>
-				<div style="position: relative; width: 10px; height: 10px; border-radius: 50%; background-color: orange" />
+				<div
+					style="
+						position: relative;
+						width: 10px;
+						height: 10px;
+						border-radius: 50%;
+						background-color: orange;
+					"
+				/>
 			</template>
 		</FmButton>
 		<FmButton type="secondary">
 			Append slot
 			<template #append>
-				<div style="position: relative; width: 10px; height: 10px; border-radius: 50%; background-color: orange" />
+				<div
+					style="
+						position: relative;
+						width: 10px;
+						height: 10px;
+						border-radius: 50%;
+						background-color: orange;
+					"
+				/>
 			</template>
 		</FmButton>
 		<FmButton type="tertiary">
 			Append slot
 			<template #append>
-				<div style="position: relative; width: 10px; height: 10px; border-radius: 50%; background-color: orange" />
+				<div
+					style="
+						position: relative;
+						width: 10px;
+						height: 10px;
+						border-radius: 50%;
+						background-color: orange;
+					"
+				/>
 			</template>
 		</FmButton>
 	</div>
 </template>
 
 <script setup>
-	import FmButton from '@/components/fm/Button/Button.vue'
+	import FmButton from '@/components/fm/Button/Button.vue';
 </script>

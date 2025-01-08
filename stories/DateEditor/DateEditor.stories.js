@@ -1,39 +1,38 @@
-import { ref, watch } from 'vue'
-import FmDateEditor from '@/components/fm/DateEditor/DateEditor.vue'
-import DateEditorDemo from './DateEditorDemo.vue'
+import { ref, watch } from 'vue';
+import FmDateEditor from '@/components/fm/DateEditor/DateEditor.vue';
+import DateEditorDemo from './DateEditorDemo.vue';
 
 const meta = {
 	title: 'Components/FmDateEditor',
 	component: FmDateEditor,
-	argTypes: {
-	},
-	args: {},
-}
+	argTypes: {},
+	args: {}
+};
 
-export default meta
+export default meta;
 
 export const General = {
 	render: (args) => ({
 		components: {
-			FmDateEditor,
+			FmDateEditor
 		},
 		setup() {
-			const key = ref(1)
+			const key = ref(1);
 
 			watch(args, () => {
-				key.value = new Date().getTime()
-			})
+				key.value = new Date().getTime();
+			});
 
 			return {
 				args,
-				key,
-			}
+				key
+			};
 		},
 		template: `
 			<FmDateEditor :key="key" v-bind="args" />
-		`,
+		`
 	})
-}
+};
 
 export const AllVariants = {
 	render: (args) => ({
@@ -41,8 +40,9 @@ export const AllVariants = {
 			DateEditorDemo
 		},
 		setup() {
-			return { args }
+			return { args };
 		},
-		template: `<DateEditorDemo />`,
+		template: `
+			<DateEditorDemo />`
 	})
-}
+};

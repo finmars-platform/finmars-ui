@@ -12,21 +12,30 @@
 		</template>
 
 		<template v-if="slots['append-inner']" #append-inner="{ isActive, isFocused, controlRef }">
-			<slot name="append-inner" :is-active="isActive" :is-focused="isFocused" :control-ref="controlRef" />
+			<slot
+				name="append-inner"
+				:is-active="isActive"
+				:is-focused="isFocused"
+				:control-ref="controlRef"
+			/>
 		</template>
 
 		<template v-if="slots.chip" #chip="{ item, index, props }">
-			<slot
-				name="chip"
-				:item="item"
-				:index="index"
-				:props="props"
-			/>
+			<slot name="chip" :item="item" :index="index" :props="props" />
 		</template>
 
 		<template
 			v-if="slots.details"
-			#details="{ id, messagesId, isDirty, isDisabled, isReadonly, isPristine, isValid, isValidating }"
+			#details="{
+				id,
+				messagesId,
+				isDirty,
+				isDisabled,
+				isReadonly,
+				isPristine,
+				isValid,
+				isValidating
+			}"
 		>
 			<slot
 				name="details"
@@ -61,14 +70,16 @@
 		</template>
 
 		<template v-if="slots['prepend-inner']" #prepend-inner="{ isActive, isFocused, controlRef }">
-			<slot name="prepend-inner" :is-active="isActive" :is-focused="isFocused" :control-ref="controlRef" />
+			<slot
+				name="prepend-inner"
+				:is-active="isActive"
+				:is-focused="isFocused"
+				:control-ref="controlRef"
+			/>
 		</template>
 
 		<template v-if="slots.selection" #selection="{ item, index }">
-			<div
-				class="fm-v-select__selection"
-				@click.stop.prevent="emits('click:selection', $event)"
-			>
+			<div class="fm-v-select__selection" @click.stop.prevent="emits('click:selection', $event)">
 				<slot name="selection" :item="item" :index="index" />
 			</div>
 		</template>
@@ -76,9 +87,9 @@
 </template>
 
 <script setup lang="ts" generic="T = any">
-	import { useSlots } from 'vue'
-	import { VIcon, VListItem, VSelect } from 'vuetify/components'
-	import type { FmVSelectProps, FmVSelectEmits, FmVSelectSlots } from './types'
+	import { useSlots } from 'vue';
+	import { VIcon, VListItem, VSelect } from 'vuetify/components';
+	import type { FmVSelectProps, FmVSelectEmits, FmVSelectSlots } from './types';
 
 	const props = withDefaults(defineProps<FmVSelectProps<T>>(), {
 		density: 'comfortable',
@@ -90,16 +101,16 @@
 		itemProps: true,
 		rounded: 4,
 		variant: 'solo'
-	})
+	});
 
-	const emits = defineEmits<FmVSelectEmits<T>>()
-	defineSlots<FmVSelectSlots<T>>()
+	const emits = defineEmits<FmVSelectEmits<T>>();
+	defineSlots<FmVSelectSlots<T>>();
 
-	const slots = useSlots()
+	const slots = useSlots();
 
 	function onClearClick(ev: MouseEvent) {
-		emits('click:clear', ev)
-		emits('update:modelValue', null)
+		emits('click:clear', ev);
+		emits('update:modelValue', null);
 	}
 </script>
 

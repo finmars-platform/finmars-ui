@@ -15,8 +15,8 @@
 </template>
 
 <script setup>
-	import { VCheckbox } from 'vuetify/components'
-	import { computed } from 'vue'
+	import { VCheckbox } from 'vuetify/components';
+	import { computed } from 'vue';
 
 	const props = defineProps({
 		modelValue: {
@@ -37,29 +37,29 @@
 		value: {
 			default: true
 		}
-	})
+	});
 
-	const emit = defineEmits(['update:modelValue'])
+	const emit = defineEmits(['update:modelValue']);
 
 	const color = computed(() => {
 		if (props.error) {
-			return 'var(--backgroundColor-error-checkbox)'
+			return 'var(--backgroundColor-error-checkbox)';
 		} else if (props.disabled) {
-			return undefined
+			return undefined;
 		} else {
-			return 'var(--backgroundColor-checkbox)'
+			return 'var(--backgroundColor-checkbox)';
 		}
-	})
+	});
 
 	const baseColor = computed(() => {
 		if (props.error) {
-			return 'var(--backgroundColor-error-checkbox)'
+			return 'var(--backgroundColor-error-checkbox)';
 		} else if (props.disabled) {
-			return undefined
+			return undefined;
 		} else {
-			return 'var(--borderColor-checkbox)'
+			return 'var(--borderColor-checkbox)';
 		}
-	})
+	});
 </script>
 
 <style lang="scss" scoped>

@@ -1,12 +1,7 @@
 <template>
 	<VDialog max-width="25%">
 		<template #activator="{ props: activatorProps }">
-			<FmIconButton
-				v-bind="activatorProps"
-				icon="mdi-close"
-				size="small"
-				variant="text"
-			/>
+			<FmIconButton v-bind="activatorProps" icon="mdi-close" size="small" variant="text" />
 		</template>
 
 		<template #default="{ isActive }">
@@ -24,8 +19,8 @@
 							rounded
 							@click="
 								() => {
-									isActive.value = false
-									$emit('isConfirm', true)
+									isActive.value = false;
+									$emit('isConfirm', true);
 								}
 							"
 						>
@@ -36,8 +31,8 @@
 							rounded
 							@click="
 								() => {
-									isActive.value = false
-									$emit('isConfirm', false)
+									isActive.value = false;
+									$emit('isConfirm', false);
 								}
 							"
 						>
@@ -51,11 +46,11 @@
 </template>
 
 <script setup lang="ts">
-	import { VCard, VCardActions, VDialog } from 'vuetify/components'
-	import FmIconButton from '@/components/fm/IconButton/IconButton.vue'
-	import FmButton from '@/components/fm/Button/Button.vue'
+	import { VCard, VCardActions, VDialog } from 'vuetify/components';
+	import FmIconButton from '@/components/fm/IconButton/IconButton.vue';
+	import FmButton from '@/components/fm/Button/Button.vue';
 
-	defineProps<{ title: string; content: string }>()
+	defineProps<{ title: string; content: string }>();
 </script>
 
 <style scoped lang="scss">

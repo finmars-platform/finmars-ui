@@ -7,25 +7,12 @@
 		class="sidebar-item"
 		:class="classes"
 	>
-		<NavigationItemLabel
-			:level="level"
-			:isActive="isActive"
-			:isOnlyIcon="isOnlyIcon"
-			:icon="icon"
+		<NavigationItemLabel :level="level" :isActive="isActive" :isOnlyIcon="isOnlyIcon" :icon="icon"
 			>{{ label }}
 		</NavigationItemLabel>
 	</component>
-	<a
-		v-if="href && !children && !to"
-		:href="href"
-		class="sidebar-item"
-		:class="classes"
-	>
-		<NavigationItemLabel
-			:level="level"
-			:isActive="isActive"
-			:isOnlyIcon="isOnlyIcon"
-			:icon="icon"
+	<a v-if="href && !children && !to" :href="href" class="sidebar-item" :class="classes">
+		<NavigationItemLabel :level="level" :isActive="isActive" :isOnlyIcon="isOnlyIcon" :icon="icon"
 			>{{ label }}
 		</NavigationItemLabel>
 	</a>
@@ -63,27 +50,16 @@
 	</div>
 
 	<div v-if="!to && !children && !href" class="sidebar-item" :class="classes">
-		<NavigationItemLabel
-			:level="level"
-			:isActive="isActive"
-			:isOnlyIcon="isOnlyIcon"
-			:icon="icon"
+		<NavigationItemLabel :level="level" :isActive="isActive" :isOnlyIcon="isOnlyIcon" :icon="icon"
 			>{{ label }}
 		</NavigationItemLabel>
 	</div>
 </template>
 
 <script setup>
-	import NavigationItem from '@/components/fm/Navigation/NavigationItem.vue'
-	import NavigationItemLabel from '@/components/fm/Navigation/NavigationItemLabel.vue'
-	import {
-		ref,
-		computed,
-		defineExpose,
-		onMounted,
-		onUnmounted,
-		resolveComponent
-	} from 'vue'
+	import NavigationItem from '@/components/fm/Navigation/NavigationItem.vue';
+	import NavigationItemLabel from '@/components/fm/Navigation/NavigationItemLabel.vue';
+	import { ref, computed, defineExpose, onMounted, onUnmounted, resolveComponent } from 'vue';
 
 	const props = defineProps({
 		label: String,
@@ -98,10 +74,10 @@
 		level: Number, // 1, 2
 		alternativeLink: String,
 		route: Object
-	})
+	});
 
-	const isOpen = ref(false)
-	const nestedItemsRefs = ref([])
+	const isOpen = ref(false);
+	const nestedItemsRefs = ref([]);
 
 	const isActive = computed(() => {
 		return (
@@ -111,58 +87,57 @@
 				props.route?.value?.path?.slice(-2) === props.href?.slice(-2)) ||
 			(!!props.href &&
 				window.location?.href?.includes(props.href) &&
-				window.location?.href?.split('?')?.[0].slice(-2) ===
-					props.href?.slice(-2))
-		)
-	})
+				window.location?.href?.split('?')?.[0].slice(-2) === props.href?.slice(-2))
+		);
+	});
 	const isNestedActive = computed(() => {
 		for (const el of nestedItemsRefs.value) {
-			if (el.isActive || el.isNestedActive) return true
+			if (el.isActive || el.isNestedActive) return true;
 		}
 
-		return false
-	})
+		return false;
+	});
 	const iconFirstLevel = computed(() => {
-		if (props.level === 1) return undefined
+		if (props.level === 1) return undefined;
 
-		return isOpen.value ? 'mdi-chevron-up' : 'mdi-chevron-down'
-	})
+		return isOpen.value ? 'mdi-chevron-up' : 'mdi-chevron-down';
+	});
 	const iconSecondLevel = computed(() => {
-		if (props.level !== 1) return props.icon
+		if (props.level !== 1) return props.icon;
 
-		return isOpen.value ? 'mdi-menu-down' : 'mdi-menu-right'
-	})
+		return isOpen.value ? 'mdi-menu-down' : 'mdi-menu-right';
+	});
 
 	const linkTag = computed(() =>
 		props.alternativeLink ? resolveComponent(props.alternativeLink) : 'a'
-	)
+	);
 
 	function setItemRef(index, el) {
 		if (el) {
-			nestedItemsRefs.value[index] = el
+			nestedItemsRefs.value[index] = el;
 		} else {
-			nestedItemsRefs.value.splice(index, 1)
+			nestedItemsRefs.value.splice(index, 1);
 		}
 	}
 
 	function getRefSetter(index) {
 		return (el) => {
-			setItemRef(index, el)
-		}
+			setItemRef(index, el);
+		};
 	}
 
 	onMounted(() => {
-		if (isNestedActive.value) isOpen.value = true
-	})
+		if (isNestedActive.value) isOpen.value = true;
+	});
 
 	onUnmounted(() => {
-		nestedItemsRefs.value = []
-	})
+		nestedItemsRefs.value = [];
+	});
 
 	defineExpose({
 		isActive,
 		isNestedActive
-	})
+	});
 </script>
 
 <style scoped lang="postcss">

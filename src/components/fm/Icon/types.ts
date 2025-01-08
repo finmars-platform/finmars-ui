@@ -1,4 +1,4 @@
-import { VNode } from 'vue'
+import { VNode } from 'vue';
 
 export interface FmIconProps {
 	color?: string;

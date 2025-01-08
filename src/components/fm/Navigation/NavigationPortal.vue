@@ -9,8 +9,8 @@
 </template>
 
 <script setup>
-	import Navigation from '@/components/fm/Navigation/Navigation.vue'
-	import { computed, ref } from 'vue'
+	import Navigation from '@/components/fm/Navigation/Navigation.vue';
+	import { computed, ref } from 'vue';
 
 	const props = defineProps({
 		isFloat: {
@@ -28,19 +28,17 @@
 		isVue: {
 			type: Boolean
 		}
-	})
+	});
 
-	const emit = defineEmits(['resizeSideNav'])
+	const emit = defineEmits(['resizeSideNav']);
 
 	const route = computed(() => {
-		if (props.route) return props.route
-		const segments = window.location.pathname?.split('/')
-		const realm_code =
-			segments.find((item) => item.includes('realm')) || 'realm03va3'
-		const space_code =
-			segments.find((item) => item.includes('space')) || 'space027ho'
-		return { params: { realm_code, space_code } }
-	})
+		if (props.route) return props.route;
+		const segments = window.location.pathname?.split('/');
+		const realm_code = segments.find((item) => item.includes('realm')) || 'realm03va3';
+		const space_code = segments.find((item) => item.includes('space')) || 'space027ho';
+		return { params: { realm_code, space_code } };
+	});
 
 	const items = ref([
 		{
@@ -392,10 +390,7 @@
 							label: 'Context Menu Layouts',
 							action: undefined,
 							href: '',
-							to: useGetNuxtLink(
-								'/configuration/context-menu-layouts',
-								route.value.params
-							)
+							to: useGetNuxtLink('/configuration/context-menu-layouts', route.value.params)
 						}
 					]
 				},
@@ -563,10 +558,7 @@
 							key: 'Manage',
 							label: 'Manage',
 							action: undefined,
-							to: useGetNuxtLink(
-								'/configuration/manage-configuration',
-								route.value.params
-							),
+							to: useGetNuxtLink('/configuration/manage-configuration', route.value.params),
 							href: ''
 						}
 					]
@@ -621,20 +613,14 @@
 							label: 'Access Policy',
 							action: undefined,
 							href: '',
-							to: useGetNuxtLink(
-								'/system/iam/access-policy',
-								route.value.params
-							)
+							to: useGetNuxtLink('/system/iam/access-policy', route.value.params)
 						},
 						{
 							key: 'resource-groups',
 							label: 'Resource Groups',
 							action: undefined,
 							href: '',
-							to: useGetNuxtLink(
-								'/system/iam/resource-group',
-								route.value.params
-							)
+							to: useGetNuxtLink('/system/iam/resource-group', route.value.params)
 						}
 					]
 				},
@@ -728,36 +714,36 @@
 				}
 			]
 		}
-	])
+	]);
 
 	function getUrlToOldApp(suffix) {
-		const store = route.value.params
+		const store = route.value.params;
 
-		let apiUrl = ''
+		let apiUrl = '';
 		if (props.isVue && props.base !== window.location.origin) {
-			apiUrl = props.base
+			apiUrl = props.base;
 		}
-		let baseApiUrl = ''
+		let baseApiUrl = '';
 
 		if (store.realm_code) {
-			baseApiUrl = '/' + store.realm_code + '/' + store.space_code
+			baseApiUrl = '/' + store.realm_code + '/' + store.space_code;
 		} else {
-			baseApiUrl = '/' + store.isUrlValid
+			baseApiUrl = '/' + store.isUrlValid;
 		}
 
-		return `${apiUrl}${baseApiUrl}/a/#!${suffix}`
+		return `${apiUrl}${baseApiUrl}/a/#!${suffix}`;
 	}
 
 	function useGetNuxtLink(linkEnd, params) {
-		let apiUrl = ''
+		let apiUrl = '';
 		if (!props.isVue && props.base) {
-			apiUrl = props.base
+			apiUrl = props.base;
 		}
 
-		const realm_code = params['realm_code']
-		const space_code = params['space_code']
+		const realm_code = params['realm_code'];
+		const space_code = params['space_code'];
 
-		return apiUrl + '/' + realm_code + '/' + space_code + '/v' + linkEnd
+		return apiUrl + '/' + realm_code + '/' + space_code + '/v' + linkEnd;
 	}
 </script>
 
