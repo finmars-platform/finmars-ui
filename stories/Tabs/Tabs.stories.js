@@ -1,6 +1,6 @@
-import { ref, watch } from 'vue'
-import FmTabs from '@/components/fm/Tabs/Tabs.vue'
-import TabsDemo from './TabsDemo.vue'
+import { ref, watch } from 'vue';
+import FmTabs from '@/components/fm/Tabs/Tabs.vue';
+import TabsDemo from './TabsDemo.vue';
 
 const meta = {
 	title: 'Components/FmTabs',
@@ -42,9 +42,9 @@ const meta = {
 		prependIcon: false,
 		disabled: false
 	}
-}
+};
 
-export default meta
+export default meta;
 
 export const General = {
 	render: (args) => ({
@@ -52,22 +52,22 @@ export const General = {
 			FmTabs
 		},
 		setup() {
-			const key = ref(1)
+			const key = ref(1);
 
 			watch(args, () => {
-				key.value = new Date().getTime()
-			})
+				key.value = new Date().getTime();
+			});
 
 			return {
 				args,
 				key
-			}
+			};
 		},
 		template: `
-        <FmTabs v-bind="args" :key="key"/>
-    `
+			<FmTabs v-bind="args" :key="key" />
+		`
 	})
-}
+};
 
 export const AllVariants = {
 	render: (args) => ({
@@ -75,9 +75,9 @@ export const AllVariants = {
 			TabsDemo
 		},
 		setup() {
-			return { args }
+			return { args };
 		},
 		template: `
-        <TabsDemo/>`
+			<TabsDemo />`
 	})
-}
+};

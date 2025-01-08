@@ -35,8 +35,8 @@
 </template>
 
 <script setup>
-	import { computed } from 'vue'
-	import { VIcon } from 'vuetify/components'
+	import { computed } from 'vue';
+	import { VIcon } from 'vuetify/components';
 
 	const props = defineProps({
 		icon: String,
@@ -46,57 +46,57 @@
 		isOnlyIcon: Boolean,
 		isDisabled: Boolean,
 		level: Number // 0, 1, 2
-	})
+	});
 
 	const backgroundClass = computed(() => {
 		if (props.isDisabled) {
-			return 'bg-[var(--sidenavOption-disabled-backgroundColor)]'
+			return 'bg-[var(--sidenavOption-disabled-backgroundColor)]';
 		} else if (props.isActive) {
-			return 'bg-[var(--sidenavOption-activated-backgroundColor)]'
+			return 'bg-[var(--sidenavOption-activated-backgroundColor)]';
 		} else {
-			return 'bg-[var(--sidenavOption-backgroundColor)]'
+			return 'bg-[var(--sidenavOption-backgroundColor)]';
 		}
-	})
+	});
 
 	const iconColorValue = computed(() => {
 		if (props.level === 0) {
-			return 'var(--sidenavOptionLeftIcon-color)'
+			return 'var(--sidenavOptionLeftIcon-color)';
 		} else if (props.level === 1) {
-			return 'var(--sidenavOption2LeftIcon-color)'
+			return 'var(--sidenavOption2LeftIcon-color)';
 		} else {
-			return 'var(--sidenavOption3LeftIcon-color)'
+			return 'var(--sidenavOption3LeftIcon-color)';
 		}
-	})
+	});
 
 	const offsetLabel = computed(() => {
 		if (props.level === 0) {
-			return 'ml-[12px]'
+			return 'ml-[12px]';
 		} else if (props.level === 1) {
-			return 'ml-[12px]'
+			return 'ml-[12px]';
 		} else {
-			return 'ml-[36px]'
+			return 'ml-[36px]';
 		}
-	})
+	});
 
 	const offsetIcon = computed(() => {
 		if (props.level === 0) {
-			return ''
+			return '';
 		} else if (props.level === 1) {
-			return 'ml-[12px]'
+			return 'ml-[12px]';
 		} else {
-			return ''
+			return '';
 		}
-	})
+	});
 
 	const appendIconColorValue = computed(() => {
 		if (props.level === 0) {
-			return 'var(--sidenavOptionRightIcon-color)'
+			return 'var(--sidenavOptionRightIcon-color)';
 		} else if (props.level === 1) {
-			return 'var(--sidenavOption2RightIcon-color)'
+			return 'var(--sidenavOption2RightIcon-color)';
 		} else {
-			return 'var(--sidenavOption3RightIcon-color)'
+			return 'var(--sidenavOption3RightIcon-color)';
 		}
-	})
+	});
 </script>
 
 <style scoped lang="postcss">

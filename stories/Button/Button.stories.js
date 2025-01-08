@@ -1,6 +1,6 @@
-import { ref, watch } from 'vue'
-import FmButton from '@/components/fm/Button/Button.vue'
-import ButtonDemo from './ButtonDemo.vue'
+import { ref, watch } from 'vue';
+import FmButton from '@/components/fm/Button/Button.vue';
+import ButtonDemo from './ButtonDemo.vue';
 
 const meta = {
 	title: 'Components/FmButton',
@@ -8,21 +8,21 @@ const meta = {
 	argTypes: {
 		type: {
 			control: 'select',
-			options: ['primary', 'secondary', 'tertiary', 'icon'],
+			options: ['primary', 'secondary', 'tertiary', 'icon']
 		},
-		prependIcon:  {
+		prependIcon: {
 			control: 'select',
 			options: [undefined, 'mdi-plus', 'mdi-open-in-new']
 		},
 		appendIcon: {
 			control: 'select',
 			options: [undefined, 'mdi-plus', 'mdi-open-in-new']
-		},
+		}
 	},
-	args: {},
-}
+	args: {}
+};
 
-export default meta
+export default meta;
 
 export const General = {
 	render: (args) => ({
@@ -30,24 +30,24 @@ export const General = {
 			FmButton
 		},
 		setup() {
-			const key = ref(1)
+			const key = ref(1);
 
 			watch(args, () => {
-				key.value = new Date().getTime()
-			})
+				key.value = new Date().getTime();
+			});
 
 			return {
 				args,
 				key
-			}
+			};
 		},
 		template: `
 			<FmButton v-bind="args" :key="key">
 				Label
 			</FmButton>
-		`,
+		`
 	})
-}
+};
 
 export const Default = {
 	render: (args) => ({
@@ -55,11 +55,12 @@ export const Default = {
 			FmButton
 		},
 		setup() {
-			return { args }
+			return { args };
 		},
-		template: `<FmButton>Primary</FmButton>`,
+		template: `
+			<FmButton>Primary</FmButton>`
 	})
-}
+};
 
 export const DefaultRounded = {
 	render: (args) => ({
@@ -67,15 +68,15 @@ export const DefaultRounded = {
 			FmButton
 		},
 		setup() {
-			return { args }
+			return { args };
 		},
 		template: `
 			<FmButton rounded>
 				Primary
 			</FmButton>
-		`,
+		`
 	})
-}
+};
 
 export const DefaultWithPrependIcon = {
 	render: (args) => ({
@@ -83,11 +84,12 @@ export const DefaultWithPrependIcon = {
 			FmButton
 		},
 		setup() {
-			return { args }
+			return { args };
 		},
-		template: `<FmButton prepend-icon="mdi-plus">Primary</FmButton>`,
+		template: `
+			<FmButton prepend-icon="mdi-plus">Primary</FmButton>`
 	})
-}
+};
 
 export const DefaultWithPrependSlot = {
 	render: (args) => ({
@@ -95,7 +97,7 @@ export const DefaultWithPrependSlot = {
 			FmButton
 		},
 		setup() {
-			return { args }
+			return { args };
 		},
 		template: `
 			<FmButton>
@@ -104,9 +106,9 @@ export const DefaultWithPrependSlot = {
 					<div style="position: relative; width: 10px; height: 10px; border-radius: 50%; background-color: #66bf3c" />
 				</template>
 			</FmButton>
-		`,
+		`
 	})
-}
+};
 
 export const DefaultWithAppendIcon = {
 	render: (args) => ({
@@ -114,11 +116,12 @@ export const DefaultWithAppendIcon = {
 			FmButton
 		},
 		setup() {
-			return { args }
+			return { args };
 		},
-		template: `<FmButton append-icon="mdi-plus">Primary</FmButton>`,
+		template: `
+			<FmButton append-icon="mdi-plus">Primary</FmButton>`
 	})
-}
+};
 
 export const DefaultWithAppendSlot = {
 	render: (args) => ({
@@ -126,7 +129,7 @@ export const DefaultWithAppendSlot = {
 			FmButton
 		},
 		setup() {
-			return { args }
+			return { args };
 		},
 		template: `
 			<FmButton>
@@ -135,9 +138,9 @@ export const DefaultWithAppendSlot = {
 					<div style="position: relative; width: 10px; height: 10px; border-radius: 50%; background-color: orange" />
 				</template>
 			</FmButton>
-		`,
+		`
 	})
-}
+};
 
 export const Secondary = {
 	render: (args) => ({
@@ -145,11 +148,12 @@ export const Secondary = {
 			FmButton
 		},
 		setup() {
-			return { args }
+			return { args };
 		},
-		template: `<FmButton type="secondary">Secondary</FmButton>`,
+		template: `
+			<FmButton type="secondary">Secondary</FmButton>`
 	})
-}
+};
 
 export const Tertiary = {
 	render: (args) => ({
@@ -157,11 +161,12 @@ export const Tertiary = {
 			FmButton
 		},
 		setup() {
-			return { args }
+			return { args };
 		},
-		template: `<FmButton type="tertiary">Tertiary</FmButton>`,
+		template: `
+			<FmButton type="tertiary">Tertiary</FmButton>`
 	})
-}
+};
 
 export const AllVariants = {
 	render: (args) => ({
@@ -169,8 +174,9 @@ export const AllVariants = {
 			ButtonDemo
 		},
 		setup() {
-			return { args }
+			return { args };
 		},
-		template: `<ButtonDemo />`,
+		template: `
+			<ButtonDemo />`
 	})
-}
+};

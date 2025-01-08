@@ -51,79 +51,74 @@
 </template>
 
 <script lang="ts" setup>
-	import { computed, nextTick, ref, watch } from 'vue'
-	import cloneDeep from 'lodash/cloneDeep'
-	import set from 'lodash/set'
-	import { formatEnteredNumber } from '../../utils'
-	import type { FmFilterRangeValues } from '@/types'
-	import type { FmFilterProps, FmFilterEmits, FmFilterSlots } from '../../types'
-	import useFilter from '@/components/fm/Filters/FilterTypes/useFilter'
-	import FmTextField from '@/components/fm/TextField/TextField.vue'
+	import { computed, nextTick, ref, watch } from 'vue';
+	import cloneDeep from 'lodash/cloneDeep';
+	import set from 'lodash/set';
+	import { formatEnteredNumber } from '../../utils';
+	import type { FmFilterRangeValues } from '@/types';
+	import type { FmFilterProps, FmFilterEmits, FmFilterSlots } from '../../types';
+	import useFilter from '@/components/fm/Filters/FilterTypes/useFilter';
+	import FmTextField from '@/components/fm/TextField/TextField.vue';
 
-	const props = defineProps<FmFilterProps>()
-	const emits = defineEmits<FmFilterEmits>()
-	defineSlots<FmFilterSlots>()
+	const props = defineProps<FmFilterProps>();
+	const emits = defineEmits<FmFilterEmits>();
+	defineSlots<FmFilterSlots>();
 
-	const { simpleMode, rangeMode } = useFilter(props)
+	const { simpleMode, rangeMode } = useFilter(props);
 
-	const innerValue = ref(cloneDeep(props.filterValue))
+	const innerValue = ref(cloneDeep(props.filterValue));
 
-	const currentFilterValue = computed(() => props.filter.options.filter_values)
+	const currentFilterValue = computed(() => props.filter.options.filter_values);
 
-	function processAction(
-		action: 'update' | 'update:from' | 'update:to',
-		value: string
-	) {
-		const updatedFilter = cloneDeep(props.filter)
+	function processAction(action: 'update' | 'update:from' | 'update:to', value: string) {
+		const updatedFilter = cloneDeep(props.filter);
 		if (action === 'update') {
-			const formattedValue = formatEnteredNumber(value)
-			updatedFilter.options.filter_values = formattedValue
-				? [Number(formattedValue)]
-				: []
+			const formattedValue = formatEnteredNumber(value);
+			updatedFilter.options.filter_values = formattedValue ? [Number(formattedValue)] : [];
 			nextTick(() => {
-				innerValue.value = formattedValue
-			})
+				innerValue.value = formattedValue;
+			});
 		}
 
 		if (action === 'update:from') {
-			const formattedValue = formatEnteredNumber(value)
+			const formattedValue = formatEnteredNumber(value);
 			set(
 				updatedFilter,
 				['options', 'filter_values', 'min_value'],
 				formattedValue ? Number(formattedValue) : null
-			)
+			);
 			nextTick(() => {
-				;(innerValue.value as FmFilterRangeValues).min_value = formattedValue
-			})
+				(innerValue.value as FmFilterRangeValues).min_value = formattedValue;
+			});
 		}
 
 		if (action === 'update:to') {
-			const formattedValue = formatEnteredNumber(value)
+			const formattedValue = formatEnteredNumber(value);
 			set(
 				updatedFilter,
 				['options', 'filter_values', 'max_value'],
 				formattedValue ? Number(formattedValue) : null
-			)
+			);
 			nextTick(() => {
-				;(innerValue.value as FmFilterRangeValues).max_value = formattedValue
-			})
+				(innerValue.value as FmFilterRangeValues).max_value = formattedValue;
+			});
 		}
 
 		if (
 			JSON.stringify(currentFilterValue.value) !==
 			JSON.stringify(updatedFilter.options.filter_values)
 		) {
-			emits('update', updatedFilter)
+			emits('update', updatedFilter);
 		}
 	}
 
 	watch(
 		() => props.filterValue,
 		() => {
-			innerValue.value = cloneDeep(props.filterValue)
+			innerValue.value = cloneDeep(props.filterValue);
 		},
 		{ immediate: true }
-	)
+	);
 </script>
 
 <style lang="scss" scoped>

@@ -1,5 +1,5 @@
-import FmImg from '@/components/fm/Img/Img.vue'
-import { ref, watch } from 'vue'
+import FmImg from '@/components/fm/Img/Img.vue';
+import { ref, watch } from 'vue';
 
 const meta = {
 	title: 'Components/FmImg',
@@ -30,9 +30,9 @@ const meta = {
 		src: 'https://i.pravatar.cc/140',
 		cover: false
 	}
-}
+};
 
-export default meta
+export default meta;
 
 export const Default = {
 	render: (args) => ({
@@ -40,18 +40,18 @@ export const Default = {
 			FmImg
 		},
 		setup() {
-			const key = ref(1)
+			const key = ref(1);
 
 			watch(args, () => {
-				key.value = new Date().getTime()
-			})
+				key.value = new Date().getTime();
+			});
 
 			return {
 				args,
 				key
-			}
+			};
 		},
 		template: `
-          <FmImg v-bind="args" :key="key"/>`
+			<FmImg v-bind="args" :key="key" />`
 	})
-}
+};

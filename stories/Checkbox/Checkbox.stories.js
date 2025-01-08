@@ -1,6 +1,6 @@
-import { ref } from 'vue'
-import FmCheckbox from '@/components/fm/Checkbox/Checkbox.vue'
-import CheckboxDemo from './CheckboxDemo.vue'
+import { ref } from 'vue';
+import FmCheckbox from '@/components/fm/Checkbox/Checkbox.vue';
+import CheckboxDemo from './CheckboxDemo.vue';
 
 const meta = {
 	title: 'Components/FmCheckbox',
@@ -9,9 +9,9 @@ const meta = {
 		disabled: false,
 		error: false
 	}
-}
+};
 
-export default meta
+export default meta;
 
 export const Default = {
 	render: (args) => ({
@@ -19,17 +19,17 @@ export const Default = {
 			FmCheckbox
 		},
 		setup() {
-			const value = ref(true)
+			const value = ref(true);
 
 			return {
 				args,
 				value
-			}
+			};
 		},
 		template: `
 			<FmCheckbox v-bind="args" v-model="value" />`
 	})
-}
+};
 
 export const List = {
 	render: (args) => ({
@@ -39,9 +39,9 @@ export const List = {
 		setup() {
 			return {
 				args
-			}
+			};
 		},
 		template: `
 			<CheckboxDemo />`
 	})
-}
+};

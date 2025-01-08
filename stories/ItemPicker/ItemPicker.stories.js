@@ -1,15 +1,22 @@
-import { ref, watch } from 'vue'
-import FmItemPicker from '@/components/fm/ItemPicker/ItemPicker/ItemPicker.vue'
-import ItemPickerDemo from './ItemPickerDemo.vue'
+import { ref, watch } from 'vue';
+import FmItemPicker from '@/components/fm/ItemPicker/ItemPicker/ItemPicker.vue';
+import ItemPickerDemo from './ItemPickerDemo.vue';
 
 const meta = {
 	title: 'Components/FmItemPicker',
 	component: FmItemPicker,
-	argTypes: {},
-	args: {}
-}
+	argTypes: {
+		minutesStep: {
+			control: 'select',
+			options: [1, 2, 5, 10, 15, 20, 30]
+		}
+	},
+	args: {
+		minutesStep: 1
+	}
+};
 
-export default meta
+export default meta;
 
 export const General = {
 	render: (args) => ({
@@ -17,22 +24,22 @@ export const General = {
 			FmItemPicker
 		},
 		setup() {
-			const key = ref(1)
+			const key = ref(1);
 
 			watch(args, () => {
-				key.value = new Date().getTime()
-			})
+				key.value = new Date().getTime();
+			});
 
 			return {
 				args,
 				key
-			}
+			};
 		},
 		template: `
 			<FmItemPicker v-bind="args" :key="key" />
 		`
 	})
-}
+};
 
 export const AllVariants = {
 	render: (args) => ({
@@ -40,9 +47,9 @@ export const AllVariants = {
 			ItemPickerDemo
 		},
 		setup() {
-			return { args }
+			return { args };
 		},
 		template: `
 			<ItemPickerDemo />`
 	})
-}
+};

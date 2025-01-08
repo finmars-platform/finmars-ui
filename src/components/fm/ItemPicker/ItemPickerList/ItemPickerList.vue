@@ -12,31 +12,23 @@
 			@click.stop.prevent="emits('select:category', cat)"
 		>
 			<span>
-				{{
-					cat === selectedCategoryName
-						? `${selectedCategoryName} (${selectedCount})`
-						: cat
-				}}
+				{{ cat === selectedCategoryName ? `${selectedCategoryName} (${selectedCount})` : cat }}
 			</span>
 
 			<FmIcon
 				icon="mdi-menu-right"
-				:color="
-					cat === currentCategory
-						? 'var(--on-secondary)'
-						: 'var(--on-surface-variant)'
-				"
+				:color="cat === currentCategory ? 'var(--on-secondary)' : 'var(--on-surface-variant)'"
 			/>
 		</div>
 	</div>
 </template>
 
 <script lang="ts" setup>
-	import type { FmItemPickerListProps, FmItemPickerListEmits } from './types'
-	import FmIcon from '../../Icon/Icon.vue'
+	import type { FmItemPickerListProps, FmItemPickerListEmits } from './types';
+	import FmIcon from '../../Icon/Icon.vue';
 
-	defineProps<FmItemPickerListProps>()
-	const emits = defineEmits<FmItemPickerListEmits>()
+	defineProps<FmItemPickerListProps>();
+	const emits = defineEmits<FmItemPickerListEmits>();
 </script>
 
 <style lang="scss" scoped>

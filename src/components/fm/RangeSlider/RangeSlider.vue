@@ -26,8 +26,8 @@
 </template>
 
 <script setup>
-	import { computed, ref, watch } from 'vue'
-	import { VRangeSlider } from 'vuetify/components'
+	import { computed, ref, watch } from 'vue';
+	import { VRangeSlider } from 'vuetify/components';
 
 	const props = defineProps({
 		modelValue: {
@@ -40,45 +40,38 @@
 			default: 0,
 			validator(value) {
 				return !isNaN(Number(value));
-			},
+			}
 		},
 		max: {
 			type: [String, Number],
 			default: 100,
 			validator(value) {
 				return !isNaN(Number(value));
-			},
+			}
 		},
 		prependIcon: {
-			type: [String, undefined],
+			type: [String, undefined]
 		},
 		appendIcon: {
-			type: [String, undefined],
+			type: [String, undefined]
 		},
 		step: {
 			type: [String, Number],
 			default: 10,
 			validator(value) {
 				return !isNaN(Number(value));
-			},
+			}
 		},
 		disabled: {
-			type: Boolean,
-		},
-	})
+			type: Boolean
+		}
+	});
 
-	const emits = defineEmits([
-		'click:append',
-		'click:prepend',
-		'end',
-		'start',
-		'update:modelValue',
-	])
+	const emits = defineEmits(['click:append', 'click:prepend', 'end', 'start', 'update:modelValue']);
 
-	const innerValue = ref(structuredClone([
-		Number(props.modelValue[0]),
-		Number(props.modelValue[1]),
-	]))
+	const innerValue = ref(
+		structuredClone([Number(props.modelValue[0]), Number(props.modelValue[1])])
+	);
 
 	const vSliderProps = computed(() => ({
 		color: 'var(--primary)',
@@ -97,32 +90,32 @@
 		showTicks: 'always',
 		...(props.step && { step: props.step }),
 		...(props.prependIcon && { prependIcon: props.prependIcon }),
-		...(props.appendIcon && { appendIcon: props.appendIcon }),
-	}))
+		...(props.appendIcon && { appendIcon: props.appendIcon })
+	}));
 
 	function getThumbLabel(value) {
-		return Number(value).toFixed()
+		return Number(value).toFixed();
 	}
 
 	function onUpdate(value) {
-		innerValue.value = value
-		emits('update:modelValue', value)
+		innerValue.value = value;
+		emits('update:modelValue', value);
 	}
 
 	watch(
 		() => props.modelValue,
 		(val, oldValue) => {
-			const [val0, val1] = val ?? []
-			const [oVal0, oVal1] = oldValue ?? []
+			const [val0, val1] = val ?? [];
+			const [oVal0, oVal1] = oldValue ?? [];
 
 			if (val0 !== oVal0 || val1 !== oVal1) {
 				innerValue.value = structuredClone([
 					Number(props.modelValue[0]),
-					Number(props.modelValue[1]),
-				])
+					Number(props.modelValue[1])
+				]);
 			}
-		},
-	)
+		}
+	);
 </script>
 
 <style lang="scss" scoped>
@@ -158,7 +151,9 @@
 		&.v-input--horizontal {
 			:deep(.v-slider-thumb) {
 				z-index: 1;
-				inset-inline-start: calc(var(--v-slider-thumb-position) - calc(var(--thumbWidth-fmSlider) / 2));
+				inset-inline-start: calc(
+					var(--v-slider-thumb-position) - calc(var(--thumbWidth-fmSlider) / 2)
+				);
 
 				.v-slider-thumb__label-container {
 					left: 0;

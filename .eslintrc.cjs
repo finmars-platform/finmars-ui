@@ -22,14 +22,15 @@ module.exports = {
 			'error',
 			{
 				singleQuote: true,
-				semi: false,
-				printWidth: 80,
+				semi: true,
+				printWidth: 100,
 				tabWidth: 2,
 				useTabs: true,
 				vueIndentScriptAndStyle: true,
 				trailingComma: 'none'
 			}
 		],
+		semi: ['error', 'always', { omitLastInOneLineBlock: true, omitLastInOneLineClassBody: true }],
 		'vue/multi-word-component-names': 'off',
 		'no-unused-vars': 'off',
 
@@ -38,9 +39,6 @@ module.exports = {
 			{ ignoreProperties: false, ignoreParameters: false }
 		],
 		'@typescript-eslint/no-unused-vars': 'error',
-		'@typescript-eslint/no-unused-expressions': [
-			'error',
-			{ allowShortCircuit: true }
-		]
+		'@typescript-eslint/no-unused-expressions': ['error', { allowShortCircuit: true }]
 	}
-}
+};

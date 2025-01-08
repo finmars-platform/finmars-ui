@@ -1,6 +1,6 @@
-import { ref, watch } from 'vue'
-import FmProgressCircular from '@/components/fm/ProgressCircular/ProgressCircular.vue'
-import ProgressCircularDemo from './ProgressCircularDemo.vue'
+import { ref, watch } from 'vue';
+import FmProgressCircular from '@/components/fm/ProgressCircular/ProgressCircular.vue';
+import ProgressCircularDemo from './ProgressCircularDemo.vue';
 
 const meta = {
 	title: 'Components/FmProgressCircular',
@@ -9,17 +9,17 @@ const meta = {
 		modelValue: 0,
 		indeterminate: {
 			control: 'select',
-			options: [false, true],
+			options: [false, true]
 		},
 		showValue: {
 			control: 'select',
-			options: [false, true],
-		},
+			options: [false, true]
+		}
 	},
-	args: {},
-}
+	args: {}
+};
 
-export default meta
+export default meta;
 
 export const General = {
 	render: (args) => ({
@@ -27,22 +27,22 @@ export const General = {
 			FmProgressCircular
 		},
 		setup() {
-			const key = ref(1)
+			const key = ref(1);
 
 			watch(args, () => {
-				key.value = new Date().getTime()
-			})
+				key.value = new Date().getTime();
+			});
 
 			return {
 				args,
 				key
-			}
+			};
 		},
 		template: `
 			<FmProgressCircular v-bind="args" :key="key" />
-		`,
+		`
 	})
-}
+};
 
 export const AllVariants = {
 	render: (args) => ({
@@ -50,8 +50,9 @@ export const AllVariants = {
 			ProgressCircularDemo
 		},
 		setup() {
-			return { args }
+			return { args };
 		},
-		template: `<ProgressCircularDemo />`,
+		template: `
+			<ProgressCircularDemo />`
 	})
-}
+};

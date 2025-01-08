@@ -1,7 +1,7 @@
 export interface FmComponentIcon {
-	icon: string
-	size?: number | string
-	color?: string
+	icon: string;
+	size?: number | string;
+	color?: string;
 }
 
 export type PlaceLocation =
@@ -24,14 +24,14 @@ export type PlaceLocation =
 	| 'start bottom | center'
 	| 'end bottom | center'
 	| 'left bottom | center'
-	| 'right bottom | center'
+	| 'right bottom | center';
 
 export interface FmAttribute {
-	key: string
-	name: string // composed `${field1}. ${field2}. ...`
-	description?: string
+	key: string;
+	name: string; // composed `${field1}. ${field2}. ...`
+	description?: string;
 
-	[key: string]: unknown
+	[key: string]: unknown;
 }
 
 export type FmFilterType =
@@ -48,28 +48,28 @@ export type FmFilterType =
 	| 'selector'
 	| 'multiselector'
 	| 'date_tree'
-	| 'use_from_above'
+	| 'use_from_above';
 
 export type FmFilterRangeValues = {
-	max_value: number | string
-	min_value: number | string
-}
+	max_value: number | string;
+	min_value: number | string;
+};
 
 export interface FmFilter {
-	content_type?: string // composed value {field1}.{field2}.{field3}.{...
-	key: string // composed value {field1}.{field2}.{field3}.{...
-	layout_name?: string
-	name: string
-	value_type: number | 'field' // 10 - string, 20 - number, 30 - classifier/enumeration, 40 - date as string (YYYY-MM-DD), 50 - boolean, 80 - date as string (YYYY-MM-DD HH:mm:ss)
+	content_type?: string; // composed value {field1}.{field2}.{field3}.{...
+	key: string; // composed value {field1}.{field2}.{field3}.{...
+	layout_name?: string;
+	name: string;
+	value_type: number | 'field'; // 10 - string, 20 - number, 30 - classifier/enumeration, 40 - date as string (YYYY-MM-DD), 50 - boolean, 80 - date as string (YYYY-MM-DD HH:mm:ss)
 	options: {
-		enabled: boolean
-		exclude_empty_cells?: boolean
-		filter_type: FmFilterType
-		filter_values: string[] | number[] | boolean[] | FmFilterRangeValues // FmFilterRangeValues for 'from_to' and 'out_of_range' filters
+		enabled: boolean;
+		exclude_empty_cells?: boolean;
+		filter_type: FmFilterType;
+		filter_values: string[] | number[] | boolean[] | FmFilterRangeValues; // FmFilterRangeValues for 'from_to' and 'out_of_range' filters
 		use_from_above?: {
 			// for linked filter ?
-			attrs_entity_type?: string
-			key?: string // composed value {field1}.{field2}.{field3}.{...
-		}
-	}
+			attrs_entity_type?: string;
+			key?: string; // composed value {field1}.{field2}.{field3}.{...
+		};
+	};
 }

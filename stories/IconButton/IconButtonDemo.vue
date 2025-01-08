@@ -25,5 +25,5 @@
 </template>
 
 <script setup>
-	import FmIconButton from '@/components/fm/IconButton/IconButton.vue'
+	import FmIconButton from '@/components/fm/IconButton/IconButton.vue';
 </script>

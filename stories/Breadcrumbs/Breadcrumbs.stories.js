@@ -1,15 +1,15 @@
-import { ref, watch } from 'vue'
-import FmBreadcrumbs from '@/components/fm/Breadcrumbs/Breadcrumbs.vue'
-import BreadcrumbsDemo from './BreadcrumbsDemo.vue'
+import { ref, watch } from 'vue';
+import FmBreadcrumbs from '@/components/fm/Breadcrumbs/Breadcrumbs.vue';
+import BreadcrumbsDemo from './BreadcrumbsDemo.vue';
 
 const meta = {
 	title: 'Components/FmBreadcrumbs',
 	component: FmBreadcrumbs,
 	argTypes: {},
 	args: {}
-}
+};
 
-export default meta
+export default meta;
 
 export const General = {
 	render: (args) => ({
@@ -17,22 +17,22 @@ export const General = {
 			FmBreadcrumbs
 		},
 		setup() {
-			const key = ref(1)
+			const key = ref(1);
 
 			watch(args, () => {
-				key.value = new Date().getTime()
-			})
+				key.value = new Date().getTime();
+			});
 
 			return {
 				args,
 				key
-			}
+			};
 		},
 		template: `
-        <FmBreadcrumbs v-bind="args" :key="key"/>
-    `
+			<FmBreadcrumbs v-bind="args" :key="key" />
+		`
 	})
-}
+};
 
 export const AllVariants = {
 	render: (args) => ({
@@ -40,9 +40,9 @@ export const AllVariants = {
 			BreadcrumbsDemo
 		},
 		setup() {
-			return { args }
+			return { args };
 		},
 		template: `
-        <BreadcrumbsDemo/>`
+			<BreadcrumbsDemo />`
 	})
-}
+};

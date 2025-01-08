@@ -8,8 +8,8 @@
 </template>
 
 <script setup>
-	import FmCheckbox from '@/components/fm/Checkbox/Checkbox.vue'
-	import { reactive } from 'vue'
+	import FmCheckbox from '@/components/fm/Checkbox/Checkbox.vue';
+	import { reactive } from 'vue';
 
-	const value = reactive({ one: false, two: false, three: true, four: false })
+	const value = reactive({ one: false, two: false, three: true, four: false });
 </script>

@@ -1,19 +1,19 @@
-import { createApp } from 'vue'
-import App from './App.vue'
-import 'vuetify/styles' // Импорт стилей Vuetify
-import '@mdi/font/css/materialdesignicons.css' // Импорт иконок
-import { createVuetify } from 'vuetify'
+import { createApp } from 'vue';
+import App from './App.vue';
+import 'vuetify/styles'; // Импорт стилей Vuetify
+import '@mdi/font/css/materialdesignicons.css'; // Импорт иконок
+import { createVuetify } from 'vuetify';
 
-const vuetify = createVuetify()
+const vuetify = createVuetify();
 
-import FloatingVue from 'floating-vue'
-import 'floating-vue/dist/style.css'
+import FloatingVue from 'floating-vue';
+import 'floating-vue/dist/style.css';
 
-import './assets/css/main.dev.css'
+import './assets/css/main.dev.css';
 
-const app = createApp(App)
+const app = createApp(App);
 
-app.use(vuetify)
+app.use(vuetify);
 
 app.use(FloatingVue, {
 	themes: {
@@ -21,6 +21,6 @@ app.use(FloatingVue, {
 			$extend: 'tooltip'
 		}
 	}
-})
+});
 
-app.mount('#app')
+app.mount('#app');

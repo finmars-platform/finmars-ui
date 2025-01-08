@@ -41,142 +41,142 @@
 </template>
 
 <script setup>
-	import { computed, ref, useSlots, watch } from 'vue'
-	import { VAutocomplete, VIcon, VListItem } from 'vuetify/components'
+	import { computed, ref, useSlots, watch } from 'vue';
+	import { VAutocomplete, VIcon, VListItem } from 'vuetify/components';
 
 	const props = defineProps({
 		id: {
-			type: String,
+			type: String
 		},
 		autoSelectFirst: {
 			type: [String, Boolean],
 			default: false,
 			validator(value) {
 				if (typeof value === 'boolean') {
-					return value
+					return value;
 				}
 
-				return ['exact'].includes(value)
-			},
+				return ['exact'].includes(value);
+			}
 		},
 		modelValue: {
-			type: [String, Number, Object],
+			type: [String, Number, Object]
 		},
 		items: {
 			type: Array,
-			default: () => [],
+			default: () => []
 		},
 		itemTitle: {
 			type: String,
-			default: 'title',
+			default: 'title'
 		},
 		itemValue: {
 			type: String,
-			default: 'value',
+			default: 'value'
 		},
 		placeholder: {
 			type: String,
-			default: 'Search',
+			default: 'Search'
 		},
 		clearOnSelect: {
 			type: Boolean,
-			default: false,
+			default: false
 		},
 		prependInnerIcon: {
 			type: String,
-			default: 'mdi-magnify',
+			default: 'mdi-magnify'
 		},
 		prependIconColor: {
 			type: String,
-			default: 'var(--on-surface-variant)',
+			default: 'var(--on-surface-variant)'
 		},
 		style: {
 			type: Object,
-			default: () => ({}),
+			default: () => ({})
 		},
 		error: {
-			type: Boolean,
+			type: Boolean
 		},
 		errorMessages: {
-			type: [String, Array],
+			type: [String, Array]
 		},
 		filterKeys: {
 			type: [String, Array],
-			default: ['title'],
+			default: ['title']
 		},
 		filterMode: {
 			type: String,
 			default: 'intersection',
-			validator: v => ['every', 'some', 'union', 'intersection'].includes(v),
+			validator: (v) => ['every', 'some', 'union', 'intersection'].includes(v)
 		},
 		hideNoData: {
 			type: Boolean,
-			default: false,
+			default: false
 		},
 		hideSelected: {
 			type: Boolean,
-			default: false,
+			default: false
 		},
 		hideDetails: {
 			type: Boolean,
-			default: true,
+			default: true
 		},
 		hint: {
-			type: String,
+			type: String
 		},
 		loading: {
-			type: Boolean,
+			type: Boolean
 		},
 		minWidth: {
-			type: [String, Number],
+			type: [String, Number]
 		},
 		width: {
-			type: [String, Number],
+			type: [String, Number]
 		},
 		maxWidth: {
-			type: [String, Number],
+			type: [String, Number]
 		},
 		multiple: {
 			type: Boolean,
-			default: false,
+			default: false
 		},
 		chips: {
-			type: Boolean,
+			type: Boolean
 		},
 		closableChips: {
-			type: Boolean,
+			type: Boolean
 		},
 		name: {
-			type: String,
+			type: String
 		},
 		noDataText: {
-			type: String,
+			type: String
 		},
 		noFilter: {
 			type: Boolean,
-			default: false,
+			default: false
 		},
 		openOnClear: {
 			type: Boolean,
-			default: false,
+			default: false
 		},
 		readonly: {
-			type: Boolean,
+			type: Boolean
 		},
 		returnObject: {
-			type: Boolean,
+			type: Boolean
 		},
 		rules: {
 			type: Array,
-			default: () => [],
+			default: () => []
 		},
 		search: {
-			type: String,
+			type: String
 		},
 		disabled: {
-			type: Boolean,
-		},
-	})
+			type: Boolean
+		}
+	});
 
 	const emits = defineEmits([
 		'click:prependInner',
@@ -184,12 +184,12 @@
 		'update:focused',
 		'update:menu',
 		'update:modelValue',
-		'update:search',
-	])
+		'update:search'
+	]);
 
-	const slots = useSlots()
+	const slots = useSlots();
 
-	const searchText = ref(props.searchText)
+	const searchText = ref(props.searchText);
 
 	const vAutocompleteProps = computed(() => ({
 		density: 'comfortable',
@@ -230,28 +230,28 @@
 		rules: props.rules,
 		style: props.style,
 		search: searchText.value,
-		disabled: props.disabled,
-	}))
+		disabled: props.disabled
+	}));
 
 	function updateSearchText(val) {
-		searchText.value = val
+		searchText.value = val;
 	}
 
 	function onClearClick(ev) {
-		searchText.value = ''
-		emits('click:clear', ev)
-		emits('update:search', '')
-		emits('update:modelValue', null)
+		searchText.value = '';
+		emits('click:clear', ev);
+		emits('update:search', '');
+		emits('update:modelValue', null);
 	}
 
 	watch(
 		() => props.searchText,
 		(val) => {
 			if (val !== searchText.value) {
-				searchText.value = val
+				searchText.value = val;
 			}
-		},
-	)
+		}
+	);
 </script>
 
 <style>

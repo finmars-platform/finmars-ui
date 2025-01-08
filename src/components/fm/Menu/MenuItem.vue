@@ -28,7 +28,7 @@
 	</div>
 </template>
 <script setup>
-	import { VIcon } from 'vuetify/components'
+	import { VIcon } from 'vuetify/components';
 
 	const props = defineProps({
 		id: {
@@ -64,5 +64,5 @@
 		prependIcon: {
 			type: [String, undefined]
 		}
-	})
+	});
 </script>

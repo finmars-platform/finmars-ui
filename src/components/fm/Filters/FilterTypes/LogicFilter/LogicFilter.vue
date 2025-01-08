@@ -25,31 +25,35 @@
 </template>
 
 <script lang="ts" setup>
-	import { computed } from 'vue'
-	import get from 'lodash/get'
-	import cloneDeep from 'lodash/cloneDeep'
-	import FmSelect from '@/components/fm/Select/Select.vue'
-	import { SELECTORS_BOOLEAN_OPTIONS } from '../../constants'
-	import type { FmFilterProps, FmFilterEmits, FmFilterSlots } from '../../types'
+	import { computed } from 'vue';
+	import get from 'lodash/get';
+	import cloneDeep from 'lodash/cloneDeep';
+	import FmSelect from '@/components/fm/Select/Select.vue';
+	import { SELECTORS_BOOLEAN_OPTIONS } from '../../constants';
+	import type { FmFilterProps, FmFilterEmits, FmFilterSlots } from '../../types';
 
-	const props = defineProps<FmFilterProps>()
-	const emits = defineEmits<FmFilterEmits>()
-	defineSlots<FmFilterSlots>()
+	const props = defineProps<FmFilterProps>();
+	const emits = defineEmits<FmFilterEmits>();
+	defineSlots<FmFilterSlots>();
 
-	const isFilterTypeMultiselector = computed(() => props.filter?.options?.filter_type === 'multiselector')
+	const isFilterTypeMultiselector = computed(
+		() => props.filter?.options?.filter_type === 'multiselector'
+	);
 
 	const innerValue = computed(() => {
 		if (isFilterTypeMultiselector) {
-			return get(props.filter, ['options', 'filter_values'], [])
+			return get(props.filter, ['options', 'filter_values'], []);
 		}
 
-		return get(props.filter, ['options', 'filter_values', 0])
-	})
+		return get(props.filter, ['options', 'filter_values', 0]);
+	});
 
 	function updateValue(value: boolean | boolean[]) {
-		const updatedFilter = cloneDeep(props.filter)
-		updatedFilter.options.filter_values = isFilterTypeMultiselector ? (value as boolean[]) : [value as boolean]
-		emits('update', updatedFilter)
+		const updatedFilter = cloneDeep(props.filter);
+		updatedFilter.options.filter_values = isFilterTypeMultiselector
+			? (value as boolean[])
+			: [value as boolean];
+		emits('update', updatedFilter);
 	}
 </script>
 

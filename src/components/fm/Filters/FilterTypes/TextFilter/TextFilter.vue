@@ -53,32 +53,34 @@
 </template>
 
 <script lang="ts" setup>
-	import cloneDeep from 'lodash/cloneDeep'
-	import FmChip from '@/components/fm/Chip/Chip.vue'
-	import FmSelect from '@/components/fm/Select/Select.vue'
-	import FmTextField from '@/components/fm/TextField/TextField.vue'
-	import useFilter from '../useFilter'
-	import type { FmFilterProps, FmFilterEmits, FmFilterSlots } from '@/components/fm/Filters/types'
-	import type { FmSelectOption } from '@/components/fm/Select/types'
+	import cloneDeep from 'lodash/cloneDeep';
+	import FmChip from '@/components/fm/Chip/Chip.vue';
+	import FmSelect from '@/components/fm/Select/Select.vue';
+	import FmTextField from '@/components/fm/TextField/TextField.vue';
+	import useFilter from '../useFilter';
+	import type { FmFilterProps, FmFilterEmits, FmFilterSlots } from '@/components/fm/Filters/types';
+	import type { FmSelectOption } from '@/components/fm/Select/types';
 
 	const props = withDefaults(defineProps<FmFilterProps>(), {
 		options: () => [] as FmSelectOption[]
-	})
-	const emits = defineEmits<FmFilterEmits>()
-	defineSlots<FmFilterSlots>()
+	});
+	const emits = defineEmits<FmFilterEmits>();
+	defineSlots<FmFilterSlots>();
 
-	const { simpleMode, selectorMode, emptyMode, displayValueIfSelect } = useFilter(props)
+	const { simpleMode, selectorMode, emptyMode, displayValueIfSelect } = useFilter(props);
 
-	function processAction(action: 'update' | 'delete', value?: any ) {
-		const updatedFilter = cloneDeep(props.filter)
+	function processAction(action: 'update' | 'delete', value?: any) {
+		const updatedFilter = cloneDeep(props.filter);
 
 		if (action === 'delete') {
-			updatedFilter.options.filter_values = []
+			updatedFilter.options.filter_values = [];
 		} else {
-			updatedFilter.options.filter_values = Array.isArray(value) ? (value as string[]) : [value as string]
+			updatedFilter.options.filter_values = Array.isArray(value)
+				? (value as string[])
+				: [value as string];
 		}
 
-		emits('update', updatedFilter)
+		emits('update', updatedFilter);
 	}
 </script>
 

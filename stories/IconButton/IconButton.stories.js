@@ -1,6 +1,6 @@
-import FmIconButton from '@/components/fm/IconButton/IconButton.vue'
-import IconButtonDemo from './IconButtonDemo.vue'
-import { ref, watch } from 'vue'
+import FmIconButton from '@/components/fm/IconButton/IconButton.vue';
+import IconButtonDemo from './IconButtonDemo.vue';
+import { ref, watch } from 'vue';
 
 const meta = {
 	title: 'Components/FmIconButton',
@@ -8,26 +8,26 @@ const meta = {
 	argTypes: {
 		icon: {
 			control: 'select',
-			options: ['mdi-plus', 'mdi-open-in-new'],
+			options: ['mdi-plus', 'mdi-open-in-new']
 		},
 		size: {
 			control: 'select',
-			options: ['normal', 'small'],
+			options: ['normal', 'small']
 		},
 		variant: {
 			control: 'select',
-			options: ['flat', 'outlined', 'text', 'tonal'],
+			options: ['flat', 'outlined', 'text', 'tonal']
 		}
 	},
 	args: {
 		size: 'normal',
 		variant: 'flat',
 		disabled: false,
-		icon: 'mdi-plus',
-	},
-}
+		icon: 'mdi-plus'
+	}
+};
 
-export default meta
+export default meta;
 
 export const Default = {
 	render: (args) => ({
@@ -35,21 +35,21 @@ export const Default = {
 			FmIconButton
 		},
 		setup() {
-			const key = ref(1)
+			const key = ref(1);
 
 			watch(args, () => {
-				key.value = new Date().getTime()
-			})
+				key.value = new Date().getTime();
+			});
 
 			return {
 				args,
 				key
-			}
+			};
 		},
 		template: `
-          <FmIconButton v-bind="args" :key="key"/>`
+			<FmIconButton v-bind="args" :key="key" />`
 	})
-}
+};
 
 export const List = {
 	render: (args) => ({
@@ -59,9 +59,9 @@ export const List = {
 		setup() {
 			return {
 				args
-			}
+			};
 		},
 		template: `
-          <IconButtonDemo />`
+			<IconButtonDemo />`
 	})
-}
+};

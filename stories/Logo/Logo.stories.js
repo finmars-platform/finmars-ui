@@ -1,6 +1,6 @@
-import FmLogo from '@/components/fm/Logo/Logo.vue'
-import { ref, watch } from 'vue'
-import { useTheme } from 'vuetify'
+import FmLogo from '@/components/fm/Logo/Logo.vue';
+import { ref, watch } from 'vue';
+import { useTheme } from 'vuetify';
 
 const meta = {
 	title: 'Components/FmLogo',
@@ -18,9 +18,9 @@ const meta = {
 		}
 	},
 	args: {}
-}
+};
 
-export default meta
+export default meta;
 
 export const Default = {
 	render: (args) => ({
@@ -28,20 +28,20 @@ export const Default = {
 			FmLogo
 		},
 		setup() {
-			const key = ref(1)
-			const theme = useTheme()
+			const key = ref(1);
+			const theme = useTheme();
 
 			watch(args, () => {
-				key.value = new Date().getTime()
-			})
+				key.value = new Date().getTime();
+			});
 
 			return {
 				args,
 				key,
 				theme
-			}
+			};
 		},
 		template: `
-          <FmLogo v-bind="args" :theme="theme?.global?.name?.value" maxHeight="30" :key="key"/>`
+			<FmLogo v-bind="args" :theme="theme?.global?.name?.value" maxHeight="30" :key="key" />`
 	})
-}
+};

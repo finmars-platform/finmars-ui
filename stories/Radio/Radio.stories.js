@@ -1,15 +1,15 @@
-import { ref, watch } from 'vue'
-import FmRadio from '@/components/fm/Radio/Radio.vue'
-import RadioDemo from './RadioDemo.vue'
+import { ref, watch } from 'vue';
+import FmRadio from '@/components/fm/Radio/Radio.vue';
+import RadioDemo from './RadioDemo.vue';
 
 const meta = {
 	title: 'Components/FmRadio',
 	component: FmRadio,
 	argTypes: {},
-	args: {},
-}
+	args: {}
+};
 
-export default meta
+export default meta;
 
 export const Default = {
 	render: (args) => ({
@@ -17,20 +17,21 @@ export const Default = {
 			FmRadio
 		},
 		setup() {
-			const key = ref(1)
+			const key = ref(1);
 
 			watch(args, () => {
-				key.value = new Date().getTime()
-			})
+				key.value = new Date().getTime();
+			});
 
 			return {
 				args,
 				key
-			}
+			};
 		},
-		template: `<FmRadio v-bind="args" :key="key" />`,
+		template: `
+			<FmRadio v-bind="args" :key="key" />`
 	})
-}
+};
 
 export const Selected = {
 	render: (args) => ({
@@ -39,20 +40,23 @@ export const Selected = {
 		},
 		setup() {
 			return {
-				args,
-			}
+				args
+			};
 		},
-		template: `<FmRadio :model-value="true" />`,
+		template: `
+			<FmRadio :model-value="true" />`
 	})
-}
+};
 
 export const AllVariants = {
 	render: (args) => ({
 		components: {
-			RadioDemo		},
-		setup() {
-			return { args }
+			RadioDemo
 		},
-		template: `<RadioDemo />`,
+		setup() {
+			return { args };
+		},
+		template: `
+			<RadioDemo />`
 	})
-}
+};

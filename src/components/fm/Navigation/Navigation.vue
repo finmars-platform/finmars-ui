@@ -10,9 +10,7 @@
 			}
 		]"
 	>
-		<div
-			class="scroll-variant-thin overflow-y-scroll max-h-[calc(100vh-132px)]"
-		>
+		<div class="scroll-variant-thin overflow-y-scroll max-h-[calc(100vh-132px)]">
 			<NavigationItem
 				v-for="item in items"
 				:key="item.key"
@@ -60,37 +58,37 @@
 </template>
 
 <script setup>
-	import Navigation from '@/components/fm/Navigation/Navigation.vue'
-	import NavigationItem from '@/components/fm/Navigation/NavigationItem.vue'
-	import FmIconButton from '@/components/fm/IconButton/IconButton.vue'
-	import { ref } from 'vue'
+	import Navigation from '@/components/fm/Navigation/Navigation.vue';
+	import NavigationItem from '@/components/fm/Navigation/NavigationItem.vue';
+	import FmIconButton from '@/components/fm/IconButton/IconButton.vue';
+	import { ref } from 'vue';
 
 	const props = defineProps({
 		isFloat: Boolean, // only for self
 		items: Array,
 		alternativeLink: String, // for NuxtLink or RouterLink
 		route: Object // $route of main app
-	})
+	});
 
-	const emit = defineEmits(['close', 'resizeSideNav'])
+	const emit = defineEmits(['close', 'resizeSideNav']);
 
-	const isOnlyIcon = ref(false)
+	const isOnlyIcon = ref(false);
 
 	async function onIconClick() {
 		if (props.isFloat) {
-			emit('close')
+			emit('close');
 		} else {
-			setIsOnlyIcon(true)
+			setIsOnlyIcon(true);
 		}
 	}
 
 	async function onClose() {
-		setIsOnlyIcon(false)
+		setIsOnlyIcon(false);
 	}
 
 	function setIsOnlyIcon(val) {
-		isOnlyIcon.value = val
-		emit('resizeSideNav', isOnlyIcon.value)
+		isOnlyIcon.value = val;
+		emit('resizeSideNav', isOnlyIcon.value);
 	}
 </script>
 
@@ -134,9 +132,7 @@
 		--sidenavOption-activated-color: var(--on-surface);
 
 		/* Disabled */
-		--sidenavOption-disabled-backgroundColor: var(
-			--sidenavOption-backgroundColor
-		);
+		--sidenavOption-disabled-backgroundColor: var(--sidenavOption-backgroundColor);
 		--sidenavOption-disabled-color: var(--sidenavOption-color);
 
 		/* --sidenavOption2 (options inside the first level groups) */
@@ -148,21 +144,15 @@
 		/* Hover */
 
 		/* Focus */
-		--sidenavOption2-focus-backgroundColor: var(
-			--sidenavOption-focus-backgroundColor
-		);
+		--sidenavOption2-focus-backgroundColor: var(--sidenavOption-focus-backgroundColor);
 
 		/* Active (called Pressed inside figma) */
-		--sidenavOption2-active-backgroundColor: var(
-			--sidenavOption-active-backgroundColor
-		);
+		--sidenavOption2-active-backgroundColor: var(--sidenavOption-active-backgroundColor);
 
 		--sidenavOption2-activated-color: var(--sidenavOption-activated-color);
 
 		/* Disabled */
-		--sidenavOption2-disabled-backgroundColor: var(
-			--sidenavOption-backgroundColor
-		);
+		--sidenavOption2-disabled-backgroundColor: var(--sidenavOption-backgroundColor);
 		--sidenavOption2-disabled-color: var(--sidenavOption-color);
 
 		/* --sidenavOption3 (options inside the second level groups) */
@@ -172,24 +162,16 @@
 
 		/* States of sidenav options */
 		/* Hover */
-		--sidenavOption3-hover-backgroundColor: var(
-			--sidenavOption-hover-backgroundColor
-		);
+		--sidenavOption3-hover-backgroundColor: var(--sidenavOption-hover-backgroundColor);
 		--sidenavOption3-focus-color: var(--sidenavOption-focus-color);
 		/* Active (called Pressed inside figma) */
-		--sidenavOption3-active-backgroundColor: var(
-			--sidenavOption-active-backgroundColor
-		);
+		--sidenavOption3-active-backgroundColor: var(--sidenavOption-active-backgroundColor);
 		/* Activated (Highlighted menu option that matches to the web page that a user currently on) */
-		--sidenavOption3-activated-backgroundColor: var(
-			--sidenavOption-activated-backgroundColor
-		);
+		--sidenavOption3-activated-backgroundColor: var(--sidenavOption-activated-backgroundColor);
 		--sidenavOption3-activated-color: var(--sidenavOption-activated-color);
 
 		/* Disabled */
-		--sidenavOption3-disabled-backgroundColor: var(
-			--sidenavOption-backgroundColor
-		);
+		--sidenavOption3-disabled-backgroundColor: var(--sidenavOption-backgroundColor);
 		--sidenavOption3-disabled-color: var(--sidenavOption-color);
 
 		/* Footer */

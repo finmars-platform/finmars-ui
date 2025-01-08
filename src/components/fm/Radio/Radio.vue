@@ -16,47 +16,44 @@
 </template>
 
 <script setup>
-	import { computed, ref, watch } from 'vue'
-	import { VRadio } from 'vuetify/components'
+	import { computed, ref, watch } from 'vue';
+	import { VRadio } from 'vuetify/components';
 
 	const props = defineProps({
 		modelValue: {
-			type: [String, Number, Boolean],
+			type: [String, Number, Boolean]
 		},
 		value: {
-			type: [String, Number, Boolean],
+			type: [String, Number, Boolean]
 		},
 		id: {
-			type: String,
+			type: String
 		},
 		name: {
-			type: String,
+			type: String
 		},
 		label: {
-			type: String,
+			type: String
 		},
 		falseValue: {
 			type: [String, Number, Boolean, undefined],
-			default: undefined,
+			default: undefined
 		},
 		trueValue: {
 			type: [String, Number, Boolean, undefined],
-			default: undefined,
+			default: undefined
 		},
 		readonly: {
-			type: Boolean,
+			type: Boolean
 		},
 		disabled: {
-			type: Boolean,
-		},
-	})
+			type: Boolean
+		}
+	});
 
-	const emits = defineEmits([
-		'click',
-		'update:modelValue',
-	]);
+	const emits = defineEmits(['click', 'update:modelValue']);
 
-	const innerValue = ref(props.modelValue)
+	const innerValue = ref(props.modelValue);
 
 	const vRadioProps = computed(() => ({
 		type: 'radio',
@@ -68,16 +65,16 @@
 		falseValue: props.falseValue,
 		trueValue: props.trueValue,
 		readonly: props.readonly,
-		disabled: props.disabled,
-	}))
+		disabled: props.disabled
+	}));
 
 	watch(
 		() => innerValue.value,
 		(val) => {
-			emits('update:modelValue', val)
+			emits('update:modelValue', val);
 		},
-		{ immediate: true },
-	)
+		{ immediate: true }
+	);
 </script>
 
 <style scoped>

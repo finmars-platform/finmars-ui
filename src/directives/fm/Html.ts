@@ -5,10 +5,10 @@ function setValue(el: Element, binding: DirectiveBinding) {
 	const { sanitize, classes } = binding.modifiers;
 	el.innerHTML = sanitize
 		? sanitizeHtml(binding.value, {
-			...(classes && {
-				allowedAttributes: { '*': ['class'] }
+				...(classes && {
+					allowedAttributes: { '*': ['class'] }
+				})
 			})
-		})
 		: binding.value;
 }
 

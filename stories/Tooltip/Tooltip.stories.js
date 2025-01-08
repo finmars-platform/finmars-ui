@@ -1,46 +1,46 @@
-import { ref, watch } from 'vue'
-import FmTooltip from '@/components/fm/Tooltip/Tooltip.vue'
-import FmButton from '@/components/fm/Button/Button.vue'
-import TooltipDemo from './TooltipDemo.vue'
+import { ref, watch } from 'vue';
+import FmTooltip from '@/components/fm/Tooltip/Tooltip.vue';
+import FmButton from '@/components/fm/Button/Button.vue';
+import TooltipDemo from './TooltipDemo.vue';
 
 const meta = {
 	title: 'Components/FmTooltip',
 	component: FmTooltip,
 	argTypes: {},
-	args: {},
-}
+	args: {}
+};
 
-export default meta
+export default meta;
 
 export const General = {
 	render: (args) => ({
 		components: {
 			FmButton,
-			FmTooltip,
+			FmTooltip
 		},
 		setup() {
-			const key = ref(1)
+			const key = ref(1);
 
 			watch(args, () => {
-				key.value = new Date().getTime()
-			})
+				key.value = new Date().getTime();
+			});
 
 			return {
 				args,
 				key
-			}
+			};
 		},
 		template: `
 			<FmTooltip v-bind="args" :key="key">
 				<template #activator="{ props }">
 					<FmButton v-bind="props">Hover Over Me</FmButton>
 				</template>
-				
+
 				<span>Tooltip text</span>
 			</FmTooltip>
-		`,
+		`
 	})
-}
+};
 
 export const AllVariants = {
 	render: (args) => ({
@@ -48,8 +48,9 @@ export const AllVariants = {
 			TooltipDemo
 		},
 		setup() {
-			return { args }
+			return { args };
 		},
-		template: `<TooltipDemo />`,
+		template: `
+			<TooltipDemo />`
 	})
-}
+};

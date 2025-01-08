@@ -33,9 +33,9 @@
 </template>
 
 <script setup>
-	import FmFileUpload from '@/components/fm/FileUpload/FileUpload.vue'
+	import FmFileUpload from '@/components/fm/FileUpload/FileUpload.vue';
 
 	const getBrowsedFiles = (files) => {
-		console.log('Uploaded files array:', files)
-	}
+		console.log('Uploaded files array:', files);
+	};
 </script>

@@ -1,7 +1,7 @@
-import { ref, watch } from 'vue'
-import FmMenu from '@/components/fm/Menu/Menu.vue'
-import FmButton from '@/components/fm/Button/Button.vue'
-import MenuDemo from './MenuDemo.vue'
+import { ref, watch } from 'vue';
+import FmMenu from '@/components/fm/Menu/Menu.vue';
+import FmButton from '@/components/fm/Button/Button.vue';
+import MenuDemo from './MenuDemo.vue';
 
 const meta = {
 	title: 'Components/FmMenu',
@@ -9,40 +9,36 @@ const meta = {
 	argTypes: {
 		itemSize: {
 			control: 'select',
-			options: ['small', 'medium', 'large'],
+			options: ['small', 'medium', 'large']
 		}
 	},
 	args: {}
-}
+};
 
-export default meta
+export default meta;
 
 export const Default = {
 	render: (args) => ({
 		components: {
 			FmMenu,
-			FmButton,
+			FmButton
 		},
 		setup() {
-			const key = ref(1)
-			const v = ref(false)
+			const key = ref(1);
+			const v = ref(false);
 
-			const items = ref([
-				{ title: 'Item 1' },
-				{ title: 'Item 2' },
-				{ title: 'Item 3' },
-			])
+			const items = ref([{ title: 'Item 1' }, { title: 'Item 2' }, { title: 'Item 3' }]);
 
 			watch(args, () => {
-				key.value = new Date().getTime()
-			})
+				key.value = new Date().getTime();
+			});
 
 			return {
 				args,
 				items,
 				v,
-				key,
-			}
+				key
+			};
 		},
 		template: `
 			<FmMenu v-bind="args" :key="key" v-model="v" :items="items">
@@ -54,7 +50,7 @@ export const Default = {
 			</FmMenu>
 		`
 	})
-}
+};
 
 export const AllVariants = {
 	render: (args) => ({
@@ -62,8 +58,9 @@ export const AllVariants = {
 			MenuDemo
 		},
 		setup() {
-			return { args }
+			return { args };
 		},
-		template: `<MenuDemo />`,
+		template: `
+			<MenuDemo />`
 	})
-}
+};

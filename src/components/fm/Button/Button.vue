@@ -35,15 +35,15 @@
 </template>
 
 <script setup>
-	import { computed } from 'vue'
-	import { VBtn, VIcon, VProgressCircular } from 'vuetify/components'
+	import { computed } from 'vue';
+	import { VBtn, VIcon, VProgressCircular } from 'vuetify/components';
 
 	const props = defineProps({
 		type: {
 			type: String,
 			default: 'primary',
 			validator(value) {
-				return ['primary', 'secondary', 'tertiary'].includes(value)
+				return ['primary', 'secondary', 'tertiary'].includes(value);
 			}
 		},
 		href: {
@@ -79,7 +79,7 @@
 		icon: {
 			type: Boolean
 		}
-	})
+	});
 
 	const vBtnProps = computed(() => {
 		const value = {
@@ -95,33 +95,33 @@
 			...(props.tag && { tag: props.tag }),
 			...(props.icon && { icon: props.icon }),
 			...(props.symbol && { symbol: props.symbol })
-		}
+		};
 
 		if (props.type === 'primary') {
-			value['base-color'] = 'var(--on-primary)'
-			value.color = 'var(--primary)'
+			value['base-color'] = 'var(--on-primary)';
+			value.color = 'var(--primary)';
 		}
 
-		return value
-	})
+		return value;
+	});
 
 	const vBtnStyle = computed(() => {
-		const value = {}
+		const value = {};
 
 		if (props.type === 'primary') {
-			value['--color-fmButton'] = 'var(--on-primary)'
+			value['--color-fmButton'] = 'var(--on-primary)';
 		}
 
 		if (props.type === 'secondary') {
-			value['--color-fmButton'] = 'var(--primary)'
+			value['--color-fmButton'] = 'var(--primary)';
 		}
 
 		if (props.type === 'tertiary') {
-			value['--color-fmButton'] = 'var(--on-surface)'
+			value['--color-fmButton'] = 'var(--on-surface)';
 		}
 
-		return value
-	})
+		return value;
+	});
 </script>
 
 <style lang="scss" scoped>

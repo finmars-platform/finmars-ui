@@ -64,46 +64,46 @@
 </template>
 
 <script lang="ts" setup>
-	import { computed, ref } from 'vue'
-	import { Ripple } from 'vuetify/directives'
-	import FmIcon from '../Icon/Icon.vue'
-	import FmTooltip from '../Tooltip/Tooltip.vue'
-	import type { FmComponentIcon } from '@/types'
-	import type { FmChipProps, FmChipEmits, FmChipSlots } from './types'
+	import { computed, ref } from 'vue';
+	import { Ripple } from 'vuetify/directives';
+	import FmIcon from '../Icon/Icon.vue';
+	import FmTooltip from '../Tooltip/Tooltip.vue';
+	import type { FmComponentIcon } from '@/types';
+	import type { FmChipProps, FmChipEmits, FmChipSlots } from './types';
 
-	const vRipple = Ripple
-	const columnGap = 6
+	const vRipple = Ripple;
+	const columnGap = 6;
 
 	const props = withDefaults(defineProps<FmChipProps>(), {
 		type: 'standard'
-	})
-	const emits = defineEmits<FmChipEmits>()
-	defineSlots<FmChipSlots>()
+	});
+	const emits = defineEmits<FmChipEmits>();
+	defineSlots<FmChipSlots>();
 
-	const chipEl = ref<HTMLDivElement | null>(null)
+	const chipEl = ref<HTMLDivElement | null>(null);
 
-	const heightValue = computed(() => props.compact ? '24px' : '32px')
+	const heightValue = computed(() => (props.compact ? '24px' : '32px'));
 
-	const columnGapValue = computed(() => `${columnGap}px`)
+	const columnGapValue = computed(() => `${columnGap}px`);
 
-	const prependIconValue = computed(() => getIconProps(props.prependIcon))
+	const prependIconValue = computed(() => getIconProps(props.prependIcon));
 
-	const appendIconValue = computed(() => getIconProps(props.appendIcon))
+	const appendIconValue = computed(() => getIconProps(props.appendIcon));
 
 	const contentWidthGap = computed(() => {
-		let res = 0
+		let res = 0;
 		if (props.closable) {
-			res = res + 16 + columnGap
+			res = res + 16 + columnGap;
 		}
 		if (prependIconValue.value) {
-			res = res + Number(prependIconValue.value.size!) + columnGap
+			res = res + Number(prependIconValue.value.size!) + columnGap;
 		}
 		if (appendIconValue.value) {
-			res = res + Number(appendIconValue.value.size!) + columnGap
+			res = res + Number(appendIconValue.value.size!) + columnGap;
 		}
 
-		return res
-	})
+		return res;
+	});
 
 	const tooltipProps = computed(() => {
 		return typeof props.tooltip === 'string'
@@ -114,14 +114,12 @@
 			: {
 					tooltip: props.tooltip?.value,
 					location: props.tooltip?.location || 'top'
-				}
-	})
+				};
+	});
 
-	function getIconProps(
-		data?: FmComponentIcon | string
-	): FmComponentIcon | false {
+	function getIconProps(data?: FmComponentIcon | string): FmComponentIcon | false {
 		if (!data) {
-			return false
+			return false;
 		}
 
 		if (typeof data === 'string') {
@@ -132,11 +130,11 @@
 					props.type === 'standard'
 						? 'var(--fmChip-standard-color)'
 						: 'var(--fmChip-outlined-color)'
-			}
+			};
 		}
 
 		if (!data.icon) {
-			return false
+			return false;
 		}
 
 		return {
@@ -147,49 +145,49 @@
 				(props.type === 'standard'
 					? 'var(--fmChip-standard-color)'
 					: 'var(--fmChip-outlined-color)')
-		}
+		};
 	}
 
 	function onClick(ev: MouseEvent) {
-		ev.preventDefault()
-		ev.stopImmediatePropagation()
-		emits('click', { event: ev, element: chipEl.value! })
+		ev.preventDefault();
+		ev.stopImmediatePropagation();
+		emits('click', { event: ev, element: chipEl.value! });
 	}
 
 	function onKeyDown(ev: KeyboardEvent) {
 		// ev.preventDefault()
-		ev.stopImmediatePropagation()
-		emits('keydown', ev)
+		ev.stopImmediatePropagation();
+		emits('keydown', ev);
 	}
 
 	function onPrependClick(ev: MouseEvent) {
 		if (props.disabled || props.readonly) {
-			return
+			return;
 		}
 
-		ev.preventDefault()
-		ev.stopImmediatePropagation()
-		emits('click:prepend', ev)
+		ev.preventDefault();
+		ev.stopImmediatePropagation();
+		emits('click:prepend', ev);
 	}
 
 	function onAppendClick(ev: MouseEvent) {
 		if (props.disabled || props.readonly) {
-			return
+			return;
 		}
 
-		ev.preventDefault()
-		ev.stopImmediatePropagation()
-		emits('click:append', ev)
+		ev.preventDefault();
+		ev.stopImmediatePropagation();
+		emits('click:append', ev);
 	}
 
 	function onCloseClick(ev: MouseEvent) {
 		if (props.disabled || props.readonly) {
-			return
+			return;
 		}
 
-		ev.preventDefault()
-		ev.stopImmediatePropagation()
-		emits('click:close', ev)
+		ev.preventDefault();
+		ev.stopImmediatePropagation();
+		emits('click:close', ev);
 	}
 </script>
 

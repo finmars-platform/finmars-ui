@@ -3,28 +3,13 @@
 		class="flex w-full items-center max-h-20 h-20 py-3 px-[22px] gap-x-4 border-b-[1px] border-[var(--outline-variant)] border-solid"
 	>
 		<FmLogo :theme="isDark ? 'dark' : 'light'" :logo="logo" class="mr-12" />
-		<FmSearch
-			v-if="false"
-			class="max-w-[360px]"
-			rounded
-			:hideDetails="false"
-			variant="solo"
-		/>
+		<FmSearch v-if="false" class="max-w-[360px]" rounded :hideDetails="false" variant="solo" />
 
-		<FmIconButton
-			icon="mdi-bell-outline"
-			size="normal"
-			variant="text"
-			class="ml-auto"
-		>
+		<FmIconButton icon="mdi-bell-outline" size="normal" variant="text" class="ml-auto">
 			<FmMenu v-model="menus.notifications" activator="parent">
 				<div class="mx-auto text-center flex flex-col">
 					<template v-if="notifications?.length">
-						<div
-							class="fm_message_item"
-							v-for="(item, index) in notifications"
-							:key="index"
-						>
+						<div class="fm_message_item" v-for="(item, index) in notifications" :key="index">
 							<div class="flex sb">
 								<div class="fm_message_item_date">
 									{{ formatDate(item.created) }}
@@ -60,11 +45,7 @@
 				</a>
 			</FmMenu>
 		</FmIconButton>
-		<FmButton
-			type="secondary"
-			append-icon="mdi-chevron-down"
-			v-if="currentWorkspaceName"
-		>
+		<FmButton type="secondary" append-icon="mdi-chevron-down" v-if="currentWorkspaceName">
 			{{ currentWorkspaceName }}
 			<FmMenu v-model="menus.workspaces" activator="parent">
 				<MenuItem
@@ -82,17 +63,9 @@
 			</FmAvatar>
 			<FmMenu v-model="menus.profile" activator="parent">
 				<MenuItem itemSize="large" @click="emit('profile')" title="Profile" />
-				<MenuItem
-					itemSize="large"
-					@click="emit('security')"
-					title="Account Security"
-				/>
+				<MenuItem itemSize="large" @click="emit('security')" title="Account Security" />
 				<VDivider opacity="1" class="border-[var(--outline-variant)] mb-2" />
-				<MenuItem
-					itemSize="large"
-					title="User interface"
-					appendIcon="mdi-menu-right"
-				>
+				<MenuItem itemSize="large" title="User interface" appendIcon="mdi-menu-right">
 					<FmMenu
 						:openOnFocus="false"
 						:openOnHover="true"
@@ -116,11 +89,7 @@
 				</MenuItem>
 				<VDivider opacity="1" class="border-[var(--outline-variant)] mt-2" />
 				<a :href="logoutUrl">
-					<MenuItem
-						itemSize="large"
-						@click="emit('security')"
-						title="Log Out"
-					/>
+					<MenuItem itemSize="large" @click="emit('security')" title="Log Out" />
 				</a>
 			</FmMenu>
 		</FmButton>
@@ -128,19 +97,19 @@
 </template>
 
 <script setup>
-	import FmLogo from '@/components/fm/Logo/Logo.vue'
-	import FmSearch from '@/components/fm/Search/Search.vue'
-	import FmIconButton from '@/components/fm/IconButton/IconButton.vue'
-	import FmButton from '@/components/fm/Button/Button.vue'
-	import FmMenu from '@/components/fm/Menu/Menu.vue'
-	import FmAvatar from '@/components/fm/Avatar/Avatar.vue'
-	import { VDivider } from 'vuetify/components'
-	import dayjs from 'dayjs'
-	import relativeTime from 'dayjs/plugin/relativeTime'
-	import MenuItem from '../src/components/fm/Menu/MenuItem.vue'
-	import { reactive } from 'vue'
+	import FmLogo from '@/components/fm/Logo/Logo.vue';
+	import FmSearch from '@/components/fm/Search/Search.vue';
+	import FmIconButton from '@/components/fm/IconButton/IconButton.vue';
+	import FmButton from '@/components/fm/Button/Button.vue';
+	import FmMenu from '@/components/fm/Menu/Menu.vue';
+	import FmAvatar from '@/components/fm/Avatar/Avatar.vue';
+	import { VDivider } from 'vuetify/components';
+	import dayjs from 'dayjs';
+	import relativeTime from 'dayjs/plugin/relativeTime';
+	import MenuItem from '../src/components/fm/Menu/MenuItem.vue';
+	import { reactive } from 'vue';
 
-	dayjs.extend(relativeTime)
+	dayjs.extend(relativeTime);
 
 	defineProps({
 		notifications: {
@@ -173,9 +142,9 @@
 		letters: {
 			type: String
 		}
-	})
+	});
 
-	const emit = defineEmits(['profile', 'setTheme', 'security', 'setCurrent'])
+	const emit = defineEmits(['profile', 'setTheme', 'security', 'setCurrent']);
 
 	const menus = reactive({
 		notifications: false,
@@ -183,7 +152,7 @@
 		workspaces: false,
 		profile: false,
 		interface: false
-	})
+	});
 
 	const SECTIONS = {
 		1: 'Events',
@@ -196,12 +165,11 @@
 		8: 'Activity log',
 		9: 'Schedules',
 		10: 'Other'
-	}
+	};
 
 	function formatDate(date) {
-		if (dayjs().diff(dayjs(date), 'hours') > 12)
-			return dayjs(date).format('DD.MM.YYYY HH:mm')
+		if (dayjs().diff(dayjs(date), 'hours') > 12) return dayjs(date).format('DD.MM.YYYY HH:mm');
 
-		return dayjs(date).fromNow()
+		return dayjs(date).fromNow();
 	}
 </script>

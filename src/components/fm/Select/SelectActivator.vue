@@ -29,20 +29,21 @@
 		/>
 
 		<div
-			:class="
-				[
-					'fm-select-activator__body',
-					{
-						'fm-select-activator__body--shorter': (clearable && value) || prependIcon,
-						'fm-select-activator__body--shortest': (clearable && value) && prependIcon,
-					}
-				]
-			"
+			:class="[
+				'fm-select-activator__body',
+				{
+					'fm-select-activator__body--shorter': (clearable && value) || prependIcon,
+					'fm-select-activator__body--shortest': clearable && value && prependIcon
+				}
+			]"
 		>
 			<div
 				v-if="label"
 				class="truncate"
-				:class="['fm-select-activator__label', { 'fm-select-activator__label--shifted': isLabelShifted }]"
+				:class="[
+					'fm-select-activator__label',
+					{ 'fm-select-activator__label--shifted': isLabelShifted }
+				]"
 			>
 				{{ label }}
 			</div>
@@ -51,11 +52,7 @@
 				v-if="isFocused || value || (persistentPlaceholder && placeholder)"
 				class="fm-select-activator__content"
 			>
-				<div
-					v-if="showPlaceholder"
-					class="truncate"
-					:class="['fm-select-activator__placeholder']"
-				>
+				<div v-if="showPlaceholder" class="truncate" :class="['fm-select-activator__placeholder']">
 					{{ placeholder }}
 				</div>
 
@@ -87,51 +84,61 @@
 </template>
 
 <script setup lang="ts">
-	import { computed, onMounted, ref } from 'vue'
-	import FmIcon from '@/components/fm/Icon/Icon.vue'
-	import type { FmSelectActivatorProps, FmSelectActivatorEmits, FmSelectActivatorSlots } from './types'
+	import { computed, onMounted, ref } from 'vue';
+	import FmIcon from '@/components/fm/Icon/Icon.vue';
+	import type {
+		FmSelectActivatorProps,
+		FmSelectActivatorEmits,
+		FmSelectActivatorSlots
+	} from './types';
 
 	const props = withDefaults(defineProps<FmSelectActivatorProps>(), {
 		variant: 'standard'
-	})
-	const emits = defineEmits<FmSelectActivatorEmits>()
-	defineSlots<FmSelectActivatorSlots>()
+	});
+	const emits = defineEmits<FmSelectActivatorEmits>();
+	defineSlots<FmSelectActivatorSlots>();
 
-	const activatorEl = ref<HTMLDivElement | null>(null)
-	const isFocused = ref(false)
+	const activatorEl = ref<HTMLDivElement | null>(null);
+	const isFocused = ref(false);
 
-	const widthValue = computed(() => props.width ? `${props.width}px` : '100%')
-	const heightValue = computed(() => props.compact ? '40px' : '56px')
-	const isLabelShifted = computed(() => isFocused.value || props.persistentPlaceholder || props.value)
-	const showPlaceholder = computed(() => (props.placeholder && !props.value && isFocused.value) || (props.persistentPlaceholder && !props.value))
+	const widthValue = computed(() => (props.width ? `${props.width}px` : '100%'));
+	const heightValue = computed(() => (props.compact ? '40px' : '56px'));
+	const isLabelShifted = computed(
+		() => isFocused.value || props.persistentPlaceholder || props.value
+	);
+	const showPlaceholder = computed(
+		() =>
+			(props.placeholder && !props.value && isFocused.value) ||
+			(props.persistentPlaceholder && !props.value)
+	);
 
 	function onFocus(ev: FocusEvent) {
 		if (props.disabled) {
-			return
+			return;
 		}
 
-		isFocused.value = true
-		emits('focus', ev)
+		isFocused.value = true;
+		emits('focus', ev);
 	}
 
 	function onBlur(ev: FocusEvent) {
 		if (props.disabled) {
-			return
+			return;
 		}
 
-		isFocused.value = false
-		emits('blur', ev)
+		isFocused.value = false;
+		emits('blur', ev);
 	}
 
 	function onKeydown(event: KeyboardEvent, key: 'down' | 'up' | 'esc' | 'enter' | 'space' | 'tab') {
-		event.preventDefault()
-		event.stopImmediatePropagation()
-		emits('keydown', { event, key })
+		event.preventDefault();
+		event.stopImmediatePropagation();
+		emits('keydown', { event, key });
 	}
 
 	onMounted(() => {
-		activatorEl.value && emits('init', activatorEl.value)
-	})
+		activatorEl.value && emits('init', activatorEl.value);
+	});
 </script>
 
 <style lang="scss" scoped>
@@ -152,7 +159,7 @@
 		padding: 0 12px;
 		column-gap: 4px;
 
-		&:focus-visible	{
+		&:focus-visible {
 			outline: none;
 		}
 
@@ -160,11 +167,19 @@
 			cursor: pointer;
 
 			&.fm-select-activator--standard {
-				background-color: color-mix(in srgb, var(--backgroundColor-standard-fmSelectActivator) 90%, transparent);
+				background-color: color-mix(
+					in srgb,
+					var(--backgroundColor-standard-fmSelectActivator) 90%,
+					transparent
+				);
 			}
 
 			&.fm-select-activator--outlined {
-				background-color: color-mix(in srgb, var(--backgroundColor-outlined-fmSelectActivator) 90%, transparent);
+				background-color: color-mix(
+					in srgb,
+					var(--backgroundColor-outlined-fmSelectActivator) 90%,
+					transparent
+				);
 			}
 		}
 

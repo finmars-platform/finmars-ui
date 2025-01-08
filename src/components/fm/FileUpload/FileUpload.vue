@@ -24,11 +24,7 @@
 							@click="toggleUploadPanel"
 							:icon="isUploadPanelOpen ? 'mdi-chevron-down' : 'mdi-chevron-up'"
 						/>
-						<FmDialog
-							@is-confirm="confirm"
-							:title="dialogTitle"
-							:content="dialogContent"
-						/>
+						<FmDialog @is-confirm="confirm" :title="dialogTitle" :content="dialogContent" />
 					</div>
 				</div>
 				<transition name="slide">
@@ -48,13 +44,13 @@
 </template>
 
 <script setup lang="ts">
-	import { reactive, ref } from 'vue'
-	import { getRandomString } from '@/utils'
-	import FmIconButton from '@/components/fm/IconButton/IconButton.vue'
-	import FmFileUploadProcessing from '@/components/fm/FileUpload/FileUploadProcessing.vue'
-	import FmIcon from '@/components/fm/Icon/Icon.vue'
-	import FmDialog from '@/components/fm/FileUpload/Dialog.vue'
-	import type { FmFileUploadProps, FmUploadFile } from './types'
+	import { reactive, ref } from 'vue';
+	import { getRandomString } from '@/utils';
+	import FmIconButton from '@/components/fm/IconButton/IconButton.vue';
+	import FmFileUploadProcessing from '@/components/fm/FileUpload/FileUploadProcessing.vue';
+	import FmIcon from '@/components/fm/Icon/Icon.vue';
+	import FmDialog from '@/components/fm/FileUpload/Dialog.vue';
+	import type { FmFileUploadProps, FmUploadFile } from './types';
 
 	withDefaults(defineProps<FmFileUploadProps>(), {
 		icon: 'mdi-file-upload-outline',
@@ -64,87 +60,85 @@
 		dialogContent: 'Are you sure that you want to cancel uploading files?',
 		multiple: true,
 		indeterminate: false
-	})
+	});
 
-	const isUploadPanelOpen = ref<boolean>(true)
-	const fileInputRef = ref<HTMLInputElement | null>(null)
-	const files = ref<FmUploadFile[]>([])
-	const totalSize = ref<number>(0)
-	let fileDataList = reactive<FmUploadFile[]>([])
+	const isUploadPanelOpen = ref<boolean>(true);
+	const fileInputRef = ref<HTMLInputElement | null>(null);
+	const files = ref<FmUploadFile[]>([]);
+	const totalSize = ref<number>(0);
+	let fileDataList = reactive<FmUploadFile[]>([]);
 
-	const emit = defineEmits(['updateFiles'])
+	const emit = defineEmits(['updateFiles']);
 
 	const addListeners = (reader: FileReader, uniqueId: string) => {
-		const file = fileDataList.find((item) => item.id === uniqueId)
+		const file = fileDataList.find((item) => item.id === uniqueId);
 		if (file) {
 			const updateProgress = (event: ProgressEvent) => {
 				if (event.lengthComputable) {
-					totalSize.value = event.total || totalSize.value
+					totalSize.value = event.total || totalSize.value;
 
-					file.progress = parseInt(
-						((event.loaded / totalSize.value) * 100).toFixed(2)
-					)
+					file.progress = parseInt(((event.loaded / totalSize.value) * 100).toFixed(2));
 				}
-			}
-			reader.addEventListener('loadstart', (event) => updateProgress(event))
-			reader.addEventListener('load', (event) => updateProgress(event))
-			reader.addEventListener('loadend', () => (file.progress = 100))
-			reader.addEventListener('progress', (event) => updateProgress(event))
+			};
+			reader.addEventListener('loadstart', (event) => updateProgress(event));
+			reader.addEventListener('load', (event) => updateProgress(event));
+			reader.addEventListener('loadend', () => (file.progress = 100));
+			reader.addEventListener('progress', (event) => updateProgress(event));
 		}
-	}
+	};
 
 	const handleFileChange = (event: Event) => {
-		const input = event.target as HTMLInputElement
+		const input = event.target as HTMLInputElement;
 		if (input?.files) {
 			Array.from(input.files).forEach((file) => {
-				const uniqueId = getRandomString(6)
+				const uniqueId = getRandomString(6);
 				if (!files.value.some((f) => f.id === uniqueId)) {
 					const item = {
 						id: uniqueId,
 						file: file,
 						progress: 0
-					}
-					fileDataList.push(item)
-					const reader = new FileReader()
-					addListeners(reader, uniqueId) // Attach progress listeners
-					reader.readAsDataURL(file) // Read the file as Data URL
-					files.value.push(item) // Add the file to the list
+					};
+					fileDataList.push(item);
+					const reader = new FileReader();
+					addListeners(reader, uniqueId); // Attach progress listeners
+					reader.readAsDataURL(file); // Read the file as Data URL
+					files.value.push(item); // Add the file to the list
 				}
-			})
-			emit('updateFiles', files.value)
+			});
+			emit('updateFiles', files.value);
 		}
-	}
+	};
 
 	const browseFile = () => {
 		if (fileInputRef.value) {
-			fileInputRef.value.click()
+			fileInputRef.value.click();
 		}
-	}
+	};
 
 	const clearAllFiles = () => {
-		files.value = []
-		fileDataList.splice(0, fileDataList.length)
-		emit('updateFiles', files.value)
-	}
+		files.value = [];
+		fileDataList.splice(0, fileDataList.length);
+		emit('updateFiles', files.value);
+	};
 
 	const removeFile = (fileId: string) => {
-		files.value = files.value.filter((file) => file.id !== fileId)
-		const index = fileDataList.findIndex((fileData) => fileData.id === fileId)
+		files.value = files.value.filter((file) => file.id !== fileId);
+		const index = fileDataList.findIndex((fileData) => fileData.id === fileId);
 		if (index !== -1) {
-			fileDataList.splice(index, 1) // Remove the fileData reactively
+			fileDataList.splice(index, 1); // Remove the fileData reactively
 		}
-		emit('updateFiles', files.value)
-	}
+		emit('updateFiles', files.value);
+	};
 
 	const toggleUploadPanel = () => {
-		isUploadPanelOpen.value = !isUploadPanelOpen.value
-	}
+		isUploadPanelOpen.value = !isUploadPanelOpen.value;
+	};
 
 	const confirm = (action = false) => {
 		if (action) {
-			clearAllFiles()
+			clearAllFiles();
 		}
-	}
+	};
 </script>
 
 <style scoped lang="scss">

@@ -1,14 +1,6 @@
 <template>
-	<div
-		@click="toggle"
-		:class="['switch-wrapper', { checked: isChecked, disabled: disable }]"
-	>
-		<div
-			:class="[
-				'switch-worker',
-				{ checked: isChecked, small: !isChecked && !icon }
-			]"
-		>
+	<div @click="toggle" :class="['switch-wrapper', { checked: isChecked, disabled: disable }]">
+		<div :class="['switch-worker', { checked: isChecked, small: !isChecked && !icon }]">
 			<span class="icon" v-if="icon">
 				<FmIcon
 					:icon="isChecked ? defaultIcons.tick : defaultIcons.cross"
@@ -21,8 +13,8 @@
 </template>
 
 <script setup>
-	import { computed, ref } from 'vue'
-	import FmIcon from '@/components/fm/Icon/Icon.vue'
+	import { computed, ref } from 'vue';
+	import FmIcon from '@/components/fm/Icon/Icon.vue';
 
 	const props = defineProps({
 		modelValue: {
@@ -37,26 +29,24 @@
 			type: Boolean,
 			default: false
 		}
-	})
+	});
 
-	const emit = defineEmits(['update:modelValue'])
+	const emit = defineEmits(['update:modelValue']);
 
-	const isChecked = ref(props.modelValue)
+	const isChecked = ref(props.modelValue);
 	const defaultIcons = {
 		tick: 'mdi-check',
 		cross: 'mdi-close'
-	}
+	};
 
 	const fmIconColor = computed(() => {
-		return isChecked.value
-			? 'var(--on-secondary-container)'
-			: 'var(--surface-container-highest)'
-	})
+		return isChecked.value ? 'var(--on-secondary-container)' : 'var(--surface-container-highest)';
+	});
 
 	const toggle = () => {
-		isChecked.value = !isChecked.value
-		emit('update:modelValue', isChecked.value)
-	}
+		isChecked.value = !isChecked.value;
+		emit('update:modelValue', isChecked.value);
+	};
 </script>
 
 <style scoped lang="scss">

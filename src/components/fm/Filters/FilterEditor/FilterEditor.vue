@@ -54,44 +54,36 @@
 			/>
 
 			<div class="fm-filter-editor__btns">
-				<FmButton
-					type="secondary"
-					rounded
-					@click.stop.prevent="emits('cancel')"
-				>
-					Cancel
-				</FmButton>
+				<FmButton type="secondary" rounded @click.stop.prevent="emits('cancel')"> Cancel </FmButton>
 
-				<FmButton rounded :disabled="!isDirty" @click.stop.prevent="apply">
-					Apply
-				</FmButton>
+				<FmButton rounded :disabled="!isDirty" @click.stop.prevent="apply"> Apply </FmButton>
 			</div>
 		</div>
 	</div>
 </template>
 
 <script lang="ts" setup>
-	import { computed, ref, toValue, watch } from 'vue'
-	import cloneDeep from 'lodash/cloneDeep'
-	import hasIn from 'lodash/hasIn'
-	import isEmpty from 'lodash/isEmpty'
-	import FmButton from '../../Button/Button.vue'
-	import FmCheckbox from '../../Checkbox/Checkbox.vue'
-	import FmProgressLinear from '../../ProgressLinear/ProgressLinear.vue'
-	import FmFilterTypeSelectorBlock from '../Blocks/FilterTypeSelectorBlock/FilterTypeSelectorBlock.vue'
-	import FmFilterLinkedBlock from '../Blocks/FilterLinkedBlock/FilterLinkedBlock.vue'
-	import FmFilterOptionListBlock from '../Blocks/FilterOptionListBlock/FilterOptionListBlock.vue'
-	import { SELECTORS_BOOLEAN_OPTIONS } from '../constants'
-	import type { FmFilter, FmFilterType } from '@/types'
-	import type { FmFilterEditorProps, FmFilterEditorEmits } from './types'
-	import type { FmSelectOption } from '@/components/fm/Select/types'
+	import { computed, ref, toValue, watch } from 'vue';
+	import cloneDeep from 'lodash/cloneDeep';
+	import hasIn from 'lodash/hasIn';
+	import isEmpty from 'lodash/isEmpty';
+	import FmButton from '../../Button/Button.vue';
+	import FmCheckbox from '../../Checkbox/Checkbox.vue';
+	import FmProgressLinear from '../../ProgressLinear/ProgressLinear.vue';
+	import FmFilterTypeSelectorBlock from '../Blocks/FilterTypeSelectorBlock/FilterTypeSelectorBlock.vue';
+	import FmFilterLinkedBlock from '../Blocks/FilterLinkedBlock/FilterLinkedBlock.vue';
+	import FmFilterOptionListBlock from '../Blocks/FilterOptionListBlock/FilterOptionListBlock.vue';
+	import { SELECTORS_BOOLEAN_OPTIONS } from '../constants';
+	import type { FmFilter, FmFilterType } from '@/types';
+	import type { FmFilterEditorProps, FmFilterEditorEmits } from './types';
+	import type { FmSelectOption } from '@/components/fm/Select/types';
 
-	import FmTextFilter from '../FilterTypes/TextFilter/TextFilter.vue'
-	import FmNumericFilter from '../FilterTypes/NumericFilter/NumericFilter.vue'
-	import FmClassifierFilter from '../FilterTypes/ClassifierFilter/ClassifierFilter.vue'
-	import FmDateFilter from '../FilterTypes/DateFilter/DateFilter.vue'
-	import FmLogicFilter from '../FilterTypes/LogicFilter/LogicFilter.vue'
-	import FmDatetimeFilter from '../FilterTypes/DatetimeFilter/DatetimeFilter.vue'
+	import FmTextFilter from '../FilterTypes/TextFilter/TextFilter.vue';
+	import FmNumericFilter from '../FilterTypes/NumericFilter/NumericFilter.vue';
+	import FmClassifierFilter from '../FilterTypes/ClassifierFilter/ClassifierFilter.vue';
+	import FmDateFilter from '../FilterTypes/DateFilter/DateFilter.vue';
+	import FmLogicFilter from '../FilterTypes/LogicFilter/LogicFilter.vue';
+	import FmDatetimeFilter from '../FilterTypes/DatetimeFilter/DatetimeFilter.vue';
 
 	const props = withDefaults(defineProps<FmFilterEditorProps>(), {
 		locals: {
@@ -101,8 +93,8 @@
 			linkedCondition: 'Link condition',
 			linkedFilterTypePlaceholder: 'Select filter type'
 		}
-	})
-	const emits = defineEmits<FmFilterEditorEmits>()
+	});
+	const emits = defineEmits<FmFilterEditorEmits>();
 
 	const filterValueTypeToComponent: Record<number | 'field', any> = {
 		10: FmTextFilter,
@@ -112,166 +104,150 @@
 		50: FmLogicFilter,
 		80: FmDatetimeFilter,
 		field: null
-	}
+	};
 
-	const filterData = ref<FmFilter | undefined>(cloneDeep(props.value))
-	const options = ref<FmSelectOption[]>([])
-	const selectedOptionList = ref<FmSelectOption[]>([])
+	const filterData = ref<FmFilter | undefined>(cloneDeep(props.value));
+	const options = ref<FmSelectOption[]>([]);
+	const selectedOptionList = ref<FmSelectOption[]>([]);
 
-	const isDirty = ref(false)
-	const isLoading = ref(false)
+	const isDirty = ref(false);
+	const isLoading = ref(false);
 
 	const name = computed(() => {
 		if (!filterData.value) {
-			return ''
+			return '';
 		}
 
-		const processedName = filterData.value.name.split('. ')
-		let result = processedName[0]
+		const processedName = filterData.value.name.split('. ');
+		let result = processedName[0];
 		for (const part of processedName.slice(1)) {
-			result += `&nbsp;&rarr;&nbsp;${part}`
+			result += `&nbsp;&rarr;&nbsp;${part}`;
 		}
-		return result
-	})
+		return result;
+	});
 
 	const currentComponent = computed(() => {
 		if (!filterData.value) {
-			return null
+			return null;
 		}
 
-		return filterValueTypeToComponent[filterData.value!.value_type]
-	})
+		return filterValueTypeToComponent[filterData.value!.value_type];
+	});
 
-	const isFilterLinked = computed(() =>
-		hasIn(filterData.value, ['options', 'use_from_above'])
-	)
+	const isFilterLinked = computed(() => hasIn(filterData.value, ['options', 'use_from_above']));
 
 	const filterValue = computed(() => {
 		if (!filterData.value) {
-			return ''
+			return '';
 		}
 
-		const { filter_type, filter_values } = filterData.value?.options
-		if (['selector', 'multiselector'].includes(filter_type)) {
-			return toValue(filter_values) as unknown[]
+		const { filter_type, filter_values } = filterData.value?.options;
+		if (['selector', 'multiselector', 'date_tree'].includes(filter_type)) {
+			return toValue(filter_values) as unknown[];
 		}
 
 		if (['from_to', 'out_of_range'].includes(filter_type)) {
 			return toValue(filter_values) as {
-				max_value: number | string
-				min_value: number | string
-			}
+				max_value: number | string;
+				min_value: number | string;
+			};
 		}
 
-		return (toValue(filter_values) as unknown[])[0]
-	})
+		return (toValue(filter_values) as unknown[])[0] || '';
+	});
 
 	function updateFilterType(type: FmFilterType) {
 		if (type === 'use_from_above') {
 			filterData.value!.options.use_from_above = {
 				attrs_entity_type: '',
 				key: ''
-			}
-			filterData.value!.options.filter_type = 'equal'
+			};
+			filterData.value!.options.filter_type = 'equal';
 		} else {
-			filterData.value!.options.filter_type = type
-			delete filterData.value!.options.use_from_above
+			filterData.value!.options.filter_type = type;
+			delete filterData.value!.options.use_from_above;
 		}
 
-		isDirty.value = true
-		filterData.value!.options.filter_values = [
-			'from_to',
-			'out_of_range'
-		].includes(type)
+		isDirty.value = true;
+		filterData.value!.options.filter_values = ['from_to', 'out_of_range'].includes(type)
 			? { min_value: '', max_value: '' }
-			: []
+			: [];
 
-		initSelectedOptionList()
+		initSelectedOptionList();
 	}
 
 	function updateEnabledFlag(val: boolean) {
-		isDirty.value = true
-		filterData.value!.options.enabled = val
+		isDirty.value = true;
+		filterData.value!.options.enabled = val;
 	}
 
 	function filterUpdate(updatedFilter: FmFilter) {
-		isDirty.value = true
-		filterData.value = updatedFilter
-		initSelectedOptionList()
+		isDirty.value = true;
+		filterData.value = updatedFilter;
+		initSelectedOptionList();
 	}
 
 	function apply() {
 		if (!isDirty.value) {
-			return
+			return;
 		}
-		emits('update:modelValue', filterData.value!)
-		emits('cancel')
+		emits('update:modelValue', filterData.value!);
+		emits('cancel');
 	}
 
 	async function getOptions() {
 		if (filterData.value?.value_type === 50) {
-			options.value = cloneDeep(SELECTORS_BOOLEAN_OPTIONS)
-			return
+			options.value = cloneDeep(SELECTORS_BOOLEAN_OPTIONS);
+			return;
 		}
 
-		if (
-			!props.getFilterOptions ||
-			typeof props.getFilterOptions !== 'function'
-		) {
-			return
+		if (!props.getFilterOptions || typeof props.getFilterOptions !== 'function') {
+			return;
 		}
 
 		try {
-			isLoading.value = true
-			options.value = await props.getFilterOptions(filterData.value!)
+			isLoading.value = true;
+			options.value = await props.getFilterOptions(filterData.value!);
 		} finally {
-			isLoading.value = false
+			isLoading.value = false;
 		}
 	}
 
 	function initSelectedOptionList() {
 		if (Array.isArray(filterValue.value)) {
 			const filteredOptions = (options.value || []).filter((o) =>
-				(
-					(filterValue.value as Array<string | number | boolean>) || []
-				).includes(o.value!)
-			)
-			selectedOptionList.value = cloneDeep(filteredOptions)
+				((filterValue.value as Array<string | number | boolean>) || []).includes(o.value!)
+			);
+			selectedOptionList.value = cloneDeep(filteredOptions);
 		} else {
-			const option = (options.value || []).find(
-				(o) => o.value! === filterValue.value
-			)
-			option
-				? (selectedOptionList.value = [option])
-				: (selectedOptionList.value = [])
+			const option = (options.value || []).find((o) => o.value! === filterValue.value);
+			option ? (selectedOptionList.value = [option]) : (selectedOptionList.value = []);
 		}
 	}
 
 	function onSelectedOptionListUpdate(value: FmSelectOption[]) {
-		selectedOptionList.value = value
-		filterData.value!.options.filter_values = value.map(
-			(o) => o.value
-		) as string[]
-		isDirty.value = true
+		selectedOptionList.value = value;
+		filterData.value!.options.filter_values = value.map((o) => o.value) as string[];
+		isDirty.value = true;
 	}
 
-	getOptions()
+	getOptions();
 
 	watch(
 		() => props.value,
 		() => {
-			filterData.value = cloneDeep(props.value)
-			initSelectedOptionList()
+			filterData.value = cloneDeep(props.value);
+			[10, 50].includes(props.value?.value_type as number) && initSelectedOptionList();
 		},
 		{ immediate: true }
-	)
+	);
 
 	watch(
 		() => options.value,
 		() => {
-			initSelectedOptionList()
+			[10, 50].includes(props.value?.value_type as number) && initSelectedOptionList();
 		}
-	)
+	);
 </script>
 
 <style lang="scss" scoped>

@@ -1,10 +1,10 @@
-import type { FmFilter, FmFilterType } from '@/types'
+import type { FmFilter, FmFilterType } from '@/types';
 
 export interface FmFilterTypeSelectorBlockProps {
-	filter: FmFilter
-	isFilterLinked?: boolean
+	filter: FmFilter;
+	isFilterLinked?: boolean;
 }
 
 export interface FmFilterTypeSelectorBlockEmits {
-	(event: 'update', value: FmFilterType): void
+	(event: 'update', value: FmFilterType): void;
 }

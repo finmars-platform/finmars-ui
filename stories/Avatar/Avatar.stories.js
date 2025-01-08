@@ -1,6 +1,6 @@
-import FmAvatar from '@/components/fm/Avatar/Avatar.vue'
-import AvatarDemo from './AvatarDemo.vue'
-import { ref, watch } from 'vue'
+import FmAvatar from '@/components/fm/Avatar/Avatar.vue';
+import AvatarDemo from './AvatarDemo.vue';
+import { ref, watch } from 'vue';
 
 const meta = {
 	title: 'Components/FmAvatar',
@@ -15,9 +15,9 @@ const meta = {
 		image: 'https://cdn.vuetifyjs.com/images/john.jpg',
 		size: 40
 	}
-}
+};
 
-export default meta
+export default meta;
 
 export const Default = {
 	render: (args) => ({
@@ -25,21 +25,21 @@ export const Default = {
 			FmAvatar
 		},
 		setup() {
-			const key = ref(1)
+			const key = ref(1);
 
 			watch(args, () => {
-				key.value = new Date().getTime()
-			})
+				key.value = new Date().getTime();
+			});
 
 			return {
 				args,
 				key
-			}
+			};
 		},
 		template: `
-          <FmAvatar v-bind="args" :key="key"/>`
+			<FmAvatar v-bind="args" :key="key" />`
 	})
-}
+};
 
 export const List = {
 	render: (args) => ({
@@ -49,9 +49,9 @@ export const List = {
 		setup() {
 			return {
 				args
-			}
+			};
 		},
 		template: `
-          <AvatarDemo />`
+			<AvatarDemo />`
 	})
-}
+};

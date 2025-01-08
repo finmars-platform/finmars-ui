@@ -14,12 +14,7 @@
 		@update:model-value="onUpdate"
 	>
 		<template v-if="slots['append-inner']" #append-inner="{ isActive, isFocused, controlRef }">
-			<VIcon
-				v-if="showErrorIcon"
-				icon="mdi-alert-circle"
-				size="20"
-				color="var(--error)"
-			/>
+			<VIcon v-if="showErrorIcon" icon="mdi-alert-circle" size="20" color="var(--error)" />
 
 			<slot
 				v-else
@@ -30,16 +25,8 @@
 			/>
 		</template>
 
-		<template
-			v-if="slots['label']"
-			#label="{ isActive, isFocused, controlRef }"
-		>
-			<slot
-				name="label"
-				:is-active="isActive"
-				:is-focused="isFocused"
-				:control-ref="controlRef"
-			/>
+		<template v-if="slots['label']" #label="{ isActive, isFocused, controlRef }">
+			<slot name="label" :is-active="isActive" :is-focused="isFocused" :control-ref="controlRef" />
 		</template>
 
 		<template v-if="slots['message']" #message="{ message }">
@@ -53,9 +40,9 @@
 </template>
 
 <script setup>
-	import { computed, onMounted, ref, watch, useSlots } from 'vue'
-	import { vMaska } from 'maska/vue'
-	import { VIcon, VTextField } from 'vuetify/components'
+	import { computed, onMounted, ref, watch, useSlots } from 'vue';
+	import { vMaska } from 'maska/vue';
+	import { VIcon, VTextField } from 'vuetify/components';
 
 	const props = defineProps({
 		modelValue: {
@@ -149,7 +136,7 @@
 		disabled: {
 			type: Boolean
 		}
-	})
+	});
 
 	const emits = defineEmits([
 		'click:clear',
@@ -161,14 +148,14 @@
 		'update:modelValue',
 		'change',
 		'init'
-	])
+	]);
 
-	const slots = useSlots()
+	const slots = useSlots();
 
-	const vtf = ref()
-	const inputElement = ref()
-	const dirty = ref(false)
-	const innerValue = ref(props.modelValue)
+	const vtf = ref();
+	const inputElement = ref();
+	const dirty = ref(false);
+	const innerValue = ref(props.modelValue);
 
 	const vTextFieldProps = computed(() => ({
 		color: props.color || 'var(--color-fmTextField)',
@@ -186,8 +173,7 @@
 		...(props.hint && { hint: props.hint, persistentHint: true }),
 		...(props.prependIcon && { prependInnerIcon: props.prependIcon }),
 		...(props.clearable && { clearable: true, persistentClear: true }),
-		persistentPlaceholder:
-			props.persistentPlaceholder || (props.placeholder && props.outlined),
+		persistentPlaceholder: props.persistentPlaceholder || (props.placeholder && props.outlined),
 		appendIcon: props.appendIcon,
 		appendInnerIcon: props.appendInnerIcon,
 		width: props.width,
@@ -204,50 +190,50 @@
 		clearable: !!props.clearable,
 		readonly: props.readonly,
 		disabled: !!props.disabled
-	}))
+	}));
 
-	const showErrorIcon = computed(() => dirty.value && !vtf.value?.isValid)
+	const showErrorIcon = computed(() => dirty.value && !vtf.value?.isValid);
 
 	function onUpdate(val) {
-		dirty.value = true
-		innerValue.value = val
-		emits('update:modelValue', val)
+		dirty.value = true;
+		innerValue.value = val;
+		emits('update:modelValue', val);
 	}
 
 	function onPrependClick(ev) {
-		ev.preventDefault()
-		ev.stopImmediatePropagation()
-		emits('click:prependInner', ev)
+		ev.preventDefault();
+		ev.stopImmediatePropagation();
+		emits('click:prependInner', ev);
 	}
 
 	function onClickControl(ev) {
-		dirty.value = true
-		emits('click:control', ev)
+		dirty.value = true;
+		emits('click:control', ev);
 	}
 
 	function onKeydownEnter() {
-		emits('change', innerValue.value)
+		emits('change', innerValue.value);
 	}
 
 	function onBlur(ev) {
-		emits('change', innerValue.value)
+		emits('change', innerValue.value);
 		emits('blur', ev);
 	}
 
 	onMounted(() => {
-		inputElement.value = vtf.value.$el.querySelector('input')
-		emits('init', { component: vtf.value, input: inputElement.value })
-	})
+		inputElement.value = vtf.value.$el.querySelector('input');
+		emits('init', { component: vtf.value, input: inputElement.value });
+	});
 
 	watch(
 		() => props.modelValue,
 		(val) => {
 			if (val !== innerValue.value) {
-				innerValue.value = val
+				innerValue.value = val;
 			}
 		},
 		{ immediate: true }
-	)
+	);
 </script>
 
 <style scoped lang="scss">

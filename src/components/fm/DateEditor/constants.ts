@@ -10,7 +10,5 @@ export const datesInMonth: Record<string, [number, number]> = {
 	'09': [30, 30],
 	'10': [31, 31],
 	'11': [30, 30],
-	'12': [31, 31],
-}
-
-export const displayingDateFormat = 'YYYY-MM-DD'
+	'12': [31, 31]
+};

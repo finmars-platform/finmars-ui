@@ -1,13 +1,9 @@
 <template>
 	<div class="grid grid-cols-2 gap-16">
 		<!-- primary -->
-		<FmTooltip
-			v-on="eventHandlers"
-		>
+		<FmTooltip v-on="eventHandlers">
 			<template #activator="{ props }">
-				<FmButton v-bind="props">
-					Hover over me (primary)
-				</FmButton>
+				<FmButton v-bind="props"> Hover over me (primary) </FmButton>
 			</template>
 
 			<span>Supporting line text lorem ipsum dolor sit amet, consectetur</span>
@@ -26,14 +22,9 @@
 		</FmButton>
 
 		<!-- secondary -->
-		<FmTooltip
-			type="secondary"
-			v-on="eventHandlers"
-		>
+		<FmTooltip type="secondary" v-on="eventHandlers">
 			<template #activator="{ props }">
-				<FmButton v-bind="props">
-					Hover over me (secondary)
-				</FmButton>
+				<FmButton v-bind="props"> Hover over me (secondary) </FmButton>
 			</template>
 
 			<span>Supporting text</span>
@@ -48,19 +39,15 @@
 				activator="parent"
 				v-on="eventHandlers"
 			>
-				Supporting text Body text string goes here psum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+				Supporting text Body text string goes here psum dolor sit amet, consectetur adipiscing elit,
+				sed do eiusmod tempor incididunt
 			</FmTooltip>
 		</FmButton>
 
 		<!-- on hover, secondary, custom template -->
-		<FmTooltip
-			type="secondary"
-			v-on="eventHandlers"
-		>
+		<FmTooltip type="secondary" v-on="eventHandlers">
 			<template #activator="{ props }">
-				<FmButton v-bind="props">
-					Hover over me (secondary, custom template)
-				</FmButton>
+				<FmButton v-bind="props"> Hover over me (secondary, custom template) </FmButton>
 			</template>
 
 			<div class="flex flex-col align-center gap-y-4">
@@ -83,14 +70,17 @@
 				<div class="flex flex-col align-center z-10" style="pointer-events: all">
 					<div class="mb-2 text-xl">Title</div>
 					<div class="mb-2">
-						Supporting text Body text string goes here psum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+						Supporting text Body text string goes here psum dolor sit amet, consectetur adipiscing
+						elit, sed do eiusmod tempor incididunt
 					</div>
 					<FmButton
 						type="secondary"
-						@click="() => {
-							console.log('APPLY');
-							isTooltipOpen = false;
-						}"
+						@click="
+							() => {
+								console.log('APPLY');
+								isTooltipOpen = false;
+							}
+						"
 					>
 						Apply
 					</FmButton>
@@ -102,13 +92,13 @@
 
 <script setup>
 	import { ref } from 'vue';
-	import FmButton from '@/components/fm/Button/Button.vue'
-	import FmTooltip from '@/components/fm/Tooltip/Tooltip.vue'
-	import { VIcon } from 'vuetify/components'
+	import FmButton from '@/components/fm/Button/Button.vue';
+	import FmTooltip from '@/components/fm/Tooltip/Tooltip.vue';
+	import { VIcon } from 'vuetify/components';
 
 	const eventHandlers = {
-		'update:model-value': (ev) => console.log('update:model-value ', ev),
-	}
+		'update:model-value': (ev) => console.log('update:model-value ', ev)
+	};
 
 	const isTooltipOpen = ref(false);
 </script>

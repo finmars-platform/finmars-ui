@@ -1,16 +1,9 @@
 <template>
-	<div
-		ref="wrapElement"
-		v-resize="checkAbilityToShowRightBtnDebounced"
-		class="fm-filter-toolbar"
-	>
+	<div ref="wrapElement" v-resize="checkAbilityToShowRightBtnDebounced" class="fm-filter-toolbar">
 		<div
 			ref="toolbarElement"
 			v-mutate.child.immediate="onToolbarElementChange"
-			:class="[
-				'fm-filter-toolbar__body',
-				{ 'fm-filter-toolbar__body--expandable': expandable }
-			]"
+			:class="['fm-filter-toolbar__body', { 'fm-filter-toolbar__body--expandable': expandable }]"
 		>
 			<FmIconButton
 				:icon="areLinkedFiltersShowed ? 'mdi-link' : 'mdi-link-off'"
@@ -27,6 +20,7 @@
 					closable
 					:type="linkedFilter.options.enabled ? 'standard' : 'outlined'"
 					:value="linkedFilter.name"
+					:tooltip="getFilterTooltip(linkedFilter)"
 					@click="editFilter($event, linkedFilter)"
 					@click:close="deleteFilter(linkedFilter.key)"
 				/>
@@ -40,12 +34,13 @@
 					closable
 					:type="filter.options.enabled ? 'standard' : 'outlined'"
 					:value="filter.name"
+					:tooltip="getFilterTooltip(filter)"
 					@click="editFilter($event, filter)"
 					@click:close="deleteFilter(filter.key)"
 				/>
 			</template>
 
-			<FmButton type="secondary" class="fm-filter-toolbar__add-btn">
+			<FmButton type="secondary" rounded class="fm-filter-toolbar__add-btn">
 				Add filter
 
 				<FmMenu
@@ -71,12 +66,7 @@
 			class="fm-filter-toolbar__btn-left"
 			@click.prevent.stop="shiftRight"
 		>
-			<FmIcon
-				v-ripple.center.circle
-				icon="mdi-chevron-left"
-				size="24"
-				color="var(--primary)"
-			/>
+			<FmIcon v-ripple.center.circle icon="mdi-chevron-left" size="24" color="var(--primary)" />
 		</div>
 
 		<div
@@ -84,12 +74,7 @@
 			class="fm-filter-toolbar__btn-right"
 			@click.prevent.stop="shiftLeft"
 		>
-			<FmIcon
-				v-ripple.center.circle
-				icon="mdi-chevron-right"
-				size="24"
-				color="var(--primary)"
-			/>
+			<FmIcon v-ripple.center.circle icon="mdi-chevron-right" size="24" color="var(--primary)" />
 		</div>
 
 		<FmMenu
@@ -113,75 +98,80 @@
 </template>
 
 <script lang="ts" setup>
-	import { computed, nextTick, onMounted, ref, watch } from 'vue'
-	import get from 'lodash/get'
-	import isEmpty from 'lodash/isEmpty'
-	import cloneDeep from 'lodash/cloneDeep'
-	import difference from 'lodash/difference'
-	import debounce from 'lodash/debounce'
-	import { Mutate, Resize, Ripple } from 'vuetify/directives'
-	import FmChip from '../../Chip/Chip.vue'
-	import FmButton from '../../Button/Button.vue'
-	import FmIcon from '../../Icon/Icon.vue'
-	import FmIconButton from '../../IconButton/IconButton.vue'
-	import FmMenu from '../../Menu/Menu.vue'
-	import FmItemPicker from '../../ItemPicker/ItemPicker/ItemPicker.vue'
-	import FmFilterEditor from '../FilterEditor/FilterEditor.vue'
-	import type { FmFilter } from '@/types'
-	import type { FmtFilterToolbarProps, FmtFilterToolbarEmits } from './types'
+	import { computed, nextTick, onMounted, ref, watch } from 'vue';
+	import get from 'lodash/get';
+	import isEmpty from 'lodash/isEmpty';
+	import cloneDeep from 'lodash/cloneDeep';
+	import difference from 'lodash/difference';
+	import debounce from 'lodash/debounce';
+	import { Mutate, Resize, Ripple } from 'vuetify/directives';
+	import FmChip from '../../Chip/Chip.vue';
+	import FmButton from '../../Button/Button.vue';
+	import FmIcon from '../../Icon/Icon.vue';
+	import FmIconButton from '../../IconButton/IconButton.vue';
+	import FmMenu from '../../Menu/Menu.vue';
+	import FmItemPicker from '../../ItemPicker/ItemPicker/ItemPicker.vue';
+	import FmFilterEditor from '../FilterEditor/FilterEditor.vue';
+	import { FmFilter, FmFilterRangeValues } from '@/types';
+	import type { FmtFilterToolbarProps, FmtFilterToolbarEmits } from './types';
 
-	const vMutate = Mutate
-	const vResize = Resize
-	const vRipple = Ripple
+	const vMutate = Mutate;
+	const vResize = Resize;
+	const vRipple = Ripple;
 
-	const props = defineProps<FmtFilterToolbarProps>()
-	const emits = defineEmits<FmtFilterToolbarEmits>()
+	const props = defineProps<FmtFilterToolbarProps>();
+	const emits = defineEmits<FmtFilterToolbarEmits>();
 
-	const areLinkedFiltersShowed = ref(props.showLinkedFilters)
-	const isAddFilterModalOpen = ref(false)
+	const areLinkedFiltersShowed = ref(props.showLinkedFilters);
+	const isAddFilterModalOpen = ref(false);
 	const filterEditModalSettings = ref({
 		open: false,
 		x: 0,
 		y: 0
-	})
+	});
 
-	const wrapElement = ref<HTMLDivElement | null>(null)
-	const toolbarElement = ref<HTMLDivElement | null>(null)
-	const showScrollBtns = ref(false)
+	const wrapElement = ref<HTMLDivElement | null>(null);
+	const toolbarElement = ref<HTMLDivElement | null>(null);
+	const showScrollBtns = ref(false);
 
-	const childElements = ref<HTMLCollection | null>(null)
-	const currentChildIndex = ref(0)
-	const toolbarOffsetX = ref(0)
+	const childElements = ref<HTMLCollection | null>(null);
+	const currentChildIndex = ref(0);
+	const toolbarOffsetX = ref(0);
 
-	const selectedAttrs = computed(() => props.value.map((f) => f.key).sort())
+	const selectedAttrs = computed(() => props.value.map((f) => f.key).sort());
 
 	const linkedFilters = computed(() =>
-		(props.value || []).filter(
-			(f) => !isEmpty(get(f, ['options', 'use_from_above']))
-		)
-	)
+		(props.value || []).filter((f) => !isEmpty(get(f, ['options', 'use_from_above'])))
+	);
 	const notLinkedFilters = computed(() =>
-		(props.value || []).filter((f) =>
-			isEmpty(get(f, ['options', 'use_from_above']))
-		)
-	)
+		(props.value || []).filter((f) => isEmpty(get(f, ['options', 'use_from_above'])))
+	);
 
-	const toolbarOffsetXValue = computed(() => `${toolbarOffsetX.value}px`)
-	const showScrollLeftBtn = computed(() => currentChildIndex.value !== 0)
-	const showScrollRightBtn = ref(true)
+	const toolbarOffsetXValue = computed(() => `${toolbarOffsetX.value}px`);
+	const showScrollLeftBtn = computed(() => currentChildIndex.value !== 0);
+	const showScrollRightBtn = ref(true);
 
-	const selectedFilter = ref<FmFilter | null>(null)
+	const selectedFilter = ref<FmFilter | null>(null);
 
 	function toggleDisplaying() {
-		areLinkedFiltersShowed.value = !areLinkedFiltersShowed.value
+		areLinkedFiltersShowed.value = !areLinkedFiltersShowed.value;
+	}
+
+	function getFilterTooltip(filter: FmFilter): string {
+		const { filter_type, filter_values } = filter.options;
+		if (!['from_to', 'out_of_range'].includes(filter_type)) {
+			return `${filter.name}: ${(filter_values as string[])?.join(', ')}`;
+		}
+
+		return `${filter.name}: ${(filter_values as FmFilterRangeValues).min_value} - ${(filter_values as FmFilterRangeValues).max_value}`;
 	}
 
 	async function updateFilter(attrKeys: string[]) {
-		const sortedAttrKeys = cloneDeep(attrKeys).sort()
-		const newAttrKeys = difference(sortedAttrKeys, selectedAttrs.value)
-		const newFilters = [] as FmFilter[]
+		const sortedAttrKeys = cloneDeep(attrKeys).sort();
+		const newAttrKeys = difference(sortedAttrKeys, selectedAttrs.value);
+		const newFilters = [] as FmFilter[];
 		for (const key of newAttrKeys) {
-			const attr = props.attributes.find((a) => a.key === key)
+			const attr = props.attributes.find((a) => a.key === key);
 			if (attr) {
 				newFilters.push({
 					content_type: (attr.content_type ?? '') as string,
@@ -194,116 +184,113 @@
 						filter_type: 'equal',
 						filter_values: []
 					}
-				})
+				});
 			}
 		}
-		emits('update:modelValue', [...props.value, ...newFilters])
+		emits('update:modelValue', [...props.value, ...newFilters]);
 
 		nextTick(() => {
 			if (!isEmpty(props.value)) {
-				const newFilter = props.value[props.value.length - 1]
-				const newFilterChipEl = document.getElementById(`${newFilter.key}`)
+				const newFilter = props.value[props.value.length - 1];
+				const newFilterChipEl = document.getElementById(`${newFilter.key}`);
 				if (newFilterChipEl) {
-					editFilter({ element: newFilterChipEl }, newFilter)
+					editFilter({ element: newFilterChipEl }, newFilter);
 				}
 			}
-		})
+		});
 	}
 
 	function updateSuggestedAttrs(attrs: string) {
-		emits('update:suggested', attrs)
+		emits('update:suggested', attrs);
 	}
 
 	function onToolbarElementChange() {
 		showScrollBtns.value =
-			toolbarElement.value!.offsetWidth >
-			wrapElement.value!.offsetWidth - 2 * 40
+			toolbarElement.value!.offsetWidth > wrapElement.value!.offsetWidth - 2 * 40;
 
-		childElements.value = toolbarElement.value!.children
-		checkAbilityToShowRightBtn()
+		childElements.value = toolbarElement.value!.children;
+		checkAbilityToShowRightBtn();
 	}
 
 	function shiftLeft() {
-		const el = childElements.value![currentChildIndex.value] as HTMLElement
-		toolbarOffsetX.value -= el.offsetWidth + 16
-		currentChildIndex.value += 1
-		checkAbilityToShowRightBtn()
+		const el = childElements.value![currentChildIndex.value] as HTMLElement;
+		toolbarOffsetX.value -= el.offsetWidth + 16;
+		currentChildIndex.value += 1;
+		checkAbilityToShowRightBtn();
 	}
 
 	function shiftRight() {
 		if (currentChildIndex.value === 1) {
-			toolbarOffsetX.value = 0
-			currentChildIndex.value = 0
+			toolbarOffsetX.value = 0;
+			currentChildIndex.value = 0;
 		} else {
-			currentChildIndex.value -= 1
-			const el = childElements.value![currentChildIndex.value] as HTMLElement
-			toolbarOffsetX.value += el.offsetWidth + 16
+			currentChildIndex.value -= 1;
+			const el = childElements.value![currentChildIndex.value] as HTMLElement;
+			toolbarOffsetX.value += el.offsetWidth + 16;
 		}
-		checkAbilityToShowRightBtn()
+		checkAbilityToShowRightBtn();
 	}
 
 	function checkAbilityToShowRightBtn() {
-		const rectWrapElement = wrapElement.value?.getBoundingClientRect()
+		const rectWrapElement = wrapElement.value?.getBoundingClientRect();
 		if (rectWrapElement) {
 			showScrollRightBtn.value = !(
 				rectWrapElement.x + rectWrapElement.width >
 				toolbarElement.value!.offsetWidth + toolbarOffsetX.value
-			)
+			);
 		}
 	}
 
-	const checkAbilityToShowRightBtnDebounced = debounce(
-		checkAbilityToShowRightBtn,
-		300
-	)
+	const checkAbilityToShowRightBtnDebounced = debounce(checkAbilityToShowRightBtn, 300);
 
-	function editFilter(
-		{ element }: { event?: MouseEvent; element: HTMLElement },
-		filter: FmFilter
-	) {
+	function editFilter({ element }: { event?: MouseEvent; element: HTMLElement }, filter: FmFilter) {
 		const chipElRect = element.getBoundingClientRect();
-		selectedFilter.value = cloneDeep(filter)
+		selectedFilter.value = cloneDeep(filter);
 		filterEditModalSettings.value = {
 			open: true,
 			x: chipElRect.x,
-			y: chipElRect.y + chipElRect.height + 2,
-		}
+			y: chipElRect.y + chipElRect.height + 2
+		};
 	}
 
 	function deleteFilter(key: string) {
-		const value = cloneDeep(props.value)
-		const ind = value.findIndex((f) => f.key === key)
+		const value = cloneDeep(props.value);
+		const ind = value.findIndex((f) => f.key === key);
 		if (ind > -1) {
-			value.splice(ind, 1)
-			emits('update:modelValue', value)
+			filterEditModalSettings.value = {
+				open: false,
+				x: 0,
+				y: 0
+			};
+
+			value.splice(ind, 1);
+			emits('update:modelValue', value);
 		}
 	}
 
 	function onFilterUpdate(updatedFilter: FmFilter) {
-		const updatedValue = cloneDeep(props.value)
-		const updatedFilterIndex = updatedValue.findIndex(
-			(f) => f.key === updatedFilter.key
-		)
+		const updatedValue = cloneDeep(props.value);
+		const updatedFilterIndex = updatedValue.findIndex((f) => f.key === updatedFilter.key);
 		if (updatedFilterIndex > -1) {
-			updatedValue[updatedFilterIndex] = updatedFilter
-			emits('update:modelValue', updatedValue)
+			updatedValue[updatedFilterIndex] = updatedFilter;
+			emits('update:modelValue', updatedValue);
 		}
 	}
 
 	onMounted(() => {
-		childElements.value = toolbarElement.value!.children
-	})
+		childElements.value = toolbarElement.value!.children;
+	});
 
 	watch(
 		() => filterEditModalSettings.value.open,
 		(val, oVal) => {
 			if (val !== oVal && !val) {
-				filterEditModalSettings.value.x = 0
-				filterEditModalSettings.value.y = 0
-				selectedFilter.value = null
+				filterEditModalSettings.value.x = 0;
+				filterEditModalSettings.value.y = 0;
+				selectedFilter.value = null;
 			}
 		}
-	)
+	);
 </script>
 
 <style lang="scss">

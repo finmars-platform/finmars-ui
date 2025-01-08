@@ -1,5 +1,5 @@
 /** @type {import('tailwindcss').Config} */
-import cssVariablesPlugin from './tailwind/cssVariablesPlugin.tw'
+import cssVariablesPlugin from './tailwind/cssVariablesPlugin.tw';
 
 export default {
 	content: ['./index.js', './src/**/*.{vue,js}', './stories/**/*.{vue,js}'],
@@ -7,4 +7,4 @@ export default {
 		extend: {}
 	},
 	plugins: [cssVariablesPlugin]
-}
+};
