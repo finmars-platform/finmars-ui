@@ -13,6 +13,6 @@ export interface FmFileUploadProps extends FmDialogOptions {
 	icon?: string;
 	variant?: 'normal' | 'large';
 	label?: string;
-	multiple: boolean;
-	indeterminate: boolean;
+	multiple?: boolean;
+	indeterminate?: boolean;
 }

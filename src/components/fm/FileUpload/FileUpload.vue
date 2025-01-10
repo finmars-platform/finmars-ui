@@ -1,7 +1,7 @@
 <template>
 	<div class="upload-container">
 		<div class="upload-button-wrap" @click="browseFile">
-			<FmIconButton :icon="icon" :variant="variant">
+			<FmIconButton :icon="icon" :size="variant === 'normal' ? 'small' : 'normal'" variant="text">
 				<input
 					type="file"
 					ref="fileInputRef"
