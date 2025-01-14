@@ -24,8 +24,6 @@ module.exports = {
 				singleQuote: true,
 				semi: true,
 				printWidth: 100,
-				tabWidth: 2,
-				useTabs: true,
 				vueIndentScriptAndStyle: true,
 				trailingComma: 'none'
 			}
