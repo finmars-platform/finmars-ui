@@ -266,8 +266,8 @@
 					key: 'transactions-from-file',
 					label: 'Import transactions from file',
 					action: undefined,
-					to: useGetNuxtLink('/system/transaction-import/', route.value.params),
-					href: ''
+          to: '',
+          href: getUrlToOldApp('/import/transaction-import')
 				}
 			]
 		},
