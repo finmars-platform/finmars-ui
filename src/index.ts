@@ -88,6 +88,13 @@ import type {
 import FmSwitch from '@/components/fm/Switch/Switch.vue';
 import FmBreadcrumbs from '@/components/fm/Breadcrumbs/Breadcrumbs.vue';
 import type { FmBreadcrumbItem, FmBreadcrumbProps } from '@/components/fm/Breadcrumbs/types';
+import FmDialog from '@/components/fm/Dialog/Dialog.vue';
+import type {
+	FmDialogProps,
+	FmDialogEvent,
+	FmDialogComponentProps,
+	FmDialogComponentEmits
+} from '@/components/fm/Dialog/types';
 import FmHeader from '../stories/Header.vue';
 
 import FmHtml from '@/directives/fm/Html';
@@ -96,8 +103,13 @@ import { createVuetify } from 'vuetify';
 import '@/assets/css/tailwind.css';
 import '@mdi/font/css/materialdesignicons.css';
 
+import type { FmDialogInstance } from '@/plugins/dialogs/types';
+import type { FmVueEventBus } from '@/plugins/vue-bus/types';
+
 export * from '@/types';
 export * from '@/utils';
+export * from '@/plugins';
+export * from '@/plugins/types';
 
 export {
 	Ripple,
@@ -121,6 +133,11 @@ export {
 	FmDatePicker,
 	FmDatePickerProps,
 	FmDatePickerEmits,
+	FmDialog,
+	FmDialogComponentProps,
+	FmDialogComponentEmits,
+	FmDialogProps,
+	FmDialogEvent,
 	FmIcon,
 	FmIconButton,
 	FmItemPicker,
@@ -224,6 +241,7 @@ export const uiComponentsPlugin = {
 		Vue.component(`${prefix}Chip`, FmChip);
 		Vue.component(`${prefix}DateEditor`, FmDateEditor);
 		Vue.component(`${prefix}DatePicker`, FmDatePicker);
+		Vue.component(`${prefix}Dialog`, FmDialog);
 		Vue.component(`${prefix}Icon`, FmIcon);
 		Vue.component(`${prefix}IconButton`, FmIconButton);
 		Vue.component(`${prefix}ItemPicker`, FmItemPicker);
@@ -264,6 +282,15 @@ export const uiComponentsPlugin = {
 };
 
 declare module '@vue/runtime-core' {
+	interface ComponentCustomProperties {
+		$openDialog: <T extends Component>(
+			params: FmDialogComponentProps<T>
+		) => FmDialogInstance | undefined;
+		$closeDialog: (id: string) => void;
+		$closeDialogs: () => void;
+		$emitter: FmVueEventBus<any>;
+	}
+
 	interface GlobalComponents {
 		FmNavigationPortal: typeof FmNavigationPortal;
 		FmNavigation: typeof FmNavigation;
@@ -278,6 +305,7 @@ declare module '@vue/runtime-core' {
 		FmTimePicker: typeof FmTimePicker;
 		FmInputTime: typeof FmInputTime;
 		FmDateTree: typeof FmDateTree;
+		FmDialog: typeof FmDialog;
 		FmIcon: typeof FmIcon;
 		FmIconButton: typeof FmIconButton;
 		FmInputDate: typeof FmInputDate;
