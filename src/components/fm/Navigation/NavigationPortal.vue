@@ -259,15 +259,15 @@
 					key: 'data-from-file',
 					label: 'Import data from file',
 					action: undefined,
-					to: '',
-					href: getUrlToOldApp('/import/simple-entity-import')
+          to: useGetNuxtLink('/system/simple-import', route.value.params),
+					href: ''
 				},
 				{
 					key: 'transactions-from-file',
 					label: 'Import transactions from file',
 					action: undefined,
-          to: '',
-          href: getUrlToOldApp('/import/transaction-import')
+          to: useGetNuxtLink('/system/transaction-import', route.value.params),
+          href: ''
 				}
 			]
 		},
@@ -433,8 +433,8 @@
 							key: 'User-Attributes',
 							label: 'User Attributes',
 							action: undefined,
-							to: '',
-							href: getUrlToOldApp('/settings/user-attribute')
+              to: useGetNuxtLink('/configuration/user-attributes', route.value.params),
+							href: ''
 						},
 						{
 							key: 'Reference-Tables',
@@ -514,8 +514,8 @@
 							key: 'Aliases',
 							label: 'Aliases',
 							action: undefined,
-							to: '',
-							href: getUrlToOldApp('/settings/aliase')
+              to: useGetNuxtLink('/system/settings/aliases', route.value.params),
+							href: ''
 						},
 						{
 							key: 'Tooltips',
