@@ -105,6 +105,7 @@ import '@mdi/font/css/materialdesignicons.css';
 
 import type { FmDialogInstance } from '@/plugins/dialogs/types';
 import type { FmVueEventBus } from '@/plugins/vue-bus/types';
+import { NavigationRoutes } from './components/fm/Navigation/Navigation.routes';
 
 export * from '@/types';
 export * from '@/utils';
@@ -208,7 +209,8 @@ export {
 	FmBreadcrumbs,
 	FmBreadcrumbProps,
 	FmBreadcrumbItem,
-	FmHtml
+	FmHtml,
+	NavigationRoutes
 };
 
 /**
