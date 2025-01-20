@@ -376,7 +376,7 @@
 							label: 'Dashboard Layouts',
 							action: undefined,
 							to: '',
-							href: getUrlToOldApp('/dashboard-layout')
+							href: getUrlToOldApp('/dashboard-layout/')
 						},
 						{
 							key: 'Input-Form-Layouts',
