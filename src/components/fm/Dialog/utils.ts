@@ -22,5 +22,3 @@ export function determineWindowWidth({
 
   return `${defaultValue}px`;
 }
-
-s;
