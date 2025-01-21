@@ -6,7 +6,7 @@ export const NavigationRoutes = [
     icon: 'mdi-view-dashboard',
     action: undefined,
     to: '',
-    href: 'getUrlToOldApp:/dashboard',
+    href: '/dashboard',
     style: {},
     classes: 'first-side-nav'
   },
@@ -25,7 +25,7 @@ export const NavigationRoutes = [
         label: 'Balance',
         action: undefined,
         to: '',
-        href: 'getUrlToOldApp:/report/balance'
+        href: '/report/balance'
       },
       {
         access: true,
@@ -33,7 +33,7 @@ export const NavigationRoutes = [
         label: 'P&L',
         action: undefined,
         to: '',
-        href: 'getUrlToOldApp:/report/profit-and-lost'
+        href: '/report/profit-and-lost'
       },
       {
         access: true,
@@ -41,14 +41,14 @@ export const NavigationRoutes = [
         label: 'Transaction',
         action: undefined,
         to: '',
-        href: 'getUrlToOldApp:/report/transaction'
+        href: '/report/transaction'
       },
       {
         access: true,
         key: 'performance',
         label: 'Performance',
         action: undefined,
-        to: 'useGetNuxtLink:/reports/performance',
+        to: '/reports/performance',
         href: ''
       }
     ]
@@ -68,7 +68,7 @@ export const NavigationRoutes = [
         label: 'Portfolios',
         action: undefined,
         to: '',
-        href: 'getUrlToOldApp:/data/portfolio'
+        href: '/data/portfolio'
       },
       {
         access: true,
@@ -76,7 +76,7 @@ export const NavigationRoutes = [
         label: 'Registers',
         action: undefined,
         to: '',
-        href: 'getUrlToOldApp:/data/portfolio-register'
+        href: '/data/portfolio-register'
       },
       {
         access: true,
@@ -84,7 +84,7 @@ export const NavigationRoutes = [
         label: 'Accounts',
         action: undefined,
         to: '',
-        href: 'getUrlToOldApp:/data/account'
+        href: '/data/account'
       },
       {
         access: true,
@@ -92,7 +92,7 @@ export const NavigationRoutes = [
         label: 'Instruments',
         action: undefined,
         to: '',
-        href: 'getUrlToOldApp:/data/instrument'
+        href: '/data/instrument'
       },
       {
         access: true,
@@ -100,7 +100,7 @@ export const NavigationRoutes = [
         label: 'Counterparties',
         action: undefined,
         to: '',
-        href: 'getUrlToOldApp:/data/counterparty'
+        href: '/data/counterparty'
       },
       {
         access: true,
@@ -108,7 +108,7 @@ export const NavigationRoutes = [
         label: 'Responsibles',
         action: undefined,
         to: '',
-        href: 'getUrlToOldApp:/data/responsible'
+        href: '/data/responsible'
       },
       {
         access: true,
@@ -116,7 +116,7 @@ export const NavigationRoutes = [
         label: 'Currencies',
         action: undefined,
         to: '',
-        href: 'getUrlToOldApp:/data/currency'
+        href: '/data/currency'
       },
       {
         access: true,
@@ -124,7 +124,7 @@ export const NavigationRoutes = [
         label: 'Strategies',
         action: undefined,
         to: '',
-        href: 'getUrlToOldApp:/data/strategy/1',
+        href: '/data/strategy/1',
         children: [
           {
             access: true,
@@ -132,7 +132,7 @@ export const NavigationRoutes = [
             label: 'Strategies 1',
             action: undefined,
             to: '',
-            href: 'getUrlToOldApp:/data/strategy/1'
+            href: '/data/strategy/1'
           },
           {
             access: true,
@@ -140,7 +140,7 @@ export const NavigationRoutes = [
             label: 'Strategies 2',
             action: undefined,
             to: '',
-            href: 'getUrlToOldApp:/data/strategy/2'
+            href: '/data/strategy/2'
           },
           {
             access: true,
@@ -148,7 +148,7 @@ export const NavigationRoutes = [
             label: 'Strategies 3',
             action: undefined,
             to: '',
-            href: 'getUrlToOldApp:/data/strategy/3'
+            href: '/data/strategy/3'
           }
         ]
       }
@@ -169,7 +169,7 @@ export const NavigationRoutes = [
         label: 'Transactions',
         action: undefined,
         to: '',
-        href: 'getUrlToOldApp:/data/complex-transaction'
+        href: '/data/complex-transaction'
       },
       {
         access: true,
@@ -177,7 +177,7 @@ export const NavigationRoutes = [
         label: 'Base Transactions',
         action: undefined,
         to: '',
-        href: 'getUrlToOldApp:/data/transaction'
+        href: '/data/transaction'
       },
       {
         access: true,
@@ -185,7 +185,7 @@ export const NavigationRoutes = [
         label: 'Register Records',
         action: undefined,
         to: '',
-        href: 'getUrlToOldApp:/data/portfolio-register-record'
+        href: '/data/portfolio-register-record'
       }
     ]
   },
@@ -204,7 +204,7 @@ export const NavigationRoutes = [
         label: 'Prices',
         action: undefined,
         to: '',
-        href: 'getUrlToOldApp:/data/price-history'
+        href: '/data/price-history'
       },
       {
         access: true,
@@ -212,7 +212,7 @@ export const NavigationRoutes = [
         label: 'FX rates',
         action: undefined,
         to: '',
-        href: 'getUrlToOldApp:/data/currency-history'
+        href: '/data/currency-history'
       },
       {
         access: true,
@@ -220,7 +220,7 @@ export const NavigationRoutes = [
         label: 'Run Pricing',
         action: undefined,
         to: '',
-        href: 'getUrlToOldApp:/pricing-manage'
+        href: '/pricing-manage'
       },
       {
         access: true,
@@ -228,7 +228,7 @@ export const NavigationRoutes = [
         label: 'Portfolio History',
         action: undefined,
         to: '',
-        href: 'getUrlToOldApp:/data/portfolio-history'
+        href: '/data/portfolio-history'
       }
     ]
   },
@@ -246,7 +246,7 @@ export const NavigationRoutes = [
         key: 'data-from-file',
         label: 'Import data from file',
         action: undefined,
-        to: 'useGetNuxtLink:/system/simple-import',
+        to: '/system/simple-import',
         href: ''
       },
       {
@@ -254,7 +254,7 @@ export const NavigationRoutes = [
         key: 'transactions-from-file',
         label: 'Import transactions from file',
         action: undefined,
-        to: 'useGetNuxtLink:/system/transaction-import',
+        to: '/system/transaction-import',
         href: ''
       }
     ]
@@ -274,7 +274,7 @@ export const NavigationRoutes = [
         label: 'Portfolio reconciliation',
         action: undefined,
         to: '',
-        href: 'getUrlToOldApp:/data/portfolio-reconcile-group'
+        href: '/data/portfolio-reconcile-group'
       },
       {
         access: true,
@@ -282,7 +282,7 @@ export const NavigationRoutes = [
         label: 'Reconciliation history',
         action: undefined,
         to: '',
-        href: 'getUrlToOldApp:/data/portfolio-reconcile-history'
+        href: '/data/portfolio-reconcile-history'
       }
     ]
   },
@@ -300,7 +300,7 @@ export const NavigationRoutes = [
         key: 'marketplace',
         label: 'Marketplace',
         action: undefined,
-        to: 'useGetNuxtLink:/marketplace',
+        to: '/marketplace',
         href: ''
       }
     ]
@@ -311,7 +311,7 @@ export const NavigationRoutes = [
     label: 'Explorer',
     icon: 'mdi-folder-outline',
     action: undefined,
-    to: 'useGetNuxtLink:/explorer',
+    to: '/explorer',
     classes: 'separator-side-nav',
     href: ''
   },
@@ -329,7 +329,7 @@ export const NavigationRoutes = [
         key: 'tasks',
         label: 'Tasks',
         action: undefined,
-        to: 'useGetNuxtLink:/system/task/',
+        to: '/system/task/',
         href: ''
       },
       {
@@ -337,7 +337,7 @@ export const NavigationRoutes = [
         key: 'initial-member-configuration',
         label: 'Initial Member',
         action: undefined,
-        to: 'useGetNuxtLink:/configuration/initial',
+        to: '/configuration/initial',
         href: ''
       },
       {
@@ -346,7 +346,7 @@ export const NavigationRoutes = [
         label: 'Workers',
         action: undefined,
         to: '',
-        href: 'getUrlToOldApp:/worker'
+        href: '/worker'
       },
       {
         access: true,
@@ -354,7 +354,7 @@ export const NavigationRoutes = [
         label: 'Workflows',
         action: undefined,
         to: '',
-        href: 'getUrlToOldApp:/workflow'
+        href: '/workflow'
       },
       {
         access: true,
@@ -370,7 +370,7 @@ export const NavigationRoutes = [
             label: 'Entity Viewer Layouts',
             action: undefined,
             to: '',
-            href: 'getUrlToOldApp:/settings/layout'
+            href: '/settings/layout'
           },
           {
             access: true,
@@ -378,7 +378,7 @@ export const NavigationRoutes = [
             label: 'Dashboard Layouts',
             action: undefined,
             to: '',
-            href: 'getUrlToOldApp:/dashboard-layout'
+            href: '/dashboard-layout'
           },
           {
             access: true,
@@ -386,7 +386,7 @@ export const NavigationRoutes = [
             label: 'Input Form Layouts',
             action: undefined,
             to: '',
-            href: 'getUrlToOldApp:/settings/input-form-layout'
+            href: '/settings/input-form-layout'
           },
           {
             access: true,
@@ -394,7 +394,7 @@ export const NavigationRoutes = [
             label: 'Context Menu Layouts',
             action: undefined,
             href: '',
-            to: 'useGetNuxtLink:/configuration/context-menu-layouts'
+            to: '/configuration/context-menu-layouts'
           }
         ]
       },
@@ -412,7 +412,7 @@ export const NavigationRoutes = [
             label: 'Account Types',
             action: undefined,
             to: '',
-            href: 'getUrlToOldApp:/data/account-type'
+            href: '/data/account-type'
           },
           {
             access: true,
@@ -420,7 +420,7 @@ export const NavigationRoutes = [
             label: 'Instrument Types',
             action: undefined,
             to: '',
-            href: 'getUrlToOldApp:/data/instrument-type'
+            href: '/data/instrument-type'
           },
           {
             access: true,
@@ -428,7 +428,7 @@ export const NavigationRoutes = [
             label: 'Transaction Types',
             action: undefined,
             to: '',
-            href: 'getUrlToOldApp:/data/transaction-type'
+            href: '/data/transaction-type'
           },
           {
             access: true,
@@ -436,14 +436,14 @@ export const NavigationRoutes = [
             label: 'Transaction Type Groups',
             action: undefined,
             to: '',
-            href: 'getUrlToOldApp:/transaction-type-group'
+            href: '/transaction-type-group'
           },
           {
             access: true,
             key: 'User-Attributes',
             label: 'User Attributes',
             action: undefined,
-            to: 'useGetNuxtLink:/configuration/user-attributes',
+            to: '/configuration/user-attributes',
             href: ''
           },
           {
@@ -452,7 +452,7 @@ export const NavigationRoutes = [
             label: 'Reference Tables',
             action: undefined,
             to: '',
-            href: 'getUrlToOldApp:/import/reference-table'
+            href: '/import/reference-table'
           },
           {
             access: true,
@@ -460,7 +460,7 @@ export const NavigationRoutes = [
             label: 'Mapping Tables',
             action: undefined,
             to: '',
-            href: 'getUrlToOldApp:/import/mapping-tables-import'
+            href: '/import/mapping-tables-import'
           },
           {
             access: true,
@@ -468,7 +468,7 @@ export const NavigationRoutes = [
             label: 'Templates',
             action: undefined,
             to: '',
-            href: 'getUrlToOldApp:/template-layout'
+            href: '/template-layout'
           },
           {
             access: true,
@@ -476,7 +476,7 @@ export const NavigationRoutes = [
             label: 'Portfolio Bundles',
             action: undefined,
             to: '',
-            href: 'getUrlToOldApp:/portfolio-bundle'
+            href: '/portfolio-bundle'
           },
           {
             access: true,
@@ -484,7 +484,7 @@ export const NavigationRoutes = [
             label: 'Portfolio Types',
             action: undefined,
             to: '',
-            href: 'getUrlToOldApp:/data/portfolio-type'
+            href: '/data/portfolio-type'
           }
         ]
       },
@@ -493,7 +493,7 @@ export const NavigationRoutes = [
         key: 'Pricing-Policies',
         label: 'Pricing policies',
         action: undefined,
-        to: 'useGetNuxtLink:/data/pricing-policy',
+        to: '/data/pricing-policy',
         href: ''
       },
       {
@@ -510,7 +510,7 @@ export const NavigationRoutes = [
             label: 'Data Import',
             action: undefined,
             to: '',
-            href: 'getUrlToOldApp:/settings/data-import'
+            href: '/settings/data-import'
           },
           {
             access: true,
@@ -518,7 +518,7 @@ export const NavigationRoutes = [
             label: 'Transactions Import',
             action: undefined,
             to: '',
-            href: 'getUrlToOldApp:/settings/transaction-import'
+            href: '/settings/transaction-import'
           }
         ]
       },
@@ -535,7 +535,7 @@ export const NavigationRoutes = [
             key: 'Aliases',
             label: 'Aliases',
             action: undefined,
-            to: 'useGetNuxtLink:/system/settings/aliases',
+            to: '/system/settings/aliases',
             href: ''
           },
           {
@@ -544,7 +544,7 @@ export const NavigationRoutes = [
             label: 'Tooltips',
             action: undefined,
             to: '',
-            href: 'getUrlToOldApp:/settings/tooltip'
+            href: '/settings/tooltip'
           },
           {
             access: true,
@@ -552,7 +552,7 @@ export const NavigationRoutes = [
             label: 'Palettes',
             action: undefined,
             to: '',
-            href: 'getUrlToOldApp:/settings/palette'
+            href: '/settings/palette'
           },
           {
             access: true,
@@ -560,7 +560,7 @@ export const NavigationRoutes = [
             label: 'Code editor',
             action: undefined,
             to: '',
-            href: 'getUrlToOldApp:/editor'
+            href: '/editor'
           }
         ]
       },
@@ -578,14 +578,14 @@ export const NavigationRoutes = [
             label: 'Import',
             action: undefined,
             to: '',
-            href: 'getUrlToOldApp:/settings/import-configuration'
+            href: '/settings/import-configuration'
           },
           {
             access: true,
             key: 'Manage',
             label: 'Manage',
             action: undefined,
-            to: 'useGetNuxtLink:/configuration/manage-configuration',
+            to: '/configuration/manage-configuration',
             href: ''
           }
         ]
@@ -607,7 +607,7 @@ export const NavigationRoutes = [
         label: 'New User Setups',
         action: undefined,
         href: '',
-        to: 'useGetNuxtLink:/configuration/initial-setup'
+        to: '/configuration/initial-setup'
       },
       {
         access: true,
@@ -623,7 +623,7 @@ export const NavigationRoutes = [
             label: 'Members',
             action: undefined,
             href: '',
-            to: 'useGetNuxtLink:/system/iam/member'
+            to: '/system/iam/member'
           },
           {
             access: true,
@@ -631,7 +631,7 @@ export const NavigationRoutes = [
             label: 'Groups',
             action: undefined,
             href: '',
-            to: 'useGetNuxtLink:/system/iam/group'
+            to: '/system/iam/group'
           },
           {
             access: true,
@@ -639,7 +639,7 @@ export const NavigationRoutes = [
             label: 'Roles',
             action: undefined,
             href: '',
-            to: 'useGetNuxtLink:/system/iam/role'
+            to: '/system/iam/role'
           },
           {
             access: true,
@@ -647,7 +647,7 @@ export const NavigationRoutes = [
             label: 'Access Policy',
             action: undefined,
             href: '',
-            to: 'useGetNuxtLink:/system/iam/access-policy'
+            to: '/system/iam/access-policy'
           },
           {
             access: true,
@@ -655,7 +655,7 @@ export const NavigationRoutes = [
             label: 'Resource Groups',
             action: undefined,
             href: '',
-            to: 'useGetNuxtLink:/system/iam/resource-group'
+            to: '/system/iam/resource-group'
           }
         ]
       },
@@ -664,7 +664,7 @@ export const NavigationRoutes = [
         key: 'Default-settings',
         label: 'Default settings',
         action: undefined,
-        to: 'useGetNuxtLink:/settings/default-settings',
+        to: '/settings/default-settings',
         href: ''
       },
       {
@@ -672,7 +672,7 @@ export const NavigationRoutes = [
         key: 'Recycle-Bin',
         label: 'Recycle Bin',
         action: undefined,
-        to: 'useGetNuxtLink:/system/recycle-bin',
+        to: '/system/recycle-bin',
         href: ''
       },
       {
@@ -680,7 +680,7 @@ export const NavigationRoutes = [
         key: 'System',
         label: 'System',
         action: undefined,
-        to: 'useGetNuxtLink:/system/dashboard',
+        to: '/system/dashboard',
         href: ''
       },
       {
@@ -697,7 +697,7 @@ export const NavigationRoutes = [
             label: 'Balance Report Instance',
             action: undefined,
             to: '',
-            href: 'getUrlToOldApp:/balance-report-instance'
+            href: '/balance-report-instance'
           },
           {
             access: true,
@@ -705,7 +705,7 @@ export const NavigationRoutes = [
             label: 'P&L Report Instance',
             action: undefined,
             to: '',
-            href: 'getUrlToOldApp:/pl-report-instance'
+            href: '/pl-report-instance'
           }
         ]
       },
@@ -723,14 +723,14 @@ export const NavigationRoutes = [
             label: 'Vault',
             action: undefined,
             to: '',
-            href: 'getUrlToOldApp:/vault'
+            href: '/vault'
           },
           {
             access: true,
             key: 'Vault-Record',
             label: 'Vault Record',
             action: undefined,
-            to: 'useGetNuxtLink:/settings/vault-record',
+            to: '/settings/vault-record',
             href: ''
           }
         ]
@@ -740,7 +740,7 @@ export const NavigationRoutes = [
         key: 'Client-Entity',
         label: 'Client Entity',
         action: undefined,
-        to: 'useGetNuxtLink:/settings/client-entity',
+        to: '/settings/client-entity',
         href: ''
       },
       {
@@ -748,7 +748,7 @@ export const NavigationRoutes = [
         key: 'White-Label',
         label: 'White Label',
         action: undefined,
-        to: 'useGetNuxtLink:/system/settings/general/',
+        to: '/system/settings/general/',
         href: ''
       },
       {
@@ -757,7 +757,7 @@ export const NavigationRoutes = [
         label: 'Journal',
         action: undefined,
         to: '',
-        href: 'getUrlToOldApp:/journal'
+        href: '/journal'
       }
     ]
   }
