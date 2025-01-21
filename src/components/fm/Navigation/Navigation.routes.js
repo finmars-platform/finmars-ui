@@ -656,6 +656,14 @@ export const NavigationRoutes = [
             action: undefined,
             href: '',
             to: '/system/iam/resource-group'
+          },
+          {
+            access: true,
+            key: 'navigation',
+            label: 'Navigation',
+            action: undefined,
+            href: '',
+            to: '/system/iam/navigation'
           }
         ]
       },
