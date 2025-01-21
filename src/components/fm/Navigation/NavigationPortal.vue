@@ -1,6 +1,6 @@
 <template>
   <Navigation
-    :items="items"
+    :items="routingItems"
     :alternativeLink="alternativeLink"
     :base="base"
     :route="route"
@@ -48,15 +48,18 @@
   const routingItems = ref(props.items);
 
   function handleItems(items) {
-    return items.map((item) => {
-      const { to, href, children } = item;
-      return {
-        ...item,
-        ...(to && to !== '' ? { to: useGetNuxtLink(to) } : {}),
-        ...(href && href !== '' ? { href: getUrlToOldApp(href) } : {}),
-        ...(children ? { children: handleItems(children) } : {})
-      };
+    items.map((item) => {
+      if (item.to && item.to !== '') {
+        item.to = useGetNuxtLink(item.to);
+      }
+      if (item.href && item.href !== '') {
+        item.href = getUrlToOldApp(item.href);
+      }
+      if (item.children) {
+        item.children = handleItems(item.children);
+      }
     });
+    return items;
   }
 
   routingItems.value = handleItems(routingItems.value);
