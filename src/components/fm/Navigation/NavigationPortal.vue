@@ -47,19 +47,19 @@
 
   const routingItems = ref(props.items);
 
-  function processItems(items) {
+  function handleItems(items) {
     return items.map((item) => {
       const { to, href, children } = item;
       return {
         ...item,
         ...(to && to !== '' ? { to: useGetNuxtLink(to) } : {}),
-        ...(href && to !== '' ? { href: getUrlToOldApp(href) } : {}),
-        ...(children ? { children: processItems(children) } : {})
+        ...(href && href !== '' ? { href: getUrlToOldApp(href) } : {}),
+        ...(children ? { children: handleItems(children) } : {})
       };
     });
   }
 
-  routingItems.value = processItems(routingItems.value);
+  routingItems.value = handleItems(routingItems.value);
 
   function getUrlToOldApp(suffix) {
     const store = route.value.params;
