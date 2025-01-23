@@ -54,9 +54,11 @@
       />
 
       <div class="fm-filter-editor__btns">
-        <FmButton type="secondary" rounded @click.stop.prevent="emits('cancel')"> Cancel </FmButton>
+        <FmButton type="secondary" rounded @click.stop.prevent="emits('cancel')">Cancel</FmButton>
 
-        <FmButton rounded :disabled="!isDirty" @click.stop.prevent="apply"> Apply </FmButton>
+        <FmButton rounded :disabled="!(isDirty && isValid)" @click.stop.prevent="apply">
+          Apply
+        </FmButton>
       </div>
     </div>
   </div>
@@ -65,8 +67,10 @@
 <script lang="ts" setup>
   import { computed, ref, toValue, watch } from 'vue';
   import cloneDeep from 'lodash/cloneDeep';
+  import get from 'lodash/get';
   import hasIn from 'lodash/hasIn';
   import isEmpty from 'lodash/isEmpty';
+  import isNumber from 'lodash/isNumber';
   import FmButton from '../../Button/Button.vue';
   import FmCheckbox from '../../Checkbox/Checkbox.vue';
   import FmProgressLinear from '../../ProgressLinear/ProgressLinear.vue';
@@ -156,6 +160,36 @@
     return (toValue(filter_values) as unknown[])[0] || '';
   });
 
+  const isValid = computed(() => {
+    if (isFilterLinked.value) {
+      const { attrs_entity_type = '', key = '' } = get(
+        filterData.value,
+        ['options', 'use_from_above'],
+        {}
+      );
+      return !!attrs_entity_type && !!key;
+    }
+
+    if (filterData.value?.options.filter_type === 'empty') {
+      return true;
+    }
+
+    if (!filterValue.value) {
+      return false;
+    }
+
+    if (Array.isArray(filterValue.value) || typeof filterValue.value === 'string') {
+      return !isEmpty(filterValue.value);
+    }
+
+    const { min_value, max_value } = filterValue.value;
+    if (typeof min_value === 'string') {
+      return !(isEmpty(min_value) || isEmpty(max_value));
+    }
+
+    return isNumber(min_value) && isNumber(max_value);
+  });
+
   function updateFilterType(type: FmFilterType) {
     if (type === 'use_from_above') {
       filterData.value!.options.use_from_above = {
@@ -178,7 +212,6 @@
 
   function updateEnabledFlag(val: boolean) {
     isDirty.value = true;
-    console.log('updateEnabledFlag: ', val, JSON.stringify(filterData.value));
     filterData.value!.options.enabled = val;
   }
 
@@ -237,7 +270,6 @@
   watch(
     () => props.value,
     () => {
-      console.log('WATCH: ', JSON.stringify(props.value));
       filterData.value = cloneDeep(props.value);
       [10, 50].includes(props.value?.value_type as number) && initSelectedOptionList();
     },
