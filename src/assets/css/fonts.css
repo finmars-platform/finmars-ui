@@ -1,0 +1,50 @@
+@font-face {
+  font-family: SFPro, sans-serif;
+  src: url("../fonts/sfPro/SFPro-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  text-rendering: optimizelegibility;
+}
+@font-face {
+  font-family: SFPro, sans-serif;
+  src: url("../fonts/sfPro/SFPro-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  text-rendering: optimizelegibility;
+}
+@font-face {
+  font-family: SFPro, sans-serif;
+  src: url("../fonts/sfPro/SFPro-Semibold.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  text-rendering: optimizelegibility;
+}
+@font-face {
+  font-family: SFPro, sans-serif;
+  src: url("../fonts/sfPro/SFPro-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  text-rendering: optimizelegibility;
+}
+
+@font-face {
+  font-family: "Segoe UI", sans-serif;
+  src: url("../fonts/segoi/SegoeUI.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  text-rendering: optimizelegibility;
+}
+@font-face {
+  font-family: "Segoe UI", sans-serif;
+  src: url("../fonts/segoi/SegoeUI-SemiBold.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  text-rendering: optimizelegibility;
+}
+@font-face {
+  font-family: "Segoe UI", sans-serif;
+  src: url("../fonts/segoi/SegoeUI-Bold.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  text-rendering: optimizelegibility;
+}

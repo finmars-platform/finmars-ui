@@ -1,7 +1,7 @@
 <template>
   <div
     :id="id"
-    class="relative w-full flex flex-row items-center justify-start px-[12px] text-[var(--on-surface)] hover:bg-[var(--surface-container-highest)]"
+    class="relative w-full flex flex-row items-center justify-start gap-x-2 px-[12px] text-[var(--body-large-font)] text-(color: var(--on-surface)) hover:bg-[var(--surface-container-highest)] cursor-pointer"
     :class="{
       'h-[56px]': itemSize === 'large',
       'h-[48px]': itemSize === 'medium',
@@ -19,7 +19,7 @@
       <VIcon v-if="prependIcon" class="mr-3" :icon="prependIcon" />
     </slot>
     <slot name="item" :item="item" :index="index">
-      <span class="text-[16px] text-[var(--on-surface)]">{{ title }}</span>
+      <span class="text-[var(--body-large-font)] text-(color: var(--on-surface))">{{ title }}</span>
     </slot>
 
     <slot name="append">

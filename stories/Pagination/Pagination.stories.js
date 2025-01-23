@@ -3,46 +3,48 @@ import FmPagination from '@/components/fm/Pagination/Pagination.vue';
 import PaginationDemo from './PaginationDemo.vue';
 
 const meta = {
-	title: 'Components/FmPagination',
-	component: FmPagination,
-	argTypes: {},
-	args: {}
+  title: 'Components/FmPagination',
+  component: FmPagination,
+  argTypes: {},
+  args: {
+    modelValue: 1
+  }
 };
 
 export default meta;
 
 export const General = {
-	render: (args) => ({
-		components: {
-			FmPagination
-		},
-		setup() {
-			const key = ref(1);
+  render: (args) => ({
+    components: {
+      FmPagination
+    },
+    setup() {
+      const key = ref(1);
 
-			watch(args, () => {
-				key.value = new Date().getTime();
-			});
+      watch(args, () => {
+        key.value = new Date().getTime();
+      });
 
-			return {
-				args,
-				key
-			};
-		},
-		template: `
+      return {
+        args,
+        key
+      };
+    },
+    template: `
 			<FmPagination v-bind="args" :key="key" />
 		`
-	})
+  })
 };
 
 export const AllVariants = {
-	render: (args) => ({
-		components: {
-			PaginationDemo
-		},
-		setup() {
-			return { args };
-		},
-		template: `
+  render: (args) => ({
+    components: {
+      PaginationDemo
+    },
+    setup() {
+      return { args };
+    },
+    template: `
 			<PaginationDemo />`
-	})
+  })
 };

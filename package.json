@@ -9,7 +9,8 @@
 		"build-storybook": "node --max-old-space-size=4096 ./node_modules/.bin/storybook build",
 		"clean": "rimraf ./dist",
 		"copy:css": "cp ./src/assets/css/themes.css ./dist",
-		"build": "npm run clean && vite build && npm run copy:css"
+		"copy:fonts": "cp ./src/assets/css/fonts.css ./dist",
+		"build": "npm run clean && vite build && npm run copy:fonts && npm run copy:css"
 	},
 	"files": [
 		"dist/",
