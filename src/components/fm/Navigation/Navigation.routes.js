@@ -1,6 +1,5 @@
 export const NavigationRoutes = [
   {
-    access: true,
     key: 'dashboard',
     label: 'Dashboard',
     icon: 'mdi-view-dashboard',
@@ -11,7 +10,6 @@ export const NavigationRoutes = [
     classes: 'first-side-nav'
   },
   {
-    access: true,
     key: 'reports',
     label: 'Reports',
     icon: 'mdi-poll',
@@ -20,7 +18,6 @@ export const NavigationRoutes = [
     href: '',
     children: [
       {
-        access: true,
         key: 'balance',
         label: 'Balance',
         action: undefined,
@@ -28,7 +25,6 @@ export const NavigationRoutes = [
         href: '/report/balance'
       },
       {
-        access: true,
         key: 'p&l',
         label: 'P&L',
         action: undefined,
@@ -36,7 +32,6 @@ export const NavigationRoutes = [
         href: '/report/profit-and-lost'
       },
       {
-        access: true,
         key: 'transaction',
         label: 'Transaction',
         action: undefined,
@@ -44,7 +39,6 @@ export const NavigationRoutes = [
         href: '/report/transaction'
       },
       {
-        access: true,
         key: 'performance',
         label: 'Performance',
         action: undefined,
@@ -54,7 +48,6 @@ export const NavigationRoutes = [
     ]
   },
   {
-    access: true,
     key: 'data',
     label: 'Data',
     icon: 'mdi-file-tree-outline',
@@ -63,7 +56,6 @@ export const NavigationRoutes = [
     href: '',
     children: [
       {
-        access: true,
         key: 'portfolios',
         label: 'Portfolios',
         action: undefined,
@@ -71,7 +63,6 @@ export const NavigationRoutes = [
         href: '/data/portfolio'
       },
       {
-        access: true,
         key: 'registers',
         label: 'Registers',
         action: undefined,
@@ -79,7 +70,6 @@ export const NavigationRoutes = [
         href: '/data/portfolio-register'
       },
       {
-        access: true,
         key: 'accounts',
         label: 'Accounts',
         action: undefined,
@@ -87,7 +77,6 @@ export const NavigationRoutes = [
         href: '/data/account'
       },
       {
-        access: true,
         key: 'instruments',
         label: 'Instruments',
         action: undefined,
@@ -95,7 +84,6 @@ export const NavigationRoutes = [
         href: '/data/instrument'
       },
       {
-        access: true,
         key: 'counterparties',
         label: 'Counterparties',
         action: undefined,
@@ -103,7 +91,6 @@ export const NavigationRoutes = [
         href: '/data/counterparty'
       },
       {
-        access: true,
         key: 'responsibles',
         label: 'Responsibles',
         action: undefined,
@@ -111,7 +98,6 @@ export const NavigationRoutes = [
         href: '/data/responsible'
       },
       {
-        access: true,
         key: 'currencies',
         label: 'Currencies',
         action: undefined,
@@ -119,7 +105,6 @@ export const NavigationRoutes = [
         href: '/data/currency'
       },
       {
-        access: true,
         key: 'strategies',
         label: 'Strategies',
         action: undefined,
@@ -127,7 +112,6 @@ export const NavigationRoutes = [
         href: '/data/strategy/1',
         children: [
           {
-            access: true,
             key: 'strategies-1',
             label: 'Strategies 1',
             action: undefined,
@@ -135,7 +119,6 @@ export const NavigationRoutes = [
             href: '/data/strategy/1'
           },
           {
-            access: true,
             key: 'strategies-2',
             label: 'Strategies 2',
             action: undefined,
@@ -143,7 +126,6 @@ export const NavigationRoutes = [
             href: '/data/strategy/2'
           },
           {
-            access: true,
             key: 'strategies-3',
             label: 'Strategies 3',
             action: undefined,
@@ -155,7 +137,6 @@ export const NavigationRoutes = [
     ]
   },
   {
-    access: true,
     key: 'transactions',
     label: 'Transactions',
     icon: 'mdi-swap-vertical',
@@ -164,7 +145,6 @@ export const NavigationRoutes = [
     href: '',
     children: [
       {
-        access: true,
         key: 'transactions-transactions',
         label: 'Transactions',
         action: undefined,
@@ -172,7 +152,6 @@ export const NavigationRoutes = [
         href: '/data/complex-transaction'
       },
       {
-        access: true,
         key: 'base-transactions',
         label: 'Base Transactions',
         action: undefined,
@@ -180,7 +159,6 @@ export const NavigationRoutes = [
         href: '/data/transaction'
       },
       {
-        access: true,
         key: 'register-transactions',
         label: 'Register Records',
         action: undefined,
@@ -190,7 +168,6 @@ export const NavigationRoutes = [
     ]
   },
   {
-    access: true,
     key: 'valuations',
     label: 'Valuations',
     icon: 'mdi-wallet-outline',
@@ -199,7 +176,6 @@ export const NavigationRoutes = [
     href: '',
     children: [
       {
-        access: true,
         key: 'prices',
         label: 'Prices',
         action: undefined,
@@ -207,7 +183,6 @@ export const NavigationRoutes = [
         href: '/data/price-history'
       },
       {
-        access: true,
         key: 'FX-Rates',
         label: 'FX rates',
         action: undefined,
@@ -215,7 +190,6 @@ export const NavigationRoutes = [
         href: '/data/currency-history'
       },
       {
-        access: true,
         key: 'Run-Pricing',
         label: 'Run Pricing',
         action: undefined,
@@ -223,7 +197,6 @@ export const NavigationRoutes = [
         href: '/pricing-manage'
       },
       {
-        access: true,
         key: 'Portfolio-History',
         label: 'Portfolio History',
         action: undefined,
@@ -233,7 +206,6 @@ export const NavigationRoutes = [
     ]
   },
   {
-    access: true,
     key: 'import',
     label: 'Import',
     icon: 'mdi-upload-outline',
@@ -242,7 +214,6 @@ export const NavigationRoutes = [
     href: '',
     children: [
       {
-        access: true,
         key: 'data-from-file',
         label: 'Import data from file',
         action: undefined,
@@ -250,7 +221,6 @@ export const NavigationRoutes = [
         href: ''
       },
       {
-        access: true,
         key: 'transactions-from-file',
         label: 'Import transactions from file',
         action: undefined,
@@ -260,7 +230,6 @@ export const NavigationRoutes = [
     ]
   },
   {
-    access: true,
     key: 'reconciliation',
     label: 'Reconciliation',
     icon: 'mdi-scale-balance',
@@ -269,7 +238,6 @@ export const NavigationRoutes = [
     href: '',
     children: [
       {
-        access: true,
         key: 'Portfolio-Reconcile-Groups',
         label: 'Portfolio reconciliation',
         action: undefined,
@@ -277,7 +245,6 @@ export const NavigationRoutes = [
         href: '/data/portfolio-reconcile-group'
       },
       {
-        access: true,
         key: 'Reconciliation-History',
         label: 'Reconciliation history',
         action: undefined,
@@ -287,7 +254,6 @@ export const NavigationRoutes = [
     ]
   },
   {
-    access: true,
     key: 'add-ons',
     label: 'Add-ons',
     icon: 'mdi-puzzle-outline',
@@ -296,7 +262,6 @@ export const NavigationRoutes = [
     href: '',
     children: [
       {
-        access: true,
         key: 'marketplace',
         label: 'Marketplace',
         action: undefined,
@@ -306,7 +271,6 @@ export const NavigationRoutes = [
     ]
   },
   {
-    access: true,
     key: 'explorer',
     label: 'Explorer',
     icon: 'mdi-folder-outline',
@@ -316,7 +280,6 @@ export const NavigationRoutes = [
     href: ''
   },
   {
-    access: true,
     key: 'configuration',
     label: 'Configuration',
     icon: 'mdi-tune',
@@ -325,7 +288,6 @@ export const NavigationRoutes = [
     href: '',
     children: [
       {
-        access: true,
         key: 'tasks',
         label: 'Tasks',
         action: undefined,
@@ -333,7 +295,6 @@ export const NavigationRoutes = [
         href: ''
       },
       {
-        access: true,
         key: 'initial-member-configuration',
         label: 'Initial Member',
         action: undefined,
@@ -341,7 +302,6 @@ export const NavigationRoutes = [
         href: ''
       },
       {
-        access: true,
         key: 'workers',
         label: 'Workers',
         action: undefined,
@@ -349,7 +309,6 @@ export const NavigationRoutes = [
         href: '/worker'
       },
       {
-        access: true,
         key: 'workflows',
         label: 'Workflows',
         action: undefined,
@@ -357,7 +316,6 @@ export const NavigationRoutes = [
         href: '/workflow'
       },
       {
-        access: true,
         key: 'layouts',
         label: 'Layouts',
         action: undefined,
@@ -365,7 +323,6 @@ export const NavigationRoutes = [
         href: '',
         children: [
           {
-            access: true,
             key: 'Entity-Viewer-Layouts',
             label: 'Entity Viewer Layouts',
             action: undefined,
@@ -373,15 +330,13 @@ export const NavigationRoutes = [
             href: '/settings/layout'
           },
           {
-            access: true,
             key: 'Dashboard-Layouts',
             label: 'Dashboard Layouts',
             action: undefined,
             to: '',
-            href: '/dashboard-layout'
+            href: '/dashboard-layout/'
           },
           {
-            access: true,
             key: 'Input-Form-Layouts',
             label: 'Input Form Layouts',
             action: undefined,
@@ -389,7 +344,6 @@ export const NavigationRoutes = [
             href: '/settings/input-form-layout'
           },
           {
-            access: true,
             key: 'Context-Menu-Layouts',
             label: 'Context Menu Layouts',
             action: undefined,
@@ -399,7 +353,6 @@ export const NavigationRoutes = [
         ]
       },
       {
-        access: true,
         key: 'Data-Settings',
         label: 'Data Settings',
         action: undefined,
@@ -407,7 +360,6 @@ export const NavigationRoutes = [
         href: '',
         children: [
           {
-            access: true,
             key: 'Account-Types',
             label: 'Account Types',
             action: undefined,
@@ -415,7 +367,6 @@ export const NavigationRoutes = [
             href: '/data/account-type'
           },
           {
-            access: true,
             key: 'Instrument-Types',
             label: 'Instrument Types',
             action: undefined,
@@ -423,7 +374,6 @@ export const NavigationRoutes = [
             href: '/data/instrument-type'
           },
           {
-            access: true,
             key: 'Transaction-Types',
             label: 'Transaction Types',
             action: undefined,
@@ -431,7 +381,6 @@ export const NavigationRoutes = [
             href: '/data/transaction-type'
           },
           {
-            access: true,
             key: 'Transaction-Type-Groups',
             label: 'Transaction Type Groups',
             action: undefined,
@@ -439,7 +388,6 @@ export const NavigationRoutes = [
             href: '/transaction-type-group'
           },
           {
-            access: true,
             key: 'User-Attributes',
             label: 'User Attributes',
             action: undefined,
@@ -447,15 +395,13 @@ export const NavigationRoutes = [
             href: ''
           },
           {
-            access: true,
             key: 'Reference-Tables',
             label: 'Reference Tables',
             action: undefined,
             to: '',
-            href: '/import/reference-table'
+            href: '/import/reference-tables'
           },
           {
-            access: true,
             key: 'Mapping-Tables',
             label: 'Mapping Tables',
             action: undefined,
@@ -463,7 +409,6 @@ export const NavigationRoutes = [
             href: '/import/mapping-tables-import'
           },
           {
-            access: true,
             key: 'Templates',
             label: 'Templates',
             action: undefined,
@@ -471,7 +416,6 @@ export const NavigationRoutes = [
             href: '/template-layout'
           },
           {
-            access: true,
             key: 'Portfolio-Bundles',
             label: 'Portfolio Bundles',
             action: undefined,
@@ -479,7 +423,6 @@ export const NavigationRoutes = [
             href: '/portfolio-bundle'
           },
           {
-            access: true,
             key: 'Portfolio-Types',
             label: 'Portfolio Types',
             action: undefined,
@@ -489,7 +432,6 @@ export const NavigationRoutes = [
         ]
       },
       {
-        access: true,
         key: 'Pricing-Policies',
         label: 'Pricing policies',
         action: undefined,
@@ -497,7 +439,6 @@ export const NavigationRoutes = [
         href: ''
       },
       {
-        access: true,
         key: 'Import-schemes',
         label: 'Import schemes',
         action: undefined,
@@ -505,7 +446,6 @@ export const NavigationRoutes = [
         href: '',
         children: [
           {
-            access: true,
             key: 'Data-Import',
             label: 'Data Import',
             action: undefined,
@@ -513,7 +453,6 @@ export const NavigationRoutes = [
             href: '/settings/data-import'
           },
           {
-            access: true,
             key: 'Transactions-Import',
             label: 'Transactions Import',
             action: undefined,
@@ -523,7 +462,6 @@ export const NavigationRoutes = [
         ]
       },
       {
-        access: true,
         key: 'Specifications',
         label: 'Specifications',
         action: undefined,
@@ -531,7 +469,6 @@ export const NavigationRoutes = [
         href: '',
         children: [
           {
-            access: true,
             key: 'Aliases',
             label: 'Aliases',
             action: undefined,
@@ -539,7 +476,6 @@ export const NavigationRoutes = [
             href: ''
           },
           {
-            access: true,
             key: 'Tooltips',
             label: 'Tooltips',
             action: undefined,
@@ -547,7 +483,6 @@ export const NavigationRoutes = [
             href: '/settings/tooltip'
           },
           {
-            access: true,
             key: 'Palettes',
             label: 'Palettes',
             action: undefined,
@@ -555,7 +490,6 @@ export const NavigationRoutes = [
             href: '/settings/palette'
           },
           {
-            access: true,
             key: 'code-editor',
             label: 'Code editor',
             action: undefined,
@@ -565,7 +499,6 @@ export const NavigationRoutes = [
         ]
       },
       {
-        access: true,
         key: 'Configuration',
         label: 'Configuration',
         action: undefined,
@@ -573,7 +506,6 @@ export const NavigationRoutes = [
         href: '',
         children: [
           {
-            access: true,
             key: 'Import',
             label: 'Import',
             action: undefined,
@@ -581,7 +513,6 @@ export const NavigationRoutes = [
             href: '/settings/import-configuration'
           },
           {
-            access: true,
             key: 'Manage',
             label: 'Manage',
             action: undefined,
@@ -593,7 +524,6 @@ export const NavigationRoutes = [
     ]
   },
   {
-    access: true,
     key: 'administration',
     label: 'Administration',
     icon: 'mdi-shield-account-variant-outline',
@@ -602,7 +532,6 @@ export const NavigationRoutes = [
     href: '',
     children: [
       {
-        access: true,
         key: 'New-User-Setups',
         label: 'New User Setups',
         action: undefined,
@@ -610,7 +539,6 @@ export const NavigationRoutes = [
         to: '/configuration/initial-setup'
       },
       {
-        access: true,
         key: 'Permission',
         label: 'Permissions',
         action: undefined,
@@ -618,7 +546,6 @@ export const NavigationRoutes = [
         href: '',
         children: [
           {
-            access: true,
             key: 'Member',
             label: 'Members',
             action: undefined,
@@ -626,7 +553,6 @@ export const NavigationRoutes = [
             to: '/system/iam/member'
           },
           {
-            access: true,
             key: 'Group',
             label: 'Groups',
             action: undefined,
@@ -634,7 +560,6 @@ export const NavigationRoutes = [
             to: '/system/iam/group'
           },
           {
-            access: true,
             key: 'Role',
             label: 'Roles',
             action: undefined,
@@ -642,7 +567,6 @@ export const NavigationRoutes = [
             to: '/system/iam/role'
           },
           {
-            access: true,
             key: 'Access-policy',
             label: 'Access Policy',
             action: undefined,
@@ -650,25 +574,15 @@ export const NavigationRoutes = [
             to: '/system/iam/access-policy'
           },
           {
-            access: true,
             key: 'resource-groups',
             label: 'Resource Groups',
             action: undefined,
             href: '',
             to: '/system/iam/resource-group'
-          },
-          {
-            access: true,
-            key: 'navigation',
-            label: 'Navigation',
-            action: undefined,
-            href: '',
-            to: '/system/iam/navigation'
           }
         ]
       },
       {
-        access: true,
         key: 'Default-settings',
         label: 'Default settings',
         action: undefined,
@@ -676,7 +590,6 @@ export const NavigationRoutes = [
         href: ''
       },
       {
-        access: true,
         key: 'Recycle-Bin',
         label: 'Recycle Bin',
         action: undefined,
@@ -684,7 +597,6 @@ export const NavigationRoutes = [
         href: ''
       },
       {
-        access: true,
         key: 'System',
         label: 'System',
         action: undefined,
@@ -692,7 +604,6 @@ export const NavigationRoutes = [
         href: ''
       },
       {
-        access: true,
         key: 'Cache',
         label: 'Cache',
         action: undefined,
@@ -700,7 +611,6 @@ export const NavigationRoutes = [
         href: '',
         children: [
           {
-            access: true,
             key: 'Balance-Report-Instance',
             label: 'Balance Report Instance',
             action: undefined,
@@ -708,7 +618,6 @@ export const NavigationRoutes = [
             href: '/balance-report-instance'
           },
           {
-            access: true,
             key: 'P&L-Report-Instance',
             label: 'P&L Report Instance',
             action: undefined,
@@ -718,7 +627,6 @@ export const NavigationRoutes = [
         ]
       },
       {
-        access: true,
         key: 'Vault',
         label: 'Vault',
         action: undefined,
@@ -726,7 +634,6 @@ export const NavigationRoutes = [
         href: '',
         children: [
           {
-            access: true,
             key: 'Vault-Vault',
             label: 'Vault',
             action: undefined,
@@ -734,7 +641,6 @@ export const NavigationRoutes = [
             href: '/vault'
           },
           {
-            access: true,
             key: 'Vault-Record',
             label: 'Vault Record',
             action: undefined,
@@ -744,7 +650,6 @@ export const NavigationRoutes = [
         ]
       },
       {
-        access: true,
         key: 'Client-Entity',
         label: 'Client Entity',
         action: undefined,
@@ -752,7 +657,6 @@ export const NavigationRoutes = [
         href: ''
       },
       {
-        access: true,
         key: 'White-Label',
         label: 'White Label',
         action: undefined,
@@ -760,7 +664,6 @@ export const NavigationRoutes = [
         href: ''
       },
       {
-        access: true,
         key: 'journal',
         label: 'Journal',
         action: undefined,
