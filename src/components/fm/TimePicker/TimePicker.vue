@@ -1,232 +1,283 @@
 <template>
-	<div class="fm-time-picker">
-		<div :class="['fm-time-picker__block', 'fm-time-picker__block-center']" />
+  <div class="fm-time-picker">
+    <div :class="['fm-time-picker__block', 'fm-time-picker__block-center']" />
 
-		<div class="fm-time-picker__body">
-			<div
-				class="fm-time-picker__col"
-				:style="{ transform: `translate(0, ${cssHoursOffset})` }"
-				@wheel.prevent="onHoursColScroll"
-			>
-				<div
-					v-for="hour in hours"
-					:key="hour"
-					:class="['fm-time-picker__cell', { 'fm-time-picker__cell--active': hour === hoursVal }]"
-					@click.stop.prevent="select('hours', hour)"
-				>
-					{{ hour }}
-				</div>
-			</div>
-
-			<div
-				class="fm-time-picker__col"
-				:style="{ transform: `translate(0, ${cssMinutesOffset})` }"
-				@wheel.prevent="onMinutesColScroll"
-			>
-				<div
-					v-for="min in filteredMinutes"
-					:key="min"
-					:class="['fm-time-picker__cell', { 'fm-time-picker__cell--active': min === minutesVal }]"
-					@click.stop.prevent="select('minutes', min)"
-				>
-					{{ min }}
-				</div>
-			</div>
-		</div>
-
-		<div :class="['fm-time-picker__block', 'fm-time-picker__block-top']" />
-		<div :class="['fm-time-picker__block', 'fm-time-picker__block-bottom']" />
-	</div>
+    <div class="fm-time-picker__body">
+      <!-- @vue-ignore -->
+      <div
+        class="fm-time-picker__col fm-time-picker__col-right"
+        @scroll="onHoursColScrollDebounced"
+      >
+        <div
+          v-for="hour in hours"
+          :key="hour"
+          :id="`h-${id}-${hour}`"
+          :class="[
+            'fm-time-picker__cell',
+            {
+              'fm-time-picker__cell--active': hour === hoursVal,
+              'fm-time-picker__cell--show-min': hour === hoursWithBlur.min,
+              'fm-time-picker__cell--show-max': hour === hoursWithBlur.max
+            }
+          ]"
+          @click.stop.prevent="select('hours', hour)"
+        >
+          {{ hour }}
+        </div>
+      </div>
+      <!-- @vue-ignore -->
+      <div
+        class="fm-time-picker__col fm-time-picker__col-left"
+        @scroll="onMinutesColScrollDebounced"
+      >
+        <div
+          v-for="min in filteredMinutes"
+          :key="min"
+          :id="`m-${id}-${min}`"
+          :class="[
+            'fm-time-picker__cell',
+            {
+              'fm-time-picker__cell--active': min === minutesVal,
+              'fm-time-picker__cell--show-min': min === minutesWithBlur.min,
+              'fm-time-picker__cell--show-max': min === minutesWithBlur.max
+            }
+          ]"
+          @click.stop.prevent="select('minutes', min)"
+        >
+          {{ min }}
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script lang="ts" setup>
-	import { computed, onBeforeMount, ref, watch } from 'vue';
-	import type { FmTimePickerProps, FmTimePickerEmits } from './types';
+  import { computed, onBeforeMount, onMounted, ref, watch } from 'vue';
+  import debounce from 'lodash/debounce';
+  import { getRandomString } from '@/utils';
+  import type { Nullable } from '@/types';
+  import type { FmTimePickerProps, FmTimePickerEmits } from './types';
 
-	const hours = Array.from({ length: 24 }).map((_, i) => `${i}`.padStart(2, '0'));
-	const minutes = Array.from({ length: 60 }).map((_, i) => `${i}`.padStart(2, '0'));
+  const id = getRandomString(4);
 
-	const props = withDefaults(defineProps<FmTimePickerProps>(), {
-		modelValue: '00:00',
-		minutesStep: 1,
-		size: 288
-	});
+  const hours = Array.from({ length: 24 }).map((_, i) => `${i}`.padStart(2, '0'));
+  const minutes = Array.from({ length: 60 }).map((_, i) => `${i}`.padStart(2, '0'));
 
-	const emits = defineEmits<FmTimePickerEmits>();
+  const props = withDefaults(defineProps<FmTimePickerProps>(), {
+    modelValue: '00:00',
+    minutesStep: 1,
+    size: 288
+  });
 
-	const value = ref<string>(props.modelValue);
+  const emits = defineEmits<FmTimePickerEmits>();
 
-	const filteredMinutes = computed(() =>
-		minutes.filter((m) => Number(m) % props.minutesStep === 0)
-	);
+  const value = ref<Nullable<string>>(props.modelValue);
 
-	const hoursVal = computed(() => (value.value || '00:00').split(':')[0]);
-	const hoursValIndex = computed(() => hours.findIndex((h) => h === hoursVal.value));
-	const minutesVal = computed(() => (value.value || '00:00').split(':')[1]);
-	const minutesValIndex = computed(() =>
-		filteredMinutes.value.findIndex((m) => m === minutesVal.value)
-	);
+  const onHoursColScrollDebounced = debounce(onHoursColScroll, 300);
+  const onMinutesColScrollDebounced = debounce(onMinutesColScroll, 300);
 
-	const cssSize = computed(() => `${props.size}px`);
-	const cssBorderRadius = computed(() => `${Math.floor(props.size / 10)}px`);
-	const cssPadding = computed(() => `${Math.floor((props.size / 10 / 7) * 6)}px`);
-	const cellSize = computed(() => {
-		const blockHeight = props.size - Math.floor((props.size / 10 / 7) * 6) * 2;
-		return Math.floor(blockHeight / 5);
-	});
-	const cssCellSize = computed(() => `${cellSize.value}px`);
-	const cssHoursOffset = computed(() => `${cellSize.value * (-hoursValIndex.value + 2)}px`);
-	const cssMinutesOffset = computed(() => `${cellSize.value * (-minutesValIndex.value + 2)}px`);
+  const filteredMinutes = computed(() =>
+    minutes.filter((m) => Number(m) % props.minutesStep === 0)
+  );
 
-	function onHoursColScroll(ev: WheelEvent) {
-		let diff = 0;
+  const hoursVal = computed(() => (value.value || '00:00').split(':')[0]);
+  const minutesVal = computed(() => (value.value || '00:00').split(':')[1]);
 
-		if (ev.deltaY > cellSize.value / 2 && hoursValIndex.value < hours.length - 1) {
-			diff = 1;
-		} else if (ev.deltaY < -cellSize.value / 2 && hoursValIndex.value > 0) {
-			diff = -1;
-		}
+  const hoursWithBlur = computed(() => {
+    const currentHourIndex = hours.findIndex((h) => h === hoursVal.value);
+    const minHourIndex = currentHourIndex - 2;
+    const maxHourIndex = currentHourIndex + 2;
+    return {
+      min: minHourIndex < 0 ? null : hours[minHourIndex],
+      max: maxHourIndex > hours.length - 1 ? null : hours[maxHourIndex]
+    };
+  });
+  const minutesWithBlur = computed(() => {
+    const currentMinutesIndex = filteredMinutes.value.findIndex((m) => m === minutesVal.value);
+    const minMinutesIndex = currentMinutesIndex - 2;
+    const maxMinutesIndex = currentMinutesIndex + 2;
+    return {
+      min: minMinutesIndex < 0 ? null : filteredMinutes.value[minMinutesIndex],
+      max:
+        maxMinutesIndex > filteredMinutes.value.length - 1
+          ? null
+          : filteredMinutes.value[maxMinutesIndex]
+    };
+  });
 
-		if (diff !== 0) {
-			const newHours = hours[hoursValIndex.value + diff];
-			value.value = `${newHours}:${minutesVal.value}`;
-			emits('update:modelValue', value.value);
-		}
-	}
+  const cssSize = computed(() => `${props.size}px`);
+  const cssBorderRadius = computed(() => `${Math.floor(props.size / 10)}px`);
+  const cssPadding = computed(() => `${Math.floor((props.size / 10 / 7) * 6)}px`);
+  const cellSize = computed(() => {
+    const blockHeight = props.size - Math.floor((props.size / 10 / 7) * 6) * 2;
+    return Math.floor(blockHeight / 5);
+  });
+  const cssCellSize = computed(() => `${cellSize.value}px`);
 
-	function onMinutesColScroll(ev: WheelEvent) {
-		let diff = 0;
+  function scrollToElement(field: 'hours' | 'minutes', val: string) {
+    const cellId = `${field === 'hours' ? 'h' : 'm'}-${id}-${val}`;
+    const cellEl = document.getElementById(cellId);
+    cellEl && cellEl.scrollIntoView({ block: 'center', behavior: 'smooth' });
+  }
 
-		if (
-			ev.deltaY > cellSize.value / 2 &&
-			minutesValIndex.value < filteredMinutes.value.length - 1
-		) {
-			diff = 1;
-		} else if (ev.deltaY < -cellSize.value / 2 && minutesValIndex.value > 0) {
-			diff = -1;
-		}
+  function select(field: 'hours' | 'minutes', val: string) {
+    let newTimeValue = `${hoursVal.value}:${minutesVal.value}`;
+    switch (field) {
+      case 'hours':
+        newTimeValue = `${val}:${minutesVal.value}`;
+        break;
+      case 'minutes':
+        newTimeValue = `${hoursVal.value}:${val}`;
+        break;
+    }
+    scrollToElement(field, val);
 
-		if (diff !== 0) {
-			const newMinutes = filteredMinutes.value[minutesValIndex.value + diff];
-			value.value = `${hoursVal.value}:${newMinutes}`;
-			emits('update:modelValue', value.value);
-		}
-	}
+    value.value = newTimeValue;
+    emits('update:modelValue', newTimeValue);
+  }
 
-	function select(field: 'hours' | 'minutes', val: string) {
-		let newTimeValue = `${hoursVal.value}:${minutesVal.value}`;
-		switch (field) {
-			case 'hours':
-				newTimeValue = `${val}:${minutesVal.value}`;
-				break;
-			case 'minutes':
-				newTimeValue = `${hoursVal.value}:${val}`;
-				break;
-		}
+  function onHoursColScroll(ev: UIEvent) {
+    // @ts-ignore
+    const selectedItemIndex = Math.round(ev.target?.scrollTop / cellSize.value);
+    const selectedItem = hours[selectedItemIndex];
+    select('hours', selectedItem);
+  }
 
-		value.value = newTimeValue;
-		emits('update:modelValue', newTimeValue);
-	}
+  function onMinutesColScroll(ev: UIEvent) {
+    // @ts-ignore
+    const selectedItemIndex = Math.round(ev.target?.scrollTop / cellSize.value);
+    const selectedItem = filteredMinutes.value[selectedItemIndex];
+    select('minutes', selectedItem);
+  }
 
-	watch(
-		() => props.modelValue,
-		(val, oldVal) => {
-			if (val !== oldVal && val !== value.value) {
-				value.value = val;
-			}
-		},
-		{ immediate: true }
-	);
+  watch(
+    () => props.modelValue,
+    (val, oldVal) => {
+      if (val !== oldVal && val !== value.value) {
+        value.value = val;
+      }
+    },
+    { immediate: true }
+  );
 
-	onBeforeMount(() => {
-		if (![1, 2, 5, 10, 15, 20, 30].includes(props.minutesStep)) {
-			throw new Error(
-				`[FmTimePicker] The value of props 'minutes-step' cannot be ${props.minutesStep}. It must be one of the following: 1, 2, 5, 10, 15, 20 or 30.`
-			);
-		}
-	});
+  onBeforeMount(() => {
+    if (![1, 2, 5, 10, 15, 20, 30].includes(props.minutesStep)) {
+      throw new Error(
+        `[FmTimePicker] The value of props 'minutes-step' cannot be ${props.minutesStep}. It must be one of the following: 1, 2, 5, 10, 15, 20 or 30.`
+      );
+    }
+  });
+
+  onMounted(() => {
+    const [hours, minutes] = value.value ? value.value.split(':') : ['0', '0'];
+    scrollToElement('hours', hours);
+    scrollToElement('minutes', minutes);
+  });
 </script>
 
 <style lang="scss" scoped>
-	.fm-time-picker {
-		--fmRimePicker-size: v-bind(cssSize);
-		--fmRimePicker-background: var(--surface-container-high);
-		--fmRimePicker-padding: v-bind(cssPadding);
-		--fmRimePicker-border-radius: v-bind(cssBorderRadius);
-		--fmRimePicker-item-size: v-bind(cssCellSize);
-		--fmRimePicker-font: var(--body-large-font);
-		--fmRimePicker-bg-active: var(--secondary);
-		--fmRimePicker-color-active: var(--on-secondary);
+  .fm-time-picker {
+    --fmTimePicker-size: v-bind(cssSize);
+    --fmTimePicker-color: var(--on-surface);
+    --fmTimePicker-background: var(--surface-container-high);
+    --fmTimePicker-padding: v-bind(cssPadding);
+    --fmTimePicker-border-radius: v-bind(cssBorderRadius);
+    --fmTimePicker-item-size: v-bind(cssCellSize);
+    --fmTimePicker-font: var(--body-large-font);
+    --fmTimePicker-bg-active: var(--secondary);
+    --fmTimePicker-color-active: var(--on-secondary);
 
-		position: relative;
-		width: var(--fmRimePicker-size);
-		min-width: var(--fmRimePicker-size);
-		height: var(--fmRimePicker-size);
-		min-height: var(--fmRimePicker-size);
-		padding: var(--fmRimePicker-padding);
-		background-color: var(--fmRimePicker-background);
-		border-radius: var(--fmRimePicker-border-radius);
-		box-shadow:
-			0 2px 6px 2px rgba(0, 0, 0, 0.15),
-			0 1px 2px 0 rgba(0, 0, 0, 0.3);
+    position: relative;
+    width: var(--fmTimePicker-size);
+    min-width: var(--fmTimePicker-size);
+    height: var(--fmTimePicker-size);
+    min-height: var(--fmTimePicker-size);
+    padding: var(--fmTimePicker-padding);
+    background-color: var(--fmTimePicker-background);
+    border-radius: var(--fmTimePicker-border-radius);
+    box-shadow:
+      0 2px 6px 2px rgba(0, 0, 0, 0.15),
+      0 1px 2px 0 rgba(0, 0, 0, 0.3);
 
-		&__body {
-			position: relative;
-			width: calc(var(--fmRimePicker-item-size) * 2);
-			height: 100%;
-			overflow: hidden;
-			display: flex;
-			justify-content: center;
-			align-items: stretch;
-			margin: 0 auto;
-			background-color: transparent;
-		}
+    &__body {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: stretch;
+      margin: 0 auto;
+      background-color: transparent;
+    }
 
-		&__col {
-			position: relative;
-			width: var(--fmRimePicker-item-size);
-			background-color: transparent;
-			transition: all ease-in-out 250ms;
-			cursor: pointer;
-		}
+    &__col {
+      position: relative;
+      width: 50%;
+      height: 100%;
+      padding-top: calc(var(--fmTimePicker-item-size) * 2);
+      padding-bottom: calc(var(--fmTimePicker-item-size) * 2);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      scrollbar-width: none;
+      scroll-behavior: smooth;
+      overflow-y: auto;
 
-		&__cell {
-			position: relative;
-			width: var(--fmRimePicker-item-size);
-			height: var(--fmRimePicker-item-size);
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			font: var(--fmRimePicker-font);
+      &-right {
+        align-items: flex-end;
+      }
 
-			&--active {
-				color: var(--fmRimePicker-color-active);
-				font-weight: 500;
-			}
-		}
+      &-left {
+        align-items: flex-start;
+      }
 
-		&__block {
-			position: absolute;
-			left: var(--fmRimePicker-padding);
-			width: calc(100% - calc(var(--fmRimePicker-padding) * 2));
-			height: var(--fmRimePicker-item-size);
-		}
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
 
-		&__block-center {
-			top: calc(50% - calc(var(--fmRimePicker-item-size) / 2));
-			background-color: var(--fmRimePicker-bg-active);
-		}
+    &__cell {
+      position: relative;
+      width: var(--fmTimePicker-item-size);
+      min-width: var(--fmTimePicker-item-size);
+      height: var(--fmTimePicker-item-size);
+      min-height: var(--fmTimePicker-item-size);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font: var(--fmTimePicker-font);
+      color: var(--fmTimePicker-color);
+      cursor: pointer;
 
-		&__block-top {
-			z-index: 1;
-			top: var(--fmRimePicker-padding);
-			background: linear-gradient(0deg, transparent 0%, var(--surface-container-high) 75%);
-		}
+      &--active {
+        color: var(--fmTimePicker-color-active);
+        font-weight: 500;
+      }
 
-		&__block-bottom {
-			z-index: 1;
-			bottom: var(--fmRimePicker-padding);
-			background: linear-gradient(180deg, transparent 0%, var(--surface-container-high) 75%);
-		}
-	}
+      &--show-min {
+        color: transparent;
+        background-clip: text;
+        background-image: linear-gradient(to top, var(--fmTimePicker-color), transparent);
+      }
+
+      &--show-max {
+        color: transparent;
+        background-clip: text;
+        background-image: linear-gradient(to bottom, var(--fmTimePicker-color), transparent);
+      }
+    }
+
+    &__block {
+      position: absolute;
+      left: var(--fmTimePicker-padding);
+      width: calc(100% - calc(var(--fmTimePicker-padding) * 2));
+      height: var(--fmTimePicker-item-size);
+
+      &-center {
+        top: calc(50% - calc(var(--fmTimePicker-item-size) / 2));
+        background-color: var(--fmTimePicker-bg-active);
+      }
+    }
+  }
 </style>
