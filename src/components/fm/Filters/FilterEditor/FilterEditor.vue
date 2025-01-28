@@ -65,7 +65,7 @@
 </template>
 
 <script lang="ts" setup>
-  import { computed, ref, toValue, watch } from 'vue';
+  import { type ComputedRef, computed, ref, toValue, watch } from 'vue';
   import cloneDeep from 'lodash/cloneDeep';
   import get from 'lodash/get';
   import hasIn from 'lodash/hasIn';
@@ -158,15 +158,21 @@
     }
 
     return (toValue(filter_values) as unknown[])[0] || '';
-  });
+  }) as ComputedRef<
+    | string
+    | string[]
+    | {
+        max_value: number | string;
+        min_value: number | string;
+      }
+  >;
 
   const isValid = computed(() => {
     if (isFilterLinked.value) {
-      const { attrs_entity_type = '', key = '' } = get(
-        filterData.value,
-        ['options', 'use_from_above'],
-        {}
-      );
+      const { attrs_entity_type, key } = get(filterData.value, ['options', 'use_from_above'], {
+        attrs_entity_type: '',
+        key: ''
+      });
       return !!attrs_entity_type && !!key;
     }
 
