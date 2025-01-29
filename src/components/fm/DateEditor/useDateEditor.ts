@@ -4,6 +4,7 @@ import customParseFormat from 'dayjs/plugin/customParseFormat';
 import isoWeek from 'dayjs/plugin/isoWeek';
 import { processedDate } from '@/components/fm/DateEditor/utils';
 import type { FmDateEditorEmits, FmDateEditorProps } from '@/components/fm/DateEditor/types';
+import type { Nullable } from '@/types';
 
 export default function useDateEditor(props: FmDateEditorProps, emits: FmDateEditorEmits) {
   dayjs.extend(customParseFormat);
@@ -22,6 +23,29 @@ export default function useDateEditor(props: FmDateEditorProps, emits: FmDateEdi
   const innerTime = ref(initialTime.value);
 
   const textFieldInput = ref(props.modelValue ? dayjs(props.modelValue).format(DATE_FORMAT) : null);
+
+  function isDateWithinAllowedRange({
+    val,
+    min = props.min,
+    max = props.max
+  }: {
+    val: Nullable<string>;
+    min?: string;
+    max?: string;
+  }) {
+    if (!val) {
+      return true;
+    }
+
+    const selectedDate = dayjs(val);
+    const minDateValue = min ? dayjs(min) : null;
+    const maxDateValue = max ? dayjs(max) : null;
+
+    const isDateMoreThanMin = minDateValue ? selectedDate.diff(minDateValue, 'day') >= 0 : true;
+    const isDateLessThanMax = maxDateValue ? maxDateValue.diff(selectedDate, 'day') > 0 : true;
+
+    return isDateMoreThanMin && isDateLessThanMax;
+  }
 
   function allowedDates(val: Dayjs | string, ignoreWeekends?: boolean) {
     const date = dayjs(val);
@@ -73,8 +97,11 @@ export default function useDateEditor(props: FmDateEditorProps, emits: FmDateEdi
     nextTick(() => {
       textFieldInput.value = processedVal;
       const isDateValid = dayjs(textFieldInput.value, DATE_FORMAT, true).isValid();
+
       if (isDateValid) {
-        innerValue.value = textFieldInput.value ?? '';
+        if (isDateWithinAllowedRange({ val: textFieldInput.value })) {
+          innerValue.value = textFieldInput.value ?? '';
+        }
       }
     });
   }
@@ -88,8 +115,10 @@ export default function useDateEditor(props: FmDateEditorProps, emits: FmDateEdi
     if (!isDateValid && key === 'tab') {
       textFieldInput.value = innerValue.value;
     } else if (isDateValid) {
-      innerValue.value = textFieldInput.value ?? '';
-      confirmDateSelection();
+      if (isDateWithinAllowedRange({ val: textFieldInput.value })) {
+        innerValue.value = textFieldInput.value ?? '';
+        confirmDateSelection();
+      }
     }
   }
 
