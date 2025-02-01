@@ -7,15 +7,19 @@
     :route="route"
     @resizeSideNav="emit('resizeSideNav', $event)"
   />
-  <div v-else class="navigation-loader-state">
+  <div v-else-if="isLoading" class="navigation-info-state">
     <ProgressCircular :size="30" indeterminate />
+  </div>
+  <div v-else class="navigation-info-state">
+    <span>Sidebar is not configured.</span>
+    <span>Contact workspace administrator: ***</span>
   </div>
 </template>
 
 <script setup>
   import ProgressCircular from '@/components/fm/ProgressCircular/ProgressCircular.vue';
   import Navigation from '@/components/fm/Navigation/Navigation.vue';
-  import { computed } from 'vue';
+  import { computed, ref } from 'vue';
 
   const props = defineProps({
     isFloat: {
@@ -41,6 +45,8 @@
 
   const emit = defineEmits(['resizeSideNav']);
 
+  const isLoading = ref(true);
+
   const route = computed(() => {
     if (props.route) return props.route;
     const segments = window.location.pathname?.split('/');
@@ -50,8 +56,19 @@
   });
 
   function transformItems(items) {
-    return items.map((item) => {
+    if (!Array.isArray(items)) {
+      isLoading.value = true;
+      return [];
+    }
+
+    if (!items.length) {
+      isLoading.value = false;
+      return [];
+    }
+
+    return items.map((item, index) => {
       const newItem = { ...item };
+      const isLast = index === items.length - 1;
 
       if (newItem.href) {
         newItem.href = getUrlToOldApp(newItem.href, route.value.params);
@@ -65,29 +82,28 @@
         newItem.children = transformItems(newItem.children);
       }
 
+      if (isLast) {
+        isLoading.value = false;
+      }
+
       return newItem;
     });
   }
 
-  const transformedItems = computed(() => {
-    if (!props.items?.length) return [];
+  const transformedItems = computed(() => transformItems(props.items));
 
-    return transformItems(props.items);
-  });
-
-  function getUrlToOldApp(suffix) {
-    const store = route.value.params;
-
+  function getUrlToOldApp(suffix, params) {
     let apiUrl = '';
+
     if (props.isVue && props.base !== window.location.origin) {
       apiUrl = props.base;
     }
     let baseApiUrl = '';
 
-    if (store.realm_code) {
-      baseApiUrl = '/' + store.realm_code + '/' + store.space_code;
+    if (params.realm_code) {
+      baseApiUrl = '/' + params.realm_code + '/' + params.space_code;
     } else {
-      baseApiUrl = '/' + store.isUrlValid;
+      baseApiUrl = '/' + params.isUrlValid;
     }
 
     return `${apiUrl}${baseApiUrl}/a/#!${suffix}`;
@@ -108,8 +124,9 @@
 </script>
 
 <style lang="postcss">
-  .navigation-loader-state {
+  .navigation-info-state {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 80vh;
