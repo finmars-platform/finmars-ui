@@ -391,15 +391,15 @@ export const NavigationRoutes = [
             key: 'User-Attributes',
             label: 'User Attributes',
             action: undefined,
-            to: '/configuration/user-attributes',
+            to: '/configuration/user-attribute',
             href: ''
           },
           {
             key: 'Reference-Tables',
             label: 'Reference Tables',
             action: undefined,
-            to: '',
-            href: '/import/reference-tables'
+            to: '/configuration/reference-table',
+            href: ''
           },
           {
             key: 'Mapping-Tables',
@@ -579,14 +579,14 @@ export const NavigationRoutes = [
             action: undefined,
             href: '',
             to: '/system/iam/resource-group'
-          },
-          {
+          }
+        /*{
             key: 'navigation',
             label: 'Navigation',
             action: undefined,
             href: '',
             to: '/system/iam/navigation'
-          }
+        }*/
         ]
       },
       {

@@ -20,6 +20,7 @@
   import ProgressCircular from '@/components/fm/ProgressCircular/ProgressCircular.vue';
   import Navigation from '@/components/fm/Navigation/Navigation.vue';
   import { computed, ref } from 'vue';
+  import {NavigationRoutes} from "@/components/fm/Navigation/Navigation.routes.js";
 
   const props = defineProps({
     isFloat: {
@@ -89,8 +90,8 @@
       return newItem;
     });
   }
-
-  const transformedItems = computed(() => transformItems(props.items));
+  // const transformedItems = computed(() => transformItems(props.items));
+  const transformedItems = computed(() => transformItems(NavigationRoutes));
 
   function getUrlToOldApp(suffix, params) {
     let apiUrl = '';
