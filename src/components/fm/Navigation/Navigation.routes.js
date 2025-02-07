@@ -384,8 +384,8 @@ export const NavigationRoutes = [
             key: 'Transaction-Type-Groups',
             label: 'Transaction Type Groups',
             action: undefined,
-            to: '',
-            href: '/transaction-type-group'
+            to: '/configuration/transaction-type-group',
+            href: ''
           },
           {
             key: 'User-Attributes',
@@ -579,14 +579,14 @@ export const NavigationRoutes = [
             action: undefined,
             href: '',
             to: '/system/iam/resource-group'
-          }
-        /*{
+          },
+          {
             key: 'navigation',
             label: 'Navigation',
             action: undefined,
             href: '',
             to: '/system/iam/navigation'
-        }*/
+          }
         ]
       },
       {
