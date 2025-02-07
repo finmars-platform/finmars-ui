@@ -509,8 +509,8 @@ export const NavigationRoutes = [
             key: 'Import',
             label: 'Import',
             action: undefined,
-            to: '',
-            href: '/settings/import-configuration'
+            to: '/configuration/import',
+            href: ''
           },
           {
             key: 'Manage',

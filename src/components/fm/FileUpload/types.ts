@@ -1,18 +1,35 @@
 export interface FmUploadFile {
-	id: string;
-	file: File | null;
-	progress: number;
+  id: string;
+  file: File | null;
+  progress: number;
 }
 
 export interface FmDialogOptions {
-	dialogTitle?: string;
-	dialogContent?: string;
+  dialogTitle?: string;
+  dialogContent?: string;
+}
+
+export interface FmTaskObject {
+  status: string;
+  progress_object?: {
+    current: number;
+    description: string;
+    percent: number;
+    total: number;
+  };
+  attachments?: [
+    {
+      file_report: number;
+    }
+  ];
 }
 
 export interface FmFileUploadProps extends FmDialogOptions {
-	icon?: string;
-	variant?: 'normal' | 'large';
-	label?: string;
-	multiple?: boolean;
-	indeterminate?: boolean;
+  type?: 'simple' | 'task';
+  variant?: 'normal' | 'large';
+  taskObject?: FmTaskObject | null;
+  indeterminate?: boolean;
+  multiple?: boolean;
+  label?: string;
+  icon?: string;
 }
