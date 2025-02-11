@@ -439,6 +439,13 @@ export const NavigationRoutes = [
         href: ''
       },
       {
+        key: 'expression-procedure',
+        label: 'Expression Procedure',
+        action: undefined,
+        href: '',
+        to: '/system/expression-procedure'
+      },
+      {
         key: 'Import-schemes',
         label: 'Import schemes',
         action: undefined,
