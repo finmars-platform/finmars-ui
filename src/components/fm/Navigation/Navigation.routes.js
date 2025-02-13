@@ -446,6 +446,13 @@ export const NavigationRoutes = [
         to: '/system/expression-procedure'
       },
       {
+        key: 'pricing-schedules',
+        label: 'Pricing Schedules',
+        action: undefined,
+        href: '',
+        to: '/system/schedule'
+      },
+      {
         key: 'Import-schemes',
         label: 'Import schemes',
         action: undefined,
