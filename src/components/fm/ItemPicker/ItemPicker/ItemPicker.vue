@@ -87,6 +87,7 @@
   import set from 'lodash/set';
   import isEmpty from 'lodash/isEmpty';
   import size from 'lodash/size';
+  import has from 'lodash/has';
   import type { FmItemPickerProps, FmItemPickerEmits } from './types';
   import { prepareSpecialGroup } from '../utils';
   import FmTextField from '../../TextField/TextField.vue';
@@ -96,6 +97,10 @@
   import FmItemPickerContent from '../ItemPickerContent/ItemPickerContent.vue';
   import type { FmAttribute } from '@/types';
   import type { FmAttributeGroup } from '@/components/fm/ItemPicker/ItemPickerContent/types';
+
+  interface FmAttributeList {
+    [key: string]: FmAttribute | FmAttributeList;
+  }
 
   const props = withDefaults(defineProps<FmItemPickerProps>(), {
     mode: 'add',
@@ -143,8 +148,8 @@
       }
 
       const processedName = a.name.split('. ');
-      const name = processedName.splice(-1)[0];
-      return name.toLocaleLowerCase().includes(searchText.value.toLocaleLowerCase());
+      const name = processedName.pop();
+      return name ? name.toLocaleLowerCase().includes(searchText.value.toLocaleLowerCase()) : true;
     })
   );
 
@@ -182,7 +187,11 @@
       value.push(props.locals.searchResultCategoryLabel);
     }
 
-    return [...value, ...Object.keys(otherItemsOnTree.value)];
+    const otherItemsCategories = Object.keys(otherItemsOnTree.value).sort((a, b) =>
+      a > b ? 1 : -1
+    );
+
+    return [...value, ...otherItemsCategories];
   }) as ComputedRef<string[]>;
 
   const itemTree = computed(() => ({
@@ -193,7 +202,26 @@
       [props.locals!.selectedLabel!]: selectedItemOnTree.value
     }),
     ...otherItemsOnTree.value
-  }));
+  })) as ComputedRef<Record<string, FmAttribute | FmAttributeList>>;
+
+  const processedItemTree = computed(() =>
+    Object.keys(itemTree.value).reduce(
+      (res, name) => {
+        const isGroup = isItemGroup(itemTree.value[name]);
+        if (isGroup) {
+          res[name] = {
+            name,
+            key: `${name}-0`,
+            itemType: 'group',
+            content: processGroup(itemTree.value[name] as FmAttributeList, 0)
+          };
+        }
+
+        return res;
+      },
+      {} as Record<string, FmAttributeGroup>
+    )
+  );
 
   const selectedCategory = ref<string>('');
 
@@ -202,10 +230,38 @@
       return undefined;
     }
 
-    return itemTree.value[selectedCategory.value];
+    return processedItemTree.value[selectedCategory.value]?.content;
   }) as ComputedRef<Record<string, FmAttributeGroup> | undefined>;
 
   const addBtnDisabled = computed(() => false);
+
+  function isItemGroup(item: FmAttributeList | FmAttribute) {
+    return !(has(item, 'key') && has(item, 'value_type'));
+  }
+
+  function processGroup(
+    group: FmAttributeList,
+    level: number
+  ): Record<string, FmAttributeGroup | FmAttribute> {
+    return Object.keys(group).reduce(
+      (res, key) => {
+        const isGroup = isItemGroup(group[key]);
+        if (isGroup) {
+          res[key] = {
+            name: key,
+            key: `${key}-${level + 1}`,
+            itemType: 'group',
+            content: processGroup(group[key] as FmAttributeList, level + 1)
+          };
+        } else {
+          res[key] = group[key] as FmAttribute;
+        }
+
+        return res;
+      },
+      {} as Record<string, FmAttributeGroup | FmAttribute>
+    );
+  }
 
   function onKeydown(ev: KeyboardEvent) {
     // ev.preventDefault()
