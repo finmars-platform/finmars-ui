@@ -40,6 +40,7 @@
   import type { FmAttribute } from '@/types';
 
   const props = withDefaults(defineProps<FmItemPickerContentProps>(), {
+    category: '',
     suggested: () => [],
     selected: () => [],
     initialSelected: () => [],
