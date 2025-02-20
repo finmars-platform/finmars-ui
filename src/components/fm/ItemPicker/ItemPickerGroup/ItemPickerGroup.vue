@@ -7,16 +7,16 @@
         color="var(--fmItemPickerGroup-color)"
       />
 
-      <span class="fm-item-picker-group__text">{{ getGroupName() }}</span>
+      <span class="fm-item-picker-group__text">{{ value.name }}</span>
     </div>
 
     <transition>
       <div v-if="isOpen" class="fm-item-picker-group__body">
-        <template v-for="item in items" :key="item.key">
+        <template v-for="item in value.content" :key="item.key">
           <FmItemPickerGroup
-            v-if="isItemGroup(item)"
+            v-if="item.itemType === 'group'"
             :level="level + 1"
-            :items="item as FmAttributeGroup"
+            :value="item as FmAttributeGroup"
             :mode="mode"
             :multiple="multiple"
             :selected="selected"
@@ -44,7 +44,6 @@
 
 <script lang="ts" setup>
   import { ref } from 'vue';
-  import has from 'lodash/has';
   import type { FmItemPickerGroupProps, FmItemPickerGroupEmits } from './types';
   import FmIcon from '../../Icon/Icon.vue';
   import FmItemPickerItem from '../ItemPickerItem/ItemPickerItem.vue';
@@ -52,7 +51,7 @@
   import type { FmAttribute } from '@/types';
   import type { FmAttributeGroup } from '@/components/fm/ItemPicker/ItemPickerContent/types';
 
-  const props = withDefaults(defineProps<FmItemPickerGroupProps>(), {
+  withDefaults(defineProps<FmItemPickerGroupProps>(), {
     mode: 'add',
     suggested: () => [],
     selected: () => [],
@@ -61,24 +60,6 @@
   const emits = defineEmits<FmItemPickerGroupEmits>();
 
   const isOpen = ref(false);
-
-  function getGroupName() {
-    const item = Object.values(props.items)[0] as FmAttribute;
-    const processedName = item.name.split('. ');
-    return processedName[props.level + 1].trim();
-  }
-
-  function isItemGroup(item: FmAttributeGroup | FmAttribute) {
-    const isItemSelected =
-      'key' in item && (props.selected || []).includes((item as FmAttribute).key);
-    const isItemSuggested =
-      'key' in item && (props.suggested || []).includes((item as FmAttribute).key);
-    if (isItemSelected || isItemSuggested) {
-      return false;
-    }
-
-    return !has(item, 'value_type');
-  }
 </script>
 
 <style lang="scss" scoped>
