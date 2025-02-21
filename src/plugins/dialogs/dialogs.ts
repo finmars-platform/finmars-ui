@@ -10,99 +10,100 @@ import { FM_DIALOGS_KEY, type FmDialogInstance, type FmDialogsPlugin } from './t
 import { ExtractComponentProps } from '@/types';
 
 export const dialogs: Plugin = {
-	install: (app: App) => {
-		let openDialogs: Record<string, { destroy: () => void }> = {};
+  install: (app: App) => {
+    let openDialogs: Record<string, { destroy: () => void }> = {};
 
-		const $openDialog = <T extends Component>(
-			params: FmDialogComponentProps<T>
-		): FmDialogInstance | undefined => {
-			const {
-				component,
-				componentProps = {} as ExtractComponentProps<T>,
-				dialogProps = {} as FmDialogProps
-			} = params;
+    const $openDialog = <T extends Component>(
+      params: FmDialogComponentProps<T>
+    ): FmDialogInstance | undefined => {
+      const {
+        component,
+        componentProps = {} as ExtractComponentProps<T>,
+        dialogProps = {} as FmDialogProps
+      } = params;
 
-			if (!component) {
-				throw Error('[Dialog plugin] The dialog component missing');
-			}
+      if (!component) {
+        throw Error('[Dialog plugin] The dialog component missing');
+      }
 
-			const { teleport } = dialogProps || ({} as FmDialogProps);
+      const { teleport } = dialogProps || ({} as FmDialogProps);
 
-			const parentElement =
-				!teleport || teleport === 'body' ? document.body : document.querySelector(teleport);
+      const parentElement =
+        !teleport || teleport === 'body' ? document.body : document.querySelector(teleport);
 
-			if (parentElement) {
-				const randomString = getRandomString(5);
-				const id = `dialog-wrapper-${randomString}`;
-				let vNode: VNode | null = createVNode(FmDialog, {
-					component,
-					componentProps,
-					dialogProps: {
-						...dialogProps,
-						id: `dialog-${randomString}`,
-						onClose: dialogProps.onClose
-							? () => {
-									dialogProps.onClose!();
-									destroy();
-								}
-							: () => destroy()
-					}
-				});
-				vNode.appContext = app._context;
-				let el: HTMLDivElement | null = document.createElement('div');
-				el.id = id;
-				render(vNode, el);
+      if (parentElement) {
+        const randomString = getRandomString(5);
+        const id = `dialog-wrapper-${randomString}`;
+        let vNode: VNode | null = createVNode(FmDialog, {
+          component,
+          componentProps,
+          dialogProps: {
+            ...dialogProps,
+            id: `dialog-${randomString}`,
+            onClose: dialogProps.onClose
+              ? () => {
+                  dialogProps.onClose!();
+                  destroy();
+                }
+              : () => destroy()
+          }
+        });
+        vNode.appContext = { ...app._context };
+        let el: HTMLDivElement | null = document.createElement('div');
+        el.id = id;
 
-				const destroy = () => {
-					if (el) {
-						const closedDialogId = el.id;
-						render(null, el);
-						document.body.removeChild(el);
-						closedDialogId && delete openDialogs[closedDialogId];
-					}
-					el = null;
-					vNode = null;
-				};
+        render(vNode, el);
 
-				document.body.appendChild(el);
-				openDialogs[id] = { destroy };
+        const destroy = () => {
+          if (el) {
+            const closedDialogId = el.id;
+            render(null, el);
+            document.body.removeChild(el);
+            closedDialogId && delete openDialogs[closedDialogId];
+          }
+          el = null;
+          vNode = null;
+        };
 
-				return { id, el, vNode, destroy };
-			}
-		};
+        document.body.appendChild(el);
+        openDialogs[id] = { destroy };
 
-		const $closeDialog = (id: string) => {
-			const dialog = openDialogs[id];
+        return { id, el, vNode, destroy };
+      }
+    };
 
-			if (!dialog) {
-				throw Error(`There is no the dialog with the ID "${id}"`);
-			}
+    const $closeDialog = (id: string) => {
+      const dialog = openDialogs[id];
 
-			dialog.destroy && dialog.destroy();
-		};
+      if (!dialog) {
+        throw Error(`There is no the dialog with the ID "${id}"`);
+      }
 
-		const $closeDialogs = () => {
-			if (!isEmpty(openDialogs)) {
-				for (const d of values(openDialogs)) {
-					d.destroy && d.destroy();
-				}
-				openDialogs = {};
-			}
-		};
+      dialog.destroy && dialog.destroy();
+    };
 
-		app.config.globalProperties.$openDialog = $openDialog;
-		app.config.globalProperties.$closeDialog = $closeDialog;
-		app.config.globalProperties.$closeDialogs = $closeDialogs;
-		app.provide<FmDialogsPlugin>(FM_DIALOGS_KEY, { $openDialog, $closeDialog, $closeDialogs });
-	}
+    const $closeDialogs = () => {
+      if (!isEmpty(openDialogs)) {
+        for (const d of values(openDialogs)) {
+          d.destroy && d.destroy();
+        }
+        openDialogs = {};
+      }
+    };
+
+    app.config.globalProperties.$openDialog = $openDialog;
+    app.config.globalProperties.$closeDialog = $closeDialog;
+    app.config.globalProperties.$closeDialogs = $closeDialogs;
+    app.provide<FmDialogsPlugin>(FM_DIALOGS_KEY, { $openDialog, $closeDialog, $closeDialogs });
+  }
 };
 
 declare module '@vue/runtime-core' {
-	export interface ComponentCustomProperties {
-		$openDialog: <T extends Component>(
-			params: FmDialogComponentProps<T>
-		) => FmDialogInstance | undefined;
-		$closeDialog: (id: string) => void;
-		$closeDialogs: () => void;
-	}
+  export interface ComponentCustomProperties {
+    $openDialog: <T extends Component>(
+      params: FmDialogComponentProps<T>
+    ) => FmDialogInstance | undefined;
+    $closeDialog: (id: string) => void;
+    $closeDialogs: () => void;
+  }
 }
