@@ -5,7 +5,7 @@
     <FmItemPicker
       class="mb-10"
       v-model="val"
-      :attributes="attrs"
+      :attributes="attributes"
       :suggested="[]"
       v-on="eventHandlers"
     />
@@ -41,6 +41,7 @@
   import cloneDeep from 'lodash/cloneDeep';
   import FmItemPicker from '@/components/fm/ItemPicker/ItemPicker/ItemPicker.vue';
   import { presetFilters, mockData, mockAttrs } from '../_Data/filters-mock-data.js';
+  import { mockAttrs1 } from '../_Data/mock.data.js';
 
   const eventHandlers = {
     close: () => console.log("'close' event"),
@@ -49,7 +50,7 @@
   };
 
   const attributes = cloneDeep(mockData.attributes);
-  const attrs = cloneDeep(mockAttrs);
+  const attrs = cloneDeep(mockAttrs1);
 
   const val = ref([]);
   const val2 = ref(cloneDeep(presetFilters.map((i) => i.key)));
