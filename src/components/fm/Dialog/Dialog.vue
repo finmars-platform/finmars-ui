@@ -108,7 +108,6 @@
   const emits = defineEmits<FmDialogComponentEmits>();
 
   const currentDialogProps = computed<FmDialogProps>(() => ({
-    teleport: props.dialogProps?.teleport || 'body',
     title: props.dialogProps?.title || '',
     cssClass: props.dialogProps?.cssClass || [],
     cssStyle: props.dialogProps?.cssStyle || {},
