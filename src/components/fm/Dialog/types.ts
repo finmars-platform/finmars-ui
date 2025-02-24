@@ -11,7 +11,6 @@ export type FmDialogEvent =
 
 export interface FmDialogProps {
   id?: string;
-  teleport?: string;
   title?: string;
   width?: string | number;
   draggable?: boolean;
