@@ -40,7 +40,7 @@
 </template>
 
 <script setup>
-  import { computed, onMounted, ref, watch, useSlots } from 'vue';
+  import { computed, nextTick, onMounted, ref, watch, useSlots } from 'vue';
   import { vMaska } from 'maska/vue';
   import { VIcon, VTextField } from 'vuetify/components';
 
@@ -158,13 +158,13 @@
   const innerValue = ref(props.modelValue);
 
   const vTextFieldProps = computed(() => ({
+    modelValue: props.modelValue,
     color: props.color || 'var(--color-fmTextField)',
     bgColor:
       props.bgColor || props.outlined
         ? 'var(--backgroundColor-fmTextField-outlined)'
         : 'var(--backgroundColor-fmTextField)',
     density: props.compact ? 'compact' : 'default',
-    modelValue: innerValue.value,
     active: props.active,
     autofocus: props.autofocus,
     type: props.type,
@@ -226,11 +226,14 @@
   });
 
   watch(
-    () => props.modelValue,
-    (val) => {
-      if (val !== innerValue.value) {
-        innerValue.value = val;
-      }
+    () => innerValue.value,
+    () => {
+      nextTick(() => {
+        if (props.modelValue !== innerValue.value) {
+          innerValue.value = props.modelValue;
+          inputElement.value.value = innerValue.value;
+        }
+      });
     },
     { immediate: true }
   );
