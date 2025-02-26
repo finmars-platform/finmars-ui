@@ -69,6 +69,7 @@
 </template>
 
 <script setup lang="ts" generic="T extends any & FmSelectOption, K extends string & keyof T">
+  import { computed } from 'vue';
   import FmMenu from '@/components/fm/Menu/Menu.vue';
   import FmCheckbox from '@/components/fm/Checkbox/Checkbox.vue';
   import FmChip from '@/components/fm/Chip/Chip.vue';
@@ -77,6 +78,7 @@
   import type { FmSelectOption, FmSelectProps, FmSelectEmits, FmSelectSlots } from './types';
 
   const props = withDefaults(defineProps<FmSelectProps<T, K>>(), {
+    options: () => [],
     itemSize: 'medium',
     variant: 'standard',
     titleKey: 'title',
@@ -85,6 +87,8 @@
   });
   const emits = defineEmits<FmSelectEmits<T, K>>();
   defineSlots<FmSelectSlots<T>>();
+
+  const propsValue = computed(() => props);
 
   const {
     menuId,
@@ -102,7 +106,7 @@
     clearSelected,
     onChipClick,
     isOptionSelected
-  } = useSelect(props, emits);
+  } = useSelect(propsValue, emits);
 
   defineExpose({
     toggleDropdown
