@@ -8,7 +8,7 @@
       @click="handleTabClick(index)"
     >
       <template #default>
-        <slot>
+        <slot :tab-index="index" :tab-value="tab">
           <div
             class="tab-wrapper"
             :class="{

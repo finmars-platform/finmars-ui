@@ -12,10 +12,13 @@
 	const props = defineProps({
 		theme: String,
 		maxHeight: String,
-		size: String
+		size: String,
+		logoUrl: String
 	});
 
 	const logo = computed(() => {
+    if (props.logoUrl) return props.logoUrl;
+
 		if (props.theme === 'light') {
 			if (props.size === 'small') {
 				return logoCollapsedLight;

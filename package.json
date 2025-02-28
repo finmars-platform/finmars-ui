@@ -1,16 +1,15 @@
 {
   "name": "@finmars/ui",
-  "version": "1.0.64",
-  "description": "",
+  "version": "1.0.70",
+  "description": "Finmars UI library for Vue 3 applications.",
   "scripts": {
     "dev": "vite dev --config vite.config.dev.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "storybook": "storybook dev -p 6006 --no-open",
     "build-storybook": "node --max-old-space-size=4096 ./node_modules/.bin/storybook build",
     "clean": "rimraf ./dist",
-    "copy:css": "cp ./src/assets/css/themes.css ./dist",
-    "copy:fonts": "cp ./src/assets/css/fonts.css ./dist",
-    "build": "npm run clean && vite build && npm run copy:fonts && npm run copy:css"
+    "copy:assets": "cp ./src/assets/css/themes.css ./dist && cp ./src/assets/css/fonts.css ./dist",
+    "build": "npm run clean && vite build && npm run copy:assets"
   },
   "files": [
     "dist/",
@@ -29,7 +28,12 @@
     "./dist/finmars-ui.css": "./dist/finmars-ui.css",
     "./dist/themes.css": "./dist/themes.css"
   },
-  "keywords": [],
+  "keywords": [
+    "finmars",
+    "UI",
+    "Vue3",
+    "component-library"
+  ],
   "author": "Sergei Zhitenev",
   "license": "SEE LICENSE IN LICENSE.md",
   "devDependencies": {

@@ -9,6 +9,15 @@ Make sure to install the dependencies:
 npm install
 ```
 
+## Storybook
+To preview and develop UI components using Storybook, run the following command:
+
+```bash
+npm run storybook
+```
+
+Storybook will be accessible at http://localhost:6006
+
 ## Development Server
 
 Start the development server on http://localhost:3000

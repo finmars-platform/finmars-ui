@@ -250,8 +250,22 @@ export const NavigationRoutes = [
         action: undefined,
         to: '',
         href: '/data/portfolio-reconcile-history'
+      },
+      {
+        key: 'Reconcile',
+        label: 'Reconcile',
+        action: undefined,
+        href: '',
+        to: '/reconcile'
       }
     ]
+  },
+  {
+    key: 'reconcile',
+    label: 'Reconcile',
+    action: undefined,
+    href: '',
+    to: '/reconcile'
   },
   {
     key: 'add-ons',

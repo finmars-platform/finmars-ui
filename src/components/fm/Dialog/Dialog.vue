@@ -21,12 +21,13 @@
               dragstart: onDragstart,
               mousedown: onMousedown,
               mouseup: onMouseup,
-              mousemove: onMousemove
+              mousemove: onMousemove,
+              keydown: onKeydown
             }
-          : {}
+          : {
+              keydown: onKeydown
+            }
       "
-      @keydown.esc.stop="startEmit('cancel')"
-      @keydown.enter.stop="isValid && startEmit('confirm')"
     >
       <div v-if="dialogProps?.draggable" class="fm-dialog__drag-icon">
         <FmIcon icon="mdi-dots-grid" />
@@ -107,7 +108,6 @@
   const emits = defineEmits<FmDialogComponentEmits>();
 
   const currentDialogProps = computed<FmDialogProps>(() => ({
-    teleport: props.dialogProps?.teleport || 'body',
     title: props.dialogProps?.title || '',
     cssClass: props.dialogProps?.cssClass || [],
     cssStyle: props.dialogProps?.cssStyle || {},
@@ -167,6 +167,14 @@
 
   function validate(value: boolean) {
     isValid.value = value;
+  }
+
+  function onKeydown(ev: KeyboardEvent) {
+    if (ev.code === 'Escape' && props.dialogProps?.closeOnEsc) {
+      ev.stopPropagation();
+      ev.preventDefault();
+      startEmit('cancel');
+    }
   }
 
   function closeDialog(arg?: { ev?: Event; withAction?: boolean }) {
