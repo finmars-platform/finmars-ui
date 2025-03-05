@@ -121,6 +121,7 @@
   import { FmFileUploadProps, FmTaskObject, FmUploadFile } from './types';
   import { reactive, ref, watch } from 'vue';
   import { getRandomString } from '@/utils';
+  import isEmpty from 'lodash/isEmpty';
 
   const props = withDefaults(defineProps<FmFileUploadProps>(), {
     icon: 'mdi-file-upload-outline',
@@ -205,7 +206,14 @@
       'application/octet-stream' // for .fcfg and .cfg files
     ];
 
-    return allowedMimeTypes.includes(file.type);
+    const allowedExtensions = ['.fcfg', '.cfg', '.zip'];
+
+    if (!isEmpty(file.type) && allowedMimeTypes.includes(file.type)) {
+      return true;
+    }
+
+    const fileName = file.name.toLowerCase();
+    return allowedExtensions.some((ext) => fileName.endsWith(ext));
   };
 
   const onDrop = (event: DragEvent) => {

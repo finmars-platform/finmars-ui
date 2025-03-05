@@ -261,13 +261,6 @@ export const NavigationRoutes = [
     ]
   },
   {
-    key: 'reconcile',
-    label: 'Reconcile',
-    action: undefined,
-    href: '',
-    to: '/reconcile'
-  },
-  {
     key: 'add-ons',
     label: 'Add-ons',
     icon: 'mdi-puzzle-outline',
