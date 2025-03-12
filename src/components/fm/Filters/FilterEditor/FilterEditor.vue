@@ -138,7 +138,11 @@
     return filterValueTypeToComponent[filterData.value!.value_type];
   });
 
-  const isFilterLinked = computed(() => hasIn(filterData.value, ['options', 'use_from_above']));
+  const isFilterLinked = computed(
+    () =>
+      hasIn(filterData.value, ['options', 'use_from_above']) &&
+      !isEmpty(get(filterData.value, ['options', 'use_from_above']))
+  );
 
   const filterValue = computed(() => {
     if (!filterData.value) {
