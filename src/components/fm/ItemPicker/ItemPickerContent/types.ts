@@ -13,6 +13,7 @@ export interface FmItemPickerContentProps {
   suggested: string[];
   selected: string[];
   initialSelected: string[];
+  allowSuggested?: boolean;
   multiple?: boolean;
   mode: 'add' | 'update';
   locals?: {

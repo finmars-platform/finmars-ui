@@ -33,12 +33,14 @@
         'fm-select-activator__body',
         {
           'fm-select-activator__body--shorter': (clearable && value) || prependIcon,
-          'fm-select-activator__body--shortest': clearable && value && prependIcon
+          'fm-select-activator__body--shortest': clearable && value && prependIcon,
+          'fm-select-activator__body--labeled': isLabelShifted
         }
       ]"
     >
       <div
         v-if="label"
+        ref="labelEl"
         class="truncate"
         :class="[
           'fm-select-activator__label',
@@ -99,6 +101,7 @@
   defineSlots<FmSelectActivatorSlots>();
 
   const activatorEl = ref<HTMLDivElement | null>(null);
+  const labelEl = ref<HTMLDivElement | null>(null);
   const isFocused = ref(false);
 
   const widthValue = computed(() => (props.width ? `${props.width}px` : '100%'));
@@ -111,6 +114,7 @@
       (props.placeholder && !props.value && isFocused.value) ||
       (props.persistentPlaceholder && !props.value)
   );
+  const labelElWidth = computed(() => (props.label ? `${labelEl.value?.offsetWidth}px` : 0));
 
   function onFocus(ev: FocusEvent) {
     if (props.disabled) {
@@ -146,7 +150,8 @@
     --height-fmSelectActivator: v-bind(heightValue);
     --backgroundColor-standard-fmSelectActivator: var(--surface-container-highest);
     --backgroundColor-outlined-fmSelectActivator: var(--surface);
-    --color-fmSelectActivator: var(--on-surface-variant);
+    --color-fmSelectActivator: var(--on-surface);
+    --color-placeholder-fmSelectActivator: var(--on-surface-variant);
     --color-focused-fmSelectActivator: var(--primary);
     --color-errored-fmSelectActivator: var(--error);
 
@@ -215,6 +220,18 @@
         top: -8px;
         z-index: 1;
       }
+
+      .fm-select-activator__body--labeled {
+        &:before {
+          content: '';
+          position: absolute;
+          left: 0;
+          width: v-bind(labelElWidth);
+          height: 16px;
+          background-color: var(--backgroundColor-outlined-fmSelectActivator);
+          top: -8px;
+        }
+      }
     }
 
     &__body {
@@ -240,7 +257,8 @@
       font-size: 16px;
       font-weight: 400;
       line-height: 24px;
-      color: var(--color-fmSelectActivator);
+      color: var(--color-placeholder-fmSelectActivator);
+      opacity: 0.8;
       transition: 0.2s ease;
 
       &--shifted {
@@ -253,7 +271,8 @@
       font-size: 16px;
       font-weight: 400;
       line-height: 24px;
-      color: var(--color-fmSelectActivator);
+      color: var(--color-placeholder-fmSelectActivator);
+      opacity: 0.8;
       transition: 0.2s ease;
     }
 
@@ -276,6 +295,7 @@
 
       .fm-select-activator__label {
         color: var(--color-focused-fmSelectActivator);
+        opacity: 0.8;
       }
     }
 
@@ -302,6 +322,7 @@
 
       .fm-select-activator__label {
         color: var(--color-errored-fmSelectActivator);
+        opacity: 0.8;
       }
     }
 

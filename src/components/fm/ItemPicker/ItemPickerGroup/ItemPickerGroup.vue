@@ -22,6 +22,7 @@
             :selected="selected"
             :initial-selected="initialSelected"
             :suggested="suggested"
+            :allow-suggested="allowSuggested"
             @update:model-value="emits('update:modelValue', $event)"
             @update:suggested="emits('update:suggested', $event)"
           />
@@ -31,6 +32,7 @@
             :item="item as FmAttribute"
             :selected="selected"
             :suggested="suggested"
+            :allow-suggested="allowSuggested"
             :multiple="multiple"
             :disabled="mode === 'add' && initialSelected.includes((item as FmAttribute).key)"
             @update:model-value="emits('update:modelValue', $event)"

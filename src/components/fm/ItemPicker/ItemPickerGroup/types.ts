@@ -6,6 +6,7 @@ export interface FmItemPickerGroupProps {
   mode: 'add' | 'update';
   selected: string[];
   suggested: string[];
+  allowSuggested?: boolean;
   initialSelected: string[];
   multiple?: boolean;
 }
