@@ -58,6 +58,7 @@
             :suggested="suggested!"
             :selected="selectedItems"
             :initial-selected="initialSelectedItems"
+            :allow-suggested="allowSuggested"
             :locals="{
               suggested: locals.suggestedLabel!,
               selected: locals.selectedLabel!

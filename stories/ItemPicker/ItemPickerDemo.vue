@@ -22,7 +22,7 @@
       v-on="eventHandlers"
     />
 
-    <h4 class="mb-4 text-h4">Multiple select, 'update' mode</h4>
+    <h4 class="mb-4 text-h4">Multiple select, 'update' mode, allow select as suggested</h4>
 
     <FmItemPicker
       v-model="val3"
@@ -31,6 +31,7 @@
       height="360"
       :attributes="attributes"
       :suggested="[]"
+      allow-suggested
       v-on="eventHandlers"
     />
   </div>

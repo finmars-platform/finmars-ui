@@ -14,6 +14,7 @@
     <span class="fm-item-picker-item__text" v-html="name" />
 
     <FmIconButton
+      v-if="allowSuggested"
       :icon="isSuggested ? 'mdi-star' : 'mdi-star-outline'"
       variant="text"
       size="small"
