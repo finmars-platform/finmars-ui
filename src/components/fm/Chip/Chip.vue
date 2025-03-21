@@ -43,7 +43,7 @@
       </FmTooltip>
     </div>
 
-    <slot name="prepend-icon">
+    <slot name="append-icon">
       <FmIcon
         v-if="appendIconValue"
         v-bind="appendIconValue"
