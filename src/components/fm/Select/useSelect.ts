@@ -231,7 +231,7 @@ export default function useSelect<T extends any & FmSelectOption, K extends stri
     key
   }: {
     event: KeyboardEvent;
-    key: 'down' | 'up' | 'esc' | 'enter' | 'space' | 'tab';
+    key: 'down' | 'up' | 'esc' | 'enter' | 'tab';
   }) {
     if (isEmpty(options.value)) {
       return;
@@ -253,7 +253,6 @@ export default function useSelect<T extends any & FmSelectOption, K extends stri
         handlePressingEscOrTabKeys(key);
         break;
       case 'enter':
-      case 'space':
         event.preventDefault();
         event.stopPropagation();
         handlePressingSpaceOrEnterKeys();
