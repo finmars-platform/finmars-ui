@@ -18,7 +18,6 @@
     @keydown.up="onKeydown($event, 'up')"
     @keydown.esc="onKeydown($event, 'esc')"
     @keydown.enter="onKeydown($event, 'enter')"
-    @keydown.space="onKeydown($event, 'space')"
     @keydown.tab="onKeydown($event, 'tab')"
   >
     <FmIcon
@@ -134,7 +133,7 @@
     emits('blur', ev);
   }
 
-  function onKeydown(event: KeyboardEvent, key: 'down' | 'up' | 'esc' | 'enter' | 'space' | 'tab') {
+  function onKeydown(event: KeyboardEvent, key: 'down' | 'up' | 'esc' | 'enter' | 'tab') {
     event.preventDefault();
     event.stopImmediatePropagation();
     emits('keydown', { event, key });

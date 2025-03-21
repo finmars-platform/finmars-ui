@@ -38,7 +38,7 @@ export interface FmSelectActivatorEmits {
     event: 'keydown',
     value: {
       event: KeyboardEvent;
-      key: 'down' | 'up' | 'esc' | 'enter' | 'space' | 'tab';
+      key: 'down' | 'up' | 'esc' | 'enter' | 'tab';
     }
   ): void;
 }
