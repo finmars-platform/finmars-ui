@@ -9,6 +9,7 @@
       'cursor-pointer': !disabled && !itemDisabled,
       'cursor-default': disabled || itemDisabled,
       'pointer-events-none': disabled || itemDisabled,
+      'opacity-25': disabled || itemDisabled,
       'bg-[var(--secondary-container)]': itemSelected,
       'bg-[var(--surface-container-highest)]': itemActive
     }"
