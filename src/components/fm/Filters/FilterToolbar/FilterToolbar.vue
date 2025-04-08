@@ -15,7 +15,7 @@
         <FmChip
           v-for="linkedFilter in linkedFilters"
           :key="linkedFilter.key"
-          :id="linkedFilter.key"
+          :id="`${id}-${linkedFilter.key}`"
           prepend-icon="mdi-link"
           closable
           :type="linkedFilter.options.enabled ? 'standard' : 'outlined'"
@@ -30,7 +30,7 @@
         <FmChip
           v-for="filter in notLinkedFilters"
           :key="filter.key"
-          :id="filter.key"
+          :id="`${id}-${filter.key}`"
           closable
           :type="filter.options.enabled ? 'standard' : 'outlined'"
           :value="filter.name"
@@ -112,6 +112,7 @@
   import debounce from 'lodash/debounce';
   import omit from 'lodash/omit';
   import { Mutate, Resize, Ripple } from 'vuetify/directives';
+  import { getRandomString } from '@/utils';
   import FmChip from '../../Chip/Chip.vue';
   import FmButton from '../../Button/Button.vue';
   import FmIcon from '../../Icon/Icon.vue';
@@ -127,6 +128,7 @@
   const vRipple = Ripple;
 
   const props = withDefaults(defineProps<FmtFilterToolbarProps>(), {
+    id: getRandomString(3),
     value: () => [],
     attributes: () => [],
     suggestedAttrs: () => []
@@ -307,6 +309,11 @@
       }
     }
   );
+
+  defineExpose({
+    filterAddBtn: addBtnElement,
+    editFilter
+  });
 </script>
 
 <style lang="scss">
