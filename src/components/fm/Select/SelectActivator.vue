@@ -155,7 +155,9 @@
     --color-errored-fmSelectActivator: var(--error);
 
     position: relative;
+    box-sizing: border-box;
     width: v-bind(widthValue);
+    max-width: v-bind(widthValue);
     min-height: var(--height-fmSelectActivator);
     display: flex;
     justify-content: flex-start;
