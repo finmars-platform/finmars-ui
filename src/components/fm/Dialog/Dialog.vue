@@ -3,7 +3,7 @@
     v-if="show"
     ref="dialogOverlayElement"
     class="fm-dialog-overlay"
-    @click="startEmit('click-overlay', $event)"
+    @click.stop.prevent="startEmit('click-overlay', $event)"
   >
     <div
       :id="dialogProps?.id"
@@ -193,7 +193,7 @@
   function startEmit(event: FmDialogEvent, ev?: Event) {
     if (event === 'click-overlay') {
       emits(event);
-      currentDialogProps.value.closeOnClickOverlay && closeDialog({ ev });
+      props.dialogProps?.closeOnClickOverlay && closeDialog({ ev });
       return;
     }
 

@@ -66,6 +66,7 @@
       dialogProps: {
         title: 'The test dialog1 title',
         closeOnEsc: true,
+        closeOnClickOverlay: true,
         onConfirm: () => {
           console.log('The user click the "Confirm" button');
         },
