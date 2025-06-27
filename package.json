@@ -1,6 +1,6 @@
 {
   "name": "@finmars/ui",
-  "version": "1.0.82",
+  "version": "1.0.83",
   "description": "Finmars UI library for Vue 3 applications.",
   "scripts": {
     "dev": "vite dev --config vite.config.dev.js",
