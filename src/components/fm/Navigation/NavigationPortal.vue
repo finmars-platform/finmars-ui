@@ -108,9 +108,9 @@
       baseApiUrl = '/' + params.isUrlValid;
     }
 
-    if (relative_link) {
-      return `${apiUrl}${baseApiUrl}${suffix}`;
-    }
+    // if (relative_link) {
+    //   return `${apiUrl}${baseApiUrl}${suffix}`;
+    // }
 
     return `${apiUrl}${baseApiUrl}/a/#!${suffix}`;
   }
