@@ -319,8 +319,9 @@ export const NavigationRoutes = [
         key: 'workflows',
         label: 'Workflows',
         action: undefined,
+        relative_link: true,
         to: '',
-        href: '/workflow'
+        href: '/w/home'
       },
       {
         key: 'layouts',

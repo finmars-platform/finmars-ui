@@ -70,8 +70,10 @@
       const newItem = { ...item };
       const isLast = index === items.length - 1;
 
+      console.log('newItem', newItem);
+
       if (newItem.href) {
-        newItem.href = getUrlToOldApp(newItem.href, route.value.params);
+        newItem.href = getUrlToOldApp(newItem.href, route.value.params, newItem.relative_link);
       }
 
       if (newItem.to) {
@@ -92,7 +94,7 @@
 
   const transformedItems = computed(() => transformItems(props.items));
 
-  function getUrlToOldApp(suffix, params) {
+  function getUrlToOldApp(suffix, params, relative_link) {
     let apiUrl = '';
 
     if (props.isVue && props.base !== window.location.origin) {
@@ -104,6 +106,10 @@
       baseApiUrl = '/' + params.realm_code + '/' + params.space_code;
     } else {
       baseApiUrl = '/' + params.isUrlValid;
+    }
+
+    if (relative_link) {
+      return `${apiUrl}${baseApiUrl}${suffix}`;
     }
 
     return `${apiUrl}${baseApiUrl}/a/#!${suffix}`;

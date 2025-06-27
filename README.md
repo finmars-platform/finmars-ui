@@ -33,3 +33,8 @@ To see what a build for production looks like
 Rum command:
 
 `npm run build`
+
+
+## Publish to npm
+
+`npm publish`

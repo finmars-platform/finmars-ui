@@ -2,7 +2,13 @@
 	<div class="layout">
 		<Header />
 		<div class="flex">
-			<NavigationPortal />
+			<NavigationPortal
+          alternativeLink="RouterLink"
+
+          :isVue="true"
+          :items="NavigationRoutes"
+
+      />
 			<div class="page">
 				<div @click="toggleDarkMode">
 					{{ toggleText }}
@@ -18,6 +24,7 @@
 	import { useTheme } from 'vuetify';
 	import Header from '~/stories/Header.vue';
 	import NavigationPortal from '@/components/fm/Navigation/NavigationPortal.vue';
+  import { NavigationRoutes } from './components/fm/Navigation/Navigation.routes';
 
 	const darkMode = ref(false);
 	const theme = useTheme();
