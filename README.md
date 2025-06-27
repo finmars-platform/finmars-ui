@@ -37,4 +37,12 @@ Rum command:
 
 ## Publish to npm
 
+`git commit ./ -m "<message>"`
+
+`git push origin <branch>`
+
+`npm version patch`
+
+`npm build`
+
 `npm publish`
