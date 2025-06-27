@@ -1,16 +1,10 @@
 /** @type {import('tailwindcss').Config} */
-import themeColors from "./tailwind/themeColors";
-import baseCssVariablesPlugin from "./tailwind/baseCssVariablesPlugin";
+import cssVariablesPlugin from './tailwind/cssVariablesPlugin.tw';
 
 export default {
-    content: [
-        "./index.js",
-        "./src/**/*.{vue,js}",
-    ],
-    theme: {
-        extend: {},
-    },
-    plugins: [
-        baseCssVariablesPlugin
-    ],
-}
+	content: ['./index.js', './src/**/*.{vue,js}', './stories/**/*.{vue,js}'],
+	theme: {
+		extend: {}
+	},
+	plugins: [cssVariablesPlugin]
+};

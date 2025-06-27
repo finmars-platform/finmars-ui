@@ -1,4 +1,5 @@
 import { fn } from '@storybook/test';
+import { messages } from './_Data/system-messages-mock-data';
 import MyHeader from './Header.vue';
 
 export default {
@@ -9,39 +10,40 @@ export default {
   render: (args) => ({
     // Components used in your story `template` are defined in the `components` object
     components: {
-      MyHeader,
+      MyHeader
     },
     // The story's `args` need to be mapped into the template through the `setup()` method
     setup() {
       // Story args can be spread into the returned object
       return {
-        ...args,
+        ...args
       };
     },
     // Then, the spread values can be accessed directly in the template
-    template: '<my-header :user="user" />',
+    template: '<my-header :user="user" :notifications="notifications" />'
   }),
   parameters: {
     // More on how to position stories at: https://storybook.js.org/docs/configure/story-layout
-    layout: 'fullscreen',
+    layout: 'fullscreen'
   },
   args: {
     onLogin: fn(),
     onLogout: fn(),
-    onCreateAccount: fn(),
-  },
+    onCreateAccount: fn()
+  }
 };
 
 export const LoggedIn = {
   args: {
     user: {
-      name: 'Jane Doe',
+      name: 'Jane Doe'
     },
-  },
+    notifications: messages
+  }
 };
 
 export const LoggedOut = {
   args: {
-    user: null,
-  },
+    user: null
+  }
 };

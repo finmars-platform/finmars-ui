@@ -1,9 +1,46 @@
-html, body {
-    font-size: 100%;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", sans-serif;
+body {
+    font-family: theme('fontFamily.--baseText-fontFamily');
+    font-size: theme('fontSize.--baseText-fontSize');
+    font-weight: theme('fontWeight.--baseText-fontWeight');
+    line-height: theme('lineHeight.--baseText-lineHeight');
+    letter-spacing: theme('letterSpacing.--baseText-letterSpacing');
+
+    color: theme('colors.--baseText-color');
+    background-color: theme('backgroundColor.--base-backgroundColor');
 }
 
-body {
-    background-color: var(--page-background-color);
-    color: var(--secondary-color);
+
+.scroll-variant-thin::-webkit-scrollbar-thumb {
+    background: transparent;
+}
+
+.scroll-variant-thin::-webkit-scrollbar-thumb {
+    background-color: var(--outline);
+    border-radius: 10px;
+    border: 2px solid var(--outline);
+}
+
+.scroll-variant-thin::-webkit-scrollbar-thumb:active {
+    background-color: var(--outline);
+}
+
+.scroll-variant-thin::-webkit-scrollbar-thumb:hover {
+    border: 0;
+}
+
+.scroll-variant-thin::-webkit-scrollbar:hover {
+    width: 5px;
+}
+
+.scroll-variant-thin::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.scroll-variant-thin::-webkit-scrollbar-track:hover {
+    background: transparent;
+}
+
+.scroll-variant-thin::-webkit-scrollbar {
+    height: 8px;
+    width: 5px;
 }
