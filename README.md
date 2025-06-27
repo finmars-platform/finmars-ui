@@ -43,6 +43,6 @@ Rum command:
 
 `npm version patch`
 
-`npm build`
+`npm run build`
 
 `npm publish`
