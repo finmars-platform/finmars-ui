@@ -70,7 +70,7 @@
       const newItem = { ...item };
       const isLast = index === items.length - 1;
 
-      console.log('newItem', newItem);
+      // console.log('newItem', newItem);
 
       if (newItem.app_code === 'w') {
         newItem.href = getUrlToWorkflowApp(newItem.href, route.value.params, newItem.relative_link);
