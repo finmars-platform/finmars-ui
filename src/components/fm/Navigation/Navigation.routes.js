@@ -321,7 +321,41 @@ export const NavigationRoutes = [
         action: undefined,
         relative_link: false,
         to: '',
-        href: '/workflow'
+        href: '',
+        children: [
+          {
+            key: 'Workflow-Dashboard',
+            label: 'Workflow Dashboard',
+            action: undefined,
+            to: '',
+            app_code: 'w',
+            href: '/workflow'
+          },
+          {
+            key: 'Workflow-Templates',
+            label: 'Workflow Templates',
+            action: undefined,
+            to: '',
+            app_code: 'w',
+            href: '/workflow-template'
+          },
+          {
+            key: 'Workflow-Schedules',
+            label: 'Schedules',
+            action: undefined,
+            to: '',
+            app_code: 'w',
+            href: '/schedule'
+          },
+          {
+            key: 'Workflow-Definitions',
+            label: 'Definitions',
+            action: undefined,
+            to: '',
+            app_code: 'w',
+            href: '/home'
+          },
+        ]
       },
       {
         key: 'layouts',

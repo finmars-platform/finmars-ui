@@ -72,7 +72,9 @@
 
       console.log('newItem', newItem);
 
-      if (newItem.href) {
+      if (newItem.app_code === 'w') {
+        newItem.href = getUrlToWorkflowApp(newItem.href, route.value.params, newItem.relative_link);
+      } else if (newItem.href) {
         newItem.href = getUrlToOldApp(newItem.href, route.value.params, newItem.relative_link);
       }
 
@@ -93,6 +95,27 @@
   }
 
   const transformedItems = computed(() => transformItems(props.items));
+
+  function getUrlToWorkflowApp(suffix, params, relative_link) {
+    let apiUrl = '';
+
+    if (props.isVue && props.base !== window.location.origin) {
+      apiUrl = props.base;
+    }
+    let baseApiUrl = '';
+
+    if (params.realm_code) {
+      baseApiUrl = '/' + params.realm_code + '/' + params.space_code;
+    } else {
+      baseApiUrl = '/' + params.isUrlValid;
+    }
+
+    // if (relative_link) {
+    //   return `${apiUrl}${baseApiUrl}${suffix}`;
+    // }
+
+    return `${apiUrl}${baseApiUrl}/w${suffix}`;
+  }
 
   function getUrlToOldApp(suffix, params, relative_link) {
     let apiUrl = '';

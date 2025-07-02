@@ -67,6 +67,7 @@
 		action: Function,
 		to: String,
 		href: String,
+		app_code: String,
 		classes: String,
 		style: Object,
 		children: Array,
