@@ -78,8 +78,15 @@
         newItem.href = getUrlToOldApp(newItem.href, route.value.params, newItem.relative_link);
       }
 
-      if (newItem.to) {
-        newItem.to = useGetNuxtLink(newItem.to, route.value.params);
+      if (window.location.href.indexOf('/w/') !== -1) {
+        if (newItem.to) {
+          newItem.href = useGetNuxtLink(newItem.to, route.value.params);
+          newItem.to = null;
+        }
+      } else {
+        if (newItem.to) {
+          newItem.to = useGetNuxtLink(newItem.to, route.value.params);
+        }
       }
 
       if (newItem.children && Array.isArray(newItem.children)) {
