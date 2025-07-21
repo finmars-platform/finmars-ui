@@ -1,6 +1,6 @@
 <template>
 	<aside
-		class="sidebar flex-col h-[calc(100vh-80px)] px-[16px] border-r border-solid border-sidenav-borderColor bg-sidenav-backgroundColor"
+		class="sidebar flex-col h-[calc(100vh-100px)] px-[16px] border-r border-solid border-sidenav-borderColor bg-sidenav-backgroundColor"
 		:class="[
 			{
 				hoverable: isOnlyIcon && !isFloat,

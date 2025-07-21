@@ -2,7 +2,7 @@ export const NavigationRoutes = [
   {
     key: 'dashboard',
     label: 'Dashboard',
-    icon: 'mdi-view-dashboard',
+    icon: 'mdi-view-dashboard-outline',
     action: undefined,
     to: '',
     href: '/dashboard',
@@ -12,7 +12,7 @@ export const NavigationRoutes = [
   {
     key: 'reports',
     label: 'Reports',
-    icon: 'mdi-poll',
+    icon: 'mdi-chart-box-outline',
     action: undefined,
     to: '',
     href: '',
@@ -33,7 +33,7 @@ export const NavigationRoutes = [
       },
       {
         key: 'transaction',
-        label: 'Transaction',
+        label: 'Transactions',
         action: undefined,
         to: '',
         href: '/report/transaction'
@@ -48,91 +48,85 @@ export const NavigationRoutes = [
     ]
   },
   {
-    key: 'data',
-    label: 'Data',
-    icon: 'mdi-file-tree-outline',
+    key: 'add-ons',
+    label: 'Add-ons',
+    icon: 'mdi-puzzle-outline',
+    action: undefined,
+    to: '',
+    href: '',
+    children: [
+
+    ]
+  },
+  {
+    key: 'data-quality',
+    label: 'Data Quality',
+    action: undefined,
+    icon: 'mdi-check-decagram-outline',
+    to: '/data-quality',
+    href: '',
+    children: [
+      {
+        key: 'reconciliation',
+        label: 'Reconciliation',
+        icon: 'mdi-scale-balance',
+        action: undefined,
+        to: '',
+        href: '',
+        children: [
+          {
+            key: 'Portfolio-Reconcile-Groups',
+            label: 'Portfolio Reconcile Groups',
+            action: undefined,
+            to: '',
+            href: '/data/portfolio-reconcile-group'
+          },
+          {
+            key: 'Reconcile',
+            label: 'Portfolio Reconciliation',
+            action: undefined,
+            href: '',
+            to: '/reconcile'
+          },
+          {
+            key: 'Reconciliation-History',
+            label: 'Reconciliation History',
+            action: undefined,
+            to: '',
+            href: '/data/portfolio-reconcile-history'
+          }
+        ]
+      },
+        ]
+  },
+  {
+    key: 'valuations',
+    label: 'Valuations',
+    icon: 'mdi-wallet-outline',
     action: undefined,
     to: '',
     href: '',
     children: [
       {
-        key: 'portfolios',
-        label: 'Portfolios',
+        key: 'Portfolio-History',
+        label: 'Portfolio History',
         action: undefined,
         to: '',
-        href: '/data/portfolio'
+        href: '/data/portfolio-history'
       },
       {
-        key: 'registers',
-        label: 'Registers',
+        key: 'prices',
+        label: 'Prices',
         action: undefined,
         to: '',
-        href: '/data/portfolio-register'
+        href: '/data/price-history'
       },
       {
-        key: 'accounts',
-        label: 'Accounts',
+        key: 'FX-Rates',
+        label: 'FX Rates',
         action: undefined,
         to: '',
-        href: '/data/account'
-      },
-      {
-        key: 'instruments',
-        label: 'Instruments',
-        action: undefined,
-        to: '',
-        href: '/data/instrument'
-      },
-      {
-        key: 'counterparties',
-        label: 'Counterparties',
-        action: undefined,
-        to: '',
-        href: '/data/counterparty'
-      },
-      {
-        key: 'responsibles',
-        label: 'Responsibles',
-        action: undefined,
-        to: '',
-        href: '/data/responsible'
-      },
-      {
-        key: 'currencies',
-        label: 'Currencies',
-        action: undefined,
-        to: '',
-        href: '/data/currency'
-      },
-      {
-        key: 'strategies',
-        label: 'Strategies',
-        action: undefined,
-        to: '',
-        href: '/data/strategy/1',
-        children: [
-          {
-            key: 'strategies-1',
-            label: 'Strategies 1',
-            action: undefined,
-            to: '',
-            href: '/data/strategy/1'
-          },
-          {
-            key: 'strategies-2',
-            label: 'Strategies 2',
-            action: undefined,
-            to: '',
-            href: '/data/strategy/2'
-          },
-          {
-            key: 'strategies-3',
-            label: 'Strategies 3',
-            action: undefined,
-            to: '',
-            href: '/data/strategy/3'
-          }
-        ]
+        href: '/data/currency-history'
       }
     ]
   },
@@ -168,41 +162,101 @@ export const NavigationRoutes = [
     ]
   },
   {
-    key: 'valuations',
-    label: 'Valuations',
-    icon: 'mdi-wallet-outline',
+    key: 'data',
+    label: 'Data',
+    icon: 'mdi-file-tree-outline',
     action: undefined,
     to: '',
     href: '',
     children: [
       {
-        key: 'prices',
-        label: 'Prices',
+        key: 'instruments',
+        label: 'Instruments',
         action: undefined,
         to: '',
-        href: '/data/price-history'
+        href: '/data/instrument'
       },
       {
-        key: 'FX-Rates',
-        label: 'FX rates',
+        key: 'registers',
+        label: 'Registers',
         action: undefined,
         to: '',
-        href: '/data/currency-history'
+        href: '/data/portfolio-register'
       },
       {
-        key: 'Run-Pricing',
-        label: 'Run Pricing',
+        key: 'portfolios',
+        label: 'Portfolios',
         action: undefined,
         to: '',
-        href: '/pricing-manage'
+        href: '/data/portfolio'
+      },
+
+      {
+        key: 'accounts',
+        label: 'Accounts',
+        action: undefined,
+        to: '',
+        href: '/data/account'
       },
       {
-        key: 'Portfolio-History',
-        label: 'Portfolio History',
+        key: 'strategies',
+        label: 'Strategies',
         action: undefined,
         to: '',
-        href: '/data/portfolio-history'
-      }
+        href: '/data/strategy/1',
+        children: [
+          {
+            key: 'strategies-1',
+            label: 'Strategies 1',
+            action: undefined,
+            to: '',
+            href: '/data/strategy/1'
+          },
+          {
+            key: 'strategies-2',
+            label: 'Strategies 2',
+            action: undefined,
+            to: '',
+            href: '/data/strategy/2'
+          },
+          {
+            key: 'strategies-3',
+            label: 'Strategies 3',
+            action: undefined,
+            to: '',
+            href: '/data/strategy/3'
+          }
+        ]
+      },
+      {
+        key: 'responsibles',
+        label: 'Responsibles',
+        action: undefined,
+        to: '',
+        href: '/data/responsible'
+      },
+      {
+        key: 'counterparties',
+        label: 'Counterparties',
+        action: undefined,
+        to: '',
+        href: '/data/counterparty'
+      },
+      {
+        key: 'Client-Entity',
+        label: 'Client Entities',
+        action: undefined,
+        to: '/settings/client-entity',
+        href: ''
+      },
+      {
+        key: 'currencies',
+        label: 'Currencies',
+        action: undefined,
+        to: '',
+        href: '/data/currency'
+      },
+
     ]
   },
   {
@@ -214,65 +268,17 @@ export const NavigationRoutes = [
     href: '',
     children: [
       {
-        key: 'data-from-file',
-        label: 'Import data from file',
-        action: undefined,
-        to: '/system/simple-import',
-        href: ''
-      },
-      {
         key: 'transactions-from-file',
-        label: 'Import transactions from file',
+        label: 'Import Transactions from File',
         action: undefined,
         to: '/system/transaction-import',
         href: ''
-      }
-    ]
-  },
-  {
-    key: 'reconciliation',
-    label: 'Reconciliation',
-    icon: 'mdi-scale-balance',
-    action: undefined,
-    to: '',
-    href: '',
-    children: [
-      {
-        key: 'Portfolio-Reconcile-Groups',
-        label: 'Portfolio reconciliation',
-        action: undefined,
-        to: '',
-        href: '/data/portfolio-reconcile-group'
       },
       {
-        key: 'Reconciliation-History',
-        label: 'Reconciliation history',
+        key: 'data-from-file',
+        label: 'Import Data from File',
         action: undefined,
-        to: '',
-        href: '/data/portfolio-reconcile-history'
-      },
-      {
-        key: 'Reconcile',
-        label: 'Reconcile',
-        action: undefined,
-        href: '',
-        to: '/reconcile'
-      }
-    ]
-  },
-  {
-    key: 'add-ons',
-    label: 'Add-ons',
-    icon: 'mdi-puzzle-outline',
-    action: undefined,
-    to: '',
-    href: '',
-    children: [
-      {
-        key: 'marketplace',
-        label: 'Marketplace',
-        action: undefined,
-        to: '/marketplace',
+        to: '/system/simple-import',
         href: ''
       }
     ]
@@ -287,6 +293,23 @@ export const NavigationRoutes = [
     href: ''
   },
   {
+    key: 'marketplace',
+    label: 'Marketplace',
+    action: undefined,
+    icon: 'mdi-store-outline',
+    to: '/marketplace',
+    href: ''
+  },
+  {
+    key: 'initial-member-configuration',
+    label: 'Installed New User Setups',
+    icon: 'mdi-ballot-outline',
+    action: undefined,
+    to: '/configuration/initial',
+    href: ''
+  },
+
+  {
     key: 'configuration',
     label: 'Configuration',
     icon: 'mdi-tune',
@@ -300,20 +323,6 @@ export const NavigationRoutes = [
         action: undefined,
         to: '/system/task/',
         href: ''
-      },
-      {
-        key: 'initial-member-configuration',
-        label: 'Initial Member',
-        action: undefined,
-        to: '/configuration/initial',
-        href: ''
-      },
-      {
-        key: 'workers',
-        label: 'Workers',
-        action: undefined,
-        to: '',
-        href: '/worker'
       },
       {
         key: 'workflows',
@@ -341,7 +350,7 @@ export const NavigationRoutes = [
           },
           {
             key: 'Workflow-Schedules',
-            label: 'Schedules',
+            label: 'Workflow Schedules',
             action: undefined,
             to: '',
             app_code: 'w',
@@ -349,7 +358,7 @@ export const NavigationRoutes = [
           },
           {
             key: 'Workflow-Definitions',
-            label: 'Definitions',
+            label: 'Workflow Definitions',
             action: undefined,
             to: '',
             app_code: 'w',
@@ -365,11 +374,18 @@ export const NavigationRoutes = [
         href: '',
         children: [
           {
-            key: 'Entity-Viewer-Layouts',
-            label: 'Entity Viewer Layouts',
+            key: 'New-User-Setups',
+            label: 'New User Setups',
             action: undefined,
-            to: '',
-            href: '/settings/layout'
+            href: '',
+            to: '/configuration/initial-setup'
+          },
+          {
+            key: 'White-Label',
+            label: 'White Label',
+            action: undefined,
+            to: '/system/settings/general/',
+            href: ''
           },
           {
             key: 'Dashboard-Layouts',
@@ -377,6 +393,13 @@ export const NavigationRoutes = [
             action: undefined,
             to: '',
             href: '/dashboard-layout/'
+          },
+          {
+            key: 'Entity-Viewer-Layouts',
+            label: 'Entity Viewer Layouts',
+            action: undefined,
+            to: '',
+            href: '/settings/layout'
           },
           {
             key: 'Input-Form-Layouts',
@@ -395,6 +418,13 @@ export const NavigationRoutes = [
         ]
       },
       {
+        key: 'Default-settings',
+        label: 'Default settings',
+        action: undefined,
+        to: '/settings/default-settings',
+        href: ''
+      },
+      {
         key: 'Data-Settings',
         label: 'Data Settings',
         action: undefined,
@@ -402,25 +432,11 @@ export const NavigationRoutes = [
         href: '',
         children: [
           {
-            key: 'Account-Types',
-            label: 'Account Types',
+            key: 'User-Attributes',
+            label: 'User Attributes',
             action: undefined,
-            to: '',
-            href: '/data/account-type'
-          },
-          {
-            key: 'Instrument-Types',
-            label: 'Instrument Types',
-            action: undefined,
-            to: '',
-            href: '/data/instrument-type'
-          },
-          {
-            key: 'Transaction-Types',
-            label: 'Transaction Types',
-            action: undefined,
-            to: '',
-            href: '/data/transaction-type'
+            to: '/configuration/user-attribute',
+            href: ''
           },
           {
             key: 'Transaction-Type-Groups',
@@ -430,32 +446,25 @@ export const NavigationRoutes = [
             href: ''
           },
           {
-            key: 'User-Attributes',
-            label: 'User Attributes',
-            action: undefined,
-            to: '/configuration/user-attribute',
-            href: ''
-          },
-          {
-            key: 'Reference-Tables',
-            label: 'Reference Tables',
-            action: undefined,
-            to: '/configuration/reference-table',
-            href: ''
-          },
-          {
-            key: 'Mapping-Tables',
-            label: 'Mapping Tables',
-            action: undefined,
-            to: '',
-            href: '/import/mapping-tables-import'
-          },
-          {
             key: 'Templates',
-            label: 'Templates',
+            label: 'Transaction Templates',
             action: undefined,
             to: '',
             href: '/template-layout'
+          },
+          {
+            key: 'Transaction-Types',
+            label: 'Transaction Types',
+            action: undefined,
+            to: '',
+            href: '/data/transaction-type'
+          },
+          {
+            key: 'Instrument-Types',
+            label: 'Instrument Types',
+            action: undefined,
+            to: '',
+            href: '/data/instrument-type'
           },
           {
             key: 'Portfolio-Bundles',
@@ -470,33 +479,57 @@ export const NavigationRoutes = [
             action: undefined,
             to: '',
             href: '/data/portfolio-type'
+          },
+          {
+            key: 'Account-Types',
+            label: 'Account Types',
+            action: undefined,
+            to: '',
+            href: '/data/account-type'
+          }
+        ]
+      },
+      {
+        key: 'Specifications',
+        label: 'Data References',
+        action: undefined,
+        to: '',
+        href: '',
+        children: [
+
+          {
+            key: 'Aliases',
+            label: 'Aliases',
+            action: undefined,
+            to: '/system/settings/aliases',
+            href: ''
+          },
+          {
+            key: 'Reference-Tables',
+            label: 'Dropdown Values',
+            action: undefined,
+            to: '/configuration/reference-table',
+            href: ''
+          },
+          {
+            key: 'Mapping-Tables',
+            label: 'Lookup Mappings',
+            action: undefined,
+            to: '',
+            href: '/import/mapping-tables-import'
           }
         ]
       },
       {
         key: 'Pricing-Policies',
-        label: 'Pricing policies',
+        label: 'Pricing Policies',
         action: undefined,
         to: '/data/pricing-policy',
         href: ''
       },
       {
-        key: 'expression-procedure',
-        label: 'Expression Procedure',
-        action: undefined,
-        href: '',
-        to: '/system/expression-procedure'
-      },
-      {
-        key: 'pricing-schedules',
-        label: 'Pricing Schedules',
-        action: undefined,
-        href: '',
-        to: '/system/schedule'
-      },
-      {
         key: 'Import-schemes',
-        label: 'Import schemes',
+        label: 'Import Schemes',
         action: undefined,
         to: '',
         href: '',
@@ -518,61 +551,31 @@ export const NavigationRoutes = [
         ]
       },
       {
-        key: 'Specifications',
-        label: 'Specifications',
+        key: 'code-editor',
+        label: 'Code editor',
         action: undefined,
         to: '',
-        href: '',
-        children: [
-          {
-            key: 'Aliases',
-            label: 'Aliases',
-            action: undefined,
-            to: '/system/settings/aliases',
-            href: ''
-          },
-          {
-            key: 'Tooltips',
-            label: 'Tooltips',
-            action: undefined,
-            to: '',
-            href: '/settings/tooltip'
-          },
-          {
-            key: 'Palettes',
-            label: 'Palettes',
-            action: undefined,
-            to: '',
-            href: '/settings/palette'
-          },
-          {
-            key: 'code-editor',
-            label: 'Code editor',
-            action: undefined,
-            to: '',
-            href: '/editor'
-          }
-        ]
+        href: '/editor'
       },
       {
         key: 'Configuration',
-        label: 'Configuration',
+        label: 'Add-ons Control',
         action: undefined,
         to: '',
         href: '',
         children: [
           {
-            key: 'Import',
-            label: 'Import',
+            key: 'Manage',
+            label: 'Manage Add-ons',
             action: undefined,
-            to: '/configuration/import',
+            to: '/configuration/manage-configuration',
             href: ''
           },
           {
-            key: 'Manage',
-            label: 'Manage',
+            key: 'Import',
+            label: 'Import Add-ons',
             action: undefined,
-            to: '/configuration/manage-configuration',
+            to: '/configuration/import',
             href: ''
           }
         ]
@@ -587,13 +590,6 @@ export const NavigationRoutes = [
     to: '',
     href: '',
     children: [
-      {
-        key: 'New-User-Setups',
-        label: 'New User Setups',
-        action: undefined,
-        href: '',
-        to: '/configuration/initial-setup'
-      },
       {
         key: 'Permission',
         label: 'Permissions',
@@ -624,7 +620,7 @@ export const NavigationRoutes = [
           },
           {
             key: 'Access-policy',
-            label: 'Access Policy',
+            label: 'Access Policies',
             action: undefined,
             href: '',
             to: '/system/iam/access-policy'
@@ -635,23 +631,17 @@ export const NavigationRoutes = [
             action: undefined,
             href: '',
             to: '/system/iam/resource-group'
-          },
-          {
-            key: 'navigation',
-            label: 'Navigation',
-            action: undefined,
-            href: '',
-            to: '/system/iam/navigation'
           }
+          // {
+          //   key: 'navigation',
+          //   label: 'Navigation',
+          //   action: undefined,
+          //   href: '',
+          //   to: '/system/iam/navigation'
+          // }
         ]
       },
-      {
-        key: 'Default-settings',
-        label: 'Default settings',
-        action: undefined,
-        to: '/settings/default-settings',
-        href: ''
-      },
+
       {
         key: 'Recycle-Bin',
         label: 'Recycle Bin',
@@ -661,10 +651,24 @@ export const NavigationRoutes = [
       },
       {
         key: 'System',
-        label: 'System',
+        label: 'Workspace Settings',
         action: undefined,
         to: '/system/dashboard',
         href: ''
+      },
+      {
+        key: 'Vault-Record',
+        label: 'Finmars Vault',
+        action: undefined,
+        to: '/settings/vault-record',
+        href: ''
+      },
+      {
+        key: 'journal',
+        label: 'Journal',
+        action: undefined,
+        to: '',
+        href: '/journal'
       },
       {
         key: 'Cache',
@@ -675,64 +679,20 @@ export const NavigationRoutes = [
         children: [
           {
             key: 'Balance-Report-Instance',
-            label: 'Balance Report Instance',
+            label: 'Balance Report Instances',
             action: undefined,
             to: '',
             href: '/balance-report-instance'
           },
           {
             key: 'P&L-Report-Instance',
-            label: 'P&L Report Instance',
+            label: 'P&L Report Instances',
             action: undefined,
             to: '',
             href: '/pl-report-instance'
           }
         ]
       },
-      {
-        key: 'Vault',
-        label: 'Vault',
-        action: undefined,
-        to: '',
-        href: '',
-        children: [
-          {
-            key: 'Vault-Vault',
-            label: 'Vault',
-            action: undefined,
-            to: '',
-            href: '/vault'
-          },
-          {
-            key: 'Vault-Record',
-            label: 'Vault Record',
-            action: undefined,
-            to: '/settings/vault-record',
-            href: ''
-          }
-        ]
-      },
-      {
-        key: 'Client-Entity',
-        label: 'Client Entity',
-        action: undefined,
-        to: '/settings/client-entity',
-        href: ''
-      },
-      {
-        key: 'White-Label',
-        label: 'White Label',
-        action: undefined,
-        to: '/system/settings/general/',
-        href: ''
-      },
-      {
-        key: 'journal',
-        label: 'Journal',
-        action: undefined,
-        to: '',
-        href: '/journal'
-      }
     ]
   }
 ];
