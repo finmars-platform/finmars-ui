@@ -54,9 +54,7 @@ export const NavigationRoutes = [
     action: undefined,
     to: '',
     href: '',
-    children: [
-
-    ]
+    children: []
   },
   {
     key: 'data-quality',
@@ -96,8 +94,8 @@ export const NavigationRoutes = [
             href: '/data/portfolio-reconcile-history'
           }
         ]
-      },
-        ]
+      }
+    ]
   },
   {
     key: 'valuations',
@@ -255,8 +253,7 @@ export const NavigationRoutes = [
         action: undefined,
         to: '',
         href: '/data/currency'
-      },
-
+      }
     ]
   },
   {
@@ -363,7 +360,7 @@ export const NavigationRoutes = [
             to: '',
             app_code: 'w',
             href: '/home'
-          },
+          }
         ]
       },
       {
@@ -496,7 +493,6 @@ export const NavigationRoutes = [
         to: '',
         href: '',
         children: [
-
           {
             key: 'Aliases',
             label: 'Aliases',
@@ -547,6 +543,50 @@ export const NavigationRoutes = [
             action: undefined,
             to: '',
             href: '/settings/transaction-import'
+          }
+        ]
+      },
+      {
+        key: 'provenance',
+        label: 'Provenance',
+        action: undefined,
+        to: '',
+        href: '',
+        children: [
+          {
+            key: 'provider',
+            label: 'Providers',
+            action: undefined,
+            to: '/settings/provider',
+            href: ''
+          },
+          {
+            key: 'provider-version',
+            label: 'Provider Versions',
+            action: undefined,
+            to: '/settings/provider-version',
+            href: ''
+          },
+          {
+            key: 'source',
+            label: 'Sources',
+            action: undefined,
+            to: '/settings/source',
+            href: ''
+          },
+          {
+            key: 'source-version',
+            label: 'Source Versions',
+            action: undefined,
+            to: '/settings/source-version',
+            href: ''
+          },
+          {
+            key: 'platform-version',
+            label: 'Platform Version',
+            action: undefined,
+            to: '/settings/platform-version',
+            href: ''
           }
         ]
       },
@@ -692,7 +732,7 @@ export const NavigationRoutes = [
             href: '/pl-report-instance'
           }
         ]
-      },
+      }
     ]
   }
 ];
